@@ -13,15 +13,15 @@ def df_free(path):
 
 # noinspection PyUnusedLocal
 class Py3status(object):
-    def vpn(self, json=None, i3status_config=None):
-        vpnRunning = os.path.exists("/var/run/openvpn.pid")
-        if not vpnRunning:
-            return
-
-        response = {'full_text': "##VPN ACTIVE##", 'name': 'vpn'}
-        if i3status_config['colors']:
-            response['color'] = "#DD55CC"
-        return (0, response)
+    # def vpn(self, json=None, i3status_config=None):
+    #     vpnRunning = os.path.exists("/var/run/openvpn.pid")
+    #     if not vpnRunning:
+    #         return (0, {'full_text': "", 'name': 'vpn'})
+    #
+    #     response = {'full_text': "##VPN ACTIVE##", 'name': 'vpn'}
+    #     if i3status_config['colors']:
+    #         response['color'] = "#DD55CC"
+    #     return (0, response)
 
     # def dhcp(self, json=None, i3status_config=None):
     #     dhcLientRunning = os.path.exists("/var/run/dhclient.pid")
@@ -75,7 +75,7 @@ class Py3status(object):
         tokens = output.split(" ")
         if len(tokens) == 4:
             activity = tokens[2]
-            percentage = int(tokens[1][-1])
+            percentage = int(tokens[-1][:-1])
             msg = "%s (%s%%)" % (activity[:-1].lower(), percentage)
         else:
             activity, percentage, time = tokens[2:5]
@@ -179,8 +179,8 @@ if __name__ == '__main__':
 
     def try_stuff():
         ps = Py3status()
-        print "bat", ps.bat(i3status_config=i3status_config)
-        print "load", ps.cpuLoad(i3status_config=i3status_config)
+        #print "bat", ps.bat(i3status_config=i3status_config)
+        #print "load", ps.cpuLoad(i3status_config=i3status_config)
         #print "dhcp", ps.dhcp(i3status_config=i3status_config)
         #print "maxTmp", ps.maxTmp(i3status_config=i3status_config)
         print "avgTmp", ps.avgTmp(i3status_config=i3status_config)
