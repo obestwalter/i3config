@@ -1,0 +1,246 @@
+# Do i3 stuff in script: i3-msg "move container to workspace 1s"
+
+set $fonttype_window -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+set $fonttype_bar -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+set $mod Mod4
+set $bins ~/.i3/bin
+
+focus_follows_mouse no
+
+# Workspace default <default|stacking|tabbed>
+workspace_layout tabbed
+
+###### EXTERNAL BINDINGS ######
+bindsym $mod+b exec --no-startup-id $bins/toggle_player.sh
+bindsym $mod+Return exec roxterm --maximize --hide-menubar
+bindsym $mod+d exec dmenu_run
+bindsym --release $mod+Home exec --no-startup-id $bins/take_screenshot.sh
+
+###### WINDOW CONTROL BINDINGS ######
+bindsym $mod+Shift+numbersign kill
+bindsym $mod+f fullscreen
+# TODO check why smart does not work
+popup_during_fullscreen leave_fullscreen
+
+# yakuake like scratchpad
+bindsym Shift+F12 move scratchpad
+bindsym F12 scratchpad show
+
+###### LAYOUT CONTROL BINDINGS ######
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+l move right
+bindsym $mod+u layout tabbed
+bindsym $mod+i layout stacking
+bindsym $mod+o layout toggle split
+bindsym $mod+p focus parent
+bindsym $mod+udiaeresis layout toggle all
+bindsym $mod+Shift+p focus child
+bindsym $mod+comma split h
+bindsym $mod+period split v
+bindsym $mod+Shift+asciicircum floating toggle
+# move windows with mouse while pressed
+floating_modifier $mod
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+x move workspace to output right
+
+bindsym $mod+F1 [class="Firefox"] move workspace current
+# does not work as expected
+# Nav is creating new workspace 1 even if renamed to 1: dev or 1:dev
+bindsym $mod+Mod1+r exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
+
+##### NAVIGATION BINDINGS #####
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+asciicircum focus mode_toggle
+
+#workspace_auto_back_and_forth yes
+bindsym Mod1+Tab workspace back_and_forth
+bindsym $mod+Tab exec quickswitch.py
+bindsym $mod+Shift+Tab exec quickswitch.py --scratchpad
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# jump to next open vim instance
+# bindsym $mod+a [class="urxvt" title="VIM"] focus
+
+###### APPEARANCE ######
+# window titles and navbar if not defined there.
+font $fonttype_window
+
+#hide_edge_borders vertical
+
+set $black #000000
+set $dark_grey #222222
+set $medium_grey #444444
+set $light_grey #999999
+set $very_light_grey #CCCCCC
+set $dark_red #CA0000
+set $orange #CF0000
+set $light_orange #FF7755
+set $green #AA9900
+set $light_yellow #F0FF80
+set $blue 0000DD
+set $white #FFFFFF
+
+# class, border, background, text, indicator
+client.background       $black
+client.focused          $white $orange $white $light_orange
+client.focused_inactive $light_grey $dark_red $light_grey $light_orange
+client.unfocused        $light_grey $medium_grey $light_grey $light_orange
+client.urgent           $white $green $white $green
+
+###### BAR ######
+force_display_urgency_hint 1000 ms
+bar {
+    colors {
+        background $dark_grey
+        statusline $light_grey
+        # class, border, bg, text
+        focused_workspace  $white $orange $white
+        active_workspace   $light_grey $dark_red $light_grey
+        inactive_workspace $light_grey $medium_grey $light_grey
+        urgent_workspace   $white $green $white
+    }
+    font $fonttype_bar
+    position top
+    mode dock
+    modifier $mod
+    tray_output primary
+    #status_command i3status --config ~/.i3/i3status.conf
+    status_command py3status -t 10 -c ~/.i3/i3status.conf
+    }
+
+###### MANAGE i3 ######
+bindsym $mod+Num_Lock exec $bins/lockscreen_with_wallpaper.sh
+bindsym $mod+Shift+Num_Lock exec $bins/lockscreen_with_suspend.sh
+
+# switch screen off
+#bindsym $mod+Shift+F12 exec xset dpms force off
+#bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'End X session and i3?' -b 'Yes, exit i3' 'i3-msg exit'"
+
+###### DEFAULTS FOR SPECIFIC WINDOWS ######
+# use xwininfo and/or xprop to find out about the window
+
+#assign [class="^Firefox$"] 10
+assign [class="^Chromium-browser$"] 10
+assign [class="^Evolution$"] 9
+assign [class="^Empathy$"] 8
+assign [class="^Krusader$"] 7
+
+set $pcWin Debug|Inspection|^Find$|Changes|TeamCity|^Run$|Version Control|Messages
+set $pcWin2 Database Console| Grep Console
+set $pcDialog SelectFont
+for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
+assign [title="($pcWin|$pcWin2|$pcDialog)"] 2
+for_window [title="Commit Changes"] floating enable
+
+# ALWAYS MAKE FLOATING
+for_window [title="Event Tester|Save Screencast|Copying|Moving|in Path"] floating enable
+
+for_window [title="synapse"] border none
+
+###### SYSTEM STUFF ######
+force_xinerama yes  # Necessary with nvidia drivers
+
+###### RESIZE MODE ######
+bindsym $mod+r mode "resize"
+mode "resize" {
+    # enter: $mod+r; exit: Enter, Escape
+    # width  - left:shrink; right:grow | height - down:shrink; up:grow
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Down resize shrink height 10 px or 10 ppt
+    bindsym Up resize grow height 10 px or 10 ppt
+    bindsym Return mode "default"
+    bindsym Shift+Left resize shrink width 100 px or 100 ppt
+    bindsym Shift+Right resize grow width 100 px or 100 ppt
+    bindsym Shift+Down resize shrink height 100 px or 100 ppt
+    bindsym Shift+Up resize grow height 100 px or 100 ppt
+    bindsym Shift+Left resize shrink width 100 px or 100 ppt
+    bindsym Shift+Right resize grow width 100 px or 100 ppt
+    bindsym Shift+Down resize shrink height 100 px or 100 ppt
+    bindsym Shift+Up resize grow height 100 px or 100 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+################### MEDIA KEYS ############################
+#bindsym XF86AudioPlay exec mpc toggle | head -1 | message
+#bindsym XF86AudioStop exec mpc stop | echo Stopped | message
+#bindsym XF86AudioPrev exec mpc prev | head -1 | message
+#bindsym XF86AudioNext exec mpc next | head -1 | message
+bindsym XF86AudioMute exec amixer set Master toggle; exec notify-send "Volume toggled"
+bindsym XF86AudioRaiseVolume exec amixer set Master 1%+ unmute
+bindsym XF86AudioLowerVolume exec amixer set Master 1%- unmute
+bindsym XF86PowerOff exec sudo -n poweroff
+#bindsym XF86Suspend exec /home/robert3005/bin/suspend_hibernate 1
+#bindsym XF86Sleep exec /home/robert3005/bin/suspend_hibernate 0
+#bindsym XF86Display exec /home/robert3005/bin/suspend_hibernate
+#bindsym XF86ScreenSaver exec i3lock -d -i ~/Pictures/Wallpapers/blur_bridge_1440x900.png
+
+# Notebook-specific hotkeys
+#bindcode 214 exec --no-startup-id /home/michael/toggle_beamer.sh
+
+# Simulate ctrl+v upon pressing $mod+x
+#bindsym --release $mod+x exec --no-startup-id xdotool key --clearmodifiers ctrl+v
+
+
+###### ALWAYS EXEC AT I3 STARTUP ######
+exec --no-startup-id nm-applet &
+exec --no-startup-id gnome-settings-daemon
+#exec --no-startup-id xmodmap ~/.xmodmap
+exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
+#exec --no-startup-id xscreensaver -nosplash
+exec --no-startup-id synaptiks
+exec --no-startup-id synaptikscfg load ~/.i3/synaptiks-config.json
+#exec --no-startup-id nohup sudo /home/robert3005/bin/tpfand
+#exec --no-startup-id wicd-client -t
+#exec --no-startup-id kmix
+#exec --no-startup-id xsettings-kde
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+
+exec --no-startup-id kwalletd
+exec --no-startup-id gnome-sound-applet
+exec --no-startup-id synapse -s
+#exec --no-startup-id xautolock -time 10 -locker '~/.i3/bin/lockscreen_with_wallpaper.sh'
+
+# always adjust wallpapers in case screens/resolutions changed
+# Would be overriden if run in .xsessionrc
+exec_always --no-startup-id wmname LG3D
+
+#exec_always sleep 3
+exec_always --no-startup-id $bins/delayed_nitrogen_restore.sh
