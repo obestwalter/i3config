@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
 import subprocess
 
 
@@ -186,7 +185,7 @@ if __name__ == '__main__':
         print "avgTmp", ps.avgTmp(i3status_config=i3status_config)
         #print "disk", ps.disk(i3status_config=i3status_config)
         print "net", ps.net(i3status_config=i3status_config)
-        print "vpn", ps.vpn(i3status_config=i3status_config)
+        #print "vpn", ps.vpn(i3status_config=i3status_config)
         # print "excuse", ps.excuse(i3status_config=i3status_config)
 
     try_stuff()
