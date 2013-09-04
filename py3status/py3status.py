@@ -32,37 +32,37 @@ class Py3status(object):
     #         response['color'] = i3status_config['color_bad']
     #     return (0, response)
 
-    def net(self, json=None, i3status_config=None):
-        # todo check for eth0 first (ifconfig eth0 or ip addr)
-        # todo get ip addrs
-        # ip -o -f inet addr
-        # ip -o -f inet6 addr
-
-        stdout = subprocess.check_output(["iwconfig", "wlan0"])
-        tokens = [t for t in stdout.split("  ") if t]
-        elems = {}
-        color = i3status_config['color_bad']
-        for token in tokens:
-            if "ESSID:" in token:
-                elems["essid"] = token.split(":")[-1].strip()[1:-1]
-            if "Bit Rate=" in token:
-                elems["bitrate"] = token.split("=")[-1].strip()
-            if "Link Quality=" in token:
-                z, n = token.split("=")[-1].strip().split("/")
-                percentage = int(z) * 100 / int(n)
-                elems["quality"] = "%s%%" % (percentage)
-                if percentage > 65:
-                    color = i3status_config['color_good']
-                else:
-                    color = i3status_config['color_degraded']
-        if len(elems) != 3:
-            return
-
-        msg = "%(essid)s %(bitrate)s %(quality)s" % (elems)
-        response = {'full_text': msg, 'name': 'wlan'}
-        if i3status_config['colors']:
-            response['color'] = color
-        return (1, response)
+    # def net(self, json=None, i3status_config=None):
+    #     # todo check for eth0 first (ifconfig eth0 or ip addr)
+    #     # todo get ip addrs
+    #     # ip -o -f inet addr
+    #     # ip -o -f inet6 addr
+    #
+    #     stdout = subprocess.check_output(["iwconfig", "wlan0"])
+    #     tokens = [t for t in stdout.split("  ") if t]
+    #     elems = {}
+    #     color = i3status_config['color_bad']
+    #     for token in tokens:
+    #         if "ESSID:" in token:
+    #             elems["essid"] = token.split(":")[-1].strip()[1:-1]
+    #         if "Bit Rate=" in token:
+    #             elems["bitrate"] = token.split("=")[-1].strip()
+    #         if "Link Quality=" in token:
+    #             z, n = token.split("=")[-1].strip().split("/")
+    #             percentage = int(z) * 100 / int(n)
+    #             elems["quality"] = "%s%%" % (percentage)
+    #             if percentage > 65:
+    #                 color = i3status_config['color_good']
+    #             else:
+    #                 color = i3status_config['color_degraded']
+    #     if len(elems) != 3:
+    #         return
+    #
+    #     msg = "%(essid)s %(bitrate)s %(quality)s" % (elems)
+    #     response = {'full_text': msg, 'name': 'wlan'}
+    #     if i3status_config['colors']:
+    #         response['color'] = color
+    #     return (1, response)
 
     def bat(self, json=None, i3status_config=None):
         # Design capacity 4343mAh
@@ -185,7 +185,7 @@ if __name__ == '__main__':
         #print "maxTmp", ps.maxTmp(i3status_config=i3status_config)
         print "avgTmp", ps.avgTmp(i3status_config=i3status_config)
         #print "disk", ps.disk(i3status_config=i3status_config)
-        print "net", ps.net(i3status_config=i3status_config)
+        #print "net", ps.net(i3status_config=i3status_config)
         #print "vpn", ps.vpn(i3status_config=i3status_config)
         print "excuse", ps.excuse(i3status_config=i3status_config)
 
