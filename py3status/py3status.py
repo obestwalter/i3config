@@ -70,6 +70,7 @@ class Py3status(object):
         # Battery 0: Full, 100%
         # Battery 0: Discharging, 75%, 01:26:12 remaining
         # Battery 0: Charging, 82%, 00:14:58 until charged
+        response = {'name': 'df_root'}
         output = subprocess.check_output(["acpi"]).strip()
         tokens = output.split(" ")
         if len(tokens) == 4:
@@ -81,7 +82,6 @@ class Py3status(object):
             activity = activity[:3].lower()
             percentage = int(percentage[:-2])
             msg = "%s %s%% %s" % (activity, percentage, time)
-        response = {'full_text': msg, 'name': 'df_root'}
         if i3status_config['colors']:
             if  percentage > 40:
                 response['color'] = i3status_config['color_good']
@@ -92,6 +92,7 @@ class Py3status(object):
                 if activity == "dis":
                     warnbar = "###" * (20 - percentage)
                     msg = "%s %s %s" % (warnbar, msg, warnbar)
+        response['full_text'] = msg if not "full" in msg else ""
         return (1, response)
 
     # def disk(self, json=None, i3status_config=None):
@@ -161,12 +162,12 @@ class Py3status(object):
         response = {'full_text': msg, 'name': 'cpuTmp', 'color': color}
         return (5, response)
 
-    # def excuse(self, json=None, i3status_config=None):
-    #     output = subprocess.check_output(["fortune", "bofh-excuses"])
-    #     output = output.split(":")[1].replace("\n", " ")
-    #     color = i3status_config['color_degraded']
-    #     response = {'full_text': output, 'name': 'excuse'}
-    #     return (0, response)
+    def excuse(self, json=None, i3status_config=None):
+        output = subprocess.check_output(["fortune", "bofh-excuses"])
+        output = output.split(":")[1].replace("\n", " ")
+        color = i3status_config['color_degraded']
+        response = {'full_text': output, 'name': 'excuse'}
+        return (0, response)
 
 
 if __name__ == '__main__':
@@ -186,6 +187,6 @@ if __name__ == '__main__':
         #print "disk", ps.disk(i3status_config=i3status_config)
         print "net", ps.net(i3status_config=i3status_config)
         #print "vpn", ps.vpn(i3status_config=i3status_config)
-        # print "excuse", ps.excuse(i3status_config=i3status_config)
+        print "excuse", ps.excuse(i3status_config=i3status_config)
 
     try_stuff()
