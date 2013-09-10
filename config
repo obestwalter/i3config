@@ -166,8 +166,8 @@ assign [class="^Krusader$"] 7
 for_window [class="sun-awt-X11-XDialogPeer"] floating disable
 set $pcWin Debug|Inspection|^Find$|^Changes$|TeamCity|^Run$|Version Control|Messages
 set $pcWin2 Database Console| Grep Console|Unversioned Files|Error
-assign [title="($pcWin|$pcWin2)"] 2
 for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
+assign [title="($pcWin|$pcWin2)"] 2
 for_window [title="Commit Changes"] floating enable
 
 # ALWAYS MAKE FLOATING
@@ -232,15 +232,15 @@ exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secret
 #exec --no-startup-id synaptiks
 #exec --no-startup-id synaptikscfg load ~/.i3/synaptiks-config.json
 #exec --no-startup-id nohup sudo /home/robert3005/bin/tpfand
-#exec --no-startup-id wicd-client -t
-#exec --no-startup-id kmix
-#exec --no-startup-id xsettings-kde
-exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 
+# Trying this if this makes integration better ...
+# http://honk.sigxcpu.org/con/Letting_GTK__applications_blend_nicely_into_KDE4.html
+exec --no-startup-id xsettings-kde
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id kwalletd
 exec --no-startup-id gnome-sound-applet
 exec --no-startup-id synapse -s
-#exec --no-startup-id xautolock -time 10 -locker '~/.i3/bin/lockscreen_with_wallpaper.sh'
+exec --no-startup-id $bins/start_xautolock.sh
 
 
 # Set the wm name to somethign Java recognizes

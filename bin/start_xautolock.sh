@@ -1,14 +1,14 @@
-#!/bin/bash - 
+#!/bin/bash -
 #
 #vim:foldmethod=marker commentstring=\ ##%s
 #===============================================================================
 #
 #          FILE:  start_xautolock.sh
-# 
-#         USAGE:  ./start_xautolock.sh 
-# 
+#
+#         USAGE:  ./start_xautolock.sh
+#
 #   DESCRIPTION:  starts xautolock
-# 
+#
 #       OPTIONS:  ---
 #  REQUIREMENTS:  ---
 #          BUGS:  ---
@@ -20,5 +20,4 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
-xautolock -time 3 -notifier 'echo "screen     lock  " | dzen2 -p 2 -y 512 -bg "#770000"' -notify 3 -locker "i3lock -i /home/obestwalter/Documents/Pictures/wallpapers/cassini_dereilct.png" &
-
+xautolock -time 5 -notifier 'echo "screen     lock  " | dzen2 -p 10 -y 512 -bg "#770000"' -notify 3 -locker "i3lock -i ~/chill/wallpapers/cassini_derelict.png" &
