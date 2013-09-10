@@ -15,6 +15,7 @@ bindsym $mod+b exec --no-startup-id $bins/toggle_player.sh
 bindsym $mod+Return exec roxterm --maximize --hide-menubar
 bindsym $mod+d exec dmenu_run
 bindsym --release $mod+Home exec --no-startup-id $bins/take_screenshot.sh
+bindsym --release $mod+Shift+Home exec --no-startup-id $bins/take_interactive_screenshot.sh
 
 ###### WINDOW CONTROL BINDINGS ######
 bindsym $mod+Shift+numbersign kill
@@ -154,21 +155,24 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'End X session and i3?' -b 'Y
 ###### DEFAULTS FOR SPECIFIC WINDOWS ######
 # use xwininfo and/or xprop to find out about the window
 
+# ASSIGN Apps to specific windows #
 #assign [class="^Firefox$"] 10
 assign [class="^Chromium-browser$"] 10
 assign [class="^Evolution$"] 9
 assign [class="^Empathy$"] 8
 assign [class="^Krusader$"] 7
 
-set $pcWin Debug|Inspection|^Find$|Changes|TeamCity|^Run$|Version Control|Messages
-set $pcWin2 Database Console| Grep Console
-set $pcDialog SelectFont
+# PYCHARM
+for_window [class="sun-awt-X11-XDialogPeer"] floating disable
+set $pcWin Debug|Inspection|^Find$|^Changes$|TeamCity|^Run$|Version Control|Messages
+set $pcWin2 Database Console| Grep Console|Unversioned Files|Error
+assign [title="($pcWin|$pcWin2)"] 2
 for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
-assign [title="($pcWin|$pcWin2|$pcDialog)"] 2
 for_window [title="Commit Changes"] floating enable
 
 # ALWAYS MAKE FLOATING
 for_window [title="Event Tester|Save Screencast|Copying|Moving|in Path"] floating enable
+for_window [title="Commit Changes"] floating enable
 
 for_window [title="synapse"] border none
 
@@ -225,8 +229,8 @@ exec --no-startup-id gnome-settings-daemon
 #exec --no-startup-id xmodmap ~/.xmodmap
 exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 #exec --no-startup-id xscreensaver -nosplash
-exec --no-startup-id synaptiks
-exec --no-startup-id synaptikscfg load ~/.i3/synaptiks-config.json
+#exec --no-startup-id synaptiks
+#exec --no-startup-id synaptikscfg load ~/.i3/synaptiks-config.json
 #exec --no-startup-id nohup sudo /home/robert3005/bin/tpfand
 #exec --no-startup-id wicd-client -t
 #exec --no-startup-id kmix
@@ -238,9 +242,10 @@ exec --no-startup-id gnome-sound-applet
 exec --no-startup-id synapse -s
 #exec --no-startup-id xautolock -time 10 -locker '~/.i3/bin/lockscreen_with_wallpaper.sh'
 
-# always adjust wallpapers in case screens/resolutions changed
+
+# Set the wm name to somethign Java recognizes
 # Would be overriden if run in .xsessionrc
 exec_always --no-startup-id wmname LG3D
 
-#exec_always sleep 3
+# always adjust wallpapers in case screens/resolutions changed
 exec_always --no-startup-id $bins/delayed_nitrogen_restore.sh

@@ -7,6 +7,6 @@ scrot ${inpath}
 #convert -flop ${inpath} ${outpath}
 #convert -negate ${inpath} ${outpath}
 #convert -motion-blur 20x20 ${inpath} ${outpath}
-convert -flop -fill orange -tint 100 ${inpath} ${outpath}
+convert -motion-blur 10x10 -flop -fill orange -tint 100 ${inpath} ${outpath}
 #convert -wave 2x3 ${inpath} ${outpath}
 #feh ${outpath}
