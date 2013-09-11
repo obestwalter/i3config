@@ -233,9 +233,10 @@ exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secret
 #exec --no-startup-id synaptikscfg load ~/.i3/synaptiks-config.json
 #exec --no-startup-id nohup sudo /home/robert3005/bin/tpfand
 
-# Trying this if this makes integration better ...
+
 # http://honk.sigxcpu.org/con/Letting_GTK__applications_blend_nicely_into_KDE4.html
-exec --no-startup-id xsettings-kde
+# ... not really that nice ...
+#exec --no-startup-id xsettings-kde
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id kwalletd
 exec --no-startup-id gnome-sound-applet
