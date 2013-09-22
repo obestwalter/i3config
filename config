@@ -11,11 +11,11 @@ focus_follows_mouse no
 workspace_layout tabbed
 
 ###### EXTERNAL BINDINGS ######
-bindsym $mod+b exec --no-startup-id $bins/toggle_player.sh
 bindsym $mod+Return exec roxterm --maximize --hide-menubar
 bindsym $mod+d exec dmenu_run
 bindsym --release $mod+Home exec --no-startup-id $bins/take_screenshot.sh
 bindsym --release $mod+Shift+Home exec --no-startup-id $bins/take_interactive_screenshot.sh
+bindsym $mod+b exec --no-startup-id $bins/toggle_player.sh
 
 ###### WINDOW CONTROL BINDINGS ######
 bindsym $mod+Shift+numbersign kill
@@ -102,7 +102,7 @@ font $fonttype_window
 #hide_edge_borders vertical
 
 set $black #000000
-set $dark_grey #222222
+set $dark_blue #000024
 set $medium_grey #444444
 set $light_grey #999999
 set $very_light_grey #CCCCCC
@@ -125,7 +125,7 @@ client.urgent           $white $green $white $green
 force_display_urgency_hint 1000 ms
 bar {
     colors {
-        background $dark_grey
+        background $dark_blue
         statusline $light_grey
         # class, border, bg, text
         focused_workspace  $white $orange $white
@@ -138,7 +138,6 @@ bar {
     mode dock
     modifier $mod
     tray_output primary
-    #status_command i3status --config ~/.i3/i3status.conf
     status_command py3status -t 10 -c ~/.i3/i3status.conf
     }
 
