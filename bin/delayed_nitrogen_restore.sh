@@ -1,2 +1,3 @@
-sleep 3
+#!/bin/bash
+sleep 1
 nitrogen --restore
