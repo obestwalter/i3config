@@ -162,16 +162,15 @@ assign [class="^Empathy$"] 8
 assign [class="^Krusader$"] 7
 
 # PYCHARM
-for_window [class="sun-awt-X11-XDialogPeer"] floating disable
+for_window [class="jetbrains-pycharm" class="sun-awt-X11-XDialogPeer"] floating disable
 set $pcWin Debug|Inspection|^Find$|^Changes$|TeamCity|^Run$|Version Control|Messages
 set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files
 for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
 assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] 2
-for_window [title="Commit Changes"] floating enable
 
 # ALWAYS MAKE FLOATING
-for_window [title="Event Tester|Save Screencast|Copying|Moving|in Path"] floating enable
-for_window [title="Commit Changes"] floating enable
+#for_window [title="Event Tester|Save Screencast|Copying|Moving|in Path"] floating enable
+#for_window [title="Commit Changes"] floating enable
 
 for_window [title="synapse"] border none
 
