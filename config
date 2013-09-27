@@ -156,13 +156,13 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'End X session and i3?' -b 'Y
 
 # ASSIGN Apps to specific windows #
 #assign [class="^Firefox$"] 10
-assign [class="^Chromium-browser$"] 10
+#assign [class="^Chromium-browser$"] 10
 assign [class="^Evolution$"] 9
-assign [class="^Empathy$"] 8
+assign [class="^Empathy$"] 9
 assign [class="^Krusader$"] 7
 
 # PYCHARM
-for_window [class="jetbrains-pycharm" class="sun-awt-X11-XDialogPeer"] floating disable
+for_window [class="jetbrains-pycharm"] floating disable
 set $pcWin Debug|Inspection|^Find$|^Changes$|TeamCity|^Run$|Version Control|Messages
 set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files
 for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
