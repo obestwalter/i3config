@@ -1,5 +1,8 @@
 # Do i3 stuff in script: i3-msg "move container to workspace 1s"
 
+###### GENERAL SETUP ######
+force_xinerama yes  # Necessary with nvidia drivers
+
 set $fonttype_window -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 set $fonttype_bar -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 set $mod Mod4
@@ -9,6 +12,16 @@ focus_follows_mouse no
 
 # Workspace default <default|stacking|tabbed>
 workspace_layout tabbed
+
+# Set the wm name to somethign Java recognizes
+# Would be overriden if run in .xsessionrc
+exec_always --no-startup-id wmname LG3D
+
+# hide mouse cursor as soon as a key is pressed
+exec_always --no-startup-id unclutter -idle 1
+
+# always adjust wallpapers in case screens/resolutions changed
+exec_always --no-startup-id $bins/delayed_nitrogen_restore.sh
 
 ###### EXTERNAL BINDINGS ######
 bindsym $mod+Return exec roxterm --maximize --hide-menubar
@@ -144,38 +157,13 @@ bar {
 ###### MANAGE i3 ######
 bindsym $mod+Num_Lock exec $bins/lockscreen_with_wallpaper.sh
 bindsym $mod+Shift+Num_Lock exec $bins/lockscreen_with_suspend.sh
+bindsym $mod+Mod1+Shift+w exec $bins/get_wininfo.sh
 
 # switch screen off
 #bindsym $mod+Shift+F12 exec xset dpms force off
 #bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'End X session and i3?' -b 'Yes, exit i3' 'i3-msg exit'"
-
-###### DEFAULTS FOR SPECIFIC WINDOWS ######
-# use xwininfo and/or xprop to find out about the window
-
-# ASSIGN Apps to specific windows #
-#assign [class="^Firefox$"] 10
-#assign [class="^Chromium-browser$"] 10
-assign [class="^Evolution$"] 9
-assign [class="^Empathy$"] 9
-assign [class="^Krusader$"] 7
-
-# PYCHARM
-for_window [class="jetbrains-pycharm"] floating disable
-set $pcWin Debug|Inspection|^Find$|^Changes$|TeamCity|^Run$|Version Control|Messages
-set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files
-for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
-assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] 2
-
-# ALWAYS MAKE FLOATING
-#for_window [title="Event Tester|Save Screencast|Copying|Moving|in Path"] floating enable
-#for_window [title="Commit Changes"] floating enable
-
-for_window [title="synapse"] border none
-
-###### SYSTEM STUFF ######
-force_xinerama yes  # Necessary with nvidia drivers
 
 ###### RESIZE MODE ######
 bindsym $mod+r mode "resize"
@@ -240,11 +228,32 @@ exec --no-startup-id kwalletd
 exec --no-startup-id gnome-sound-applet
 exec --no-startup-id synapse -s
 exec --no-startup-id $bins/start_xautolock.sh
+exec --no-startup-id dropbox start
+exec --no-startup-id spd-say -l de -t female3 "Guten Tag Oliver"
 
+###### DEFAULTS FOR SPECIFIC WINDOWS ######
+# use xwininfo and/or xprop to find out about the window
 
-# Set the wm name to somethign Java recognizes
-# Would be overriden if run in .xsessionrc
-exec_always --no-startup-id wmname LG3D
+# ASSIGN Apps to specific windows #
+#assign [class="^Firefox$"] 10
+#assign [class="^Chromium-browser$"] 10
+assign [class="^Evolution$"] 9
+assign [class="^Empathy$"] 9
+assign [class="^Krusader$"] 7
 
-# always adjust wallpapers in case screens/resolutions changed
-exec_always --no-startup-id $bins/delayed_nitrogen_restore.sh
+# PYCHARM
+set $pcWin Debug|Inspection|^Find$|^Changes$|TeamCity|^Run$|Version Control|Messages
+set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files
+for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XFramePeer"] floating disable
+for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
+assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] 2
+
+#assign [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer"] 2
+#for_window [class="jetbrains-pycharm" title="Commit Changes"] floating enable
+# the little navigation popup has a space as the title ...
+#for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=" "] floating enable
+
+# GENERAL
+#for_window [title="Event Tester|Save Screencast|Copying|Moving|in Path"] floating enable
+
+for_window [title="synapse"] border none
