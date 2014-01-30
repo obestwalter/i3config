@@ -20,6 +20,9 @@ exec_always --no-startup-id wmname LG3D
 # hide mouse cursor as soon as a key is pressed
 exec_always --no-startup-id unclutter -idle 1
 
+# move mouse ot of the way with window if context key is pressed
+bindsym Mod4+e exec xdotool getactivewindow mousemove -w '%1' 0 0
+
 # always adjust wallpapers in case screens/resolutions changed
 exec_always --no-startup-id $bins/delayed_nitrogen_restore.sh
 
@@ -150,7 +153,6 @@ bar {
     position top
     mode dock
     modifier $mod
-    tray_output primary
     status_command py3status -t 10 -c ~/.i3/i3status.conf
     }
 
@@ -244,7 +246,9 @@ assign [class="^Krusader$"] 7
 # PYCHARM
 set $pcWin Debug|Inspection|^Find$|^Changes$|TeamCity|^Run$|Version Control|Messages
 set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files
+# set $pcWin3 ^Commit Changes|
 for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XFramePeer"] floating disable
+# for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer"] floating disable
 for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
 assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] 2
 
