@@ -21,7 +21,7 @@ exec_always --no-startup-id wmname LG3D
 #exec_always --no-startup-id unclutter -keystroke
 
 # move mouse ot of the way with window if context key is pressed
-bindsym Mod4+e exec xdotool getactivewindow mousemove -w '%1' 0 0
+bindsym $mod+e exec xdotool getactivewindow mousemove -w '%1' 0 0
 
 # always adjust wallpapers in case screens/resolutions changed
 exec_always --no-startup-id $bins/delayed_nitrogen_restore.sh
