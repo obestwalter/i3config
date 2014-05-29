@@ -40,7 +40,7 @@ class Py3status(object):
                     if percentage < 15:
                         notify("battery low - will shutdown soon ...",
                                expireTime=1000, urgency="critical")
-                    if percentage < 14:
+                    if percentage < 8:
                         notify("!!!! WILL SHUTDOWN IN 60 SECONDS !!!!",
                                expireTime=60000, urgency="critical")
                         subprocess.call(["sudo", "shutdown", "-h", "+1"])
