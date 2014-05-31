@@ -82,7 +82,7 @@ class Py3status(object):
         response = {'full_text': msg, 'name': 'cpuTmp', 'color': color}
         return (5, response)
 
-    def excuse(self, json=None, i3status_config=None):
+    def __excuse(self, json=None, i3status_config=None):
         output = subprocess.check_output(["fortune", "bofh-excuses"])
         output = output.split(":")[1].replace("\n", " ")
         color = i3status_config['color_degraded']
@@ -102,6 +102,6 @@ if __name__ == '__main__':
         print "bat", ps.bat(i3status_config=i3status_config)
         print "load", ps.cpuLoad(i3status_config=i3status_config)
         print "avgTmp", ps.avgTmp(i3status_config=i3status_config)
-        print "excuse", ps.excuse(i3status_config=i3status_config)
+        ##print "excuse", ps.excuse(i3status_config=i3status_config)
 
     try_stuff()
