@@ -231,7 +231,7 @@ exec --no-startup-id tracker-control --set-log-verbosity errors
 exec --no-startup-id classicmenu-indicator
 exec --no-startup-id keepassx -min
 
-spd-say -l de -t female3 -i -50 "Hallo Oliver\! Alter Schweede\! was gehht\!"
+exec --no-startup-id spd-say -l de -t female3 -i -50 "Hallo Oliver. Alter Schweede. was gehht"
 
 ###### DEFAULTS FOR SPECIFIC WINDOWS ######
 # use xwininfo and/or xprop to find out about the window
