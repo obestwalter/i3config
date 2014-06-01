@@ -226,6 +226,9 @@ exec --no-startup-id gnome-sound-applet
 exec --no-startup-id synapse -s
 exec --no-startup-id $bins/start_xautolock.sh
 exec --no-startup-id dropbox start
+exec --no-startup-id tracker-control -s
+exec --no-startup-id tracker-control --set-log-verbosity errors
+
 exec --no-startup-id spd-say -l de -t female3 -i -50 "Guten Tag Oliver"
 
 ###### DEFAULTS FOR SPECIFIC WINDOWS ######
