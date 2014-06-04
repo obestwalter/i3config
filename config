@@ -111,31 +111,6 @@ bindsym $mod+0 workspace 10
 # jump to next open vim instance
 # bindsym $mod+a [class="urxvt" title="VIM"] focus
 
-###### APPEARANCE ######
-# window titles and navbar if not defined there.
-font $fonttype_window
-
-#hide_edge_borders vertical
-
-set $black #000000
-set $dark_blue #000024
-set $medium_grey #444444
-set $light_grey #999999
-set $very_light_grey #CCCCCC
-set $dark_red #CA0000
-set $orange #CF0000
-set $light_orange #FF7755
-set $green #AA9900
-set $light_yellow #F0FF80
-set $blue 0000DD
-set $white #FFFFFF
-
-# class, border, background, text, indicator
-client.background       $black
-client.focused          $white $orange $white $light_orange
-client.focused_inactive $light_grey $dark_red $light_grey $light_orange
-client.unfocused        $light_grey $medium_grey $light_grey $light_orange
-client.urgent           $white $green $white $green
 
 ###### BAR ######
 force_display_urgency_hint 1000 ms
@@ -212,7 +187,6 @@ bindsym XF86PowerOff exec sudo -n poweroff
 
 
 ###### ALWAYS EXEC AT I3 STARTUP ######
-exec --no-startup-id nm-applet &
 exec --no-startup-id gnome-settings-daemon
 #exec --no-startup-id xmodmap ~/.xmodmap
 exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
@@ -228,8 +202,9 @@ exec --no-startup-id $bins/start_xautolock.sh
 exec --no-startup-id dropbox start
 exec --no-startup-id tracker-control -s
 exec --no-startup-id tracker-control --set-log-verbosity errors
+#exec --no-startup-id keepassx -min
+exec --no-startup-id nm-applet &
 exec --no-startup-id classicmenu-indicator
-exec --no-startup-id keepassx -min
 
 exec --no-startup-id spd-say -l de -t female3 -i -50 "Hallo Oliver. Alter Schweede. was gehht"
 
@@ -261,3 +236,29 @@ assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] 2
 #for_window [title="Event Tester|Save Screencast|Copying|Moving|in Path"] floating enable
 
 for_window [title="synapse"] border none
+
+###### APPEARANCE ######
+# window titles and navbar if not defined there.
+font $fonttype_window
+
+#hide_edge_borders vertical
+
+set $black #000000
+set $dark_blue #000024
+set $medium_grey #444444
+set $light_grey #999999
+set $very_light_grey #CCCCCC
+set $dark_red #CA0000
+set $orange #CF0000
+set $light_orange #FF7755
+set $green #AA9900
+set $light_yellow #F0FF80
+set $blue 0000DD
+set $white #FFFFFF
+
+# class, border, background, text, indicator
+client.background       $black
+client.focused          $white $orange $white $light_orange
+client.focused_inactive $light_grey $dark_red $light_grey $light_orange
+client.unfocused        $light_grey $medium_grey $light_grey $light_orange
+client.urgent           $white $green $white $green
