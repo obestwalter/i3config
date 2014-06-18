@@ -79,7 +79,11 @@ bindsym $mod+x move workspace to output right
 bindsym $mod+F1 [class="Firefox"] move workspace current
 # does not work as expected
 # Nav is creating new workspace 1 even if renamed to 1: dev or 1:dev
-bindsym $mod+Mod1+r exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
+# bindsym $mod+Mod1+r exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
+
+# dynamic tagging feature
+bindsym $mod+t exec ~/.i3/get_workspace_options.py | dmenu -b | ~/.i3/go_to_workspace.py
+bindsym $mod+Shift+t exec ~/.i3/get_workspace_options.py | dmenu -b | ~/.i3/move_to_workspace.py
 
 ##### NAVIGATION BINDINGS #####
 bindsym $mod+h focus left
@@ -202,25 +206,26 @@ font $fonttype_window
 
 #hide_edge_borders vertical
 
-set $black #000000
-set $dark_blue #000024
-set $medium_grey #444444
-set $light_grey #999999
-set $very_light_grey #CCCCCC
-set $dark_red #CA0000
-set $orange #CF0000
-set $light_orange #FF7755
-set $green #AA9900
-set $light_yellow #F0FF80
-set $blue 0000DD
-set $white #FFFFFF
+set $black              #000000
+set $blue               #0000DD
+set $dark_blue          #000024
+set $very_light_grey    #CCCCCC
+set $light_grey         #777777
+set $medium_grey        #444444
+set $dark_grey          #222222
+set $dark_red           #CA0000
+set $light_orange       #FF7755
+set $orange             #CF0000
+set $green              #AA9900
+set $light_yellow       #F0FF80
+set $white              #FFFFFF
 
-# class, border, background, text, indicator
 client.background       $black
-client.focused          $white $orange $white $light_orange
-client.focused_inactive $light_grey $dark_red $light_grey $light_orange
-client.unfocused        $light_grey $medium_grey $light_grey $light_orange
-client.urgent           $white $green $white $green
+#   class               border         background   text          indicator
+client.focused          $white         $orange      $white        $light_orange
+client.focused_inactive $white         $dark_grey   $light_grey   $light_orange
+client.unfocused        $light_grey    $medium_grey $light_grey   $light_orange
+client.urgent           $white         $green       $white        $green
 
 ###### BAR ######
 force_display_urgency_hint 1000 ms
@@ -264,6 +269,7 @@ exec --no-startup-id nm-applet &
 exec --no-startup-id diodon
 exec --no-startup-id classicmenu-indicator
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id ulatencyd
 #exec --no-startup-id gnome-panel
 
 exec --no-startup-id spd-say -l de -t female3 -i -50 "Hallo Oliver. Alter Schweede. was gehht"
