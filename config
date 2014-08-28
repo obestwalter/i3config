@@ -15,19 +15,6 @@ new_float normal
 # Workspace default <default|stacking|tabbed>
 workspace_layout tabbed
 
-# Set the wm name to somethign Java recognizes
-# Would be overriden if run in .xsessionrc
-exec_always --no-startup-id wmname LG3D
-
-# hide mouse cursor as soon as a key is pressed
-#exec_always --no-startup-id unclutter -keystroke
-
-# move mouse ot of the way with window if context key is pressed
-bindsym $mod+e exec xdotool getactivewindow mousemove -w '%1' 0 0
-
-# always adjust wallpapers in case screens/resolutions changed
-exec_always --no-startup-id $bins/delayed_nitrogen_restore.sh
-
 ###### EXTERNAL BINDINGS ######
 bindsym $mod+Return exec roxterm --maximize --hide-menubar
 bindsym $mod+d exec dmenu_run
@@ -166,9 +153,6 @@ bindsym XF86PowerOff exec sudo -n poweroff
 #bindsym XF86Display exec /home/robert3005/bin/suspend_hibernate
 #bindsym XF86ScreenSaver exec i3lock -d -i ~/Pictures/Wallpapers/blur_bridge_1440x900.png
 
-# Notebook-specific hotkeys
-#bindcode 214 exec --no-startup-id /home/michael/toggle_beamer.sh
-
 # Simulate ctrl+v upon pressing $mod+x
 #bindsym --release $mod+x exec --no-startup-id xdotool key --clearmodifiers ctrl+v
 
@@ -233,6 +217,7 @@ client.urgent           $white         $green       $white        $green
 force_display_urgency_hint 1000 ms
 
 bar {
+    #tray_output primary
     position bottom
     colors {
         background $dark_blue
@@ -250,28 +235,29 @@ bar {
     #status_command ~/.i3/conky/init.sh
     }
 
-###### ALWAYS EXEC AT I3 STARTUP ######
-exec --no-startup-id gnome-settings-daemon
+###### ONLY EXEC AT FIRST I3 STARTUP ######
+# todo set keys
 #exec --no-startup-id xmodmap ~/.xmodmap
+
+exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 exec --no-startup-id $bins/touchpad_settings.sh
-# http://honk.sigxcpu.org/con/Letting_GTK__applications_blend_nicely_into_KDE4.html
-# ... not really that nice ...
-#exec --no-startup-id xsettings-kde
-exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id kwalletd
 exec --no-startup-id gnome-sound-applet
 exec --no-startup-id synapse -s
 exec --no-startup-id $bins/start_xautolock.sh
 exec --no-startup-id dropbox start
-exec --no-startup-id tracker-control -s
-exec --no-startup-id tracker-control --set-log-verbosity errors
-#exec --no-startup-id keepassx -min
 exec --no-startup-id nm-applet &
 exec --no-startup-id diodon
 exec --no-startup-id classicmenu-indicator
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id ulatencyd
 exec --no-startup-id "sh -c 'sleep 15; exec gmail-notify'"
-#exec --no-startup-id gnome-panel
-exec --no-startup-id spd-say -l de -t female3 -i -50 "Hallo Olliver. Alter Schweede! Was gehht?"
+
+###### ALWAYS EXEC AT I3 START/RESTART ######
+# Set wm name to something Java recognizes (overriden if run in .xsessionrc)
+exec_always --no-startup-id wmname LG3D
+# move mouse ot of the way with window if context key is pressed
+bindsym $mod+e exec xdotool getactivewindow mousemove -w '%1' 0 0
+# always adjust wallpapers in case screens/resolutions changed
+exec_always --no-startup-id $bins/delayed_nitrogen_restore.sh
