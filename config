@@ -1,8 +1,6 @@
 # Do i3 stuff in script: i3-msg "move container to workspace 1s"
 
 ###### GENERAL SETUP ######
-force_xinerama yes  # Necessary with nvidia drivers
-
 set $fonttype_window -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 set $fonttype_bar -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 set $mod Mod4
@@ -246,13 +244,14 @@ exec --no-startup-id kwalletd
 exec --no-startup-id gnome-sound-applet
 exec --no-startup-id synapse -s
 exec --no-startup-id $bins/start_xautolock.sh
-exec --no-startup-id dropbox start
 exec --no-startup-id nm-applet &
 exec --no-startup-id diodon
 exec --no-startup-id classicmenu-indicator
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id ulatencyd
 exec --no-startup-id "sh -c 'sleep 15; exec gmail-notify'"
+
+exec_always --no-startup-id dropbox start
 
 ###### ALWAYS EXEC AT I3 START/RESTART ######
 # Set wm name to something Java recognizes (overriden if run in .xsessionrc)
