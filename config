@@ -179,6 +179,10 @@ assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] 2
 # the little navigation popup has a space as the title ...
 #for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=" "] floating enable
 
+# RDP
+for_window [class="xfreerdp"]floating disable
+
+
 # GENERAL
 #for_window [title="Event Tester|Save Screencast|Copying|Moving|in Path"] floating enable
 
@@ -215,7 +219,7 @@ client.urgent           $white         $green       $white        $green
 force_display_urgency_hint 1000 ms
 
 bar {
-    #tray_output primary
+    tray_output primary
     position bottom
     colors {
         background $dark_blue
