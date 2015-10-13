@@ -240,6 +240,7 @@ bar {
 ###### ONLY EXEC AT FIRST I3 STARTUP ######
 # todo set keys
 #exec --no-startup-id xmodmap ~/.xmodmap
+exec --no-startup-id setxkbmap "de" -variant nodeadkeys
 
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
@@ -255,12 +256,14 @@ exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agen
 exec --no-startup-id ulatencyd
 exec --no-startup-id "sh -c 'sleep 15; exec gmail-notify'"
 
-exec_always --no-startup-id dropbox start
 
 ###### ALWAYS EXEC AT I3 START/RESTART ######
+
+exec_always --no-startup-id dropbox start
+
 # Set wm name to something Java recognizes (overriden if run in .xsessionrc)
 exec_always --no-startup-id wmname LG3D
-# move mouse ot of the way with window if context key is pressed
+# move mouse out of the way with window if context key is pressed
 bindsym $mod+e exec xdotool getactivewindow mousemove -w '%1' 0 0
 # always adjust wallpapers in case screens/resolutions changed
 exec_always --no-startup-id $bins/delayed_nitrogen_restore.sh
