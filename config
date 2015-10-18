@@ -1,4 +1,4 @@
-# Do i3 stuff in script: i3-msg "move container to workspace 1s"
+# Do i3 stuff in script: i3-msg "move container to workspace 1"
 
 ###### GENERAL SETUP ######
 set $fonttype_window -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -234,13 +234,12 @@ bar {
     mode dock
     modifier $mod
     status_command py3status -t 10 -c ~/.i3/i3status.conf
-    #status_command ~/.i3/conky/init.sh
     }
 
 ###### ONLY EXEC AT FIRST I3 STARTUP ######
 # todo set keys
 #exec --no-startup-id xmodmap ~/.xmodmap
-exec --no-startup-id setxkbmap "de" -variant nodeadkeys
+exec --no-startup-id "setxkbmap -model pc105 -layout de -variant nodeadkeys"
 
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
@@ -250,11 +249,13 @@ exec --no-startup-id gnome-sound-applet
 exec --no-startup-id synapse -s
 exec --no-startup-id $bins/start_xautolock.sh
 exec --no-startup-id nm-applet &
-exec --no-startup-id diodon
+# exec --no-startup-id diodon
+exec --no-startup-id glipper
 exec --no-startup-id classicmenu-indicator
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id ulatencyd
-exec --no-startup-id "sh -c 'sleep 15; exec gmail-notify'"
+exec --no-startup-id sh -c '/usr/bin/nvidia-settings --load-config-only'
+# exec --no-startup-id ulatencyd
+# exec --no-startup-id "sh -c 'sleep 15; exec gmail-notify'"
 
 
 ###### ALWAYS EXEC AT I3 START/RESTART ######
