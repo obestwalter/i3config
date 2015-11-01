@@ -247,7 +247,7 @@ exec --no-startup-id $bins/touchpad_settings.sh
 exec --no-startup-id kwalletd
 exec --no-startup-id gnome-sound-applet
 exec --no-startup-id synapse -s
-exec --no-startup-id $bins/start_xautolock.sh
+# exec --no-startup-id $bins/start_xautolock.sh  # does not play with gnome
 exec --no-startup-id nm-applet &
 # exec --no-startup-id diodon
 exec --no-startup-id glipper
