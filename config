@@ -261,10 +261,11 @@ exec --no-startup-id sh -c '/usr/bin/nvidia-settings --load-config-only'
 ###### ALWAYS EXEC AT I3 START/RESTART ######
 
 exec_always --no-startup-id dropbox start
-
 # Set wm name to something Java recognizes (overriden if run in .xsessionrc)
 exec_always --no-startup-id wmname LG3D
 # move mouse out of the way with window if context key is pressed
 bindsym $mod+e exec xdotool getactivewindow mousemove -w '%1' 0 0
+# always try to set sane working config for 3 screens
+exec_always --no-startup-id $bins/lywork.sh
 # always adjust wallpapers in case screens/resolutions changed
 exec_always --no-startup-id $bins/delayed_nitrogen_restore.sh
