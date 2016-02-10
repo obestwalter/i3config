@@ -25,6 +25,8 @@ bindsym $mod+Shift+numbersign kill
 bindsym $mod+f fullscreen
 # TODO check why smart does not work
 popup_during_fullscreen leave_fullscreen
+# move mouse out of the way with window if context key is pressed
+bindsym $mod+e exec xdotool getactivewindow mousemove -w '%1' 0 0
 
 # yakuake like scratchpad
 bindsym Shift+F12 move scratchpad
@@ -238,6 +240,7 @@ bar {
 
 ###### ONLY EXEC AT FIRST I3 STARTUP ######
 # todo set keys
+
 #exec --no-startup-id xmodmap ~/.xmodmap
 exec --no-startup-id "setxkbmap -model pc105 -layout de -variant nodeadkeys"
 
@@ -263,7 +266,7 @@ exec --no-startup-id sh -c '/usr/bin/nvidia-settings --load-config-only'
 exec_always --no-startup-id dropbox start
 # Set wm name to something Java recognizes (overriden if run in .xsessionrc)
 exec_always --no-startup-id wmname LG3D
-# move mouse out of the way with window if context key is pressed
-bindsym $mod+e exec xdotool getactivewindow mousemove -w '%1' 0 0
+# try to set sane working config for 3 screens
+exec_always --no-startup-id $bins/xrandr_work.sh
 # always adjust wallpapers in case screens/resolutions changed
 exec_always --no-startup-id $bins/delayed_nitrogen_restore.sh
