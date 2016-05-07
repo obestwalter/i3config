@@ -216,11 +216,11 @@ for_window [title="synapse"] border none
 ############################# APPEARANCE ######################################
 ###############################################################################
 font $fonttype_window
-hide_edge_borders both
+hide_edge_borders none
 
-# <class> <border> <background> <text> <indicator>
-client.focused          #859900 #fdf6e3 #586e75 #268bd2
-client.focused_inactive #fdf6e3 #002b36 #586e75 #268bd2
-client.unfocused        #586e75 #586e75 #839496 #268bd2
-client.urgent           #2aa198 #2aa198 #002b36 #268bd2
-client.background       $black
+# <class>               border     bg     txt     ind
+client.focused          #fdf6e3 #fdf6e3 #657b83 #268bd2
+client.unfocused        #fdf6e3 #002b36 #657b83 #268bd2
+client.focused_inactive #002b36 #002b36 #657b83 #268bd2
+client.urgent           #2aa198 #2aa198 #657b83 #268bd2
+client.background       #000000
