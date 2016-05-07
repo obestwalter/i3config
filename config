@@ -212,50 +212,15 @@ for_window [class="xfreerdp"]floating disable
 
 for_window [title="synapse"] border none
 
-###### APPEARANCE ######
-# window titles and navbar if not defined there.
+###############################################################################
+############################# APPEARANCE ######################################
+###############################################################################
 font $fonttype_window
+hide_edge_borders both
 
-#hide_edge_borders vertical
-
-set $black              #000000
-set $blue               #0000DD
-set $dark_blue          #000024
-set $very_light_grey    #CCCCCC
-set $light_grey         #777777
-set $medium_grey        #444444
-set $dark_grey          #222222
-set $dark_red           #CA0000
-set $light_orange       #FF7755
-set $orange             #CF0000
-set $green              #AA9900
-set $light_yellow       #F0FF80
-set $white              #FFFFFF
-
+# <class> <border> <background> <text> <indicator>
+client.focused          #859900 #fdf6e3 #586e75 #268bd2
+client.focused_inactive #fdf6e3 #002b36 #586e75 #268bd2
+client.unfocused        #586e75 #586e75 #839496 #268bd2
+client.urgent           #2aa198 #2aa198 #002b36 #268bd2
 client.background       $black
-#   class               border         background   text          indicator
-client.focused          $white         $orange      $white        $light_orange
-client.focused_inactive $white         $dark_grey   $light_grey   $light_orange
-client.unfocused        $light_grey    $medium_grey $light_grey   $light_orange
-client.urgent           $white         $green       $white        $green
-
-###### BAR ######
-# force_display_urgency_hint 1000 ms
-
-#bar {
-#    tray_output primary
-#    position bottom
-#    colors {
-#        background $dark_blue
-#        statusline $light_grey
-#        # class, border, bg, text
-#        focused_workspace  $white $orange $white
-#        active_workspace   $light_grey $dark_blue $white
-#        inactive_workspace $light_grey $medium_grey $light_grey
-#        urgent_workspace   $white $green $white
-#    }
-#    font $fonttype_bar
-#    mode dock
-#    modifier $mod
-#    status_command py3status -t 10 -c ~/.i3/i3status.conf
-#    }

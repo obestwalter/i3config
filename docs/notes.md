@@ -39,16 +39,10 @@ http://software.opensuse.org/download.html?project=home%3AAlexx2000&package=doub
 
 * Guake
 
-## Search files
-
-`catfish --start <folder to search> <thing to search>`
-
 ## Clipboard manager
 
 * glipper
 * diodon ?
-
-# Color scheme: solarized
 
 # IPC
 
