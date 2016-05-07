@@ -1,0 +1,39 @@
+# Startup reorg
+
+# Most of this should be done via XFCE now?
+# not sure
+# exec --no-startup-id synapse -s
+# exec --no-startup-id glipper
+# exec --no-startup-id gnome-settings-daemon
+# exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
+# exec --no-startup-id kwalletd
+# exec --no-startup-id gnome-sound-applet
+# exec --no-startup-id nm-applet &
+# exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+# exec --no-startup-id sh -c '/usr/bin/nvidia-settings --load-config-only'
+
+# legacy
+# exec --no-startup-id classicmenu-indicator
+# exec --no-startup-id diodon
+# exec --no-startup-id $bins/start_xautolock.sh  # does not play with gnome
+# exec --no-startup-id ulatencyd
+# exec --no-startup-id "sh -c 'sleep 15; exec gmail-notify'"
+
+# Software under consideration
+
+## Drop down terminal
+
+* Guake
+
+## Search files
+
+`catfish --start <folder to search> <thing to search>`
+
+## Clipboard manager
+
+* glipper
+* diodon ?
+
+# IPC
+
+Do i3 stuff in script: i3-msg "move container to workspace 1"
