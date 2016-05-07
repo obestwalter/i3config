@@ -1,5 +1,7 @@
 # XFCE
 
+The basics to set it up can be cherry picked here: http://feeblenerd.blogspot.de/2015/11/pretty-i3-with-xfce.html
+
 [internals](http://rabexc.org/posts/an-unwilling-dive-in-xfce4-internals)
 
 All the configs are in `~/.config` and very tidy! Nice!
