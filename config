@@ -93,8 +93,8 @@ bindsym $mod+F1 [class="Firefox"] move workspace current
 # bindsym $mod+Mod1+r exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 
 # dynamic tagging feature
-bindsym $mod+t exec ~/.i3/get_workspace_options.py | dmenu -b | ~/.i3/go_to_workspace.py
-bindsym $mod+Shift+t exec ~/.i3/get_workspace_options.py | dmenu -b | ~/.i3/move_to_workspace.py
+# bindsym $mod+t exec ~/.i3/get_workspace_options.py | dmenu -b | ~/.i3/go_to_workspace.py
+# bindsym $mod+Shift+t exec ~/.i3/get_workspace_options.py | dmenu -b | ~/.i3/move_to_workspace.py
 
 ##### NAVIGATION BINDINGS #####
 bindsym $mod+h focus left

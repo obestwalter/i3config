@@ -1,3 +1,9 @@
+# XFCE
+
+[internals](http://rabexc.org/posts/an-unwilling-dive-in-xfce4-internals)
+
+All the configs are in `~/.config` and very tidy! Nice!
+
 # Startup reorg
 
 # Most of this should be done via XFCE now?
@@ -21,6 +27,12 @@
 
 # Software under consideration
 
+## Orthodox file manager
+
+* double commander
+
+http://software.opensuse.org/download.html?project=home%3AAlexx2000&package=doublecmd-gtk
+
 ## Drop down terminal
 
 * Guake
@@ -33,6 +45,8 @@
 
 * glipper
 * diodon ?
+
+# Color scheme: solarized
 
 # IPC
 
