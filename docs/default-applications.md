@@ -7,6 +7,10 @@
 
 Norton Commander -> Total Commander -> Krusader -> Midnight Commander -> Double Commander
 
+**Learn Ranger**
+
+**Learn Double Commander**
+
 # Clipboard Manager
 
 TBD

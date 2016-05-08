@@ -1,68 +1,65 @@
 ###############################################################################
-############################## STARTUP ########################################
+############################## VARIABLES ######################################
 ###############################################################################
 
-exec --no-startup-id $bins/touchpad_settings.sh
-
-# exec --no-startup-id xmodmap ~/.xmodmap
-# exec --no-startup-id "setxkbmap -model pc105 -layout de -variant nodeadkeys"
-
-
-###### ALWAYS EXEC AT I3 START/RESTART ######
-
-# exec --no-startup-id dropbox start
-
-# legacy
-# Set wm name to something Java recognizes (overriden if run in .xsessionrc)
-# exec_always --no-startup-id wmname LG3D
-# try to set sane working config for 3 screens
-# exec_always --no-startup-id $bins/xrandr_work.sh
-# always adjust wallpapers in case screens/resolutions changed
-# exec_always --no-startup-id $bins/delayed_nitrogen_restore.sh
-
-###### GENERAL SETUP ######
-set $fonttype_window -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-set $fonttype_bar -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# Windows key is main modifier - see `xmodmap` for info about modifier keys
 set $mod Mod4
-set $bins ~/.i3/bin
+set $bin ~/.i3/bin
 
+###############################################################################
+########################### GLOBAL SETTINGS ###################################
+###############################################################################
+
+workspace_layout stacking
+floating_modifier $mod
 focus_follows_mouse no
+popup_during_fullscreen leave_fullscreen
 new_window normal
 new_float normal
 
-# Workspace default <default|stacking|tabbed>
-workspace_layout tabbed
+###############################################################################
+############################# APPEARANCE ######################################
+###############################################################################
 
-###### EXTERNAL BINDINGS ######
-bindsym $mod+Return exec gnome-terminal --maximize --hide-menubar
-# bindsym $mod+Return exec roxterm --maximize --hide-menubar
-# bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id xfce4-popup-whiskermenu
-bindsym --release $mod+Home exec --no-startup-id $bins/take_screenshot.sh
-bindsym --release $mod+Shift+Home exec --no-startup-id $bins/take_interactive_screenshot.sh
-bindsym $mod+b exec --no-startup-id $bins/toggle_player.sh
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+hide_edge_borders none
 
-###### WINDOW CONTROL BINDINGS ######
+#                       border     bg     txt     ind
+client.focused          #fdf6e3 #fdf6e3 #657b83 #268bd2
+client.unfocused        #fdf6e3 #002b36 #657b83 #268bd2
+client.focused_inactive #002b36 #002b36 #657b83 #268bd2
+client.urgent           #2aa198 #2aa198 #657b83 #268bd2
+client.background       #000000
+
+###############################################################################
+############################## STARTUP ########################################
+###############################################################################
+
+# FIXME - workaround for https://github.com/denesb/xfce4-i3-workspaces-plugin/issues/20
+exec_always --no-startup-id pkill -f i3-workspaces
+
+exec --no-startup-id $bin/touchpad_settings.sh
+
+###############################################################################
+############################## BINDINGS #######################################
+###############################################################################
+
 bindsym $mod+Shift+numbersign kill
 bindsym $mod+f fullscreen
-# TODO check why smart does not work
-popup_during_fullscreen leave_fullscreen
-# move mouse out of the way with window if context key is pressed
-bindsym $mod+e exec xdotool getactivewindow mousemove -w '%1' 0 0
+
+bindsym $mod+Return exec gnome-terminal --maximize --hide-menubar
+bindsym $mod+d exec --no-startup-id xfce4-popup-whiskermenu
+bindsym $mod+Shift+d exec dmenu_run
 
 # yakuake like scratchpad
-# bindsym Shift+F12 move scratchpad
-# bindsym F12 scratchpad show
+bindsym Shift+F12 move scratchpad
+bindsym F12 scratchpad show
 
-###### LAYOUT CONTROL BINDINGS ######
 bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+h move left
 bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+j move down
 bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+k move up
 bindsym $mod+Shift+Right move right
-bindsym $mod+Shift+l move right
+
 bindsym $mod+u layout tabbed
 bindsym $mod+i layout stacking
 bindsym $mod+o layout toggle split
@@ -72,8 +69,6 @@ bindsym $mod+Shift+p focus child
 bindsym $mod+comma split h
 bindsym $mod+period split v
 bindsym $mod+Shift+asciicircum floating toggle
-# move windows with mouse while pressed
-floating_modifier $mod
 
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
@@ -87,30 +82,20 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+x move workspace to output right
 
-bindsym $mod+F1 [class="Firefox"] move workspace current
-# does not work as expected
-# Nav is creating new workspace 1 even if renamed to 1: dev or 1:dev
-# bindsym $mod+Mod1+r exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
-
-# dynamic tagging feature
-# bindsym $mod+t exec ~/.i3/get_workspace_options.py | dmenu -b | ~/.i3/go_to_workspace.py
-# bindsym $mod+Shift+t exec ~/.i3/get_workspace_options.py | dmenu -b | ~/.i3/move_to_workspace.py
-
 ##### NAVIGATION BINDINGS #####
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+# TODO use focus-last.py instead
+#workspace_auto_back_and_forth yes
+bindsym Mod1+Tab workspace back_and_forth
+
+bindsym $mod+Tab exec quickswitch.py
+bindsym $mod+Shift+Tab exec quickswitch.py --scratchpad
+
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+# FIXME what is this supposed to do?
 bindsym $mod+asciicircum focus mode_toggle
-
-#workspace_auto_back_and_forth yes
-bindsym Mod1+Tab workspace back_and_forth
-bindsym $mod+Tab exec quickswitch.py
-bindsym $mod+Shift+Tab exec quickswitch.py --scratchpad
 
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -123,61 +108,12 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
-# jump to next open vim instance
-# bindsym $mod+a [class="urxvt" title="VIM"] focus
-
-
 ###### MANAGE i3 ######
-bindsym $mod+Num_Lock exec $bins/lockscreen_with_wallpaper.sh
-bindsym $mod+Shift+Num_Lock exec $bins/lockscreen_with_suspend.sh
-bindsym $mod+Mod1+Shift+w exec $bins/get_wininfo.sh
-
 # switch screen off
 #bindsym $mod+Shift+F12 exec xset dpms force off
 #bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'End X session and i3?' -b 'Yes, exit i3' 'i3-msg exit'"
-
-###### RESIZE MODE ######
-bindsym $mod+r mode "resize"
-mode "resize" {
-    # enter: $mod+r; exit: Enter, Escape
-    # width  - left:shrink; right:grow | height - down:shrink; up:grow
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
-    bindsym Down resize shrink height 10 px or 10 ppt
-    bindsym Up resize grow height 10 px or 10 ppt
-    bindsym Return mode "default"
-    bindsym Shift+Left resize shrink width 100 px or 100 ppt
-    bindsym Shift+Right resize grow width 100 px or 100 ppt
-    bindsym Shift+Down resize shrink height 100 px or 100 ppt
-    bindsym Shift+Up resize grow height 100 px or 100 ppt
-    bindsym Shift+Left resize shrink width 100 px or 100 ppt
-    bindsym Shift+Right resize grow width 100 px or 100 ppt
-    bindsym Shift+Down resize shrink height 100 px or 100 ppt
-    bindsym Shift+Up resize grow height 100 px or 100 ppt
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-
-################### MEDIA KEYS ############################
-#bindsym XF86AudioPlay exec mpc toggle | head -1 | message
-#bindsym XF86AudioStop exec mpc stop | echo Stopped | message
-#bindsym XF86AudioPrev exec mpc prev | head -1 | message
-#bindsym XF86AudioNext exec mpc next | head -1 | message
-bindsym XF86AudioMute exec amixer set Master toggle; exec notify-send "Volume toggled"
-bindsym XF86AudioRaiseVolume exec amixer set Master 1%+ unmute
-bindsym XF86AudioLowerVolume exec amixer set Master 1%- unmute
-bindsym XF86PowerOff exec sudo -n poweroff
-#bindsym XF86Suspend exec /home/robert3005/bin/suspend_hibernate 1
-#bindsym XF86Sleep exec /home/robert3005/bin/suspend_hibernate 0
-#bindsym XF86Display exec /home/robert3005/bin/suspend_hibernate
-#bindsym XF86ScreenSaver exec i3lock -d -i ~/Pictures/Wallpapers/blur_bridge_1440x900.png
-
-# Simulate ctrl+v upon pressing $mod+x
-#bindsym --release $mod+x exec --no-startup-id xdotool key --clearmodifiers ctrl+v
-
 
 ###### DEFAULTS FOR SPECIFIC WINDOWS ######
 # use xwininfo and/or xprop to find out about the window
@@ -185,9 +121,6 @@ bindsym XF86PowerOff exec sudo -n poweroff
 # ASSIGN Apps to specific windows #
 #assign [class="^Firefox$"] 10
 #assign [class="^Chromium-browser$"] 10
-assign [class="^Evolution$"] 9
-assign [class="^Empathy$"] 9
-assign [class="^Krusader$"] 7
 
 # PYCHARM
 set $pcWin Debug|Inspection|^Find$|^Changes$|TeamCity|^Run$|Version Control|Messages
@@ -212,15 +145,29 @@ for_window [class="xfreerdp"]floating disable
 
 for_window [title="synapse"] border none
 
-###############################################################################
-############################# APPEARANCE ######################################
-###############################################################################
-font $fonttype_window
-hide_edge_borders none
 
-# <class>               border     bg     txt     ind
-client.focused          #fdf6e3 #fdf6e3 #657b83 #268bd2
-client.unfocused        #fdf6e3 #002b36 #657b83 #268bd2
-client.focused_inactive #002b36 #002b36 #657b83 #268bd2
-client.urgent           #2aa198 #2aa198 #657b83 #268bd2
-client.background       #000000
+###############################################################################
+############################# RESIZE MODE  ####################################
+###############################################################################
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+    # enter: $mod+r; exit: Enter, Escape
+    # width  - left:shrink; right:grow | height - down:shrink; up:grow
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Down resize shrink height 10 px or 10 ppt
+    bindsym Up resize grow height 10 px or 10 ppt
+    bindsym Return mode "default"
+    bindsym Shift+Left resize shrink width 100 px or 100 ppt
+    bindsym Shift+Right resize grow width 100 px or 100 ppt
+    bindsym Shift+Down resize shrink height 100 px or 100 ppt
+    bindsym Shift+Up resize grow height 100 px or 100 ppt
+    bindsym Shift+Left resize shrink width 100 px or 100 ppt
+    bindsym Shift+Right resize grow width 100 px or 100 ppt
+    bindsym Shift+Down resize shrink height 100 px or 100 ppt
+    bindsym Shift+Up resize grow height 100 px or 100 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
