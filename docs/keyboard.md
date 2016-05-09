@@ -14,6 +14,8 @@ german layout: `xkeycaps -keyboard PC105DE`
 
 us layout: `xkeycaps -keyboard PC105`
 
+    cat /usr/share/X11/xkb/symbols/de
+
 ### Change
 
 http://ubuntuforums.org/showthread.php?t=188761
