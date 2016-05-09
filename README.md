@@ -2,7 +2,7 @@
 
 ## What?
 
-There is so much more out there than M$ Windows :)
+My computer is my virtual workplace and living room. It needs to be functional and cozy. The big desktop environments are too opinionated and restricting in the way how I am supposed to use my computer. i3 helps you to [take the power back](https://www.tape.tv/rage-against-the-machine/videos/take-the-power-back-live).
 
 ![i3-screen](docs/i3-screen.png)
 
