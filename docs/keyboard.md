@@ -26,4 +26,6 @@ http://xahlee.info/linux/linux_xbindkeys_tutorial.html
 
 # Simulate keystrokes
 
+http://www.semicomplete.com/projects/xdotool/
+
 http://xmodulo.com/simulate-key-press-mouse-movement-linux.html
