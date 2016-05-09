@@ -42,7 +42,7 @@ bindsym $win+f fullscreen
 bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
 
 bindsym $alt+space exec xfce4-popup-whiskermenu
-bindsym $win+Shift+d exec xdotool mousemove 880 420 && xfce4-popup-windowmenu -p
+bindsym $win+space exec xdotool mousemove 880 420 && xfce4-popup-windowmenu -p
 bindsym $win+Tab exec $bin/quickswitch.py
 bindsym $win+Shift+Tab exec $bin/quickswitch.py --scratchpad
 bindsym $alt+Tab exec /usr/bin/python3 $bin/focus-last.py --switch
@@ -128,6 +128,8 @@ mode "resize" {
 ###############################################################################
 ############################## STARTUP ########################################
 ###############################################################################
+
+exec_always --no-startup-id sleep 0.2 && nitrogen --restore
 
 exec_always --no-startup-id $bin/focus-last.py
 
