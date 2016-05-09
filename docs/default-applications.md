@@ -28,9 +28,13 @@ gnome-terminal
 
 ## Search
 
-### Search files
+Search files: `catfish --start <folder to search> <thing to search>`
 
-`catfish --start <folder to search> <thing to search>`
+### Desktop search
+
+* tracker
+* zeitgeist
+* ??
 
 ## Drop down terminal
 
