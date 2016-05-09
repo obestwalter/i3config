@@ -1,8 +1,10 @@
 # Keyboard
 
+![generic 104](pc104-keycodes.png)
+
 ## Who is grabbing what?
 
-I use XFCE and i3 as the window manager. So what is defined in `xfce4-keyboard-settings` will take precedence even over what is configured in the i3 config. 
+All global keyboard shortcuts should be managed from i3 if possible, so all in `xfce4-keyboard-settings` should be removed. 
 
 ## Layout
 
