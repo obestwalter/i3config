@@ -4,7 +4,15 @@
 
 My computer is my virtual workplace and living room. It needs to be functional and cozy. The big desktop environments are too opinionated and restricting in the way how I am supposed to use my computer. i3 helps me to [take the power back](https://www.tape.tv/rage-against-the-machine/videos/take-the-power-back-live).
 
+I want to control this ... 
+
 ![i3-screen](docs/i3-screen.png)
+
+Mainly with this ...
+
+![generic 104](docs/img/pc104-keycodes.png)
+
+and i3 is really great for that.
 
 ## Why?
 

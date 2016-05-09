@@ -1,6 +1,6 @@
 # Keyboard
 
-![generic 104](pc104-keycodes.png)
+![generic 104](img/pc104-keycodes.png)
 
 ## Who is grabbing what?
 

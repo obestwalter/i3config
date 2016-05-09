@@ -10,4 +10,10 @@ http://unix.stackexchange.com/questions/46301/a-list-of-available-dbus-services
 
 https://wiki.gnome.org/action/show/Apps/DFeet?action=show&redirect=DFeet
 
-
+    import dbus
+    
+    for service in dbus.SystemBus().list_names():
+    print(service)
+   
+    for service in dbus.SessionBus().list_names():
+        print(service)

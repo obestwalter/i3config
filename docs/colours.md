@@ -6,7 +6,7 @@ So I often have problems with the standard colour choices of many programs and n
 
 Solarized is a theme with the colour blind in mind and works very well for me, so I try to use it wherever I can.
 
-[![solarized palette](solarized-palette.png)](https://github.com/altercation/solarized)
+[![solarized palette](img/solarized-palette.png)](https://github.com/altercation/solarized)
 
 
 https://github.com/altercation/solarized
