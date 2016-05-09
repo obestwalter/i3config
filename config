@@ -41,7 +41,7 @@ bindsym $m+f fullscreen
 bindsym --release $m+y exec "sleep 0.1 && xdotool key Menu"
 
 bindsym $m+d exec xfce4-popup-whiskermenu
-bindsym $m+Shift+d exec xfce4-popup-windowmenu
+bindsym $m+Shift+d exec xfce4-popup-windowmenu -p
 bindsym $m+Tab exec $bin/quickswitch.py
 bindsym $m+Shift+Tab exec $bin/quickswitch.py --scratchpad
 bindsym Mod1+Tab workspace back_and_forth
