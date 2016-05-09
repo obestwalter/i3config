@@ -41,3 +41,11 @@ gnome-terminal
 * glipper
 * diodon ?
 
+
+## Media streaming
+
+### emby
+
+Not so easy to get it working though ... 
+
+https://github.com/MediaBrowser/Wiki/wiki/Connectivity
