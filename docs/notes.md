@@ -46,6 +46,3 @@ bindsym $mod+F1 [class="Firefox"] move workspace current
     
 * Windows key is main modifier - see `xmodmap` for info about modifier keys
 
-# IPC
-
-Do i3 stuff in script: i3-msg "move container to workspace 1"
