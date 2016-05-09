@@ -36,21 +36,24 @@ bindsym $m+Shift+e exec "i3-nagbar -t warning -m 'Exit?' -b 'Yes' 'i3-msg exit'"
 bindsym $m+Shift+c restart
 bindsym $m+Shift+r reload
 
+bindsym $m+Shift+numbersign kill
+bindsym $m+f fullscreen
+bindsym --release $m+y exec "sleep 0.1 && xdotool key Menu"
+
 bindsym $m+d exec xfce4-popup-whiskermenu
 bindsym $m+Shift+d exec dmenu_run
 bindsym $m+Tab exec $bin/quickswitch.py
 bindsym $m+Shift+Tab exec $bin/quickswitch.py --scratchpad
 bindsym Mod1+Tab workspace back_and_forth
 
-bindsym $m+Shift+numbersign kill
-bindsym $m+f fullscreen
-bindsym --release $m+y exec "sleep 0.1 && xdotool key Menu"
-
 bindsym $m+Return exec gnome-terminal --maximize --hide-menubar
 bindsym $m+Shift+F12 exec --release xset dpms force off
 
 bindsym Shift+F12 move scratchpad
 bindsym F12 scratchpad show
+
+bindcode 107 exec xfce4-screenshooter -f
+bindcode Shift+107 exec xfce4-screenshooter -r
 
 ############################ BINDINGS: NAVIGATION #############################
 ###############################################################################
