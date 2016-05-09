@@ -1,11 +1,10 @@
 # Random unsorted stuff
 
+## Links
+
 https://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment-using-i3/
 
-## i3 companion
-
-https://github.com/DarkStarSword/junk/tree/master/config/home/.i3
-
+[i3 companion](https://github.com/DarkStarSword/junk/tree/master/config/home/.i3)
 
 ## XFCE
 
@@ -16,7 +15,7 @@ The basics to set it up can be cherry picked here: http://feeblenerd.blogspot.de
 All the configs are in `~/.config` and very tidy! Nice!
 
 
-# Snippets
+## Snippets
 
 ## move mouse out of the way with window if context key is pressed
 bindsym $mod+e exec xdotool getactivewindow mousemove -w '%1' 0 0
@@ -46,23 +45,6 @@ bindsym $mod+F1 [class="Firefox"] move workspace current
     bindsym $mod+Mod1+Shift+w exec $bin/get_wininfo.sh
     
 * Windows key is main modifier - see `xmodmap` for info about modifier keys
-
-# Software under consideration
-
-## Orthodox file manager
-
-* double commander
-
-http://software.opensuse.org/download.html?project=home%3AAlexx2000&package=doublecmd-gtk
-
-## Drop down terminal
-
-* Guake
-
-## Clipboard manager
-
-* glipper
-* diodon ?
 
 # IPC
 
