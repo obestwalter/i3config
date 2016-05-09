@@ -23,3 +23,7 @@ http://xahlee.info/linux/linux_xmodmap_tutorial.html
 http://xahlee.info/linux/linux_keyboard_tools.html
 
 http://xahlee.info/linux/linux_xbindkeys_tutorial.html
+
+# Simulate keystrokes
+
+http://xmodulo.com/simulate-key-press-mouse-movement-linux.html

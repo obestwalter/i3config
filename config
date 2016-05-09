@@ -69,14 +69,12 @@ bindsym $m+Shift+7 move container to workspace 7
 bindsym $m+Shift+8 move container to workspace 8
 bindsym $m+Shift+9 move container to workspace 9
 bindsym $m+Shift+0 move container to workspace 10
-bindsym $m+Shift+Left move left
-bindsym $m+Shift+Down move down
-bindsym $m+Shift+Up move up
-bindsym $m+Shift+Right move right
 
 ####################### BINDINGS: CONTROL LAYOUT ##############################
 ###############################################################################
 
+bindsym $m+x move workspace to output right
+bindsym $m+asciicircum focus mode_toggle
 bindsym $m+u layout tabbed
 bindsym $m+i layout stacking
 bindsym $m+o layout toggle split
@@ -87,8 +85,10 @@ bindsym $m+comma split h
 bindsym $m+period split v
 bindsym $m+Shift+asciicircum floating toggle
 
-bindsym $m+x move workspace to output right
-bindsym $m+asciicircum focus mode_toggle
+bindsym $m+Shift+Left move left
+bindsym $m+Shift+Down move down
+bindsym $m+Shift+Up move up
+bindsym $m+Shift+Right move right
 bindsym $m+1 workspace 1
 bindsym $m+2 workspace 2
 bindsym $m+3 workspace 3
