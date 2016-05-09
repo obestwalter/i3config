@@ -24,4 +24,4 @@ That was o.k. but I like to experiment. So at the moment I am playing with [XFCE
 
 ## How?
 
-**TBD** (first stumps in [docs](docs/))
+**TBD** (first stumps are [here](http://oliver.bestwalter.de/i3config/))

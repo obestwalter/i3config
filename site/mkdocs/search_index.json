@@ -1,0 +1,194 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "My environment\n\n\nWIP\n - still not much to see here.",
+            "title": "Home"
+        },
+        {
+            "location": "/#my-environment",
+            "text": "WIP  - still not much to see here.",
+            "title": "My environment"
+        },
+        {
+            "location": "/basics/",
+            "text": "Lightdm\n\n\nis the session manager and can be stopped by \n\n\n...\n\n\nbasic i3 experience: \nstartx i3\n\n\nTools for exploration/config\n\n\nWindows and their properties\n\n\nUse xwininfo and/or xprop to find out about the window",
+            "title": "Basics"
+        },
+        {
+            "location": "/basics/#lightdm",
+            "text": "is the session manager and can be stopped by   ...  basic i3 experience:  startx i3",
+            "title": "Lightdm"
+        },
+        {
+            "location": "/basics/#tools-for-explorationconfig",
+            "text": "",
+            "title": "Tools for exploration/config"
+        },
+        {
+            "location": "/basics/#windows-and-their-properties",
+            "text": "Use xwininfo and/or xprop to find out about the window",
+            "title": "Windows and their properties"
+        },
+        {
+            "location": "/colours/",
+            "text": "I am a little bit colour blind\n\n\nSo I often have problems with the standard colour choices of many programs and need to tweak them. This is often mindboggingly frustrating depending on what program you use. Therefore it is an important cirterion for me, if the program I use either just has an palette I can live with or is customizable in all the right places. Ideally it uses the colour choices I make somewhere centrally and I don't have to bother.\n\n\nSolarized\n\n\nSolarized is a theme with the colour blind in mind and works very well for me, so I try to use it wherever I can.\n\n\n\n\nhttps://github.com/altercation/solarized\n\n\nbase03    #002b36   background\nbase02    #073642   background\nbase01    #586e75   content\nbase00    #657b83   content\nbase0     #839496   content\nbase1     #93a1a1   content\nbase2     #eee8d5   background\nbase3     #fdf6e3   background\nyellow    #b58900   accent\norange    #cb4b16   accent\nred       #dc322f   accent\nmagenta   #d33682   accent\nviolet    #6c71c4   accent\nblue      #268bd2   accent\ncyan      #2aa198   accent\ngreen     #859900   accent",
+            "title": "Colours"
+        },
+        {
+            "location": "/colours/#i-am-a-little-bit-colour-blind",
+            "text": "So I often have problems with the standard colour choices of many programs and need to tweak them. This is often mindboggingly frustrating depending on what program you use. Therefore it is an important cirterion for me, if the program I use either just has an palette I can live with or is customizable in all the right places. Ideally it uses the colour choices I make somewhere centrally and I don't have to bother.",
+            "title": "I am a little bit colour blind"
+        },
+        {
+            "location": "/colours/#solarized",
+            "text": "Solarized is a theme with the colour blind in mind and works very well for me, so I try to use it wherever I can.   https://github.com/altercation/solarized  base03    #002b36   background\nbase02    #073642   background\nbase01    #586e75   content\nbase00    #657b83   content\nbase0     #839496   content\nbase1     #93a1a1   content\nbase2     #eee8d5   background\nbase3     #fdf6e3   background\nyellow    #b58900   accent\norange    #cb4b16   accent\nred       #dc322f   accent\nmagenta   #d33682   accent\nviolet    #6c71c4   accent\nblue      #268bd2   accent\ncyan      #2aa198   accent\ngreen     #859900   accent",
+            "title": "Solarized"
+        },
+        {
+            "location": "/default-applications/",
+            "text": "Default applications\n\n\nLauncher\n\n\n\n\nSynapse\n\n\nXFCE Whisker menu\n\n\n\n\nOrthodox file manager\n\n\nNorton Commander -> Total Commander -> Krusader -> Midnight Commander -> Double Commander\n\n\nhttp://software.opensuse.org/download.html?project=home%3AAlexx2000&package=doublecmd-gtk\n\n\nLearn Ranger\n\n\nLearn Double Commander\n\n\nTerminal Emulator\n\n\nNormal\n\n\ngnome-terminal\n\n\nDropdown\n\n\n\n\nguake\n\n\ntilda\n\n\n\n\nSearch\n\n\nSearch files: \ncatfish --start <folder to search> <thing to search>\n\n\nDesktop search\n\n\n\n\ntracker\n\n\nzeitgeist\n\n\n??\n\n\n\n\nDrop down terminal\n\n\n\n\nGuake\n\n\n\n\nClipboard manager\n\n\n\n\nglipper\n\n\ndiodon?\n\n\n\n\nMedia streaming\n\n\nemby\n\n\nNot so easy to get it working though ... \n\n\nhttps://github.com/MediaBrowser/Wiki/wiki/Connectivity",
+            "title": "Default application"
+        },
+        {
+            "location": "/default-applications/#default-applications",
+            "text": "",
+            "title": "Default applications"
+        },
+        {
+            "location": "/default-applications/#launcher",
+            "text": "Synapse  XFCE Whisker menu",
+            "title": "Launcher"
+        },
+        {
+            "location": "/default-applications/#orthodox-file-manager",
+            "text": "Norton Commander -> Total Commander -> Krusader -> Midnight Commander -> Double Commander  http://software.opensuse.org/download.html?project=home%3AAlexx2000&package=doublecmd-gtk  Learn Ranger  Learn Double Commander",
+            "title": "Orthodox file manager"
+        },
+        {
+            "location": "/default-applications/#terminal-emulator",
+            "text": "",
+            "title": "Terminal Emulator"
+        },
+        {
+            "location": "/default-applications/#normal",
+            "text": "gnome-terminal",
+            "title": "Normal"
+        },
+        {
+            "location": "/default-applications/#dropdown",
+            "text": "guake  tilda",
+            "title": "Dropdown"
+        },
+        {
+            "location": "/default-applications/#search",
+            "text": "Search files:  catfish --start <folder to search> <thing to search>",
+            "title": "Search"
+        },
+        {
+            "location": "/default-applications/#desktop-search",
+            "text": "tracker  zeitgeist  ??",
+            "title": "Desktop search"
+        },
+        {
+            "location": "/default-applications/#drop-down-terminal",
+            "text": "Guake",
+            "title": "Drop down terminal"
+        },
+        {
+            "location": "/default-applications/#clipboard-manager",
+            "text": "glipper  diodon?",
+            "title": "Clipboard manager"
+        },
+        {
+            "location": "/default-applications/#media-streaming",
+            "text": "",
+            "title": "Media streaming"
+        },
+        {
+            "location": "/default-applications/#emby",
+            "text": "Not so easy to get it working though ...   https://github.com/MediaBrowser/Wiki/wiki/Connectivity",
+            "title": "emby"
+        },
+        {
+            "location": "/ipc/",
+            "text": "Inter process communication\n\n\nI3\n\n\nDo i3 stuff in script: i3-msg \"move container to workspace 1\"\n\n\nDbus\n\n\nhttp://unix.stackexchange.com/questions/46301/a-list-of-available-dbus-services\n\n\nhttps://wiki.gnome.org/action/show/Apps/DFeet?action=show&redirect=DFeet\n\n\nimport dbus\n\nfor service in dbus.SystemBus().list_names():\nprint(service)\n\nfor service in dbus.SessionBus().list_names():\n    print(service)",
+            "title": "Inter process communication"
+        },
+        {
+            "location": "/ipc/#inter-process-communication",
+            "text": "",
+            "title": "Inter process communication"
+        },
+        {
+            "location": "/ipc/#i3",
+            "text": "Do i3 stuff in script: i3-msg \"move container to workspace 1\"",
+            "title": "I3"
+        },
+        {
+            "location": "/ipc/#dbus",
+            "text": "http://unix.stackexchange.com/questions/46301/a-list-of-available-dbus-services  https://wiki.gnome.org/action/show/Apps/DFeet?action=show&redirect=DFeet  import dbus\n\nfor service in dbus.SystemBus().list_names():\nprint(service)\n\nfor service in dbus.SessionBus().list_names():\n    print(service)",
+            "title": "Dbus"
+        },
+        {
+            "location": "/keyboard/",
+            "text": "Keyboard\n\n\n\n\nWho is grabbing what?\n\n\nAll global keyboard shortcuts should be managed from i3 if possible, so all in \nxfce4-keyboard-settings\n should be removed. \n\n\nLayout\n\n\nExplore\n\n\ngerman layout: \nxkeycaps -keyboard PC105DE\n\n\nus layout: \nxkeycaps -keyboard PC105\n\n\nChange\n\n\nhttp://ubuntuforums.org/showthread.php?t=188761\n\n\nUnsorted links to tools and tutorials that might be useful\n\n\nhttp://xahlee.info/linux/linux_xmodmap_tutorial.html\n\n\nhttp://xahlee.info/linux/linux_keyboard_tools.html\n\n\nhttp://xahlee.info/linux/linux_xbindkeys_tutorial.html\n\n\nSimulate keystrokes\n\n\nhttp://www.semicomplete.com/projects/xdotool/\n\n\nhttp://xmodulo.com/simulate-key-press-mouse-movement-linux.html\n\n\nxdotool key --window \"$(xdotool search --class Chrome | head -n 1)\" F5",
+            "title": "Keyboard"
+        },
+        {
+            "location": "/keyboard/#keyboard",
+            "text": "",
+            "title": "Keyboard"
+        },
+        {
+            "location": "/keyboard/#who-is-grabbing-what",
+            "text": "All global keyboard shortcuts should be managed from i3 if possible, so all in  xfce4-keyboard-settings  should be removed.",
+            "title": "Who is grabbing what?"
+        },
+        {
+            "location": "/keyboard/#layout",
+            "text": "",
+            "title": "Layout"
+        },
+        {
+            "location": "/keyboard/#explore",
+            "text": "german layout:  xkeycaps -keyboard PC105DE  us layout:  xkeycaps -keyboard PC105",
+            "title": "Explore"
+        },
+        {
+            "location": "/keyboard/#change",
+            "text": "http://ubuntuforums.org/showthread.php?t=188761",
+            "title": "Change"
+        },
+        {
+            "location": "/keyboard/#unsorted-links-to-tools-and-tutorials-that-might-be-useful",
+            "text": "http://xahlee.info/linux/linux_xmodmap_tutorial.html  http://xahlee.info/linux/linux_keyboard_tools.html  http://xahlee.info/linux/linux_xbindkeys_tutorial.html",
+            "title": "Unsorted links to tools and tutorials that might be useful"
+        },
+        {
+            "location": "/keyboard/#simulate-keystrokes",
+            "text": "http://www.semicomplete.com/projects/xdotool/  http://xmodulo.com/simulate-key-press-mouse-movement-linux.html  xdotool key --window \"$(xdotool search --class Chrome | head -n 1)\" F5",
+            "title": "Simulate keystrokes"
+        },
+        {
+            "location": "/unified-user-experience/",
+            "text": "Unified user experience\n\n\nI am using computers with text based and graphic user interfaces for more than 30 years now and would like to share my experiences.\n\n\nDesktop environments like Windows, Gnome, KDE, XFCE, etc. are all trying to unify the user experience by providing a set of common patterns that all applications belonging to that system abide by that. Glued together is this by providing different means of manipulating the layout of application windows and ways to navigating between them. The standard ways are inolving a lot of mousing, clicking and Alt/Strg/Win+Tabbing until the wanted Window pops up. Additionally if you are using a lot of applications chances are, that you have to deal with a chaotic collection of different paradigms and GUI toolkits. This is bad, but it also is reality.\n\n\nNavigation\n\n\nModern computer usage involves a lot of navigating inside and between applications. Unifying this behaviour is near to impossible, because people. So next best thing is to adjust the system and all the commonly used applications to behave in a similar way. This is what I am trying here.\n\n\nGlobal usage patterns for navigation\n\n\n\n\nNavigate between workspaces/monitors\n\n\nNavigate between Applications\n\n\nNavigate between Application Windows\n\n\nNavigate inside the Application\n\n\n\n\nThere are some shortcuts that are ideally the same between applications:\n\n\n\n\nStrg+f\n: Find stuff\n\n\nStrg+Tab\n: Next tab\n\n\nStrg+Shift+Tab\n: Previous tab\n\n\n\n\nA criterion for the usability of an application is also the ability to tweak the shortcuts in a way that it fits into global usage patterns.",
+            "title": "Unified user experience"
+        },
+        {
+            "location": "/unified-user-experience/#unified-user-experience",
+            "text": "I am using computers with text based and graphic user interfaces for more than 30 years now and would like to share my experiences.  Desktop environments like Windows, Gnome, KDE, XFCE, etc. are all trying to unify the user experience by providing a set of common patterns that all applications belonging to that system abide by that. Glued together is this by providing different means of manipulating the layout of application windows and ways to navigating between them. The standard ways are inolving a lot of mousing, clicking and Alt/Strg/Win+Tabbing until the wanted Window pops up. Additionally if you are using a lot of applications chances are, that you have to deal with a chaotic collection of different paradigms and GUI toolkits. This is bad, but it also is reality.",
+            "title": "Unified user experience"
+        },
+        {
+            "location": "/unified-user-experience/#navigation",
+            "text": "Modern computer usage involves a lot of navigating inside and between applications. Unifying this behaviour is near to impossible, because people. So next best thing is to adjust the system and all the commonly used applications to behave in a similar way. This is what I am trying here.",
+            "title": "Navigation"
+        },
+        {
+            "location": "/unified-user-experience/#global-usage-patterns-for-navigation",
+            "text": "Navigate between workspaces/monitors  Navigate between Applications  Navigate between Application Windows  Navigate inside the Application   There are some shortcuts that are ideally the same between applications:   Strg+f : Find stuff  Strg+Tab : Next tab  Strg+Shift+Tab : Previous tab   A criterion for the usability of an application is also the ability to tweak the shortcuts in a way that it fits into global usage patterns.",
+            "title": "Global usage patterns for navigation"
+        }
+    ]
+}

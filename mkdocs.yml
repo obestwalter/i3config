@@ -1,0 +1,12 @@
+site_name: i3 environment
+pages:
+- Home: index.md
+- Unfinished:
+  - Basics: basics.md
+  - Colours: colours.md
+  - Default application: default-applications.md
+  - Inter process communication: ipc.md
+  - Keyboard: keyboard.md
+  - Unified user experience: unified-user-experience.md
+
+# theme: readthedocs
