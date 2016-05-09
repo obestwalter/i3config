@@ -49,7 +49,6 @@ bindsym $alt+Tab exec /usr/bin/python3 $bin/focus-last.py --switch
 # bindsym $alt+Tab workspace back_and_forth
 
 bindsym $win+Return exec gnome-terminal --maximize --hide-menubar
-bindsym $win+Shift+F12 exec --release xset dpms force off
 
 bindsym Shift+F12 move scratchpad
 bindsym F12 scratchpad show
