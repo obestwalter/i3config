@@ -41,7 +41,7 @@ bindsym $win+Shift+numbersign kill
 bindsym $win+f fullscreen
 bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
 
-bindsym $win+d exec xfce4-popup-whiskermenu
+bindsym $alt+space exec xfce4-popup-whiskermenu
 bindsym $win+Shift+d exec xdotool mousemove 880 420 && xfce4-popup-windowmenu -p
 bindsym $win+Tab exec $bin/quickswitch.py
 bindsym $win+Shift+Tab exec $bin/quickswitch.py --scratchpad
