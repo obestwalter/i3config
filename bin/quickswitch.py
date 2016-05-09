@@ -1,5 +1,6 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
+"""based on https://github.com/proxypoke/quickswitch-for-i3 by slowpoke"""
 
 import argparse
 import subprocess
