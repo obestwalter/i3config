@@ -50,7 +50,7 @@ bindsym $mod+Shift+r reload
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit?' -b 'Yes' 'i3-msg exit'"
 
 bindsym $mod+Tab workspace back_and_forth
-bindsym Mod1+Tab exec quickswitch.py
+bindsym Mod1+Tab exec $bin/quickswitch.py
 bindsym Mod1+Shift+Tab exec quickswitch.py --scratchpad
 
 bindsym $mod+Return exec gnome-terminal --maximize --hide-menubar
