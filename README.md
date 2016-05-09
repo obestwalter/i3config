@@ -1,4 +1,10 @@
-# My Improved tiling window manager environment [i3wm](https://i3wm.org/)
+# My [i3wm](https://i3wm.org/) environment
+
+## What?
+
+There is so much more out there than M$ Windows :)
+
+![i3-screen](docs/i3-screen.png | width=600)
 
 ## Why?
 
