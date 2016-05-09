@@ -39,7 +39,7 @@ gnome-terminal
 ## Clipboard manager
 
 * glipper
-* diodon ?
+* diodon?
 
 
 ## Media streaming
