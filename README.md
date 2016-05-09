@@ -6,7 +6,7 @@ My computer is my virtual workplace and living room. It needs to be functional a
 
 I want to control this ... 
 
-![i3-screen](docs/i3-screen.png)
+![i3-screen](docs/img/i3-screen.png)
 
 mainly with this ...
 
