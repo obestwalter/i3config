@@ -36,7 +36,7 @@ client.background       #000000
 ############################## STARTUP ########################################
 ###############################################################################
 
-# works around https://github.com/denesb/xfce4-i3-workspaces-plugin/issues/20
+# work around https://github.com/denesb/xfce4-i3-workspaces-plugin/issues/20
 exec_always --no-startup-id pkill -f i3-workspaces
 
 exec --no-startup-id $bin/touchpad_settings.sh
@@ -47,7 +47,7 @@ exec --no-startup-id $bin/touchpad_settings.sh
 
 bindsym $mod+Shift+c restart
 bindsym $mod+Shift+r reload
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'End X session and i3?' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit?' -b 'Yes' 'i3-msg exit'"
 
 bindsym $mod+Tab workspace back_and_forth
 bindsym Mod1+Tab exec quickswitch.py
