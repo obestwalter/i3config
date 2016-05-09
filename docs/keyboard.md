@@ -29,3 +29,5 @@ http://xahlee.info/linux/linux_xbindkeys_tutorial.html
 http://www.semicomplete.com/projects/xdotool/
 
 http://xmodulo.com/simulate-key-press-mouse-movement-linux.html
+
+    xdotool key --window "$(xdotool search --class Chrome | head -n 1)" F5
