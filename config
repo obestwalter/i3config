@@ -38,13 +38,14 @@ bindsym $m+Shift+r reload
 
 bindsym $m+Shift+numbersign kill
 bindsym $m+f fullscreen
-bindsym --release $m+y exec "sleep 0.1 && xdotool key Menu"
+bindsym --release $m+y exec sleep 0.1 && xdotool key Menu
 
 bindsym $m+d exec xfce4-popup-whiskermenu
-bindsym $m+Shift+d exec "xdotool mousemove 880 420 && xfce4-popup-windowmenu -p"
+bindsym $m+Shift+d exec xdotool mousemove 880 420 && xfce4-popup-windowmenu -p
 bindsym $m+Tab exec $bin/quickswitch.py
 bindsym $m+Shift+Tab exec $bin/quickswitch.py --scratchpad
-bindsym Mod1+Tab workspace back_and_forth
+bindsym Mod1+Tab exec /usr/bin/python3 $bin/focus-last.py --switch
+# bindsym Mod1+Tab workspace back_and_forth
 
 bindsym $m+Return exec gnome-terminal --maximize --hide-menubar
 bindsym $m+Shift+F12 exec --release xset dpms force off
@@ -127,6 +128,8 @@ mode "resize" {
 ###############################################################################
 ############################## STARTUP ########################################
 ###############################################################################
+
+exec_always --no-startup-id $bin/focus-last.py
 
 # work around https://github.com/denesb/xfce4-i3-workspaces-plugin/issues/20
 exec_always --no-startup-id pkill -f i3-workspaces
