@@ -4,11 +4,11 @@
 
 There is so much more out there than M$ Windows :)
 
-![i3-screen](docs/i3-screen.png | width=600)
+![i3-screen](docs/i3-screen.png)
 
 ## Why?
 
-I have been pushing around windows on a screen for literally decades now and it got a little bit tiring at some point. A tiling window manager takes away a lot of that window pushing by defaulting to opening application maximized and giving the user complete control over layouting and navigation with the keyboard. After a week of complete agony with that new way of doing stuff on a computer I started to enjoy it and now there is no way back.
+I have been pushing around windows on a screen for literally decades now and it got a little bit tiring at some point. A tiling window manager takes away a lot of that window pushing by always opening applications maximized and giving the user complete control over layout and navigation with the keyboard. After a week of complete agony with that new way of doing stuff on a computer I started to enjoy it and now there is no way back.
 
 I like the way I can manipulate windows and navigate between them. The absolute killer feature of i3 is how graceful it lets you handle [multi monitor setups](http://i3wm.org/docs/userguide.html#multi_monitor). 
 
