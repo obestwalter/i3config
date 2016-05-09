@@ -40,6 +40,36 @@ Most of this should be done via XFCE now? not sure
     # always adjust wallpapers in case screens/resolutions changed
     exec_always --no-startup-id $bin/delayed_nitrogen_restore.sh
 
+# Special window settings reorg
+
+    # ASSIGN Apps to specific windows #
+    #assign [class="^Firefox$"] 10
+    #assign [class="^Chromium-browser$"] 10
+    
+    # PYCHARM
+    set $pcWin Debug|Inspection|^Find$|^Changes$|TeamCity|^Run$|Version Control|Messages
+    set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files
+    # set $pcWin3 ^Commit Changes|
+    for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XFramePeer"] floating disable
+    # for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer"] floating disable
+    for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
+    assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] 2
+    
+    #assign [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer"] 2
+    #for_window [class="jetbrains-pycharm" title="Commit Changes"] floating enable
+    # the little navigation popup has a space as the title ...
+    #for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=" "] floating enable
+    
+    # RDP
+    for_window [class="xfreerdp"]floating disable
+    
+    
+    # GENERAL
+    #for_window [title="Event Tester|Save Screencast|Copying|Moving|in Path"] floating enable
+    
+    for_window [title="synapse"] border none
+
+
 # Snippets
 
 ## move mouse out of the way with window if context key is pressed
@@ -58,12 +88,18 @@ bindsym $mod+F1 [class="Firefox"] move workspace current
     # Nav is creating new workspace 1 even if renamed to 1: dev or 1:dev
     bindsym $mod+Mod1+r exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 
+## Back and forth
+
+    exec --no-startup-id $bin/focus_last.py
+    bindsym Mod1+Tab exec $bin/focus_last.py --switch
+    
 ## stuff
 
     bindsym $mod+Num_Lock exec $bin/lockscreen_with_wallpaper.sh
     bindsym $mod+Shift+Num_Lock exec $bin/lockscreen_with_suspend.sh
     bindsym $mod+Mod1+Shift+w exec $bin/get_wininfo.sh
     
+* Windows key is main modifier - see `xmodmap` for info about modifier keys
 
 # Software under consideration
 

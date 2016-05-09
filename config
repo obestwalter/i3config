@@ -2,7 +2,6 @@
 ############################## VARIABLES ######################################
 ###############################################################################
 
-# Windows key is main modifier - see `xmodmap` for info about modifier keys
 set $mod Mod4
 set $bin ~/.i3/bin
 
@@ -10,7 +9,9 @@ set $bin ~/.i3/bin
 ########################### GLOBAL SETTINGS ###################################
 ###############################################################################
 
-workspace_layout stacking
+workspace_auto_back_and_forth yes
+focus_on_window_activation focus
+workspace_layout tabbed
 floating_modifier $mod
 focus_follows_mouse no
 popup_during_fullscreen leave_fullscreen
@@ -22,20 +23,20 @@ new_float normal
 ###############################################################################
 
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-hide_edge_borders none
+hide_edge_borders both
 
 #                       border     bg     txt     ind
-client.focused          #fdf6e3 #fdf6e3 #657b83 #268bd2
-client.unfocused        #fdf6e3 #002b36 #657b83 #268bd2
-client.focused_inactive #002b36 #002b36 #657b83 #268bd2
-client.urgent           #2aa198 #2aa198 #657b83 #268bd2
+client.focused          #fdf6e3 #859900 #fdf6e3 #268bd2
+client.unfocused        #fdf6e3 #073642 #93a1a1 #268bd2
+client.focused_inactive #fdf6e3 #002b36 #657b83 #268bd2
+client.urgent           #fdf6e3 #2aa198 #657b83 #268bd2
 client.background       #000000
 
 ###############################################################################
 ############################## STARTUP ########################################
 ###############################################################################
 
-# FIXME - workaround for https://github.com/denesb/xfce4-i3-workspaces-plugin/issues/20
+# works around https://github.com/denesb/xfce4-i3-workspaces-plugin/issues/20
 exec_always --no-startup-id pkill -f i3-workspaces
 
 exec --no-startup-id $bin/touchpad_settings.sh
@@ -44,21 +45,24 @@ exec --no-startup-id $bin/touchpad_settings.sh
 ############################## BINDINGS #######################################
 ###############################################################################
 
-bindsym $mod+Shift+numbersign kill
-bindsym $mod+f fullscreen
+bindsym $mod+Shift+c restart
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'End X session and i3?' -b 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+Tab workspace back_and_forth
+bindsym Mod1+Tab exec quickswitch.py
+bindsym Mod1+Shift+Tab exec quickswitch.py --scratchpad
 
 bindsym $mod+Return exec gnome-terminal --maximize --hide-menubar
+bindsym $mod+Shift+numbersign kill
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+F12 exec --release xset dpms force off
+
 bindsym $mod+d exec --no-startup-id xfce4-popup-whiskermenu
 bindsym $mod+Shift+d exec dmenu_run
 
-# yakuake like scratchpad
 bindsym Shift+F12 move scratchpad
 bindsym F12 scratchpad show
-
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
 
 bindsym $mod+u layout tabbed
 bindsym $mod+i layout stacking
@@ -70,33 +74,12 @@ bindsym $mod+comma split h
 bindsym $mod+period split v
 bindsym $mod+Shift+asciicircum floating toggle
 
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+x move workspace to output right
-
-##### NAVIGATION BINDINGS #####
-# TODO use focus-last.py instead
-#workspace_auto_back_and_forth yes
-bindsym Mod1+Tab workspace back_and_forth
-
-bindsym $mod+Tab exec quickswitch.py
-bindsym $mod+Shift+Tab exec quickswitch.py --scratchpad
-
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-# FIXME what is this supposed to do?
 bindsym $mod+asciicircum focus mode_toggle
-
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -107,44 +90,20 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
-
-###### MANAGE i3 ######
-# switch screen off
-#bindsym $mod+Shift+F12 exec xset dpms force off
-#bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'End X session and i3?' -b 'Yes, exit i3' 'i3-msg exit'"
-
-###### DEFAULTS FOR SPECIFIC WINDOWS ######
-# use xwininfo and/or xprop to find out about the window
-
-# ASSIGN Apps to specific windows #
-#assign [class="^Firefox$"] 10
-#assign [class="^Chromium-browser$"] 10
-
-# PYCHARM
-set $pcWin Debug|Inspection|^Find$|^Changes$|TeamCity|^Run$|Version Control|Messages
-set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files
-# set $pcWin3 ^Commit Changes|
-for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XFramePeer"] floating disable
-# for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer"] floating disable
-for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
-assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] 2
-
-#assign [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer"] 2
-#for_window [class="jetbrains-pycharm" title="Commit Changes"] floating enable
-# the little navigation popup has a space as the title ...
-#for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=" "] floating enable
-
-# RDP
-for_window [class="xfreerdp"]floating disable
-
-
-# GENERAL
-#for_window [title="Event Tester|Save Screencast|Copying|Moving|in Path"] floating enable
-
-for_window [title="synapse"] border none
-
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
 
 ###############################################################################
 ############################# RESIZE MODE  ####################################
@@ -170,4 +129,3 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
