@@ -1,5 +1,16 @@
 # Default applications
 
+# Synchronization
+
+## Files
+
+* [Dropbox](http://naleid.com/blog/2011/10/03/using-dropbox-to-share-your-home-directory-across-multiple-computers)
+
+## Bookmarks
+
+http://beebom.com/best-bookmark-managers/
+
+
 ## Launcher
 
 * Synapse
@@ -36,10 +47,6 @@ Search files: `catfish --start <folder to search> <thing to search>`
 * zeitgeist
 * ??
 
-## Drop down terminal
-
-* Guake
-
 ## Clipboard manager
 
 * glipper
@@ -50,6 +57,6 @@ Search files: `catfish --start <folder to search> <thing to search>`
 
 ### emby
 
-Not so easy to get it working though ... 
+Not so easy to get it working though ...
 
 https://github.com/MediaBrowser/Wiki/wiki/Connectivity

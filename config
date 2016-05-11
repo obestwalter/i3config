@@ -20,13 +20,13 @@ new_float normal
 ############################# APPEARANCE ######################################
 ###############################################################################
 
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango: Ubuntu Mono Bold 15px
 hide_edge_borders both
 
-#                       border     bg     txt     ind
+#                       border    bg      txt     ind
 client.focused          #fdf6e3 #859900 #fdf6e3 #268bd2
-client.unfocused        #fdf6e3 #073642 #93a1a1 #268bd2
-client.focused_inactive #fdf6e3 #002b36 #657b83 #268bd2
+client.unfocused        #839496 #073642 #93a1a1 #268bd2
+client.focused_inactive #859900 #002b36 #859900 #268bd2
 client.urgent           #fdf6e3 #2aa198 #657b83 #268bd2
 client.background       #000000
 
@@ -41,7 +41,8 @@ bindsym $win+Shift+numbersign kill
 bindsym $win+f fullscreen
 bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
 
-bindsym $alt+space exec xfce4-popup-whiskermenu
+bindsym $alt+space exec xdotool mousemove 700 370 && xfce4-popup-whiskermenu -p
+#bindsym $alt+space exec xdotool mousemove 700 370 && xfce4-popup-whiskermenu -p
 bindsym $win+space exec xdotool mousemove 880 420 && xfce4-popup-windowmenu -p
 bindsym $win+Tab exec $bin/quickswitch.py
 bindsym $win+Shift+Tab exec $bin/quickswitch.py --scratchpad
@@ -126,17 +127,34 @@ mode "resize" {
 }
 
 ###############################################################################
+########################## BEHAVIOURAL FIXES ##################################
+###############################################################################
+
+# PYCHARM #####################################################################
+
+set $pcWin Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
+set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files|^Commit Changes
+assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] 2
+for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
+
+for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable
+
+###############################################################################
 ############################## STARTUP ########################################
 ###############################################################################
 
-exec_always --no-startup-id sleep 0.2 && nitrogen --restore
+# ONCE ########################################################################
 
-exec_always --no-startup-id $bin/focus-last.py
-
-# work around https://github.com/denesb/xfce4-i3-workspaces-plugin/issues/20
-exec_always --no-startup-id pkill -f i3-workspaces
-
+#     TODO   exec --no-startup-id synpase
 exec --no-startup-id $bin/touchpad_settings.sh
+exec --no-startup-id $bin/focus-last.py
+
+# ALWAYS ######################################################################
+
+exec_always --no-startup-id sleep 0.2 && nitrogen --restore
 
 # work around http://askubuntu.com/questions/732967/
 exec_always --no-startup-id dropbox stop && DBUS_SESSION_BUS_ADDRESS="" dropbox start
+
+# work around https://github.com/denesb/xfce4-i3-workspaces-plugin/issues/20
+# exec_always --no-startup-id pkill -f i3-workspaces
