@@ -4,9 +4,6 @@ import subprocess
 
 # noinspection PyUnusedLocal
 class Py3status(object):
-    firstWarning = False
-    secondWarning = False
-
     @staticmethod
     def _notify(msg, expireTime=2000, urgency="normal"):
         subprocess.call(
@@ -40,15 +37,7 @@ class Py3status(object):
                 response['color'] = i3status_config['color_degraded']
             else:
                 response['color'] = i3status_config['color_bad']
-                if activity == "dis":
-                    if percentage < 15:
-                        self.firstWarning = True
-                        self._notify("battery low - will shutdown soon ...",
-                                     expireTime=1000, urgency="critical")
-                    if percentage < 8:
-                        self.secondWarning = True
-                        self._notify("!!!! WILL SHUTDOWN IN 60 SECONDS !!!!",
-                                     expireTime=60000, urgency="critical")
-                        subprocess.call(["sudo", "shutdown", "-h", "+1"])
+                if activity == "dis" and percentage < 5:
+                    subprocess.call(["xfce4-session-logout"])
         response['full_text'] = msg if "full" not in msg else ""
         return (1, response)
