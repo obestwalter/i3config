@@ -6,6 +6,8 @@ https://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment
 
 [i3 companion](https://github.com/DarkStarSword/junk/tree/master/config/home/.i3)
 
+http://blog.tunnelshade.in/2014/05/making-i3-beautiful.html
+
 ## XFCE
 
 The basics to set it up can be cherry picked here: http://feeblenerd.blogspot.de/2015/11/pretty-i3-with-xfce.html
