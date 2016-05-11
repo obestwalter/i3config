@@ -55,7 +55,7 @@ bar {
     font pango: Ubuntu Mono Bold 15px
     mode dock
     modifier $win
-    # status_command py3status -t 10 -c ~/.i3/i3status.conf
+    status_command py3status -t 1 -c ~/.i3/i3status.conf
 }
 
 ######################## BINDINGS: SYSTEM INTERACTION #########################
