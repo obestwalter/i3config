@@ -23,12 +23,35 @@ new_float normal
 font pango: Ubuntu Mono Bold 15px
 hide_edge_borders both
 
-#                       border    bg      txt     ind
+client.background       #000000
+#---------------------- border    bg      txt     ind
 client.focused          #fdf6e3 #859900 #fdf6e3 #268bd2
 client.unfocused        #839496 #073642 #93a1a1 #268bd2
 client.focused_inactive #859900 #002b36 #859900 #268bd2
 client.urgent           #fdf6e3 #2aa198 #657b83 #268bd2
-client.background       #000000
+
+bar {
+    tray_output primary
+    position bottom
+    colors {
+        focused_background #002b36
+        focused_statusline #0000FF
+        focused_separator  #0000FF
+        background #073642
+        statusline #00FF00
+        separator  #fdf6e3
+        #----------------- border   bg      text
+        focused_workspace  #fdf6e3 #859900 #fdf6e3
+        inactive_workspace #839496 #073642 #93a1a1
+        active_workspace   #859900 #002b36 #859900
+        binding_mode       #fdf6e3 #2aa198 #fdf6e3
+        urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
+    }
+    font pango: Ubuntu Mono Bold 14px
+    mode dock
+    modifier $win
+    # status_command py3status -t 10 -c ~/.i3/i3status.conf
+}
 
 ######################## BINDINGS: SYSTEM INTERACTION #########################
 ###############################################################################
@@ -41,8 +64,7 @@ bindsym $win+Shift+numbersign kill
 bindsym $win+f fullscreen
 bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
 
-bindsym $alt+space exec xdotool mousemove 700 370 && xfce4-popup-whiskermenu -p
-#bindsym $alt+space exec xdotool mousemove 700 370 && xfce4-popup-whiskermenu -p
+# bindsym $alt+space exec xdotool mousemove 700 370 && xfce4-popup-whiskermenu -p
 bindsym $win+space exec xdotool mousemove 880 420 && xfce4-popup-windowmenu -p
 bindsym $win+Tab exec $bin/quickswitch.py
 bindsym $win+Shift+Tab exec $bin/quickswitch.py --scratchpad
@@ -136,8 +158,11 @@ set $pcWin Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
 set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files|^Commit Changes
 assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] 2
 for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
-
 for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable
+
+# Others ######################################################################
+
+for_window [title="synapse"] border none
 
 ###############################################################################
 ############################## STARTUP ########################################
@@ -145,7 +170,7 @@ for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title="
 
 # ONCE ########################################################################
 
-#     TODO   exec --no-startup-id synpase
+#     TODO   exec --no-startup-id synapse
 exec --no-startup-id $bin/touchpad_settings.sh
 exec --no-startup-id $bin/focus-last.py
 
