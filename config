@@ -5,10 +5,14 @@ set $alt Mod1
 set $win Mod4
 set $bin ~/.i3/bin
 
-set $ws1 "1: cyber"
-set $ws2 "2: hack"
-set $ws3 "3: term"
-set $ws4 "4: comm"
+#set $ws1 "1: cyber"
+#set $ws2 "2: hack"
+#set $ws3 "3: term"
+#set $ws4 "4: comm"
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
 
 ########################### GLOBAL SETTINGS ###################################
 ###############################################################################
@@ -43,7 +47,7 @@ bar {
         focused_statusline #fdf6e3
         focused_separator  #b58900
         background #073642
-        statusline #FFFFFF
+        statusline #fdf6e3
         separator  #657b83
         #----------------- border   bg      text
         focused_workspace  #fdf6e3 #859900 #fdf6e3
@@ -52,8 +56,8 @@ bar {
         binding_mode       #fdf6e3 #2aa198 #fdf6e3
         urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
     }
-    font pango: Ubuntu Mono Bold 15px
-    mode dock
+    font pango: Fira Code 20px
+    mode hide
     modifier $win
     status_command py3status -t 1 -c ~/.i3/i3status.conf
 }
@@ -61,13 +65,17 @@ bar {
 ######################## BINDINGS: SYSTEM INTERACTION #########################
 ###############################################################################
 
+# TODO checkout xbindkeys (.xbindkeyrc) | show keys -> Control+Shift+q
+
 bindsym $win+Shift+e exec "i3-nagbar -t warning -m 'Exit?' -b 'Yes' 'i3-msg exit'"
 bindsym $win+Shift+c restart
 bindsym $win+Shift+r reload
+bindsym $win+Shift+l exec i3lock -i ~/Pictures/wallpapers/5760x1080/space-invaders.png
 
 bindsym $win+Shift+numbersign kill
 bindsym $win+f fullscreen
 bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
+
 
 bindsym $win+Tab exec $bin/quickswitch.py
 bindsym $win+Shift+Tab exec $bin/quickswitch.py --scratchpad

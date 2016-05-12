@@ -1,5 +1,11 @@
 # Default applications
 
+# PLayers
+
+gnome-music
+
+parole
+
 # Synchronization
 
 ## Files

@@ -4,7 +4,9 @@
 
 ## Who is grabbing what?
 
-All global keyboard shortcuts should be managed from i3 if possible, so all in `xfce4-keyboard-settings` should be removed. 
+All global keyboard shortcuts should be managed from i3 if possible, so all in `xfce4-keyboard-settings` should be removed.
+
+https://faq.i3wm.org/question/5483/how-can-i-list-all-xorg-and-i3-keybindings-currently-in-effect/
 
 ## Layout
 
