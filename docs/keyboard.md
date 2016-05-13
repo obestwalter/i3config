@@ -28,6 +28,9 @@ http://xahlee.info/linux/linux_xmodmap_tutorial.html
 
 http://xahlee.info/linux/linux_keyboard_tools.html
 
+**TODO** checkout xbindkeys (.xbindkeyrc) | show keys -> Control+Shift+q
+https://faq.i3wm.org/question/6901/mouse-button-press-hold-release-through-keyboard.1.html
+
 http://xahlee.info/linux/linux_xbindkeys_tutorial.html
 
 # Simulate keystrokes

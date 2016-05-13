@@ -6,6 +6,13 @@ gnome-music
 
 parole
 
+# Music Visualization
+
+ProjectM
+
+http://www.vsxu.com/
+
+
 # Synchronization
 
 ## Files
