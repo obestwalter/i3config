@@ -68,7 +68,6 @@ bar {
 bindsym $win+Shift+e exec "i3-nagbar -t warning -m 'Exit?' -b 'Yes' 'i3-msg exit'"
 bindsym $win+Shift+c restart
 bindsym $win+Shift+r reload
-#bindsym $win+Shift+l exec xtrlock
 bindsym $win+Shift+l exec i3lock -i ~/Pictures/wallpapers/5760x1080/space-invaders.png
 
 bindsym $win+Shift+numbersign kill
@@ -79,11 +78,10 @@ bindsym $win+Tab exec "rofi -modi 'Workspace:$bin/i3wslist.sh,Move to Workspace:
 bindsym $alt+Tab exec "rofi -show window
 bindsym $win+d exec "rofi -show run
 
-bindsym $win+Return exec gnome-terminal --maximize --hide-menubar
+bindsym $win+Return exec xfce4-terminal --maximize --hide-menubar
 
-# Trying Tilda
-# bindsym Shift+F12 move scratchpad
-# bindsym F12 scratchpad show
+bindsym Shift+F12 move scratchpad
+bindsym F12 scratchpad show
 
 bindcode 107 exec xfce4-screenshooter -f
 bindcode Shift+107 exec xfce4-screenshooter -r
@@ -180,6 +178,7 @@ for_window [title="synapse"] border none
 # ONCE ########################################################################
 
 exec --no-startup-id synapse --startup
+exec --no-startup-id glipper
 exec --no-startup-id $bin/touchpad_settings.sh
 
 # ALWAYS ######################################################################
