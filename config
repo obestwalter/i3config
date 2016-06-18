@@ -78,7 +78,7 @@ bindsym $win+Tab exec "rofi -modi 'Workspace:$bin/i3wslist.sh,Move to Workspace:
 bindsym $alt+Tab exec "rofi -show window
 bindsym $win+d exec "rofi -show run
 
-bindsym $win+Return exec xfce4-terminal --maximize --hide-menubar
+bindsym $win+Return exec gnome-terminal --maximize --hide-menubar
 
 bindsym Shift+F12 move scratchpad
 bindsym F12 scratchpad show
@@ -178,6 +178,7 @@ for_window [title="synapse"] border none
 # ONCE ########################################################################
 
 exec --no-startup-id synapse --startup
+exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id glipper
 exec --no-startup-id $bin/touchpad_settings.sh
 

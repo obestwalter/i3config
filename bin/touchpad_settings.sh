@@ -1,6 +1,7 @@
 #!/bin/bash
 
 xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Locked Drags" 1
+xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Tap Action" 0, 0, 0, 0, 1, 3, 2
 
 # old busted json settings
 # use xinput, xinput list, xinput list-props, xinput list-props <id>
