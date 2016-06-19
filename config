@@ -40,8 +40,13 @@ client.focused_inactive #859900 #002b36 #859900 #268bd2
 client.urgent           #fdf6e3 #2aa198 #657b83 #268bd2
 
 bar {
-    tray_output primary
+    tray_output DP-3
+    tray_padding 0
     position bottom
+    font pango: Fira Code 13px
+    mode dock
+    modifier $win
+    separator_symbol ;
     colors {
         focused_background #002b36
         focused_statusline #fdf6e3
@@ -49,16 +54,13 @@ bar {
         background #073642
         statusline #fdf6e3
         separator  #657b83
-        #----------------- border   bg      text
+        #----------------- border  bg      text
         focused_workspace  #fdf6e3 #859900 #fdf6e3
         inactive_workspace #839496 #073642 #93a1a1
         active_workspace   #859900 #002b36 #859900
         binding_mode       #fdf6e3 #2aa198 #fdf6e3
         urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
     }
-    font pango: Fira Code 20px
-    mode hide
-    modifier $win
     status_command py3status -t 1 -c ~/.i3/i3status.conf
 }
 
@@ -177,17 +179,23 @@ for_window [title="synapse"] border none
 
 # ONCE ########################################################################
 
-exec --no-startup-id synapse --startup
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id xfce4-volumed
 exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id sh -c '/usr/bin/nvidia-settings --load-config-only'
 exec --no-startup-id glipper
-exec --no-startup-id $bin/touchpad_settings.sh
+exec --no-startup-id synapse --startup
+exec --no-startup-id sleep 0.2 && nm-applet
+exec --no-startup-id sleep 0.5 && classicmenu-indicator
 
 # ALWAYS ######################################################################
+
+# Touchpad settings are forgotten on resume
+exec_always --no-startup-id sleep 1 && $bin/touchpad_settings.sh
 
 exec_always --no-startup-id sleep 0.2 && nitrogen --restore
 
 # work around http://askubuntu.com/questions/732967/
 exec_always --no-startup-id dropbox stop && DBUS_SESSION_BUS_ADDRESS="" dropbox start
-
-# work around https://github.com/denesb/xfce4-i3-workspaces-plugin/issues/20
-# exec_always --no-startup-id pkill -f i3-workspaces
