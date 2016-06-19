@@ -5,14 +5,10 @@ set $alt Mod1
 set $win Mod4
 set $bin ~/.i3/bin
 
-#set $ws1 "1: cyber"
-#set $ws2 "2: hack"
-#set $ws3 "3: term"
-#set $ws4 "4: comm"
-set $ws1 1
-set $ws2 2
-set $ws3 3
-set $ws4 4
+set $ws1 "1: cyber"
+set $ws2 "2: hack"
+set $ws3 "3: term"
+set $ws4 "4: comm"
 
 ########################### GLOBAL SETTINGS ###################################
 ###############################################################################
