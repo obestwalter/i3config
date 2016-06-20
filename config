@@ -5,10 +5,14 @@ set $alt Mod1
 set $win Mod4
 set $bin ~/.i3/bin
 
-set $ws1 "1: cyber"
-set $ws2 "2: hack"
-set $ws3 "3: term"
-set $ws4 "4: comm"
+# set $ws1 "1: cyber"
+# set $ws2 "2: hack"
+# set $ws3 "3: term"
+# set $ws4 "4: comm"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
 
 ########################### GLOBAL SETTINGS ###################################
 ###############################################################################
@@ -182,7 +186,6 @@ exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secret
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id sh -c '/usr/bin/nvidia-settings --load-config-only'
 exec --no-startup-id glipper
-exec --no-startup-id synapse --startup
 exec --no-startup-id sleep 0.2 && nm-applet
 exec --no-startup-id sleep 0.5 && classicmenu-indicator
 
@@ -191,6 +194,7 @@ exec --no-startup-id sleep 0.5 && classicmenu-indicator
 # Touchpad settings are forgotten on resume
 exec_always --no-startup-id sleep 1 && $bin/touchpad_settings.sh
 
+exec_always --no-startup-id synapse --startup
 exec_always --no-startup-id sleep 0.2 && nitrogen --restore
 
 # work around http://askubuntu.com/questions/732967/
