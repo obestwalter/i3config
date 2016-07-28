@@ -46,7 +46,7 @@ bar {
     font pango: Fira Code 13px
     mode dock
     modifier $win
-    separator_symbol ;
+    separator_symbol ║
     colors {
         focused_background #002b36
         focused_statusline #fdf6e3
@@ -188,14 +188,13 @@ exec --no-startup-id sh -c '/usr/bin/nvidia-settings --load-config-only'
 exec --no-startup-id glipper
 exec --no-startup-id sleep 0.2 && nm-applet
 exec --no-startup-id sleep 0.5 && classicmenu-indicator
+exec --no-startup-id synapse --startup
+exec --no-startup-id sleep 0.2 && nitrogen --restore
 
 # ALWAYS ######################################################################
 
 # Touchpad settings are forgotten on resume
 exec_always --no-startup-id sleep 1 && $bin/touchpad_settings.sh
-
-exec_always --no-startup-id synapse --startup
-exec_always --no-startup-id sleep 0.2 && nitrogen --restore
 
 # work around http://askubuntu.com/questions/732967/
 exec_always --no-startup-id dropbox stop && DBUS_SESSION_BUS_ADDRESS="" dropbox start
