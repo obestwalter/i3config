@@ -40,12 +40,15 @@ client.focused_inactive #859900 #002b36 #859900 #268bd2
 client.urgent           #fdf6e3 #2aa198 #657b83 #268bd2
 
 bar {
+    status_command py3status -t 1 -c ~/.i3/i3status.conf
+    position bottom
     tray_output DP-3
     tray_padding 0
-    position bottom
     font pango: Fira Code 13px
     mode dock
     modifier $win
+    bindsym button4 nop
+    bindsym button5 nop
     separator_symbol ║
     colors {
         focused_background #002b36
@@ -61,7 +64,6 @@ bar {
         binding_mode       #fdf6e3 #2aa198 #fdf6e3
         urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
     }
-    status_command py3status -t 1 -c ~/.i3/i3status.conf
 }
 
 ######################## BINDINGS: SYSTEM INTERACTION #########################
