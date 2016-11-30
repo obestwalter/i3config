@@ -82,7 +82,7 @@ bindsym $win+Tab exec "rofi -modi 'Workspace:$bin/i3wslist.sh,Move to Workspace:
 bindsym $alt+Tab exec "rofi -show window
 bindsym $win+d exec "rofi -show run
 
-bindsym $win+Return exec gnome-terminal --maximize --hide-menubar
+bindsym $win+Return exec xfce4-terminal --maximize --hide-menubar
 
 bindsym Shift+F12 move scratchpad
 bindsym F12 scratchpad show
@@ -198,7 +198,7 @@ exec --no-startup-id sleep 0.4 && nitrogen --restore
 # ALWAYS ######################################################################
 
 # Touchpad settings are forgotten on resume
-exec_always --no-startup-id sleep 1 && $bin/touchpad_settings.sh
+# exec_always --no-startup-id sleep 1 && $bin/touchpad_settings.sh
 
 # work around http://askubuntu.com/questions/732967/
 exec_always --no-startup-id dropbox stop && DBUS_SESSION_BUS_ADDRESS="" dropbox start
