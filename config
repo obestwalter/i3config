@@ -72,7 +72,7 @@ bar {
 bindsym $win+Shift+e exec "i3-nagbar -t warning -m 'Exit?' -b 'Yes' 'i3-msg exit'"
 bindsym $win+Shift+c restart
 bindsym $win+Shift+r reload
-bindsym $win+Shift+l exec i3lock -i ~/Pictures/wallpapers/5760x1080/space-invaders.png
+bindsym $win+Shift+l exec i3lock -c 78B079
 
 bindsym $win+Shift+numbersign kill
 bindsym $win+f fullscreen
@@ -181,6 +181,7 @@ for_window [title="synapse"] border none
 
 # ONCE ########################################################################
 
+exec --no-startup-id xfce4-clipman
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xfce4-volumed
 exec --no-startup-id sleep 0.2 && nm-applet
