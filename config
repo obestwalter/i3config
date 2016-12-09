@@ -80,15 +80,16 @@ bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
 
 bindsym $win+Tab exec "rofi -modi 'Workspace:$bin/i3wslist.sh,Move to Workspace:$bin/i3wsmove.sh' -show Workspace"
 bindsym $alt+Tab exec "rofi -show window
-bindsym $win+d exec "rofi -show run
+bindsym $alt+space exec "rofi -show run
 
 bindsym $win+Return exec xfce4-terminal --maximize --hide-menubar
 
 bindsym Shift+F12 move scratchpad
 bindsym F12 scratchpad show
 
-bindcode 107 exec xfce4-screenshooter -f
-bindcode Shift+107 exec xfce4-screenshooter -r
+bindcode 107 exec xfce4-screenshooter --fullscreen
+# fixme region does not work from here, but from the console -> WTF?
+bindcode Shift+107 exec xfce4-screenshooter --region
 
 ############################ BINDINGS: NAVIGATION #############################
 ###############################################################################
