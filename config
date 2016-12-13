@@ -188,7 +188,7 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xfce4-volumed
 exec --no-startup-id sleep 0.2 && nm-applet
 exec --no-startup-id sleep 0.4 && nitrogen --restore
-exec --no-startup-id xautolock -detectsleep -time 2 -locker 'lockdown.sh' &
+exec --no-startup-id xautolock -detectsleep -time 2 -locker '$bin/lockdown.sh' &
 
 # Ubuntu leftovers
 # exec --no-startup-id glipper
