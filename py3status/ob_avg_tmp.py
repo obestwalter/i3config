@@ -2,7 +2,8 @@
 import subprocess
 
 
-class Py3status(object):
+class Py3status:
+    """show averagy tmp"""
     # noinspection PyUnusedLocal
     def avg_tmp(self, json=None, i3status_config=None):
         output = subprocess.check_output(["acpi", "-t"]).strip()
