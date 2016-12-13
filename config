@@ -73,6 +73,7 @@ bindsym $win+Shift+e exec "i3-nagbar -t warning -m 'Exit?' -b 'Yes' 'i3-msg exit
 bindsym $win+Shift+c restart
 bindsym $win+Shift+r reload
 bindsym $win+Shift+l exec i3lock -c 78B079
+bindsym $win+Shift+s exec systemctl suspend & i3lock -c 78B079
 
 bindsym $win+Shift+numbersign kill
 bindsym $win+f fullscreen
