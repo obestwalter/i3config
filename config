@@ -81,7 +81,8 @@ bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
 
 bindsym $win+Tab exec "rofi -modi 'Workspace:$bin/i3wslist.sh,Move to Workspace:$bin/i3wsmove.sh' -show Workspace"
 bindsym $alt+Tab exec "rofi -show window
-bindsym $alt+space exec "rofi -show run
+# see https://github.com/DaveDavenport/rofi
+bindsym $alt+space exec --no-startup-id "rofi -combi-modi window,drun,run -show combi -modi combi"
 
 bindsym $win+Return exec xfce4-terminal --maximize --hide-menubar
 
@@ -188,7 +189,7 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xfce4-volumed
 exec --no-startup-id sleep 0.2 && nm-applet
 exec --no-startup-id sleep 0.4 && nitrogen --restore
-exec --no-startup-id xautolock -time 2 -notify 10 -notifier "notify-send --urgency low --expire-time=10000 -- 'Locking screen in 10 seconds'" -locker '$bin/lockdown.sh' &
+# exec --no-startup-id xautolock -time 2 -notify 10 -notifier "notify-send --urgency low --expire-time=10000 -- 'Locking screen in 10 seconds'" -locker '$bin/lockdown.sh' &
 
 # Ubuntu leftovers
 # exec --no-startup-id glipper
