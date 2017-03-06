@@ -1,23 +1,15 @@
-############################## VARIABLES ######################################
+########################## GLOBAL VARIABLES ###################################
 ###############################################################################
 
 set $alt Mod1
 set $win Mod4
 set $bin ~/.i3/bin
-
-# set $ws1 "1: cyber"
-# set $ws2 "2: hack"
-# set $ws3 "3: term"
-# set $ws4 "4: comm"
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
+set $roseOfSharon BF5700
 
 ########################### GLOBAL SETTINGS ###################################
 ###############################################################################
 
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 focus_on_window_activation focus
 workspace_layout tabbed
 floating_modifier $win
@@ -25,6 +17,146 @@ focus_follows_mouse no
 popup_during_fullscreen leave_fullscreen
 new_window normal
 new_float normal
+
+######################### BINDINGS: CONTROL SPECIALS ##########################
+###############################################################################
+
+# My Notebook does not have a context menu key. This is a replacement
+bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
+
+########################### BINDINGS: LAUNCH STUFF ############################
+###############################################################################
+
+bindsym $win+Return exec xfce4-terminal --maximize --hide-menubar
+
+bindcode 107 exec "xfce4-screenshooter --fullscreen"
+# fixme region does not work from here, but from the console -> WTF?
+bindcode Shift+107 exec "xfce4-screenshooter --region"
+
+bindsym $win+Shift+l exec i3lock -c $roseOfSharon
+bindsym $win+Shift+s exec systemctl suspend & i3lock -c $roseOfSharon
+
+# FIXME own scripts in my path are not found
+bindsym $alt+space exec "rofi -combi-modi window,drun,run,ssh -show combi -modi run,simple,win"
+
+########################### BINDINGS: CONTROL I3WM ############################
+###############################################################################
+
+bindsym $win+Shift+e exec "i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
+bindsym $win+Shift+c restart
+bindsym $win+Shift+r reload
+
+########################## BINDINGS: CONTROL WINDOWS ##########################
+###############################################################################
+
+# numbersign == #
+bindsym $win+Shift+numbersign kill
+bindsym Shift+F12 move scratchpad
+bindsym F12 scratchpad show
+bindsym Control+F12 sticky toggle
+
+############################ BINDINGS: NAVIGATION #############################
+###############################################################################
+
+bindsym $alt+Tab workspace back_and_forth
+bindsym $win+Tab exec "rofi -show window"
+bindsym $win+Shift+Tab exec "rofi -modi 'Workspace:$bin/i3wslist.sh,Move to Workspace:$bin/i3wsmove.sh' -show Workspace"
+
+bindsym $win+Left focus left
+bindsym $win+Down focus down
+bindsym $win+Up focus up
+bindsym $win+Right focus right
+
+bindsym $win+Shift+1 move container to workspace number 1
+bindsym $win+Shift+2 move container to workspace number 2
+bindsym $win+Shift+3 move container to workspace number 3
+bindsym $win+Shift+4 move container to workspace number 4
+bindsym $win+Shift+5 move container to workspace number 5
+bindsym $win+Shift+6 move container to workspace number 6
+bindsym $win+Shift+7 move container to workspace number 7
+bindsym $win+Shift+8 move container to workspace number 8
+bindsym $win+Shift+9 move container to workspace number 9
+bindsym $win+Shift+0 move container to workspace number 10
+
+####################### BINDINGS: CONTROL LAYOUT ##############################
+###############################################################################
+
+bindsym $win+f fullscreen
+
+bindsym $win+x move workspace to output right
+bindsym $win+asciicircum focus mode_toggle
+bindsym $win+u layout tabbed
+bindsym $win+i layout stacking
+bindsym $win+o layout toggle split
+bindsym $win+p focus parent
+bindsym $win+udiaeresis layout toggle all
+bindsym $win+Shift+p focus child
+bindsym $win+comma split h
+bindsym $win+period split v
+bindsym $win+Shift+asciicircum floating toggle
+
+bindsym $win+Shift+Left move left
+bindsym $win+Shift+Down move down
+bindsym $win+Shift+Up move up
+bindsym $win+Shift+Right move right
+bindsym $win+1 workspace 1
+bindsym $win+2 workspace 2
+bindsym $win+3 workspace 3
+bindsym $win+4 workspace 4
+bindsym $win+5 workspace 5
+bindsym $win+6 workspace 6
+bindsym $win+7 workspace 7
+bindsym $win+8 workspace 8
+bindsym $win+9 workspace 9
+bindsym $win+0 workspace 10
+
+bindsym $win+r mode "resize"
+mode "resize" {
+    # enter: $win+r; exit: Enter, Escape
+    # width[left:shrink|right:grow] | height[down:shrink|up:grow]
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Down resize shrink height 10 px or 10 ppt
+    bindsym Up resize grow height 10 px or 10 ppt
+    bindsym Return mode "default"
+    bindsym Shift+Left resize shrink width 100 px or 100 ppt
+    bindsym Shift+Right resize grow width 100 px or 100 ppt
+    bindsym Shift+Down resize shrink height 100 px or 100 ppt
+    bindsym Shift+Up resize grow height 100 px or 100 ppt
+    bindsym Shift+Left resize shrink width 100 px or 100 ppt
+    bindsym Shift+Right resize grow width 100 px or 100 ppt
+    bindsym Shift+Down resize shrink height 100 px or 100 ppt
+    bindsym Shift+Up resize grow height 100 px or 100 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+########################### STARTUP - ONCE ####################################
+###############################################################################
+
+exec --no-startup-id xfce4-clipman
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id xfce4-volumed
+exec --no-startup-id sleep 0.2 && nm-applet
+exec --no-startup-id sleep 0.4 && nitrogen --restore
+# exec --no-startup-id xautolock -time 2 -notify 10 -notifier "notify-send --urgency low --expire-time=10000 -- 'Locking screen in 10 seconds'" -locker '$bin/lockdown.sh' &
+
+# Ubuntu leftovers
+# exec --no-startup-id glipper
+# exec --no-startup-id sleep 0.5 && classicmenu-indicator
+# exec --no-startup-id gnome-settings-daemon
+# exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
+# exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+# exec --no-startup-id sh -c '/usr/bin/nvidia-settings --load-config-only'
+
+########################## STARTUP - ALWAYS ###################################
+###############################################################################
+
+# Touchpad settings are forgotten on resume
+# exec_always --no-startup-id sleep 1 && $bin/touchpad_settings.sh
+
+# work around http://askubuntu.com/questions/732967/
+exec_always --no-startup-id dropbox stop && DBUS_SESSION_BUS_ADDRESS="" dropbox start
 
 ############################# APPEARANCE ######################################
 ###############################################################################
@@ -66,144 +198,28 @@ bar {
     }
 }
 
-######################## BINDINGS: SYSTEM INTERACTION #########################
-###############################################################################
-
-bindsym $win+Shift+e exec "i3-nagbar -t warning -m 'Exit?' -b 'Yes' 'i3-msg exit'"
-bindsym $win+Shift+c restart
-bindsym $win+Shift+r reload
-bindsym $win+Shift+l exec i3lock -c 78B079
-bindsym $win+Shift+s exec systemctl suspend & i3lock -c 78B079
-
-bindsym $win+Shift+numbersign kill
-bindsym $win+f fullscreen
-bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
-
-bindsym $win+Tab exec "rofi -modi 'Workspace:$bin/i3wslist.sh,Move to Workspace:$bin/i3wsmove.sh' -show Workspace"
-bindsym $alt+Tab exec "rofi -show window
-# see https://github.com/DaveDavenport/rofi
-bindsym $alt+space exec --no-startup-id "rofi -combi-modi window,drun,run,ssh -show combi -modi combi"
-
-bindsym $win+Return exec xfce4-terminal --maximize --hide-menubar
-
-bindsym Shift+F12 move scratchpad
-bindsym F12 scratchpad show
-bindsym Control+F12 sticky toggle
-bindcode 107 exec "xfce4-screenshooter --fullscreen"
-# fixme region does not work from here, but from the console -> WTF?
-bindcode Shift+107 exec "xfce4-screenshooter --region"
-
-############################ BINDINGS: NAVIGATION #############################
-###############################################################################
-
-bindsym $win+Left focus left
-bindsym $win+Down focus down
-bindsym $win+Up focus up
-bindsym $win+Right focus right
-bindsym $win+Shift+1 move container to workspace number 1
-bindsym $win+Shift+2 move container to workspace number 2
-bindsym $win+Shift+3 move container to workspace number 3
-bindsym $win+Shift+4 move container to workspace number 4
-bindsym $win+Shift+5 move container to workspace number 5
-bindsym $win+Shift+6 move container to workspace number 6
-bindsym $win+Shift+7 move container to workspace number 7
-bindsym $win+Shift+8 move container to workspace number 8
-bindsym $win+Shift+9 move container to workspace number 9
-bindsym $win+Shift+0 move container to workspace number 10
-
-####################### BINDINGS: CONTROL LAYOUT ##############################
-###############################################################################
-
-bindsym $win+x move workspace to output right
-bindsym $win+asciicircum focus mode_toggle
-bindsym $win+u layout tabbed
-bindsym $win+i layout stacking
-bindsym $win+o layout toggle split
-bindsym $win+p focus parent
-bindsym $win+udiaeresis layout toggle all
-bindsym $win+Shift+p focus child
-bindsym $win+comma split h
-bindsym $win+period split v
-bindsym $win+Shift+asciicircum floating toggle
-
-bindsym $win+Shift+Left move left
-bindsym $win+Shift+Down move down
-bindsym $win+Shift+Up move up
-bindsym $win+Shift+Right move right
-bindsym $win+1 workspace $ws1
-bindsym $win+2 workspace $ws2
-bindsym $win+3 workspace $ws3
-bindsym $win+4 workspace $ws4
-bindsym $win+5 workspace 5
-bindsym $win+6 workspace 6
-bindsym $win+7 workspace 7
-bindsym $win+8 workspace 8
-bindsym $win+9 workspace 9
-bindsym $win+0 workspace 10
-
-bindsym $win+r mode "resize"
-mode "resize" {
-    # enter: $win+r; exit: Enter, Escape
-    # width[left:shrink|right:grow] | height[down:shrink|up:grow]
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
-    bindsym Down resize shrink height 10 px or 10 ppt
-    bindsym Up resize grow height 10 px or 10 ppt
-    bindsym Return mode "default"
-    bindsym Shift+Left resize shrink width 100 px or 100 ppt
-    bindsym Shift+Right resize grow width 100 px or 100 ppt
-    bindsym Shift+Down resize shrink height 100 px or 100 ppt
-    bindsym Shift+Up resize grow height 100 px or 100 ppt
-    bindsym Shift+Left resize shrink width 100 px or 100 ppt
-    bindsym Shift+Right resize grow width 100 px or 100 ppt
-    bindsym Shift+Down resize shrink height 100 px or 100 ppt
-    bindsym Shift+Up resize grow height 100 px or 100 ppt
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
 ###############################################################################
 ########################## BEHAVIOURAL FIXES ##################################
 ###############################################################################
 
 # PYCHARM #####################################################################
 
+set $pyCharmWs1 2
+set $pyCharmWs2 1
+
+# diff view hack
+for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable, workspace $pyCharmWs1
+
+set $pyCharmMainWindows ^Commit Changes
+assign [class="jetbrains-pycharm" title="$pyCharmMainWindows"] $pyCharmWs1
+for_window [class="jetbrains-pycharm" title="$pyCharmMainWindows"] floating disable
+
 set $pcWin Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
-set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files|^Commit Changes
-assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] $ws2
+set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files
+assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] $pyCharmWs2
 for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
-for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable
 
 # Others ######################################################################
 
-for_window [title="synapse"] border none
-
-###############################################################################
-############################## STARTUP ########################################
-###############################################################################
-
-# ONCE ########################################################################
-
-exec --no-startup-id xfce4-clipman
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id xfce4-volumed
-exec --no-startup-id sleep 0.2 && nm-applet
-exec --no-startup-id sleep 0.4 && nitrogen --restore
-# exec --no-startup-id xautolock -time 2 -notify 10 -notifier "notify-send --urgency low --expire-time=10000 -- 'Locking screen in 10 seconds'" -locker '$bin/lockdown.sh' &
-
-# Ubuntu leftovers
-# exec --no-startup-id glipper
-# exec --no-startup-id sleep 0.5 && classicmenu-indicator
-# exec --no-startup-id synapse --startup
-# exec --no-startup-id gnome-settings-daemon
-# exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
-# exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
-# exec --no-startup-id sh -c '/usr/bin/nvidia-settings --load-config-only'
-
-# ALWAYS ######################################################################
-
-# Touchpad settings are forgotten on resume
-# exec_always --no-startup-id sleep 1 && $bin/touchpad_settings.sh
-
-# work around http://askubuntu.com/questions/732967/
-exec_always --no-startup-id dropbox stop && DBUS_SESSION_BUS_ADDRESS="" dropbox start
+# for_window [title="FreeRDP:.*"]
+for_window [class="xfreerdp"] floating disable
