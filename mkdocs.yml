@@ -9,4 +9,4 @@ pages:
   - Default applications: default-applications.md
   - Inter process communication: ipc.md
 
-# theme: readthedocs
+theme: material
