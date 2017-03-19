@@ -24,7 +24,7 @@ new_float normal
 # My Notebook does not have a context menu key. This is a replacement
 bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
 
-########################### BINDINGS: LAUNCH STUFF ############################
+####################### BINDINGS: LAUNCH STUFF ################################
 ###############################################################################
 
 bindsym $win+Return exec xfce4-terminal --maximize --hide-menubar
@@ -37,6 +37,28 @@ bindsym $win+Shift+l exec i3lock -c $roseOfSharon
 bindsym $win+Shift+s exec systemctl suspend & i3lock -c $roseOfSharon
 
 bindsym $alt+space exec "rofi -combi-modi window,drun,run,ssh -show combi -modi combi,run,files:$bin/rofi-file-browser.sh"
+
+######################## BINDINGS: CONTROL MUSIC ##############################
+
+bindsym $win+a exec clerk
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Touchpad controls
+bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 ########################### BINDINGS: CONTROL I3WM ############################
 ###############################################################################
