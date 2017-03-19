@@ -42,33 +42,31 @@ bindsym $alt+space exec "rofi -combi-modi window,drun,run,ssh -show combi -modi 
 
 bindsym $win+a exec clerk
 
-# Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym $win+F6 exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym $win+F7 exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym $win+F5 exec --no-startup-id pactl set-sink-mute 0 toggle
 
-# Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym $win+Control+p exec --no-startup-id mpc toggle
 
-# Touchpad controls
-bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+########################## BINDINGS: CONTROL OTHERS ###########################
 
-# Media player controls
+bindsym $win+F9 exec xbacklight -dec 5
+bindsym $win+F10 exec xbacklight -inc 5
+
 bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+bindsym $win+F4 exec $bin/toggle-touchpad.sh
+
 ########################### BINDINGS: CONTROL I3WM ############################
-###############################################################################
 
 bindsym $win+Shift+e exec "i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
 bindsym $win+Shift+c restart
 bindsym $win+Shift+r reload
 
 ########################## BINDINGS: CONTROL WINDOWS ##########################
-###############################################################################
 
 # numbersign == #
 bindsym $win+Shift+numbersign kill
@@ -77,7 +75,6 @@ bindsym F12 scratchpad show
 bindsym Control+F12 sticky toggle
 
 ############################ BINDINGS: NAVIGATION #############################
-###############################################################################
 
 bindsym $alt+Tab workspace back_and_forth
 bindsym $win+Tab exec "rofi -show window"
@@ -100,7 +97,6 @@ bindsym $win+Shift+9 move container to workspace number 9
 bindsym $win+Shift+0 move container to workspace number 10
 
 ####################### BINDINGS: CONTROL LAYOUT ##############################
-###############################################################################
 
 bindsym $win+f fullscreen
 
@@ -153,7 +149,6 @@ mode "resize" {
 }
 
 ########################## STARTUP - ALWAYS ###################################
-###############################################################################
 
 # Touchpad settings are forgotten on resume
 # exec_always --no-startup-id sleep 1 && $bin/touchpad_settings.sh
@@ -162,7 +157,6 @@ mode "resize" {
 exec_always --no-startup-id dropbox stop && DBUS_SESSION_BUS_ADDRESS="" dropbox start
 
 ############################# APPEARANCE ######################################
-###############################################################################
 
 font pango: Ubuntu Mono Bold 15px
 hide_edge_borders both
@@ -201,9 +195,7 @@ bar {
     }
 }
 
-###############################################################################
 ########################## BEHAVIOURAL FIXES ##################################
-###############################################################################
 
 # PYCHARM #####################################################################
 
