@@ -85,6 +85,9 @@ bindsym $win+Down focus down
 bindsym $win+Up focus up
 bindsym $win+Right focus right
 
+bindsym $win+$alt+Left workspace prev
+bindsym $win+$alt+Right workspace next
+
 bindsym $win+Shift+1 move container to workspace number 1
 bindsym $win+Shift+2 move container to workspace number 2
 bindsym $win+Shift+3 move container to workspace number 3
