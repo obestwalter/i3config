@@ -42,8 +42,8 @@ bindsym $alt+space exec "rofi -combi-modi window,drun,run,ssh -show combi -modi 
 
 bindsym $win+a exec clerk
 
-bindsym $win+F6 exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym $win+F7 exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym $win+F6 exec --no-startup-id pactl set-sink-volume 0 -1%
+bindsym $win+F7 exec --no-startup-id pactl set-sink-volume 0 +1%
 bindsym $win+F5 exec --no-startup-id pactl set-sink-mute 0 toggle
 
 bindsym $win+Control+p exec --no-startup-id mpc toggle
