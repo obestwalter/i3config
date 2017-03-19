@@ -11,3 +11,9 @@ basic i3 experience: `startx i3`
 ## Windows and their properties
 
 Use xwininfo and/or xprop to find out about the window
+
+## Keyboard
+
+xev to check keycodes
+
+
