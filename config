@@ -101,7 +101,7 @@ bindsym $win+Shift+0 move container to workspace number 10
 
 ####################### BINDINGS: CONTROL LAYOUT ##############################
 
-bindsym $win+f fullscreen
+bindsym F11 fullscreen
 
 bindsym $win+x move workspace to output right
 bindsym $win+asciicircum focus mode_toggle
