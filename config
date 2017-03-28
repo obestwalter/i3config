@@ -151,14 +151,6 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
-########################## STARTUP - ALWAYS ###################################
-
-# Touchpad settings are forgotten on resume
-# exec_always --no-startup-id sleep 1 && $bin/touchpad_settings.sh
-
-# work around http://askubuntu.com/questions/732967/
-exec_always --no-startup-id dropbox stop && DBUS_SESSION_BUS_ADDRESS="" dropbox start
-
 ############################# APPEARANCE ######################################
 
 font pango: Ubuntu Mono Bold 15px
