@@ -195,7 +195,7 @@ bar {
 # PYCHARM #####################################################################
 
 set $pyCharmWs1 2
-set $pyCharmWs2 1
+set $pyCharmWs2 3
 
 # diff view hack
 for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable, workspace $pyCharmWs1
