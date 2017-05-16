@@ -6,6 +6,20 @@ set $win Mod4
 set $bin ~/.i3/bin
 set $roseOfSharon BF5700
 
+# Workspaces
+set $ws1 "1:  "
+set $ws2 "2:  "
+set $ws3 "3:  "
+set $ws4 "4:  "
+set $ws5 "5:  "
+set $ws6 "6:  "
+set $ws7 "7:  "
+set $ws8 "8:  "
+set $ws9 "9:𓁉 "
+set $ws10 "10: 𓆉 "
+#  Gucharmap
+
+
 ########################### GLOBAL SETTINGS ###################################
 ###############################################################################
 
@@ -37,7 +51,7 @@ bindsym $win+Shift+l exec i3lock -c $roseOfSharon
 bindsym $win+Shift+s exec systemctl suspend & i3lock -c $roseOfSharon
 
 bindsym $alt+space exec "rofi -combi-modi window,drun,run,ssh -show combi -modi combi,run,files:$bin/rofi-file-browser.sh"
-
+bindsym $alt+Shift+space rofi -modi "clipboard:roficlip.py --show,persistent:roficlip.py --show --persistent,actions:roficlip.py --show --actions" -show clipboard
 ######################## BINDINGS: CONTROL MUSIC ##############################
 
 bindsym $win+a exec clerk
@@ -88,16 +102,16 @@ bindsym $win+Right focus right
 bindsym $win+$alt+Left workspace prev
 bindsym $win+$alt+Right workspace next
 
-bindsym $win+Shift+1 move container to workspace number 1
-bindsym $win+Shift+2 move container to workspace number 2
-bindsym $win+Shift+3 move container to workspace number 3
-bindsym $win+Shift+4 move container to workspace number 4
-bindsym $win+Shift+5 move container to workspace number 5
-bindsym $win+Shift+6 move container to workspace number 6
-bindsym $win+Shift+7 move container to workspace number 7
-bindsym $win+Shift+8 move container to workspace number 8
-bindsym $win+Shift+9 move container to workspace number 9
-bindsym $win+Shift+0 move container to workspace number 10
+bindsym $win+Shift+1 move container to workspace number $ws1
+bindsym $win+Shift+2 move container to workspace number $ws2
+bindsym $win+Shift+3 move container to workspace number $ws3
+bindsym $win+Shift+4 move container to workspace number $ws4
+bindsym $win+Shift+5 move container to workspace number $ws5
+bindsym $win+Shift+6 move container to workspace number $ws6
+bindsym $win+Shift+7 move container to workspace number $ws7
+bindsym $win+Shift+8 move container to workspace number $ws8
+bindsym $win+Shift+9 move container to workspace number $ws9
+bindsym $win+Shift+0 move container to workspace number $ws10
 
 ####################### BINDINGS: CONTROL LAYOUT ##############################
 
@@ -119,16 +133,18 @@ bindsym $win+Shift+Left move left
 bindsym $win+Shift+Down move down
 bindsym $win+Shift+Up move up
 bindsym $win+Shift+Right move right
-bindsym $win+1 workspace 1
-bindsym $win+2 workspace 2
-bindsym $win+3 workspace 3
-bindsym $win+4 workspace 4
-bindsym $win+5 workspace 5
-bindsym $win+6 workspace 6
-bindsym $win+7 workspace 7
-bindsym $win+8 workspace 8
-bindsym $win+9 workspace 9
-bindsym $win+0 workspace 10
+bindsym $win+1 workspace $ws1
+bindsym $win+2 workspace $ws2
+bindsym $win+3 workspace $ws3
+bindsym $win+4 workspace $ws4
+bindsym $win+5 workspace $ws5
+bindsym $win+6 workspace $ws6
+bindsym $win+7 workspace $ws7
+bindsym $win+8 workspace $ws8
+bindsym $win+9 workspace $ws9
+bindsym $win+0 workspace $ws10
+
+bindsym $win+e workspace $ws7
 
 bindsym $win+r mode "resize"
 mode "resize" {
@@ -153,7 +169,7 @@ mode "resize" {
 
 ############################# APPEARANCE ######################################
 
-font pango: Ubuntu Mono Bold 15px
+font "pango:Deja Vu Sans Mono Bold 7"
 hide_edge_borders both
 
 client.background       #000000
@@ -168,7 +184,7 @@ bar {
     position bottom
     tray_output DP-3
     tray_padding 0
-    font pango: Fira Code 13px
+    font "pango:Deja Vu Sans Mono, FontAwesome 7"
     mode dock
     modifier $win
     bindsym button4 nop
@@ -182,9 +198,9 @@ bar {
         statusline #fdf6e3
         separator  #657b83
         #----------------- border  bg      text
-        focused_workspace  #fdf6e3 #859900 #fdf6e3
-        inactive_workspace #839496 #073642 #93a1a1
-        active_workspace   #859900 #002b36 #859900
+        focused_workspace  #073642 #859900 #fdf6e3
+        inactive_workspace #073642 #073642 #93a1a1
+        active_workspace   #073642 #002b36 #859900
         binding_mode       #fdf6e3 #2aa198 #fdf6e3
         urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
     }
@@ -213,3 +229,5 @@ for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
 
 # for_window [title="FreeRDP:.*"]
 for_window [class="xfreerdp"] floating disable
+
+for_window [class="xfdesktop"] floating enable
