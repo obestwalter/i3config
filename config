@@ -17,7 +17,8 @@ set $ws7 "7:  "
 set $ws8 "8:  "
 set $ws9 "9: 𓁉 "
 set $ws10 "10: 𓆉 "
-#  Gucharmap
+set $ws13 "12:  "
+#  Gucharmap
 
 
 ########################### GLOBAL SETTINGS ###################################
@@ -221,6 +222,7 @@ set $pcWin Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
 set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files
 assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] $ws2
 for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
+for_window [class="jetbrains-pycharm" title=".* \(.*\)"] move to workspace $ws2
 
 # Others ######################################################################
 
