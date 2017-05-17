@@ -15,7 +15,7 @@ set $ws5 "5:  "
 set $ws6 "6:  "
 set $ws7 "7:  "
 set $ws8 "8:  "
-set $ws9 "9:𓁉 "
+set $ws9 "9: 𓁉 "
 set $ws10 "10: 𓆉 "
 #  Gucharmap
 
@@ -210,19 +210,16 @@ bar {
 
 # PYCHARM #####################################################################
 
-set $pyCharmWs1 2
-set $pyCharmWs2 3
-
 # diff view hack
-for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable, workspace $pyCharmWs1
+for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable, workspace $ws2
 
 set $pyCharmMainWindows ^Commit Changes
-assign [class="jetbrains-pycharm" title="$pyCharmMainWindows"] $pyCharmWs1
+assign [class="jetbrains-pycharm" title="$pyCharmMainWindows"] $ws2
 for_window [class="jetbrains-pycharm" title="$pyCharmMainWindows"] floating disable
 
 set $pcWin Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
 set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files
-assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] $pyCharmWs2
+assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] $ws2
 for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
 
 # Others ######################################################################
