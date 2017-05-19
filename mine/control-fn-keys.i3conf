@@ -1,3 +1,5 @@
+# TODO use bindcode for real fn keys
+
 # bindsym $win+F4 exec $bin/toggle-touchpad.sh
 bindsym $win+F4 exec --no-startup-id firefox
 bindsym $win+F6 exec --no-startup-id pactl set-sink-volume 0 -1%
