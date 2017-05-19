@@ -1,0 +1,20 @@
+bindsym $win+r mode "resize"
+mode "resize" {
+    # enter: $win+r; exit: Enter, Escape
+    # width[left:shrink|right:grow] | height[down:shrink|up:grow]
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Down resize shrink height 10 px or 10 ppt
+    bindsym Up resize grow height 10 px or 10 ppt
+    bindsym Return mode "default"
+    bindsym Shift+Left resize shrink width 100 px or 100 ppt
+    bindsym Shift+Right resize grow width 100 px or 100 ppt
+    bindsym Shift+Down resize shrink height 100 px or 100 ppt
+    bindsym Shift+Up resize grow height 100 px or 100 ppt
+    bindsym Shift+Left resize shrink width 100 px or 100 ppt
+    bindsym Shift+Right resize grow width 100 px or 100 ppt
+    bindsym Shift+Down resize shrink height 100 px or 100 ppt
+    bindsym Shift+Up resize grow height 100 px or 100 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}

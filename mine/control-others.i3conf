@@ -1,0 +1,29 @@
+# i3wm
+
+bindsym $win+Shift+e exec "i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
+bindsym $win+Shift+c restart
+bindsym $win+Shift+r reload
+
+# Terminal
+
+bindsym $win+Return exec xfce4-terminal --maximize --hide-menubar
+
+# Media and stuff
+
+bindsym $win+a exec clerk
+bindsym $win+Control+p exec --no-startup-id mpc toggle
+
+# Rofi
+
+bindsym $alt+space exec "rofi -combi-modi window,drun,run,ssh -show combi -modi combi,run,files:$bin/rofi-file-browser.sh"
+bindsym $alt+Shift+space rofi -modi "clipboard:roficlip.py --show,persistent:roficlip.py --show --persistent,actions:roficlip.py --show --actions" -show clipboard
+
+# Locking and suspending
+
+bindsym $win+Shift+l exec i3lock -c $roseOfSharon
+bindsym $win+Shift+s exec systemctl suspend & i3lock -c $roseOfSharon
+
+# Specials
+
+# My Notebook does not have a context menu key. This is a replacement
+bindsym --release $win+y exec sleep 0.1 && xdotool key Menu

@@ -1,0 +1,22 @@
+bindsym $alt+Tab workspace back_and_forth
+bindsym $win+Tab exec "rofi -show window"
+bindsym $win+Shift+Tab exec "rofi -modi 'Workspace:$bin/i3wslist.sh,Move to Workspace:$bin/i3wsmove.sh' -show Workspace"
+
+bindsym $win+Left focus left
+bindsym $win+Down focus down
+bindsym $win+Up focus up
+bindsym $win+Right focus right
+
+bindsym $win+$alt+Left workspace prev
+bindsym $win+$alt+Right workspace next
+
+bindsym $win+Shift+1 move container to workspace number $ws1
+bindsym $win+Shift+2 move container to workspace number $ws2
+bindsym $win+Shift+3 move container to workspace number $ws3
+bindsym $win+Shift+4 move container to workspace number $ws4
+bindsym $win+Shift+5 move container to workspace number $ws5
+bindsym $win+Shift+6 move container to workspace number $ws6
+bindsym $win+Shift+7 move container to workspace number $ws7
+bindsym $win+Shift+8 move container to workspace number $ws8
+bindsym $win+Shift+9 move container to workspace number $ws9
+bindsym $win+Shift+0 move container to workspace number $ws10

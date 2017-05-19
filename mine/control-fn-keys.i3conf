@@ -1,0 +1,17 @@
+# bindsym $win+F4 exec $bin/toggle-touchpad.sh
+bindsym $win+F4 exec --no-startup-id firefox
+bindsym $win+F6 exec --no-startup-id pactl set-sink-volume 0 -1%
+bindsym $win+F7 exec --no-startup-id pactl set-sink-volume 0 +1%
+bindsym $win+F5 exec --no-startup-id pactl set-sink-mute 0 toggle
+
+bindsym $win+F9 exec xbacklight -dec 5
+bindsym $win+F10 exec xbacklight -inc 5
+
+bindsym XF86AudioPlay exec quodlibet --play
+bindsym XF86AudioPause exec quodlibet --pause
+bindsym XF86AudioNext exec quodlibet --next
+bindsym XF86AudioPrev exec quodlibet --previous
+
+# Print key | Druck/S-Abfr
+bindcode 107 exec "xfce4-screenshooter --fullscreen"
+bindcode Shift+107 exec "xfce4-screenshooter --region"

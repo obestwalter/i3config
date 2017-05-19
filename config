@@ -1,12 +1,31 @@
-########################## GLOBAL VARIABLES ###################################
-###############################################################################
+# /home/oliver/.i3/mine/control-fn-keys.i3conf
+
+# bindsym $win+F4 exec $bin/toggle-touchpad.sh
+bindsym $win+F4 exec --no-startup-id firefox
+bindsym $win+F6 exec --no-startup-id pactl set-sink-volume 0 -1%
+bindsym $win+F7 exec --no-startup-id pactl set-sink-volume 0 +1%
+bindsym $win+F5 exec --no-startup-id pactl set-sink-mute 0 toggle
+
+bindsym $win+F9 exec xbacklight -dec 5
+bindsym $win+F10 exec xbacklight -inc 5
+
+bindsym XF86AudioPlay exec quodlibet --play
+bindsym XF86AudioPause exec quodlibet --pause
+bindsym XF86AudioNext exec quodlibet --next
+bindsym XF86AudioPrev exec quodlibet --previous
+
+# Print key | Druck/S-Abfr
+bindcode 107 exec "xfce4-screenshooter --fullscreen"
+bindcode Shift+107 exec "xfce4-screenshooter --region"
+
+
+# /home/oliver/.i3/mine/settings.i3conf
 
 set $alt Mod1
 set $win Mod4
 set $bin ~/.i3/bin
 set $roseOfSharon BF5700
 
-# Workspaces
 set $ws1 "1:  "
 set $ws2 "2:  "
 set $ws3 "3:  "
@@ -18,108 +37,68 @@ set $ws8 "8:  "
 set $ws9 "9: 𓁉 "
 set $ws10 "10:  "
 set $ws13 "12:  "
-# (gucharmap or Ctrl+Shift+u hexcode)
-#   𓆉 
+
+set $pyCharmMainWindows ^Commit Changes
+set $pcWin Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
+set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files|^Push Commits
 
 
-########################### GLOBAL SETTINGS ###################################
-###############################################################################
+# /home/oliver/.i3/mine/control-others.i3conf
 
-workspace_auto_back_and_forth yes
-focus_on_window_activation focus
-workspace_layout tabbed
-floating_modifier $win
-focus_follows_mouse no
-popup_during_fullscreen leave_fullscreen
-new_window normal
-new_float normal
-
-######################### BINDINGS: CONTROL SPECIALS ##########################
-###############################################################################
-
-# My Notebook does not have a context menu key. This is a replacement
-bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
-
-####################### BINDINGS: LAUNCH STUFF ################################
-###############################################################################
-
-bindsym $win+Return exec xfce4-terminal --maximize --hide-menubar
-
-bindcode 107 exec "xfce4-screenshooter --fullscreen"
-# fixme region does not work from here, but from the console -> WTF?
-bindcode Shift+107 exec "xfce4-screenshooter --region"
-
-bindsym $win+Shift+l exec i3lock -c $roseOfSharon
-bindsym $win+Shift+s exec systemctl suspend & i3lock -c $roseOfSharon
-
-bindsym $alt+space exec "rofi -combi-modi window,drun,run,ssh -show combi -modi combi,run,files:$bin/rofi-file-browser.sh"
-bindsym $alt+Shift+space rofi -modi "clipboard:roficlip.py --show,persistent:roficlip.py --show --persistent,actions:roficlip.py --show --actions" -show clipboard
-######################## BINDINGS: CONTROL MUSIC ##############################
-
-bindsym $win+a exec clerk
-
-bindsym $win+F6 exec --no-startup-id pactl set-sink-volume 0 -1%
-bindsym $win+F7 exec --no-startup-id pactl set-sink-volume 0 +1%
-bindsym $win+F5 exec --no-startup-id pactl set-sink-mute 0 toggle
-
-bindsym $win+Control+p exec --no-startup-id mpc toggle
-
-########################## BINDINGS: CONTROL OTHERS ###########################
-
-bindsym $win+F9 exec xbacklight -dec 5
-bindsym $win+F10 exec xbacklight -inc 5
-
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-
-bindsym $win+F4 exec $bin/toggle-touchpad.sh
-
-########################### BINDINGS: CONTROL I3WM ############################
+# i3wm
 
 bindsym $win+Shift+e exec "i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
 bindsym $win+Shift+c restart
 bindsym $win+Shift+r reload
 
-########################## BINDINGS: CONTROL WINDOWS ##########################
+# Terminal
 
-# numbersign == #
-bindsym $win+Shift+numbersign kill
-bindsym Shift+F12 move scratchpad
-bindsym F12 scratchpad show
-bindsym Control+F12 sticky toggle
+bindsym $win+Return exec xfce4-terminal --maximize --hide-menubar
 
-############################ BINDINGS: NAVIGATION #############################
+# Media and stuff
 
-bindsym $alt+Tab workspace back_and_forth
-bindsym $win+Tab exec "rofi -show window"
-bindsym $win+Shift+Tab exec "rofi -modi 'Workspace:$bin/i3wslist.sh,Move to Workspace:$bin/i3wsmove.sh' -show Workspace"
+bindsym $win+a exec clerk
+bindsym $win+Control+p exec --no-startup-id mpc toggle
 
-bindsym $win+Left focus left
-bindsym $win+Down focus down
-bindsym $win+Up focus up
-bindsym $win+Right focus right
+# Rofi
 
-bindsym $win+$alt+Left workspace prev
-bindsym $win+$alt+Right workspace next
+bindsym $alt+space exec "rofi -combi-modi window,drun,run,ssh -show combi -modi combi,run,files:$bin/rofi-file-browser.sh"
+bindsym $alt+Shift+space rofi -modi "clipboard:roficlip.py --show,persistent:roficlip.py --show --persistent,actions:roficlip.py --show --actions" -show clipboard
 
-bindsym $win+Shift+1 move container to workspace number $ws1
-bindsym $win+Shift+2 move container to workspace number $ws2
-bindsym $win+Shift+3 move container to workspace number $ws3
-bindsym $win+Shift+4 move container to workspace number $ws4
-bindsym $win+Shift+5 move container to workspace number $ws5
-bindsym $win+Shift+6 move container to workspace number $ws6
-bindsym $win+Shift+7 move container to workspace number $ws7
-bindsym $win+Shift+8 move container to workspace number $ws8
-bindsym $win+Shift+9 move container to workspace number $ws9
-bindsym $win+Shift+0 move container to workspace number $ws10
+# Locking and suspending
 
-####################### BINDINGS: CONTROL LAYOUT ##############################
+bindsym $win+Shift+l exec i3lock -c $roseOfSharon
+bindsym $win+Shift+s exec systemctl suspend & i3lock -c $roseOfSharon
 
-bindsym F11 fullscreen
+# Specials
 
-bindsym $win+x move workspace to output right
+# My Notebook does not have a context menu key. This is a replacement
+bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
+
+
+# /home/oliver/.i3/mine/window-fixers.i3conf
+
+# PYCHARM
+
+assign [class="jetbrains-pycharm" title="$pyCharmMainWindows"] $ws2
+assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] $ws2
+
+# diff view hack
+for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace $ws2; workspace $ws2
+
+for_window [class="jetbrains-pycharm" title="$pyCharmMainWindows"] floating disable
+for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
+
+# OTHERS
+
+# for_window [title="FreeRDP:.*"]
+for_window [class="xfreerdp"] floating disable
+
+for_window [class="xfdesktop"] floating enable
+
+
+# /home/oliver/.i3/mine/containers.i3conf
+
 bindsym $win+asciicircum focus mode_toggle
 bindsym $win+u layout tabbed
 bindsym $win+i layout stacking
@@ -130,6 +109,13 @@ bindsym $win+Shift+p focus child
 bindsym $win+comma split h
 bindsym $win+period split v
 bindsym $win+Shift+asciicircum floating toggle
+
+
+# /home/oliver/.i3/mine/layout.i3conf
+
+bindsym $win+e workspace $ws7
+
+bindsym $win+x move workspace to output right
 
 bindsym $win+Shift+Left move left
 bindsym $win+Shift+Down move down
@@ -146,7 +132,8 @@ bindsym $win+8 workspace $ws8
 bindsym $win+9 workspace $ws9
 bindsym $win+0 workspace $ws10
 
-bindsym $win+e workspace $ws7
+
+# /home/oliver/.i3/mine/mode-resize.i3conf
 
 bindsym $win+r mode "resize"
 mode "resize" {
@@ -169,10 +156,23 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
-############################# APPEARANCE ######################################
+
+# /home/oliver/.i3/mine/basics.i3conf
 
 font "pango:Deja Vu Sans Mono Bold 7"
 hide_edge_borders both
+
+workspace_auto_back_and_forth yes
+focus_on_window_activation focus
+workspace_layout tabbed
+floating_modifier $win
+focus_follows_mouse no
+popup_during_fullscreen leave_fullscreen
+new_window normal
+new_float normal
+
+
+# /home/oliver/.i3/mine/appearance.i3conf
 
 client.background       #000000
 #---------------------- border    bg      txt     ind
@@ -208,24 +208,38 @@ bar {
     }
 }
 
-########################## BEHAVIOURAL FIXES ##################################
 
-# PYCHARM #####################################################################
+# /home/oliver/.i3/mine/navigation.i3conf
 
-# diff view hack
-for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace $ws2; workspace $ws2
+bindsym $alt+Tab workspace back_and_forth
+bindsym $win+Tab exec "rofi -show window"
+bindsym $win+Shift+Tab exec "rofi -modi 'Workspace:$bin/i3wslist.sh,Move to Workspace:$bin/i3wsmove.sh' -show Workspace"
 
-set $pyCharmMainWindows ^Commit Changes
-assign [class="jetbrains-pycharm" title="$pyCharmMainWindows"] $ws2
-for_window [class="jetbrains-pycharm" title="$pyCharmMainWindows"] floating disable
+bindsym $win+Left focus left
+bindsym $win+Down focus down
+bindsym $win+Up focus up
+bindsym $win+Right focus right
 
-set $pcWin Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
-set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files|^Push Commits
-assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] $ws2
+bindsym $win+$alt+Left workspace prev
+bindsym $win+$alt+Right workspace next
 
-# Others ######################################################################
+bindsym $win+Shift+1 move container to workspace number $ws1
+bindsym $win+Shift+2 move container to workspace number $ws2
+bindsym $win+Shift+3 move container to workspace number $ws3
+bindsym $win+Shift+4 move container to workspace number $ws4
+bindsym $win+Shift+5 move container to workspace number $ws5
+bindsym $win+Shift+6 move container to workspace number $ws6
+bindsym $win+Shift+7 move container to workspace number $ws7
+bindsym $win+Shift+8 move container to workspace number $ws8
+bindsym $win+Shift+9 move container to workspace number $ws9
+bindsym $win+Shift+0 move container to workspace number $ws10
 
-# for_window [title="FreeRDP:.*"]
-for_window [class="xfreerdp"] floating disable
 
-for_window [class="xfdesktop"] floating enable
+# /home/oliver/.i3/mine/control-windows.i3conf
+
+# numbersign == #
+bindsym F11 fullscreen
+bindsym $win+Shift+numbersign kill
+bindsym Shift+F12 move scratchpad
+bindsym F12 scratchpad show
+bindsym Control+F12 sticky toggle

@@ -1,0 +1,6 @@
+# numbersign == #
+bindsym F11 fullscreen
+bindsym $win+Shift+numbersign kill
+bindsym Shift+F12 move scratchpad
+bindsym F12 scratchpad show
+bindsym Control+F12 sticky toggle
