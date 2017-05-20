@@ -20,11 +20,10 @@ bindsym $alt+Shift+space rofi -modi "clipboard:roficlip.py --show,persistent:rof
 
 # Locking and suspending
 
-bindsym $win+Shift+l exec i3lock -c $roseOfSharon
-bindsym $win+Shift+s exec systemctl suspend & i3lock -c $roseOfSharon
+bindsym $win+Shift+l exec i3lock -c $lockColor
+bindsym $win+Shift+s exec systemctl suspend & i3lock -c $lockColor
 
 # Specials
 
 # My Notebook does not have a context menu key. This is a replacement
 bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
-
