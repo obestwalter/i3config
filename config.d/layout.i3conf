@@ -16,4 +16,3 @@ bindsym $win+7 workspace $ws7
 bindsym $win+8 workspace $ws8
 bindsym $win+9 workspace $ws9
 bindsym $win+0 workspace $ws10
-
