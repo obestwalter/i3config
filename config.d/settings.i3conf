@@ -2,7 +2,7 @@ set $alt Mod1
 set $win Mod4
 set $bin ~/.i3/bin
 
-set $bar_status_command "py3status -t 1 -c ~/.i3/i3status.conf"
+set $bar_status_command "py3status -c ~/.i3/status-bar.conf -i ~/.i3/py3status -l ~/.i3/py3status.log -b -t 1"
 set $bar_mode dock
 set $bar_position bottom
 set $bar_tray_output DP-3
