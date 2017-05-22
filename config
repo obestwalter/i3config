@@ -1,5 +1,5 @@
 ####################################################
-# i3config (i3configger: Mon May 22 15:44:46 2017) #
+# i3config (i3configger: Mon May 22 15:50:27 2017) #
 ####################################################
 set $base03  #002b36
 set $base02  #073642
@@ -82,43 +82,9 @@ set $uwtxt #fdf6e3
 
 set $lockColor cb4b16
 
-### appearance.i3conf ###
-font "pango:Deja Vu Sans Mono Bold 7"
-hide_edge_borders both
-
-client.background       #000000
-client.focused          $cfbr  $cfbg  $cftxt $cfind $cfchildb
-client.unfocused        $cubr  $cubg  $cutxt $cuind $cuchildb
-client.focused_inactive $cfibr $cfibg $cfitxt $cfiind $cfichildb
-client.urgent           $curbr $curbg $curtxt $curind $curchildb
-
-bar {
-    status_command $bar_status_command
-    position $bar_position
-    tray_output $bar_tray_output
-    tray_padding 0
-    font $bar_font
-    mode $bar_mode
-    modifier $win
-    bindsym button4 nop
-    bindsym button5 nop
-    separator_symbol $bar_separator_symbol
-    colors {
-        focused_background $bar_focused_background
-        focused_statusline $bar_focused_statusline
-        focused_separator  $bar_focused_separator
-        background $bar_background
-        statusline $bar_statusline
-        separator  $bar_separator_symbol
-        focused_workspace  $fwbr $fwbg $fwtxt
-        inactive_workspace $iwbr $iwbg $iwtxt
-        active_workspace   $awbr $awbg $awtxt
-        binding_mode       $bmbr $bmbg $bmtxt
-        urgent_workspace   $uwbr $uwbg $uwtxt
-    }
-}
-
 ### basic-settings.i3conf ###
+font "pango:Deja Vu Sans Mono Bold 7"
+
 workspace_auto_back_and_forth yes
 focus_on_window_activation focus
 workspace_layout tabbed
@@ -131,13 +97,6 @@ new_float normal
 set $alt Mod1
 set $win Mod4
 set $bin ~/.i3/bin
-
-set $bar_status_command "py3status -c ~/.i3/status-bar.conf -i ~/.i3/py3status -l ~/.i3/py3status.log -b -t 1"
-set $bar_mode dock
-set $bar_position bottom
-set $bar_tray_output DP-3
-set $bar_separator_symbol ║
-set $bar_font "pango:Deja Vu Sans Mono, FontAwesome 7"
 
 set $ws1 "1:  "
 set $ws2 "2:  "
@@ -288,6 +247,50 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
+### status-bar-settings.i3conf ###
+set $bar_status_command "py3status -c ~/.i3/status-bar.conf -i ~/.i3/py3status -l ~/.i3/py3status.log -b -t 1"
+set $bar_mode dock
+set $bar_position bottom
+set $bar_tray_output DP-3
+set $bar_separator_symbol ║
+set $bar_font "pango:Deja Vu Sans Mono, FontAwesome 7"
+
+
+bar {
+    status_command $bar_status_command
+    position $bar_position
+    tray_output $bar_tray_output
+    tray_padding 0
+    font $bar_font
+    mode $bar_mode
+    modifier $win
+    bindsym button4 nop
+    bindsym button5 nop
+    separator_symbol $bar_separator_symbol
+    colors {
+        focused_background $bar_focused_background
+        focused_statusline $bar_focused_statusline
+        focused_separator  $bar_focused_separator
+        background $bar_background
+        statusline $bar_statusline
+        separator  $bar_separator_symbol
+        focused_workspace  $fwbr $fwbg $fwtxt
+        inactive_workspace $iwbr $iwbg $iwtxt
+        active_workspace   $awbr $awbg $awtxt
+        binding_mode       $bmbr $bmbg $bmtxt
+        urgent_workspace   $uwbr $uwbg $uwtxt
+    }
+}
+
+### window-decorations.i3conf ###
+hide_edge_borders both
+
+client.background       #000000
+client.focused          $cfbr  $cfbg  $cftxt $cfind $cfchildb
+client.unfocused        $cubr  $cubg  $cutxt $cuind $cuchildb
+client.focused_inactive $cfibr $cfibg $cfitxt $cfiind $cfichildb
+client.urgent           $curbr $curbg $curtxt $curind $curchildb
 
 ### window-fixers-pycharm.i3conf ###
 set $pyCharmMainWindows ^Commit Changes

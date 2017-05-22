@@ -1,3 +1,5 @@
+font "pango:Deja Vu Sans Mono Bold 7"
+
 workspace_auto_back_and_forth yes
 focus_on_window_activation focus
 workspace_layout tabbed
@@ -10,13 +12,6 @@ new_float normal
 set $alt Mod1
 set $win Mod4
 set $bin ~/.i3/bin
-
-set $bar_status_command "py3status -c ~/.i3/status-bar.conf -i ~/.i3/py3status -l ~/.i3/py3status.log -b -t 1"
-set $bar_mode dock
-set $bar_position bottom
-set $bar_tray_output DP-3
-set $bar_separator_symbol ║
-set $bar_font "pango:Deja Vu Sans Mono, FontAwesome 7"
 
 set $ws1 "1:  "
 set $ws2 "2:  "
