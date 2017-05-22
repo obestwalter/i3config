@@ -1,5 +1,5 @@
 ####################################################
-# i3config (i3configger: Mon May 22 15:23:36 2017) #
+# i3config (i3configger: Mon May 22 15:44:46 2017) #
 ####################################################
 set $base03  #002b36
 set $base02  #073642
@@ -82,7 +82,7 @@ set $uwtxt #fdf6e3
 
 set $lockColor cb4b16
 
-### /home/oliver/.i3/config.d/appearance.i3conf ###
+### appearance.i3conf ###
 font "pango:Deja Vu Sans Mono Bold 7"
 hide_edge_borders both
 
@@ -118,7 +118,7 @@ bar {
     }
 }
 
-### /home/oliver/.i3/config.d/basic-settings.i3conf ###
+### basic-settings.i3conf ###
 workspace_auto_back_and_forth yes
 focus_on_window_activation focus
 workspace_layout tabbed
@@ -149,9 +149,9 @@ set $ws7 "7:  "
 set $ws8 "8:  "
 set $ws9 "9: 𓁉 "
 set $ws10 "10:  "
-set $ws13 "12:  "
+set $ws13 "13:  "
 
-### /home/oliver/.i3/config.d/control-containers.i3conf ###
+### control-containers.i3conf ###
 bindsym $win+asciicircum focus mode_toggle
 bindsym $win+u layout tabbed
 bindsym $win+i layout stacking
@@ -163,7 +163,7 @@ bindsym $win+comma split h
 bindsym $win+period split v
 bindsym $win+Shift+asciicircum floating toggle
 
-### /home/oliver/.i3/config.d/control-fn-keys.i3conf ###
+### control-fn-keys.i3conf ###
 # TODO use bindcode for real fn keys
 
 # bindsym $win+F4 exec $bin/toggle-touchpad.sh
@@ -184,7 +184,7 @@ bindsym XF86AudioPrev exec quodlibet --previous
 bindcode 107 exec "xfce4-screenshooter --fullscreen"
 bindcode Shift+107 exec "xfce4-screenshooter --region"
 
-### /home/oliver/.i3/config.d/control-layout.i3conf ###
+### control-layout.i3conf ###
 bindsym $win+e workspace $ws7
 
 bindsym $win+x move workspace to output right
@@ -204,7 +204,7 @@ bindsym $win+8 workspace $ws8
 bindsym $win+9 workspace $ws9
 bindsym $win+0 workspace $ws10
 
-### /home/oliver/.i3/config.d/control-navigation.i3conf ###
+### control-navigation.i3conf ###
 bindsym $alt+Tab workspace back_and_forth
 bindsym $win+Tab exec "rofi -show window"
 bindsym $win+Shift+Tab exec "rofi -modi 'Workspace:$bin/i3wslist.sh,Move to Workspace:$bin/i3wsmove.sh' -show Workspace"
@@ -228,7 +228,7 @@ bindsym $win+Shift+8 move container to workspace number $ws8
 bindsym $win+Shift+9 move container to workspace number $ws9
 bindsym $win+Shift+0 move container to workspace number $ws10
 
-### /home/oliver/.i3/config.d/control-others.i3conf ###
+### control-others.i3conf ###
 # i3wm
 
 bindsym $win+Shift+e exec "i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
@@ -259,7 +259,7 @@ bindsym $win+Shift+s exec systemctl suspend & i3lock -c $lockColor
 # My Notebook does not have a context menu key. This is a replacement
 bindsym --release $win+y exec sleep 0.1 && xdotool key Menu
 
-### /home/oliver/.i3/config.d/control-windows.i3conf ###
+### control-windows.i3conf ###
 # numbersign == #
 bindsym F11 fullscreen
 bindsym $win+Shift+numbersign kill
@@ -267,7 +267,7 @@ bindsym Shift+F12 move scratchpad
 bindsym F12 scratchpad show
 bindsym Control+F12 sticky toggle
 
-### /home/oliver/.i3/config.d/mode-resize.i3conf ###
+### mode-resize.i3conf ###
 bindsym $win+r mode "resize"
 mode "resize" {
     # enter: $win+r; exit: Enter, Escape
@@ -289,7 +289,7 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
-### /home/oliver/.i3/config.d/window-fixers-pycharm.i3conf ###
+### window-fixers-pycharm.i3conf ###
 set $pyCharmMainWindows ^Commit Changes
 set $pcWin Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
 set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files|^Push Commits
@@ -303,7 +303,7 @@ for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title="
 for_window [class="jetbrains-pycharm" title="$pyCharmMainWindows"] floating disable
 for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
 
-### /home/oliver/.i3/config.d/window-fixers-remote-desktops.i3conf ###
+### window-fixers-remote-desktops.i3conf ###
 for_window [title="FreeRDP:.*"] floating disable
 for_window [class="xfreerdp"] floating disable
 for_window [class="xfdesktop"] floating enable
