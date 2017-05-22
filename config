@@ -1,5 +1,5 @@
 ####################################################
-# i3config (i3configger: Mon May 22 15:50:27 2017) #
+# i3config (i3configger: Mon May 22 15:57:26 2017) #
 ####################################################
 set $base03  #002b36
 set $base02  #073642
@@ -255,7 +255,6 @@ set $bar_position bottom
 set $bar_tray_output DP-3
 set $bar_separator_symbol ║
 set $bar_font "pango:Deja Vu Sans Mono, FontAwesome 7"
-
 
 bar {
     status_command $bar_status_command
