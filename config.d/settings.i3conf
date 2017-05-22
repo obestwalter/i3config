@@ -19,7 +19,7 @@ set $ws7 "7:  "
 set $ws8 "8:  "
 set $ws9 "9: 𓁉 "
 set $ws10 "10:  "
-set $ws13 "12:  "
+set $ws13 "13:  "
 
 set $pyCharmMainWindows ^Commit Changes
 set $pcWin Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
