@@ -1,3 +1,12 @@
+workspace_auto_back_and_forth yes
+focus_on_window_activation focus
+workspace_layout tabbed
+floating_modifier $win
+focus_follows_mouse no
+popup_during_fullscreen leave_fullscreen
+new_window normal
+new_float normal
+
 set $alt Mod1
 set $win Mod4
 set $bin ~/.i3/bin
@@ -20,7 +29,3 @@ set $ws8 "8:  "
 set $ws9 "9: 𓁉 "
 set $ws10 "10:  "
 set $ws13 "12:  "
-
-set $pyCharmMainWindows ^Commit Changes
-set $pcWin Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
-set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files|^Push Commits

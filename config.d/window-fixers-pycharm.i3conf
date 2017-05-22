@@ -1,4 +1,6 @@
-# PYCHARM
+set $pyCharmMainWindows ^Commit Changes
+set $pcWin Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
+set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files|^Push Commits
 
 assign [class="jetbrains-pycharm" title="$pyCharmMainWindows"] $ws2
 assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] $ws2
@@ -8,10 +10,3 @@ for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title="
 
 for_window [class="jetbrains-pycharm" title="$pyCharmMainWindows"] floating disable
 for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
-
-# OTHERS
-
-# for_window [title="FreeRDP:.*"]
-for_window [class="xfreerdp"] floating disable
-
-for_window [class="xfdesktop"] floating enable

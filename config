@@ -1,5 +1,5 @@
 ####################################################
-# i3config (i3configger: Mon May 22 01:37:56 2017) #
+# i3config (i3configger: Mon May 22 15:23:36 2017) #
 ####################################################
 set $base03  #002b36
 set $base02  #073642
@@ -83,6 +83,9 @@ set $uwtxt #fdf6e3
 set $lockColor cb4b16
 
 ### /home/oliver/.i3/config.d/appearance.i3conf ###
+font "pango:Deja Vu Sans Mono Bold 7"
+hide_edge_borders both
+
 client.background       #000000
 client.focused          $cfbr  $cfbg  $cftxt $cfind $cfchildb
 client.unfocused        $cubr  $cubg  $cutxt $cuind $cuchildb
@@ -115,10 +118,7 @@ bar {
     }
 }
 
-### /home/oliver/.i3/config.d/basics.i3conf ###
-font "pango:Deja Vu Sans Mono Bold 7"
-hide_edge_borders both
-
+### /home/oliver/.i3/config.d/basic-settings.i3conf ###
 workspace_auto_back_and_forth yes
 focus_on_window_activation focus
 workspace_layout tabbed
@@ -128,7 +128,30 @@ popup_during_fullscreen leave_fullscreen
 new_window normal
 new_float normal
 
-### /home/oliver/.i3/config.d/containers.i3conf ###
+set $alt Mod1
+set $win Mod4
+set $bin ~/.i3/bin
+
+set $bar_status_command "py3status -c ~/.i3/status-bar.conf -i ~/.i3/py3status -l ~/.i3/py3status.log -b -t 1"
+set $bar_mode dock
+set $bar_position bottom
+set $bar_tray_output DP-3
+set $bar_separator_symbol ║
+set $bar_font "pango:Deja Vu Sans Mono, FontAwesome 7"
+
+set $ws1 "1:  "
+set $ws2 "2:  "
+set $ws3 "3:  "
+set $ws4 "4:  "
+set $ws5 "5:  "
+set $ws6 "6:  "
+set $ws7 "7:  "
+set $ws8 "8:  "
+set $ws9 "9: 𓁉 "
+set $ws10 "10:  "
+set $ws13 "12:  "
+
+### /home/oliver/.i3/config.d/control-containers.i3conf ###
 bindsym $win+asciicircum focus mode_toggle
 bindsym $win+u layout tabbed
 bindsym $win+i layout stacking
@@ -160,6 +183,50 @@ bindsym XF86AudioPrev exec quodlibet --previous
 # Print key | Druck/S-Abfr
 bindcode 107 exec "xfce4-screenshooter --fullscreen"
 bindcode Shift+107 exec "xfce4-screenshooter --region"
+
+### /home/oliver/.i3/config.d/control-layout.i3conf ###
+bindsym $win+e workspace $ws7
+
+bindsym $win+x move workspace to output right
+
+bindsym $win+Shift+Left move left
+bindsym $win+Shift+Down move down
+bindsym $win+Shift+Up move up
+bindsym $win+Shift+Right move right
+bindsym $win+1 workspace $ws1
+bindsym $win+2 workspace $ws2
+bindsym $win+3 workspace $ws3
+bindsym $win+4 workspace $ws4
+bindsym $win+5 workspace $ws5
+bindsym $win+6 workspace $ws6
+bindsym $win+7 workspace $ws7
+bindsym $win+8 workspace $ws8
+bindsym $win+9 workspace $ws9
+bindsym $win+0 workspace $ws10
+
+### /home/oliver/.i3/config.d/control-navigation.i3conf ###
+bindsym $alt+Tab workspace back_and_forth
+bindsym $win+Tab exec "rofi -show window"
+bindsym $win+Shift+Tab exec "rofi -modi 'Workspace:$bin/i3wslist.sh,Move to Workspace:$bin/i3wsmove.sh' -show Workspace"
+
+bindsym $win+Left focus left
+bindsym $win+Down focus down
+bindsym $win+Up focus up
+bindsym $win+Right focus right
+
+bindsym $win+$alt+Left workspace prev
+bindsym $win+$alt+Right workspace next
+
+bindsym $win+Shift+1 move container to workspace number $ws1
+bindsym $win+Shift+2 move container to workspace number $ws2
+bindsym $win+Shift+3 move container to workspace number $ws3
+bindsym $win+Shift+4 move container to workspace number $ws4
+bindsym $win+Shift+5 move container to workspace number $ws5
+bindsym $win+Shift+6 move container to workspace number $ws6
+bindsym $win+Shift+7 move container to workspace number $ws7
+bindsym $win+Shift+8 move container to workspace number $ws8
+bindsym $win+Shift+9 move container to workspace number $ws9
+bindsym $win+Shift+0 move container to workspace number $ws10
 
 ### /home/oliver/.i3/config.d/control-others.i3conf ###
 # i3wm
@@ -200,26 +267,6 @@ bindsym Shift+F12 move scratchpad
 bindsym F12 scratchpad show
 bindsym Control+F12 sticky toggle
 
-### /home/oliver/.i3/config.d/layout.i3conf ###
-bindsym $win+e workspace $ws7
-
-bindsym $win+x move workspace to output right
-
-bindsym $win+Shift+Left move left
-bindsym $win+Shift+Down move down
-bindsym $win+Shift+Up move up
-bindsym $win+Shift+Right move right
-bindsym $win+1 workspace $ws1
-bindsym $win+2 workspace $ws2
-bindsym $win+3 workspace $ws3
-bindsym $win+4 workspace $ws4
-bindsym $win+5 workspace $ws5
-bindsym $win+6 workspace $ws6
-bindsym $win+7 workspace $ws7
-bindsym $win+8 workspace $ws8
-bindsym $win+9 workspace $ws9
-bindsym $win+0 workspace $ws10
-
 ### /home/oliver/.i3/config.d/mode-resize.i3conf ###
 bindsym $win+r mode "resize"
 mode "resize" {
@@ -242,60 +289,10 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
-### /home/oliver/.i3/config.d/navigation.i3conf ###
-bindsym $alt+Tab workspace back_and_forth
-bindsym $win+Tab exec "rofi -show window"
-bindsym $win+Shift+Tab exec "rofi -modi 'Workspace:$bin/i3wslist.sh,Move to Workspace:$bin/i3wsmove.sh' -show Workspace"
-
-bindsym $win+Left focus left
-bindsym $win+Down focus down
-bindsym $win+Up focus up
-bindsym $win+Right focus right
-
-bindsym $win+$alt+Left workspace prev
-bindsym $win+$alt+Right workspace next
-
-bindsym $win+Shift+1 move container to workspace number $ws1
-bindsym $win+Shift+2 move container to workspace number $ws2
-bindsym $win+Shift+3 move container to workspace number $ws3
-bindsym $win+Shift+4 move container to workspace number $ws4
-bindsym $win+Shift+5 move container to workspace number $ws5
-bindsym $win+Shift+6 move container to workspace number $ws6
-bindsym $win+Shift+7 move container to workspace number $ws7
-bindsym $win+Shift+8 move container to workspace number $ws8
-bindsym $win+Shift+9 move container to workspace number $ws9
-bindsym $win+Shift+0 move container to workspace number $ws10
-
-### /home/oliver/.i3/config.d/settings.i3conf ###
-set $alt Mod1
-set $win Mod4
-set $bin ~/.i3/bin
-
-set $bar_status_command "py3status -c ~/.i3/status-bar.conf -i ~/.i3/py3status -l ~/.i3/py3status.log -b -t 1"
-set $bar_mode dock
-set $bar_position bottom
-set $bar_tray_output DP-3
-set $bar_separator_symbol ║
-set $bar_font "pango:Deja Vu Sans Mono, FontAwesome 7"
-
-set $ws1 "1:  "
-set $ws2 "2:  "
-set $ws3 "3:  "
-set $ws4 "4:  "
-set $ws5 "5:  "
-set $ws6 "6:  "
-set $ws7 "7:  "
-set $ws8 "8:  "
-set $ws9 "9: 𓁉 "
-set $ws10 "10:  "
-set $ws13 "12:  "
-
+### /home/oliver/.i3/config.d/window-fixers-pycharm.i3conf ###
 set $pyCharmMainWindows ^Commit Changes
 set $pcWin Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
 set $pcWin2 ^Database Console|^Grep Console|^Unversioned Files|^Push Commits
-
-### /home/oliver/.i3/config.d/window-fixers.i3conf ###
-# PYCHARM
 
 assign [class="jetbrains-pycharm" title="$pyCharmMainWindows"] $ws2
 assign [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] $ws2
@@ -306,9 +303,7 @@ for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title="
 for_window [class="jetbrains-pycharm" title="$pyCharmMainWindows"] floating disable
 for_window [class="jetbrains-pycharm" title="($pcWin|$pcWin2)"] floating disable
 
-# OTHERS
-
-# for_window [title="FreeRDP:.*"]
+### /home/oliver/.i3/config.d/window-fixers-remote-desktops.i3conf ###
+for_window [title="FreeRDP:.*"] floating disable
 for_window [class="xfreerdp"] floating disable
-
 for_window [class="xfdesktop"] floating enable

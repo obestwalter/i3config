@@ -1,0 +1,3 @@
+for_window [title="FreeRDP:.*"] floating disable
+for_window [class="xfreerdp"] floating disable
+for_window [class="xfdesktop"] floating enable
