@@ -2,3 +2,5 @@
 site
 *.pyc
 _resources
+config.d/rendered/*
+config.d/cruft/*
