@@ -14,24 +14,26 @@
   },
   "bars": {
     "laptop": {
-      "output": "DP-3",
-      "position": "top"
+      "position": "top",
+      "mode": "hide",
+      "output": "DP-3"
     },
     "left-external": {
-      "output": "DP-4",
       "source": "full",
-      "position": "bottom"
+      "mode": "hide",
+      "position": "bottom",
+      "output": "DP-4"
     },
     "right-external": {
-      "output": "DP-6",
       "mode": "hide",
-      "position": "top"
+      "position": "top",
+      "output": "DP-6"
     },
     "vga": {
       "font": "pango:Deja Vu Sans Mono, FontAwesome 10",
-      "output": "VGA-0",
       "mode": "dock",
-      "position": "bottom"
+      "position": "bottom",
+      "output": "VGA-0"
     }
   }
 }

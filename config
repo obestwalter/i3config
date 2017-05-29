@@ -1,24 +1,6 @@
 ######################################################################################
-# Generated from /home/oliver/.i3/config.d by i3configger (Mon May 29 20:58:03 2017) #
+# Generated from /home/oliver/.i3/config.d by i3configger (Mon May 29 21:22:56 2017) #
 ######################################################################################
-
-### colors.conf ###
-set #002b36  #002b36
-set #073642  #073642
-set #586e75  #586e75
-set #657b83  #657b83
-set #839496   #839496
-set #93a1a1   #93a1a1
-set #eee8d5   #eee8d5
-set #fdf6e3   #fdf6e3
-set #b58900  #b58900
-set #cb4b16  #cb4b16
-set #dc322f     #dc322f
-set #d33682 #d33682
-set #6c71c4  #6c71c4
-set #268bd2    #268bd2
-set #2aa198    #2aa198
-set #859900   #859900
 
 ### control-containers.conf ###
 bindsym Mod4+asciicircum focus mode_toggle
@@ -128,50 +110,6 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
-### scheme.solarized-dark.conf ###
-set #002b36 #fdf6e3
-set #859900 #859900
-set #002b36 #fdf6e3
-set #268bd2 #268bd2
-set #859900 #859900
-set #839496 #839496
-set #073642 #073642
-set #93a1a1 #93a1a1
-set #268bd2 #268bd2
-set #073642 #073642
-set #859900 #859900
-set #fdf6e3 #002b36
-set #859900 #859900
-set #268bd2 #268bd2
-set #fdf6e3 #002b36
-set #002b36 #fdf6e3
-set #2aa198 #2aa198
-set #657b83 #657b83
-set #268bd2 #268bd2
-set #2aa198 #2aa198
-set #073642 #073642
-set #002b36 #fdf6e3
-set #657b83  #657b83
-set #fdf6e3 #002b36
-set #002b36 #fdf6e3
-set #b58900  #b58900
-set #073642 #073642
-set #859900 #859900
-set #002b36 #fdf6e3
-set #073642 #073642
-set #073642 #073642
-set #93a1a1 #93a1a1
-set #073642 #073642
-set #fdf6e3 #002b36
-set #859900 #859900
-set #002b36 #fdf6e3
-set #2aa198 #2aa198
-set #002b36 #fdf6e3
-set #002b36 #fdf6e3
-set #cb4b16 #cb4b16
-set #002b36 #fdf6e3
-set cb4b16 cb4b16
-
 ### window-decorations.conf ###
 hide_edge_borders smart
 client.background       #000000
@@ -181,9 +119,6 @@ client.focused_inactive #859900 #fdf6e3 #859900 #268bd2 #fdf6e3
 client.urgent           #002b36 #2aa198 #657b83 #268bd2 #2aa198
 
 ### window-fixers-pycharm.conf ###
-set ^Commit Changes ^Commit Changes
-set Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
-set ^Database Console|^Grep Console|^Unversioned Files|^Push Commits ^Database Console|^Grep Console|^Unversioned Files|^Push Commits
 assign [class="jetbrains-pycharm" title="^Commit Changes"] "2:  "
 assign [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] "2:  "
 for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace "2:  "; workspace "2:  "
@@ -207,7 +142,7 @@ bar {
     tray_padding 0
     tray_output primary
     font pango:Deja Vu Sans Mono, FontAwesome 7
-    mode dock
+    mode hide
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
@@ -226,7 +161,6 @@ bar {
         binding_mode       #002b36 #2aa198 #002b36
     }
 }
-
 bar {
     id left-external
     output DP-4
@@ -239,7 +173,7 @@ bar {
     tray_padding 0
     tray_output primary
     font pango:Deja Vu Sans Mono, FontAwesome 7
-    mode dock
+    mode hide
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
@@ -258,7 +192,6 @@ bar {
         binding_mode       #002b36 #2aa198 #002b36
     }
 }
-
 bar {
     id right-external
     output DP-6
@@ -290,7 +223,6 @@ bar {
         binding_mode       #002b36 #2aa198 #002b36
     }
 }
-
 bar {
     id vga
     output VGA-0
@@ -322,4 +254,3 @@ bar {
         binding_mode       #002b36 #2aa198 #002b36
     }
 }
-
