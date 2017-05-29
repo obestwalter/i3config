@@ -1,10 +1,10 @@
 {
   "settings": {
     "marker": "i3status",
-    "template": "tpl",
-    "target": "~/.i3"
+    "template": "tpl"
   },
   "defaults": {
+    "target": "~/.i3",
     "font": "pango:Deja Vu Sans Mono, FontAwesome 7",
     "source": "clock",
     "position": "bottom",
@@ -20,12 +20,12 @@
     "left-external": {
       "output": "DP-4",
       "source": "full",
-      "mode": "hidden",
+      "mode": "hide",
       "position": "top"
     },
     "right-external": {
       "output": "DP-6",
-      "mode": "hidden",
+      "mode": "hide",
       "position": "top"
     },
     "vga": {
