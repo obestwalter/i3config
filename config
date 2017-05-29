@@ -1,5 +1,5 @@
 ######################################################################################
-# Generated from /home/oliver/.i3/config.d by i3configger (Mon May 29 20:35:56 2017) #
+# Generated from /home/oliver/.i3/config.d by i3configger (Mon May 29 20:58:03 2017) #
 ######################################################################################
 
 ### colors.conf ###
@@ -195,7 +195,6 @@ for_window [title="FreeRDP:.*"] floating disable
 for_window [class="xfreerdp"] floating disable
 for_window [class="xfdesktop"] floating enable
 
-### laptop ###
 bar {
     id laptop
     output DP-3
@@ -214,12 +213,12 @@ bar {
     bindsym button5 nop
     separator_symbol  ║ 
     colors {
-        background $background
-        statusline $statusline
-        separator  $separator
-        focused_background $focused_background
-        focused_statusline $focused_statusline
-        focused_separator  $focused_separator
+        background #073642
+        statusline #002b36
+        separator  #657b83
+        focused_background #fdf6e3
+        focused_statusline #002b36
+        focused_separator  #b58900
         focused_workspace  #073642 #859900 #002b36
         active_workspace   #073642 #fdf6e3 #859900
         inactive_workspace #073642 #073642 #93a1a1
@@ -227,7 +226,7 @@ bar {
         binding_mode       #002b36 #2aa198 #002b36
     }
 }
-### left-external ###
+
 bar {
     id left-external
     output DP-4
@@ -236,22 +235,22 @@ bar {
         -i ~/.i3/py3status \
         -l ~/.i3/py3status.DP-4-left-external.log \
         -b -t 1"
-    position top
+    position bottom
     tray_padding 0
     tray_output primary
     font pango:Deja Vu Sans Mono, FontAwesome 7
-    mode hide
+    mode dock
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
     separator_symbol  ║ 
     colors {
-        background $background
-        statusline $statusline
-        separator  $separator
-        focused_background $focused_background
-        focused_statusline $focused_statusline
-        focused_separator  $focused_separator
+        background #073642
+        statusline #002b36
+        separator  #657b83
+        focused_background #fdf6e3
+        focused_statusline #002b36
+        focused_separator  #b58900
         focused_workspace  #073642 #859900 #002b36
         active_workspace   #073642 #fdf6e3 #859900
         inactive_workspace #073642 #073642 #93a1a1
@@ -259,7 +258,7 @@ bar {
         binding_mode       #002b36 #2aa198 #002b36
     }
 }
-### right-external ###
+
 bar {
     id right-external
     output DP-6
@@ -278,12 +277,12 @@ bar {
     bindsym button5 nop
     separator_symbol  ║ 
     colors {
-        background $background
-        statusline $statusline
-        separator  $separator
-        focused_background $focused_background
-        focused_statusline $focused_statusline
-        focused_separator  $focused_separator
+        background #073642
+        statusline #002b36
+        separator  #657b83
+        focused_background #fdf6e3
+        focused_statusline #002b36
+        focused_separator  #b58900
         focused_workspace  #073642 #859900 #002b36
         active_workspace   #073642 #fdf6e3 #859900
         inactive_workspace #073642 #073642 #93a1a1
@@ -291,7 +290,7 @@ bar {
         binding_mode       #002b36 #2aa198 #002b36
     }
 }
-### vga ###
+
 bar {
     id vga
     output VGA-0
@@ -310,12 +309,12 @@ bar {
     bindsym button5 nop
     separator_symbol  ║ 
     colors {
-        background $background
-        statusline $statusline
-        separator  $separator
-        focused_background $focused_background
-        focused_statusline $focused_statusline
-        focused_separator  $focused_separator
+        background #073642
+        statusline #002b36
+        separator  #657b83
+        focused_background #fdf6e3
+        focused_statusline #002b36
+        focused_separator  #b58900
         focused_workspace  #073642 #859900 #002b36
         active_workspace   #073642 #fdf6e3 #859900
         inactive_workspace #073642 #073642 #93a1a1
@@ -323,3 +322,4 @@ bar {
         binding_mode       #002b36 #2aa198 #002b36
     }
 }
+

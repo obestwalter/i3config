@@ -20,8 +20,7 @@
     "left-external": {
       "output": "DP-4",
       "source": "full",
-      "mode": "hide",
-      "position": "top"
+      "position": "bottom"
     },
     "right-external": {
       "output": "DP-6",
