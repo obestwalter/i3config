@@ -1,0 +1,38 @@
+{
+  "settings": {
+    "marker": "i3status",
+    "template": "tpl",
+    "target": "~/.i3"
+  },
+  "defaults": {
+    "font": "pango:Deja Vu Sans Mono, FontAwesome 7",
+    "source": "clock",
+    "position": "bottom",
+    "mode": "dock",
+    "tray_padding": "0",
+    "separator_symbol": " ║ "
+  },
+  "bars": {
+    "laptop": {
+      "output": "DP-3",
+      "position": "top"
+    },
+    "left-external": {
+      "output": "DP-4",
+      "source": "full",
+      "mode": "hidden",
+      "position": "top"
+    },
+    "right-external": {
+      "output": "DP-6",
+      "mode": "hidden",
+      "position": "top"
+    },
+    "vga": {
+      "font": "pango:Deja Vu Sans Mono, FontAwesome 10",
+      "output": "VGA-0",
+      "mode": "dock",
+      "position": "bottom"
+    }
+  }
+}
