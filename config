@@ -2,6 +2,7 @@
 # Generated from /home/oliver/.i3/config.d by i3configger (Tue May 30 09:58:00 2017) #
 ######################################################################################
 
+sdsdf
 
 ### control-containers.conf ###
 bindsym Mod4+asciicircum focus mode_toggle
@@ -172,7 +173,7 @@ bar {
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
-    separator_symbol  ║ 
+    separator_symbol  ║
     colors {
         background #073642
         statusline #fdf6e3
@@ -203,7 +204,7 @@ bar {
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
-    separator_symbol  ║ 
+    separator_symbol  ║
     colors {
         background #073642
         statusline #fdf6e3
@@ -234,7 +235,7 @@ bar {
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
-    separator_symbol  ║ 
+    separator_symbol  ║
     colors {
         background #073642
         statusline #fdf6e3
@@ -265,7 +266,7 @@ bar {
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
-    separator_symbol  ║ 
+    separator_symbol  ║
     colors {
         background #073642
         statusline #fdf6e3
