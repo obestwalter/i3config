@@ -1,4 +1,7 @@
 {
+  "main": {
+    "target": "../config"
+  },
   "bars": {
     "laptop": {
       "selector": "full",
@@ -33,16 +36,10 @@
       "position": "bottom",
       "tray_padding": "0",
       "separator_symbol": " ║ "
-    },
+    }
+  },
     "message": {
       "select": {},
       "set": {}
-    },
-    "settings": {
-      "name": "config",
-      "partials": "~/.i3/config.d",
-      "suffix": ".conf",
-      "target": "~/.i3"
     }
-  }
 }
