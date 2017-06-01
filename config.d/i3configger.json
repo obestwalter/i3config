@@ -4,20 +4,20 @@
   },
   "bars": {
     "laptop": {
-      "selector": "full",
+      "select-value": "full",
       "position": "bottom",
       "mode": "hide",
       "output": "DP-3"
     },
     "left-external": {
-      "selector": "full",
-      "mode": "hide",
+      "select-value": "full",
+      "mode": "dock",
       "position": "bottom",
       "output": "DP-4"
     },
     "right-external": {
       "mode": "hide",
-      "position": "top",
+      "position": "bottom",
       "output": "DP-6"
     },
     "vga": {
@@ -38,7 +38,7 @@
       "separator_symbol": " ║ "
     }
   },
-    "message": {
+    "state": {
       "select": {},
       "set": {}
     }
