@@ -27,9 +27,9 @@
       "output": "VGA-0"
     },
     "defaults": {
-      "marker": "i3status",
-      "target": "~/.i3",
-      "selector": "clock",
+      "select-key": "i3status",
+      "select-value": "clock",
+      "target": "..",
       "template": "tpl",
       "font": "pango:Deja Vu Sans Mono, FontAwesome 7",
       "mode": "dock",
