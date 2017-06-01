@@ -2,8 +2,6 @@
 # Generated from /home/oliver/.i3/config.d by i3configger (Tue May 30 09:58:00 2017) #
 ######################################################################################
 
-sdsdf
-
 ### control-containers.conf ###
 bindsym Mod4+asciicircum focus mode_toggle
 bindsym Mod4+u layout tabbed
