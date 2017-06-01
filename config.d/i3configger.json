@@ -1,45 +1,45 @@
 {
-  "main": {
-    "target": "../config"
-  },
-  "bars": {
-    "laptop": {
-      "select-value": "full",
-      "position": "bottom",
-      "mode": "hide",
-      "output": "DP-3"
+    "bars": {
+        "defaults": {
+            "font": "pango:Deja Vu Sans Mono, FontAwesome 7",
+            "mode": "dock",
+            "position": "bottom",
+            "select-key": "i3status",
+            "select-value": "clock",
+            "separator_symbol": " \u2551 ",
+            "target": "..",
+            "template": "tpl",
+            "tray_padding": "0"
+        },
+        "laptop": {
+            "mode": "hide",
+            "output": "DP-3",
+            "position": "bottom",
+            "select-value": "full"
+        },
+        "left-external": {
+            "mode": "dock",
+            "output": "DP-4",
+            "position": "bottom",
+            "select-value": "full"
+        },
+        "right-external": {
+            "mode": "hide",
+            "output": "DP-6",
+            "position": "bottom"
+        },
+        "vga": {
+            "font": "pango:Deja Vu Sans Mono, FontAwesome 10",
+            "mode": "dock",
+            "output": "VGA-0",
+            "position": "bottom"
+        }
     },
-    "left-external": {
-      "select-value": "full",
-      "mode": "dock",
-      "position": "bottom",
-      "output": "DP-4"
+    "main": {
+        "target": "../config"
     },
-    "right-external": {
-      "mode": "hide",
-      "position": "bottom",
-      "output": "DP-6"
-    },
-    "vga": {
-      "font": "pango:Deja Vu Sans Mono, FontAwesome 10",
-      "mode": "dock",
-      "position": "bottom",
-      "output": "VGA-0"
-    },
-    "defaults": {
-      "select-key": "i3status",
-      "select-value": "clock",
-      "target": "..",
-      "template": "tpl",
-      "font": "pango:Deja Vu Sans Mono, FontAwesome 7",
-      "mode": "dock",
-      "position": "bottom",
-      "tray_padding": "0",
-      "separator_symbol": " ║ "
-    }
-  },
     "state": {
-      "select": {},
-      "set": {}
+        "select": {},
+        "set": {}
     }
 }
