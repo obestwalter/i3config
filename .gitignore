@@ -5,3 +5,6 @@ _resources
 config.d/rendered/*
 config.d/cruft/*
 *.log
+
+# i3configger persistent state
+config.d/.state.json
