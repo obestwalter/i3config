@@ -1,5 +1,5 @@
 ########################################################################################
-# Generated from /home/oliver/.i3/config.d/i3configger.json (Fri Jun  2 19:56:01 2017) #
+# Generated from /home/oliver/.i3/config.d/i3configger.json (Fri Jun  2 21:26:56 2017) #
 ########################################################################################
 ### control-containers.conf ###
 bindsym Mod4+asciicircum focus mode_toggle
