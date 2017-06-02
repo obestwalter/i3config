@@ -38,8 +38,4 @@
     "main": {
         "target": "../config"
     },
-    "state": {
-        "select": {},
-        "set": {}
-    }
 }
