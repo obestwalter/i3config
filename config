@@ -1,7 +1,6 @@
-######################################################################################
-# Generated from /home/oliver/.i3/config.d by i3configger (Tue May 30 09:58:00 2017) #
-######################################################################################
-
+########################################################################################
+# Generated from /home/oliver/.i3/config.d/i3configger.json (Fri Jun  2 19:56:01 2017) #
+########################################################################################
 ### control-containers.conf ###
 bindsym Mod4+asciicircum focus mode_toggle
 bindsym Mod4+u layout tabbed
@@ -17,9 +16,9 @@ bindsym Mod4+Shift+asciicircum floating toggle
 
 ### control-fn-keys.conf ###
 bindsym Mod4+F4 exec --no-startup-id firefox
-bindsym Mod4+F6 exec --no-startup-id pactl set-sink-volume 0 -1%
-bindsym Mod4+F7 exec --no-startup-id pactl set-sink-volume 0 +1%
-bindsym Mod4+F5 exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym Mod4+F6 exec --no-startup-id pactl set-sink-volume 0 -1% && killall -SIGUSR1 i3status
+bindsym Mod4+F7 exec --no-startup-id pactl set-sink-volume 0 +1% && killall -SIGUSR1 i3status
+bindsym Mod4+F5 exec --no-startup-id pactl set-sink-mute 0 toggle && killall -SIGUSR1 i3status
 bindsym Mod4+F9 exec xbacklight -dec 5
 bindsym Mod4+F10 exec xbacklight -inc 5
 bindsym XF86AudioPlay exec quodlibet --play
@@ -155,23 +154,26 @@ for_window [title="FreeRDP:.*"] floating disable
 for_window [class="xfreerdp"] floating disable
 for_window [class="xfdesktop"] floating enable
 
+
+### i3status.tpl.conf ###
 bar {
     id laptop
     output DP-3
     status_command "py3status \
-        -c ~/.i3/i3status.full.conf \
-        -i ~/.i3/py3status \
-        -l ~/.i3/py3status.DP-3-laptop.log \
-        -b -t 1"
+        --dbus-notify \
+        --timeout 1 \
+        -c /home/oliver/.i3/i3status.full.conf \
+        -i /home/oliver/.i3/py3status \
+        -l /home/oliver/.i3/py3status.DP-3-laptop.log"
     position bottom
     tray_padding 0
     tray_output primary
     font pango:Deja Vu Sans Mono, FontAwesome 7
-    mode hide
+    mode dock
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
-    separator_symbol  ║
+    separator_symbol  ║ 
     colors {
         background #073642
         statusline #fdf6e3
@@ -186,23 +188,27 @@ bar {
         binding_mode       #fdf6e3 #2aa198 #fdf6e3
     }
 }
+
+
+### i3status.tpl.conf ###
 bar {
     id left-external
     output DP-4
     status_command "py3status \
-        -c ~/.i3/i3status.full.conf \
-        -i ~/.i3/py3status \
-        -l ~/.i3/py3status.DP-4-left-external.log \
-        -b -t 1"
+        --dbus-notify \
+        --timeout 1 \
+        -c /home/oliver/.i3/i3status.full.conf \
+        -i /home/oliver/.i3/py3status \
+        -l /home/oliver/.i3/py3status.DP-4-left-external.log"
     position bottom
     tray_padding 0
     tray_output primary
     font pango:Deja Vu Sans Mono, FontAwesome 7
-    mode hide
+    mode dock
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
-    separator_symbol  ║
+    separator_symbol  ║ 
     colors {
         background #073642
         statusline #fdf6e3
@@ -217,23 +223,27 @@ bar {
         binding_mode       #fdf6e3 #2aa198 #fdf6e3
     }
 }
+
+
+### i3status.tpl.conf ###
 bar {
     id right-external
     output DP-6
     status_command "py3status \
-        -c ~/.i3/i3status.clock.conf \
-        -i ~/.i3/py3status \
-        -l ~/.i3/py3status.DP-6-right-external.log \
-        -b -t 1"
-    position top
+        --dbus-notify \
+        --timeout 1 \
+        -c /home/oliver/.i3/i3status.clock.conf \
+        -i /home/oliver/.i3/py3status \
+        -l /home/oliver/.i3/py3status.DP-6-right-external.log"
+    position bottom
     tray_padding 0
     tray_output primary
     font pango:Deja Vu Sans Mono, FontAwesome 7
-    mode hide
+    mode dock
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
-    separator_symbol  ║
+    separator_symbol  ║ 
     colors {
         background #073642
         statusline #fdf6e3
@@ -248,14 +258,18 @@ bar {
         binding_mode       #fdf6e3 #2aa198 #fdf6e3
     }
 }
+
+
+### i3status.tpl.conf ###
 bar {
     id vga
     output VGA-0
     status_command "py3status \
-        -c ~/.i3/i3status.clock.conf \
-        -i ~/.i3/py3status \
-        -l ~/.i3/py3status.VGA-0-vga.log \
-        -b -t 1"
+        --dbus-notify \
+        --timeout 1 \
+        -c /home/oliver/.i3/i3status.clock.conf \
+        -i /home/oliver/.i3/py3status \
+        -l /home/oliver/.i3/py3status.VGA-0-vga.log"
     position bottom
     tray_padding 0
     tray_output primary
@@ -264,7 +278,7 @@ bar {
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
-    separator_symbol  ║
+    separator_symbol  ║ 
     colors {
         background #073642
         statusline #fdf6e3
@@ -279,3 +293,4 @@ bar {
         binding_mode       #fdf6e3 #2aa198 #fdf6e3
     }
 }
+

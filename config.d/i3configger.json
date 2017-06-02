@@ -4,8 +4,8 @@
             "font": "pango:Deja Vu Sans Mono, FontAwesome 7",
             "mode": "dock",
             "position": "bottom",
-            "select-key": "i3status",
-            "select-value": "clock",
+            "key": "i3status",
+            "value": "clock",
             "separator_symbol": " \u2551 ",
             "target": "..",
             "template": "tpl",
@@ -15,13 +15,13 @@
             "mode": "hide",
             "output": "DP-3",
             "position": "bottom",
-            "select-value": "full"
+            "value": "full"
         },
         "left-external": {
             "mode": "dock",
             "output": "DP-4",
             "position": "bottom",
-            "select-value": "full"
+            "value": "full"
         },
         "right-external": {
             "mode": "hide",
