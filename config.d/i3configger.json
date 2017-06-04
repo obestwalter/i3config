@@ -1,41 +1,43 @@
 {
-    "bars": {
-        "defaults": {
-            "font": "pango:Deja Vu Sans Mono, FontAwesome 7",
-            "mode": "dock",
-            "position": "bottom",
-            "key": "i3status",
-            "value": "clock",
-            "separator_symbol": " \u2551 ",
-            "target": "..",
-            "template": "tpl",
-            "tray_padding": "0"
-        },
-        "laptop": {
-            "mode": "hide",
-            "output": "DP-3",
-            "position": "bottom",
-            "value": "full"
-        },
-        "left-external": {
-            "mode": "dock",
-            "output": "DP-4",
-            "position": "bottom",
-            "value": "full"
-        },
-        "right-external": {
-            "mode": "hide",
-            "output": "DP-6",
-            "position": "bottom"
-        },
-        "vga": {
-            "font": "pango:Deja Vu Sans Mono, FontAwesome 10",
-            "mode": "dock",
-            "output": "VGA-0",
-            "position": "bottom"
-        }
+  "bars": {
+    "defaults": {
+      "font": "pango:Deja Vu Sans Mono, FontAwesome 7",
+      "mode": "dock",
+      "position": "bottom",
+      "key": "i3status",
+      "value": "clock",
+      "separator_symbol": " \u2551 ",
+      "target": "..",
+      "template": "tpl",
+      "tray_padding": "0"
     },
-    "main": {
-        "target": "../config"
+    "targets": {
+      "laptop": {
+        "mode": "hide",
+        "output": "DP-3",
+        "position": "bottom",
+        "value": "full"
+      },
+      "left-external": {
+        "mode": "dock",
+        "output": "DP-4",
+        "position": "bottom",
+        "value": "full"
+      },
+      "right-external": {
+        "mode": "hide",
+        "output": "DP-6",
+        "position": "bottom"
+      },
+      "vga": {
+        "font": "pango:Deja Vu Sans Mono, FontAwesome 10",
+        "mode": "dock",
+        "output": "VGA-0",
+        "position": "bottom"
+      }
     }
+  },
+  "main": {
+    "target": "../config"
+  }
 }
