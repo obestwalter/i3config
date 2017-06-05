@@ -1,6 +1,6 @@
-######################################################################################################
-# Built from ~/.i3/config.d by i3configger 0.4.3.dev20+g8219c26.d20170604 (Sun Jun  4 03:05:17 2017) #
-######################################################################################################
+###########################################################################################
+# Built from ~/.i3/config.d by i3configger 0.4.4.dev5+g7d2528f (Sun Jun  4 14:10:30 2017) #
+###########################################################################################
 
 ### control-containers.conf ###
 bindsym Mod4+asciicircum focus mode_toggle
@@ -205,7 +205,7 @@ bar {
     tray_padding 0
     tray_output primary
     font pango:Deja Vu Sans Mono, FontAwesome 7
-    mode dock
+    mode hide
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
@@ -275,7 +275,7 @@ bar {
     tray_padding 0
     tray_output primary
     font pango:Deja Vu Sans Mono, FontAwesome 10
-    mode dock
+    mode hide
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
