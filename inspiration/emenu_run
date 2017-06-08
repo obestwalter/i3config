@@ -1,0 +1,33 @@
+#!/bin/bash
+cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
+histsize=50
+if [ -d "$cachedir" ]; then
+# not needed with dmenu_path
+#    cache=$cachedir/emenu
+    hist=$cachedir/emenu_hist
+else
+# not needed with dmenu_path
+#    cache=$HOME/.emenu_cache # if no xdg dir, fall back to dotfile in ~
+    hist=$HOME/.emenu_cache_hist # if no xdg dir, fall back to dotfile in ~
+fi
+
+# not needed with dmenu_path
+#cmd=$(
+#    IFS=:
+#    if stest -dqr -n "$cache" $PATH; then
+#        (cat "$hist" ; stest -flx $PATH | sort -u | tee "$cache" ) | dmenu "$@"
+#    else
+#        (cat "$hist"; cat "$cache") | dmenu "$@"
+#    fi
+#    ) 
+cmd=$( (tac "$hist" ; dmenu_path ) | dmenu "$@" )
+
+if [[ -z $cmd ]]; then
+    exit
+fi
+
+echo "$cmd" | ${SHELL:-"/bin/sh"} &
+
+sed -i -e "/^${cmd}$/d;${histsize}q" "$hist"
+echo "$cmd" >> "$hist"
+
