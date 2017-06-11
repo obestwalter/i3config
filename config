@@ -1,6 +1,31 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Sun Jun 11 18:58:19 2017) #
+# Built from ~/.i3/config.d by i3configger (Sun Jun 11 19:24:00 2017) #
 #######################################################################
+
+### basics.conf ###
+
+floating_modifier Mod4
+focus_on_window_activation focus
+focus_follows_mouse no
+force_display_urgency_hint 1000 ms
+new_float normal
+new_window normal
+popup_during_fullscreen smart
+mouse_warping none
+workspace_auto_back_and_forth yes
+workspace_layout tabbed
+
+
+
+### color-mappings.conf ###
+hide_edge_borders smart
+
+client.background       #000000
+client.focused          #fdf6e3  #859900  #fdf6e3 #268bd2 #859900
+client.unfocused        #839496  #073642  #93a1a1 #268bd2 #073642
+client.focused_inactive #859900 #002b36 #859900 #268bd2 #002b36
+client.urgent           #fdf6e3 #2aa198 #657b83 #268bd2 #2aa198
+
 
 ### control-containers.conf ###
 bindsym Mod4+asciicircum focus mode_toggle
@@ -128,21 +153,7 @@ bindsym Control+F12 sticky toggle
 
 
 ### hostname.ob1.conf ###
-
 font "pango:Deja Vu Sans Mono Bold 7"
-
-floating_modifier Mod4
-focus_on_window_activation focus
-focus_follows_mouse no
-force_display_urgency_hint 1000 ms
-new_float normal
-new_window normal
-popup_during_fullscreen smart
-mouse_warping none
-workspace_auto_back_and_forth yes
-workspace_layout tabbed
-
-# 
 
 
 ### mode-resize.conf ###
@@ -166,16 +177,6 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
-
-### window-decorations.conf ###
-hide_edge_borders smart
-
-client.background       #000000
-client.focused          #fdf6e3  #859900  #fdf6e3 #268bd2 #859900
-client.unfocused        #839496  #073642  #93a1a1 #268bd2 #073642
-client.focused_inactive #859900 #002b36 #859900 #268bd2 #002b36
-client.urgent           #fdf6e3 #2aa198 #657b83 #268bd2 #2aa198
 
 
 ### window-fixers-pycharm.conf ###
