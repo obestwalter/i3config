@@ -1,6 +1,7 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Sun Jun 11 18:00:21 2017) #
+# Built from ~/.i3/config.d by i3configger (Sun Jun 11 18:58:19 2017) #
 #######################################################################
+
 ### control-containers.conf ###
 bindsym Mod4+asciicircum focus mode_toggle
 bindsym Mod4+u layout tabbed
@@ -167,31 +168,6 @@ mode "resize" {
 }
 
 
-### scheme.solarized-dark.conf ###
-# client: border, background, text, indicator, child_background
-# focused
-
-# unfocused
-
-
-
-# bar
-
-
-# workspace: border, background, text
-# focused
-
-# inactive
-
-# active
-
-# binding mode
-
-# urgent
-
-
-
-
 ### window-decorations.conf ###
 hide_edge_borders smart
 
@@ -234,7 +210,7 @@ bar {
     tray_padding 0
     tray_output primary
     font pango:Deja Vu Sans Mono, FontAwesome 7
-    mode hide
+    mode dock
     modifier Mod4
     bindsym button4 nop
     bindsym button5 nop
