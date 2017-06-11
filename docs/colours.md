@@ -1,6 +1,6 @@
 # I am a little bit colour blind
 
-So I often have problems with the standard colour choices of many programs and need to tweak them. This is often mindboggingly frustrating depending on what program you use. Therefore it is an important cirterion for me, if the program I use either just has an palette I can live with or is customizable in all the right places. Ideally it uses the colour choices I make somewhere centrally and I don't have to bother.
+So I often have problems with the standard colour choices of many programs and need to tweak them. This is often mindboggingly frustrating depending on what program you use. Therefore it is an important criterion for me, if the program I use either just has an palette I can live with or is customizable in all the right places. Ideally it uses the colour choices I make somewhere centrally and I don't have to bother.
 
 ## Solarized
 
