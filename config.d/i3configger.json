@@ -13,21 +13,19 @@
     },
     "targets": {
       "laptop": {
-        "mode": "hide",
         "output": "DP-3",
         "position": "bottom",
         "value": "full"
       },
       "left-external": {
-        "mode": "dock",
         "output": "DP-4",
         "position": "bottom",
         "value": "full"
       },
       "right-external": {
-        "mode": "hide",
         "output": "DP-6",
-        "position": "bottom"
+        "position": "bottom",
+        "value": "full"
       },
       "vga": {
         "font": "pango:Deja Vu Sans Mono, FontAwesome 10",
