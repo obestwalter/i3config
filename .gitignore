@@ -2,8 +2,6 @@
 site
 *.pyc
 _resources
-config.d/rendered/*
-config.d/cruft/*
 *.log
 
 # i3configger persistent state
