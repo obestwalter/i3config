@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Tue Jun 20 20:03:20 2017) #
+# Built from ~/.i3/config.d by i3configger (Tue Jun 20 21:32:02 2017) #
 #######################################################################
 
 ### basics.conf ###
@@ -216,14 +216,14 @@ for_window [class="xfreerdp"] floating disable
 for_window [class="xfdesktop"] floating enable
 
 
-### i3status.tpl.conf ###
+### i3bar.tpl.conf ###
 bar {
     id laptop
     output DP-3
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
-        -c /home/oliver/.i3/i3status.full.conf \
+        -c /home/oliver/.i3/i3bar.full.conf \
         -i /home/oliver/.i3/py3status \
         -l /home/oliver/.i3/py3status.DP-3-laptop.log"
     position bottom
@@ -249,14 +249,14 @@ bar {
         binding_mode       #002b36 #dc322f #002b36
     }
 }
-### i3status.tpl.conf ###
+### i3bar.tpl.conf ###
 bar {
     id left-external
     output DP-4
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
-        -c /home/oliver/.i3/i3status.full.conf \
+        -c /home/oliver/.i3/i3bar.full.conf \
         -i /home/oliver/.i3/py3status \
         -l /home/oliver/.i3/py3status.DP-4-left-external.log"
     position bottom
@@ -282,14 +282,14 @@ bar {
         binding_mode       #002b36 #dc322f #002b36
     }
 }
-### i3status.tpl.conf ###
+### i3bar.tpl.conf ###
 bar {
     id right-external
     output DP-6
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
-        -c /home/oliver/.i3/i3status.full.conf \
+        -c /home/oliver/.i3/i3bar.full.conf \
         -i /home/oliver/.i3/py3status \
         -l /home/oliver/.i3/py3status.DP-6-right-external.log"
     position bottom
@@ -315,14 +315,14 @@ bar {
         binding_mode       #002b36 #dc322f #002b36
     }
 }
-### i3status.tpl.conf ###
+### i3bar.tpl.conf ###
 bar {
     id vga
     output VGA-0
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
-        -c /home/oliver/.i3/i3status.clock.conf \
+        -c /home/oliver/.i3/i3bar.clock.conf \
         -i /home/oliver/.i3/py3status \
         -l /home/oliver/.i3/py3status.VGA-0-vga.log"
     position bottom
