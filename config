@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Tue Jun 20 21:32:02 2017) #
+# Built from ~/.i3/config.d by i3configger (Sat Jun 24 21:51:41 2017) #
 #######################################################################
 
 ### basics.conf ###
@@ -20,10 +20,11 @@ mouse_warping none
 
 
 client.background       #000000
-client.focused          #fdf6e3  #268bd2  #fdf6e3 #fdf6e3 #fdf6e3
-client.unfocused        #fdf6e3  #586e75  #93a1a1 #268bd2 #dc322f
+client.focused          #fdf6e3  #268bd2  #fdf6e3  #fdf6e3  #fdf6e3
+client.unfocused        #eee8d5  #073642  #93a1a1  #268bd2  #dc322f
 client.focused_inactive #859900 #002b36 #859900 #268bd2 #002b36
 client.urgent           #fdf6e3 #2aa198 #657b83 #268bd2 #2aa198
+client.placeholder      #fdf6e3  #2aa198  #657b83  #268bd2  #2aa198
 
 
 ### control-containers.conf ###
@@ -44,9 +45,9 @@ bindsym Mod4+Shift+asciicircum floating toggle
 
 # bindsym Mod4+F4 exec ~/.i3/bin/toggle-touchpad.sh
 bindsym Mod4+F4 exec --no-startup-id firefox
-bindsym Mod4+F6 exec --no-startup-id pactl set-sink-volume 0 -1% && killall -SIGUSR1 i3status
-bindsym Mod4+F7 exec --no-startup-id pactl set-sink-volume 0 +1% && killall -SIGUSR1 i3status
-bindsym Mod4+F5 exec --no-startup-id pactl set-sink-mute 0 toggle && killall -SIGUSR1 i3status
+bindsym Mod4+F6 exec --no-startup-id pactl set-sink-volume 0 -1% && killall -SIGUSR1 py3status
+bindsym Mod4+F7 exec --no-startup-id pactl set-sink-volume 0 +1% && killall -SIGUSR1 py3status
+bindsym Mod4+F5 exec --no-startup-id pactl set-sink-mute 0 toggle && killall -SIGUSR1 py3status
 
 bindsym Mod4+F9 exec xbacklight -dec 5
 bindsym Mod4+F10 exec xbacklight -inc 5
@@ -239,7 +240,7 @@ bar {
         background #002b36
         statusline #dc322f
         separator  #002b36
-        focused_background #586e75
+        focused_background #073642
         focused_statusline #268bd2
         focused_separator  #93a1a1
         focused_workspace  #002b36 #859900 #002b36
@@ -272,7 +273,7 @@ bar {
         background #002b36
         statusline #dc322f
         separator  #002b36
-        focused_background #586e75
+        focused_background #073642
         focused_statusline #268bd2
         focused_separator  #93a1a1
         focused_workspace  #002b36 #859900 #002b36
@@ -305,7 +306,7 @@ bar {
         background #002b36
         statusline #dc322f
         separator  #002b36
-        focused_background #586e75
+        focused_background #073642
         focused_statusline #268bd2
         focused_separator  #93a1a1
         focused_workspace  #002b36 #859900 #002b36
@@ -338,7 +339,7 @@ bar {
         background #002b36
         statusline #dc322f
         separator  #002b36
-        focused_background #586e75
+        focused_background #073642
         focused_statusline #268bd2
         focused_separator  #93a1a1
         focused_workspace  #002b36 #859900 #002b36

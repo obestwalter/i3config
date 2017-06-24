@@ -4,7 +4,6 @@
       "font": "pango:Deja Vu Sans Mono, FontAwesome 7",
       "mode": "dock",
       "position": "bottom",
-      "key": "i3status",
       "value": "clock",
       "separator_symbol": " \u2551 ",
       "target": "..",
