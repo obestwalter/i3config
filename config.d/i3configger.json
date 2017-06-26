@@ -4,7 +4,7 @@
       "font": "pango:Deja Vu Sans Mono, FontAwesome 7",
       "mode": "dock",
       "position": "bottom",
-      "value": "clock",
+      "select": "clock",
       "separator_symbol": " \u2551 ",
       "target": "..",
       "template": "tpl",
@@ -14,17 +14,17 @@
       "laptop": {
         "output": "DP-3",
         "position": "bottom",
-        "value": "full"
+        "select": "full"
       },
       "left-external": {
         "output": "DP-4",
         "position": "bottom",
-        "value": "full"
+        "select": "full"
       },
       "right-external": {
         "output": "DP-6",
         "position": "bottom",
-        "value": "full"
+        "select": "full"
       },
       "vga": {
         "font": "pango:Deja Vu Sans Mono, FontAwesome 10",
@@ -35,6 +35,10 @@
     }
   },
   "main": {
+    "i3_refresh_msg": "restart",
+    "status_command": "py3status",
+    "log": null,
+    "notify": false,
     "target": "../config"
   }
 }
