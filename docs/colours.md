@@ -28,6 +28,10 @@ cyan      #2aa198   accent
 green     #859900   accent
 ```
 
+## Gruvbox
+
+https://github.com/morhetz/gruvbox
+
 ## helpers
 
 [i3 configurator](https://thomashunter.name/i3-configurator/)
