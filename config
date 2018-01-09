@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Tue Jun 27 21:24:12 2017) #
+# Built from ~/.i3/config.d by i3configger (Tue Jan  9 15:31:57 2018) #
 #######################################################################
 
 ### basics.conf ###
@@ -230,7 +230,7 @@ bar {
     position bottom
     tray_padding 0
     tray_output primary
-    font pango:Deja Vu Sans Mono, FontAwesome 7
+    font pango:Deja Vu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Free Solid, Font Awesome 5 Brands 7
     mode dock
     modifier Mod4
     bindsym button4 nop
@@ -263,7 +263,7 @@ bar {
     position bottom
     tray_padding 0
     tray_output primary
-    font pango:Deja Vu Sans Mono, FontAwesome 7
+    font pango:Deja Vu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Free Solid, Font Awesome 5 Brands 7
     mode dock
     modifier Mod4
     bindsym button4 nop
@@ -296,7 +296,7 @@ bar {
     position bottom
     tray_padding 0
     tray_output primary
-    font pango:Deja Vu Sans Mono, FontAwesome 7
+    font pango:Deja Vu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Free Solid, Font Awesome 5 Brands 7
     mode dock
     modifier Mod4
     bindsym button4 nop
@@ -329,7 +329,7 @@ bar {
     position bottom
     tray_padding 0
     tray_output primary
-    font pango:Deja Vu Sans Mono, FontAwesome 10
+    font pango:Deja Vu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Free Solid, Font Awesome 5 Brands 10
     mode dock
     modifier Mod4
     bindsym button4 nop

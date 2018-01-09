@@ -1,7 +1,7 @@
 {
   "bars": {
     "defaults": {
-      "font": "pango:Deja Vu Sans Mono, FontAwesome 7",
+      "font": "pango:Deja Vu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Free Solid, Font Awesome 5 Brands 7",
       "mode": "dock",
       "position": "bottom",
       "select": "clock",
@@ -27,7 +27,7 @@
         "select": "full"
       },
       "vga": {
-        "font": "pango:Deja Vu Sans Mono, FontAwesome 10",
+        "font": "pango:Deja Vu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Free Solid, Font Awesome 5 Brands 10",
         "mode": "dock",
         "output": "VGA-0",
         "position": "bottom"
