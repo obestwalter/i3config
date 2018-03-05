@@ -12,17 +12,17 @@
     },
     "targets": {
       "laptop": {
-        "output": "DP-3",
+        "output": "eDP-1",
         "position": "bottom",
         "select": "full"
       },
       "left-external": {
-        "output": "DP-4",
+        "output": "DP-2-2-8",
         "position": "bottom",
         "select": "full"
       },
       "right-external": {
-        "output": "DP-6",
+        "output": "DP-1-2",
         "position": "bottom",
         "select": "full"
       },

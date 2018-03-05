@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Tue Jan  9 19:38:24 2018) #
+# Built from ~/.i3/config.d by i3configger (Mon Mar  5 10:50:13 2018) #
 #######################################################################
 
 ### basics.conf ###
@@ -220,13 +220,13 @@ for_window [class="xfdesktop"] floating enable
 ### i3bar.tpl.conf ###
 bar {
     id laptop
-    output DP-3
+    output eDP-1
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
-        -c /home/oliver/.i3/i3bar.full.conf \
-        -i /home/oliver/.i3/py3status \
-        -l /home/oliver/.i3/py3status.DP-3-laptop.log"
+        -c /home/ob/.i3/i3bar.full.conf \
+        -i /home/ob/.i3/py3status \
+        -l /home/ob/.i3/py3status.eDP-1-laptop.log"
     position bottom
     tray_padding 0
     tray_output primary
@@ -253,13 +253,13 @@ bar {
 ### i3bar.tpl.conf ###
 bar {
     id left-external
-    output DP-4
+    output DP-2-2-8
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
-        -c /home/oliver/.i3/i3bar.full.conf \
-        -i /home/oliver/.i3/py3status \
-        -l /home/oliver/.i3/py3status.DP-4-left-external.log"
+        -c /home/ob/.i3/i3bar.full.conf \
+        -i /home/ob/.i3/py3status \
+        -l /home/ob/.i3/py3status.DP-2-2-8-left-external.log"
     position bottom
     tray_padding 0
     tray_output primary
@@ -286,13 +286,13 @@ bar {
 ### i3bar.tpl.conf ###
 bar {
     id right-external
-    output DP-6
+    output DP-1-2
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
-        -c /home/oliver/.i3/i3bar.full.conf \
-        -i /home/oliver/.i3/py3status \
-        -l /home/oliver/.i3/py3status.DP-6-right-external.log"
+        -c /home/ob/.i3/i3bar.full.conf \
+        -i /home/ob/.i3/py3status \
+        -l /home/ob/.i3/py3status.DP-1-2-right-external.log"
     position bottom
     tray_padding 0
     tray_output primary
@@ -323,9 +323,9 @@ bar {
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
-        -c /home/oliver/.i3/i3bar.clock.conf \
-        -i /home/oliver/.i3/py3status \
-        -l /home/oliver/.i3/py3status.VGA-0-vga.log"
+        -c /home/ob/.i3/i3bar.clock.conf \
+        -i /home/ob/.i3/py3status \
+        -l /home/ob/.i3/py3status.VGA-0-vga.log"
     position bottom
     tray_padding 0
     tray_output primary

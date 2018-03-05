@@ -1,38 +1,45 @@
 #!/bin/bash
 
-xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Locked Drags" 1
-xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Tap Action" 0, 0, 0, 0, 1, 3, 2
+#xinput list-props "DLL07BF:01 06CB:7A13 Touchpad"
+#Device 'DLL07BF:01 06CB:7A13 Touchpad':
+#	Device Enabled (140):	1
+#	Coordinate Transformation Matrix (142):	1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+#	libinput Tapping Enabled (278):	1
+#	libinput Tapping Enabled Default (279):	0
+#	libinput Tapping Drag Enabled (280):	1
+#	libinput Tapping Drag Enabled Default (281):	1
+#	libinput Tapping Drag Lock Enabled (282):	0
+#	libinput Tapping Drag Lock Enabled Default (283):	0
+#	libinput Tapping Button Mapping Enabled (284):	1, 0
+#	libinput Tapping Button Mapping Default (285):	1, 0
+#	libinput Natural Scrolling Enabled (286):	0
+#	libinput Natural Scrolling Enabled Default (287):	0
+#	libinput Left Handed Enabled (288):	0
+#	libinput Left Handed Enabled Default (289):	0
+#	libinput Accel Speed (290):	0.000000
+#	libinput Accel Speed Default (291):	0.000000
+#	libinput Scroll Methods Available (292):	1, 1, 0
+#	libinput Scroll Method Enabled (293):	1, 0, 0
+#	libinput Scroll Method Enabled Default (294):	1, 0, 0
+#	libinput Click Methods Available (295):	1, 1
+#	libinput Click Method Enabled (296):	1, 0
+#	libinput Click Method Enabled Default (297):	1, 0
+#	libinput Middle Emulation Enabled (298):	0
+#	libinput Middle Emulation Enabled Default (299):	0
+#	libinput Send Events Modes Available (263):	1, 1
+#	libinput Send Events Mode Enabled (264):	0, 0
+#	libinput Send Events Mode Enabled Default (265):	0, 0
+#	libinput Disable While Typing Enabled (300):	1
+#	libinput Disable While Typing Enabled Default (301):	1
+#	Device Node (266):	"/dev/input/event10"
+#	Device Product ID (267):	1739, 31251
+#	libinput Drag Lock Buttons (302):	<no items>
+#	libinput Horizontal Scroll Enabled (303):	1
+#22:30:01 ob@h2g2 [0] < ~ >  277 %
 
-# old busted json settings
-# use xinput, xinput list, xinput list-props, xinput list-props <id>
-# to get features of the device
-#
-# {
-#  "circular_scrolling": false,
-#  "circular_touchpad": false,
-#  "rt_tap_action": 2,
-#  "circular_scrolling_distance": 5.73,
-#  "edge_motion_always": false,
-#  "horizontal_scrolling_distance": 107,
-#  "horizontal_two_finger_scrolling": true,
-#  "horizontal_edge_scrolling": true,
-#  "lt_tap_action": 0,
-#  "tap_and_drag_gesture": true,
-#  "f2_tap_action": 3,
-#  "corner_coasting": false,
-#  "acceleration_factor": 0.0371,
-#  "fast_taps": false,
-#  "vertical_edge_scrolling": true,
-#  "maximum_speed": 1.75,
-#  "circular_scrolling_trigger": 0,
-#  "minimum_speed": 1.0,
-#  "locked_drags": true,
-#  "vertical_two_finger_scrolling": true,
-#  "f1_tap_action": 1,
-#  "coasting_speed": 20.0,
-#  "vertical_scrolling_distance": 107,
-#  "f3_tap_action": 0,
-#  "locked_drags_timeout": 5.0,
-#  "lb_tap_action": 0,
-#  "rb_tap_action": 3
-#}
+
+xinput set-prop "DLL07BF:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
+#xinput set-prop "DLL07BF:01 06CB:7A13 Touchpad" "libinput Tapping Enabled Default" 1
+xinput set-prop "DLL07BF:01 06CB:7A13 Touchpad" "libinput Tapping Drag Lock Enabled"	1
+#xinput set-prop "DLL07BF:01 06CB:7A13 Touchpad" "libinput Tapping Drag Lock Default"	1
+
