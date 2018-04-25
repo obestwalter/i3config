@@ -1,22 +1,21 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Fri Mar  9 16:47:32 2018) #
+# Built from ~/.i3/config.d by i3configger (Wed Apr 25 11:11:56 2018) #
 #######################################################################
 
 ### basics.conf ###
 floating_modifier Mod4
-focus_on_window_activation smart
+
 focus_follows_mouse no
-force_display_urgency_hint 5000 ms
-new_float normal 3px
-new_window normal 1px
+mouse_warping output
 popup_during_fullscreen smart
 workspace_auto_back_and_forth yes
+focus_on_window_activation smart
+
 workspace_layout tabbed
-
+new_float normal 3px
+new_window normal 1px
+force_display_urgency_hint 3000 ms
 hide_edge_borders smart
-
-focus_follows_mouse yes
-mouse_warping output
 
 
 client.background       #000000
@@ -68,6 +67,7 @@ bindsym Mod4+e workspace "7:  "
 bindsym Mod4+s move workspace to output DP-2-2-8
 bindsym Mod4+d move workspace to output DP-1-2
 bindsym Mod4+x move workspace to output eDP-1
+bindsym Mod4+h move workspace to output HDMI-1
 
 bindsym Mod4+Shift+Left move left
 bindsym Mod4+Shift+Down move down
@@ -161,10 +161,10 @@ font "pango:Deja Vu Sans Mono Bold 7"
 ### mode-i3configger.conf ###
 bindsym Mod4+w mode "i3configger"
 mode "i3configger" {
-    bindsym Left exec "~/.virtualenvs/i3/bin/i3configger select-previous colors --i3-refresh-msg restart"
-    bindsym Right exec "~/.virtualenvs/i3/bin/i3configger select-next colors --i3-refresh-msg restart"
-    bindsym Up exec "~/.virtualenvs/i3/bin/i3configger shadow bars:targets:laptop:mode dock"
-    bindsym Down exec "~/.virtualenvs/i3/bin/i3configger shadow bars:targets:laptop:mode hide"
+    bindsym Left exec "~/.virtualenvs/i3configger/bin/i3configger select-previous colors --i3-refresh-msg restart"
+    bindsym Right exec "~/.virtualenvs/i3configger/bin/i3configger select-next colors --i3-refresh-msg restart"
+    bindsym Up exec "~/.virtualenvs/i3configger/bin/i3configger shadow bars:targets:laptop:mode dock"
+    bindsym Down exec "~/.virtualenvs/i3configger/bin/i3configger shadow bars:targets:laptop:mode hide"
 
     # fonts bigger/smaller
     # bindsym Shift+Left
