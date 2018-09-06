@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Wed Apr 25 11:11:56 2018) #
+# Built from ~/.i3/config.d by i3configger (Mon Sep  3 20:37:02 2018) #
 #######################################################################
 
 ### basics.conf ###
@@ -8,7 +8,7 @@ floating_modifier Mod4
 focus_follows_mouse no
 mouse_warping output
 popup_during_fullscreen smart
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 focus_on_window_activation smart
 
 workspace_layout tabbed
@@ -123,8 +123,12 @@ bindsym Mod4+Return exec xfce4-terminal --maximize --hide-menubar
 
 # Media and stuff
 
-bindsym Mod4+a exec clerk
-bindsym Mod4+Control+p exec --no-startup-id mpc toggle
+# TODO find a decent clipboard handler
+# bindsym Mod1+Control+v
+
+# music stuff not in use atm
+# bindsym Mod4+Control+p exec --no-startup-id mpc toggle
+# bindsym --release Mod4+y exec sleep 0.1 && xdotool key Menu
 
 # Locking and suspending
 
@@ -154,17 +158,17 @@ bindsym F12 scratchpad show
 bindsym Control+F12 sticky toggle
 
 
-### hostname.ob1.conf ###
-font "pango:Deja Vu Sans Mono Bold 7"
+### hostname.h2g2.conf ###
+font "pango:Deja Vu Sans Mono Bold 10"
 
 
 ### mode-i3configger.conf ###
 bindsym Mod4+w mode "i3configger"
 mode "i3configger" {
-    bindsym Left exec "~/.virtualenvs/i3configger/bin/i3configger select-previous colors --i3-refresh-msg restart"
-    bindsym Right exec "~/.virtualenvs/i3configger/bin/i3configger select-next colors --i3-refresh-msg restart"
-    bindsym Up exec "~/.virtualenvs/i3configger/bin/i3configger shadow bars:targets:laptop:mode dock"
-    bindsym Down exec "~/.virtualenvs/i3configger/bin/i3configger shadow bars:targets:laptop:mode hide"
+    bindsym Left exec --no-startup-id "~/.virtualenvs/i3configger/bin/i3configger select-previous colors --i3-refresh-msg restart"
+    bindsym Right exec --no-startup-id  "~/.virtualenvs/i3configger/bin/i3configger select-next colors --i3-refresh-msg restart"
+    bindsym Up exec --no-startup-id "~/.virtualenvs/i3configger/bin/i3configger shadow bars:targets:laptop:mode dock"
+    bindsym Down exec --no-startup-id "~/.virtualenvs/i3configger/bin/i3configger shadow bars:targets:laptop:mode hide"
 
     # fonts bigger/smaller
     # bindsym Shift+Left
@@ -207,7 +211,8 @@ assign [class="jetbrains-pycharm" title="^Commit Changes"] "2:  "
 assign [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] "2:  "
 
 # diff view hack
-for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace "2:  "; workspace "2:  "
+# for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace "2:  "; workspace "2:  "
+for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable
 
 for_window [class="jetbrains-pycharm" title="^Commit Changes"] floating disable
 for_window [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] floating disable
@@ -230,11 +235,12 @@ bar {
         -i /home/ob/.i3/py3status \
         -l /home/ob/.i3/py3status.eDP-1-laptop.log"
     position bottom
-    tray_padding 0
+    tray_padding 3
     tray_output primary
-    font pango:Deja Vu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Free Solid, Font Awesome 5 Brands 7
+    font pango:Fira Code 12, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
     mode dock
     modifier Mod4
+    bindsym --release button3 exec --no-startup-id scrot
     bindsym button4 nop
     bindsym button5 nop
     separator_symbol  ║ 
@@ -263,11 +269,12 @@ bar {
         -i /home/ob/.i3/py3status \
         -l /home/ob/.i3/py3status.DP-2-2-8-left-external.log"
     position bottom
-    tray_padding 0
+    tray_padding 3
     tray_output primary
-    font pango:Deja Vu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Free Solid, Font Awesome 5 Brands 7
+    font pango:Fira Code 12, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
     mode dock
     modifier Mod4
+    bindsym --release button3 exec --no-startup-id scrot
     bindsym button4 nop
     bindsym button5 nop
     separator_symbol  ║ 
@@ -296,11 +303,12 @@ bar {
         -i /home/ob/.i3/py3status \
         -l /home/ob/.i3/py3status.DP-1-2-right-external.log"
     position bottom
-    tray_padding 0
+    tray_padding 3
     tray_output primary
-    font pango:Deja Vu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Free Solid, Font Awesome 5 Brands 7
+    font pango:Fira Code 12, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
     mode dock
     modifier Mod4
+    bindsym --release button3 exec --no-startup-id scrot
     bindsym button4 nop
     bindsym button5 nop
     separator_symbol  ║ 
@@ -329,11 +337,12 @@ bar {
         -i /home/ob/.i3/py3status \
         -l /home/ob/.i3/py3status.VGA-0-vga.log"
     position bottom
-    tray_padding 0
+    tray_padding 3
     tray_output primary
     font pango:Deja Vu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Free Solid, Font Awesome 5 Brands 10
     mode dock
     modifier Mod4
+    bindsym --release button3 exec --no-startup-id scrot
     bindsym button4 nop
     bindsym button5 nop
     separator_symbol  ║ 
