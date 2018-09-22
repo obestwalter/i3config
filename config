@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Mon Sep  3 20:37:02 2018) #
+# Built from ~/.i3/config.d by i3configger (Sat Sep 22 08:55:27 2018) #
 #######################################################################
 
 ### basics.conf ###
@@ -48,8 +48,8 @@ bindsym Mod4+F6 exec --no-startup-id pactl set-sink-volume 0 -1% && killall -SIG
 bindsym Mod4+F7 exec --no-startup-id pactl set-sink-volume 0 +1% && killall -SIGUSR1 py3status
 bindsym Mod4+F5 exec --no-startup-id pactl set-sink-mute 0 toggle && killall -SIGUSR1 py3status
 
-bindsym Mod4+F9 exec xbacklight -dec 5
-bindsym Mod4+F10 exec xbacklight -inc 5
+bindsym Mod4+F9 exec --no-startup-id xbacklight e -ctrl intel_backlight -dec 5
+bindsym Mod4+F10 exec --no-startup-id xbacklight e -ctrl intel_backlight -inc 5
 
 bindsym XF86AudioPlay exec quodlibet --play
 bindsym XF86AudioPause exec quodlibet --pause
@@ -240,7 +240,7 @@ bar {
     font pango:Fira Code 12, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
     mode dock
     modifier Mod4
-    bindsym --release button3 exec --no-startup-id scrot
+    bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
     bindsym button5 nop
     separator_symbol  ║ 
@@ -274,7 +274,7 @@ bar {
     font pango:Fira Code 12, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
     mode dock
     modifier Mod4
-    bindsym --release button3 exec --no-startup-id scrot
+    bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
     bindsym button5 nop
     separator_symbol  ║ 
@@ -308,7 +308,7 @@ bar {
     font pango:Fira Code 12, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
     mode dock
     modifier Mod4
-    bindsym --release button3 exec --no-startup-id scrot
+    bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
     bindsym button5 nop
     separator_symbol  ║ 
@@ -342,7 +342,7 @@ bar {
     font pango:Deja Vu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Free Solid, Font Awesome 5 Brands 10
     mode dock
     modifier Mod4
-    bindsym --release button3 exec --no-startup-id scrot
+    bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
     bindsym button5 nop
     separator_symbol  ║ 
