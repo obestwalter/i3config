@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Fri Nov  2 21:10:54 2018) #
+# Built from ~/.i3/config.d by i3configger (Fri Nov  2 22:54:15 2018) #
 #######################################################################
 
 ### basics.conf ###
@@ -132,7 +132,7 @@ bindsym Mod4+Return exec xfce4-terminal --maximize --hide-menubar
 
 # Locking and suspending
 
-bindsym Mod4+Shift+l exec i3lock -i ~/Dropbox/Pictures/wallpapers/single_screen/generative-orange.png
+bindsym Mod4+Shift+l exec i3lock -f -t -i ~/Dropbox/Pictures/wallpapers/single_screen/generative-orange.png
 bindsym Mod4+Shift+s exec systemctl suspend & i3lock -c $lockColor
 
 # Specials
