@@ -26,10 +26,9 @@
         "position": "bottom",
         "select": "full"
       },
-      "vga": {
-        "font": "pango:Deja Vu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Free Solid, Font Awesome 5 Brands 10",
+      "HDMI": {
         "mode": "dock",
-        "output": "VGA-0",
+        "output": "HDMI-1",
         "position": "bottom"
       }
     }
@@ -38,7 +37,7 @@
     "i3_refresh_msg": "restart",
     "status_command": "py3status",
     "log": null,
-    "notify": false,
+    "notify": true,
     "target": "../config"
   }
 }
