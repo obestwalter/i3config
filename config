@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Fri Nov  2 22:54:15 2018) #
+# Built from ~/.i3/config.d by i3configger (Thu Apr 18 15:53:21 2019) #
 #######################################################################
 
 ### basics.conf ###
@@ -19,11 +19,11 @@ hide_edge_borders smart
 
 
 client.background       #000000
-client.focused          #fdf6e3  #6c71c4  #fdf6e3  #6c71c4  #fdf6e3
-client.unfocused        #eee8d5  #073642  #93a1a1  #6c71c4  #fdf6e3
-client.focused_inactive #eee8d5 #002b36 #6c71c4 #6c71c4 #002b36
-client.urgent           #fdf6e3 #2aa198 #657b83 #6c71c4 #2aa198
-client.placeholder      #fdf6e3  #2aa198  #657b83  #6c71c4  #2aa198
+client.focused          #fdf6e3  #268bd2  #fdf6e3  #268bd2  #fdf6e3
+client.unfocused        #eee8d5  #073642  #93a1a1  #268bd2  #fdf6e3
+client.focused_inactive #eee8d5 #002b36 #268bd2 #268bd2 #002b36
+client.urgent           #fdf6e3 #2aa198 #657b83 #268bd2 #2aa198
+client.placeholder      #fdf6e3  #2aa198  #657b83  #268bd2  #2aa198
 
 
 ### control-containers.conf ###
@@ -132,13 +132,10 @@ bindsym Mod4+Return exec xfce4-terminal --maximize --hide-menubar
 
 # Locking and suspending
 
-bindsym Mod4+Shift+l exec i3lock -f -t -i ~/Dropbox/Pictures/wallpapers/single_screen/generative-orange.png
-bindsym Mod4+Shift+s exec systemctl suspend & i3lock -c $lockColor
-
-# Specials
-
-# My Notebook does not have a context menu key. This is a replacement
-bindsym --release Mod4+y exec sleep 0.1 && xdotool key Menu
+# TODO turn this into a switchable scheme
+# set i3lock -c 000000 pyxtrlock
+bindsym Mod4+Shift+l exec i3lock -c 000000
+bindsym Mod4+Shift+s exec systemctl suspend & i3lock -c 000000
 
 
 ### control-rofi.conf ###
@@ -206,7 +203,20 @@ mode "resize" {
 }
 
 
+### python.conf ###
+# copy cleaned repl stuff from clipboard
+
+bindsym Mod4+v exec --no-startup-id ~/.i3/bin/clipmagic.py
+
+
 ### window-fixers-pycharm.conf ###
+# TODO turn this into a switchable scheme for single and multi monitor use
+# check https://www.reddit.com/r/i3wm/comments/8gh4c0/working_fix_for_focusing_intellij_popups/
+# http://efod.se/pycharm-idea-i3wm/
+# https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001411659-Lose-Focus-after-Switching-Workspace-in-i3wm
+# https://youtrack.jetbrains.com/issue/IDEA-124160
+
+
 assign [class="jetbrains-pycharm" title="^Commit Changes"] "2:  "
 assign [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] "2:  "
 
@@ -249,10 +259,10 @@ bar {
         statusline #dc322f
         separator  #002b36
         focused_background #eee8d5
-        focused_statusline #6c71c4
+        focused_statusline #268bd2
         focused_separator  #93a1a1
-        focused_workspace  #6c71c4 #6c71c4 #fdf6e3
-        active_workspace   #6c71c4 #073642 #6c71c4
+        focused_workspace  #268bd2 #268bd2 #fdf6e3
+        active_workspace   #268bd2 #073642 #268bd2
         inactive_workspace #073642 #073642 #93a1a1
         urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
         binding_mode       #fdf6e3 #cb4b16 #fdf6e3
@@ -283,10 +293,10 @@ bar {
         statusline #dc322f
         separator  #002b36
         focused_background #eee8d5
-        focused_statusline #6c71c4
+        focused_statusline #268bd2
         focused_separator  #93a1a1
-        focused_workspace  #6c71c4 #6c71c4 #fdf6e3
-        active_workspace   #6c71c4 #073642 #6c71c4
+        focused_workspace  #268bd2 #268bd2 #fdf6e3
+        active_workspace   #268bd2 #073642 #268bd2
         inactive_workspace #073642 #073642 #93a1a1
         urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
         binding_mode       #fdf6e3 #cb4b16 #fdf6e3
@@ -317,10 +327,10 @@ bar {
         statusline #dc322f
         separator  #002b36
         focused_background #eee8d5
-        focused_statusline #6c71c4
+        focused_statusline #268bd2
         focused_separator  #93a1a1
-        focused_workspace  #6c71c4 #6c71c4 #fdf6e3
-        active_workspace   #6c71c4 #073642 #6c71c4
+        focused_workspace  #268bd2 #268bd2 #fdf6e3
+        active_workspace   #268bd2 #073642 #268bd2
         inactive_workspace #073642 #073642 #93a1a1
         urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
         binding_mode       #fdf6e3 #cb4b16 #fdf6e3
@@ -328,18 +338,18 @@ bar {
 }
 ### i3bar.tpl.conf ###
 bar {
-    id vga
-    output VGA-0
+    id HDMI
+    output HDMI-1
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
         -c /home/ob/.i3/i3bar.clock.conf \
         -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.VGA-0-vga.log"
+        -l /home/ob/.i3/py3status.HDMI-1-HDMI.log"
     position bottom
     tray_padding 3
     tray_output primary
-    font pango:Deja Vu Sans Mono, Font Awesome 5 Free, Font Awesome 5 Free Solid, Font Awesome 5 Brands 10
+    font pango:Fira Code 12, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
     mode dock
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
@@ -351,10 +361,10 @@ bar {
         statusline #dc322f
         separator  #002b36
         focused_background #eee8d5
-        focused_statusline #6c71c4
+        focused_statusline #268bd2
         focused_separator  #93a1a1
-        focused_workspace  #6c71c4 #6c71c4 #fdf6e3
-        active_workspace   #6c71c4 #073642 #6c71c4
+        focused_workspace  #268bd2 #268bd2 #fdf6e3
+        active_workspace   #268bd2 #073642 #268bd2
         inactive_workspace #073642 #073642 #93a1a1
         urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
         binding_mode       #fdf6e3 #cb4b16 #fdf6e3
