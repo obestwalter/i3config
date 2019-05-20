@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Thu Apr 18 15:53:21 2019) #
+# Built from ~/.i3/config.d by i3configger (Mon May 20 14:50:05 2019) #
 #######################################################################
 
 ### basics.conf ###
@@ -132,10 +132,15 @@ bindsym Mod4+Return exec xfce4-terminal --maximize --hide-menubar
 
 # Locking and suspending
 
-# TODO turn this into a switchable scheme
-# set i3lock -c 000000 pyxtrlock
-bindsym Mod4+Shift+l exec i3lock -c 000000
-bindsym Mod4+Shift+s exec systemctl suspend & i3lock -c 000000
+# TODO make switchable theme: img -> solid -> transparent
+
+# set i3lock -c BF5700 i3lock -f -t -i ~/Dropbox/Pictures/wallpapers/single_screen/generative-orange.png
+
+
+# set i3lock -c BF5700 pyxtrlock
+
+bindsym Mod4+Shift+l exec i3lock -c BF5700
+bindsym Mod4+Shift+s exec systemctl suspend & i3lock -c BF5700
 
 
 ### control-rofi.conf ###
@@ -206,6 +211,26 @@ mode "resize" {
 ### python.conf ###
 # copy cleaned repl stuff from clipboard
 
+# fixme does definitely no work yet ...
+# not at all with ipython ...
+#
+# and only semi with normal REPL
+#
+# turns ...
+#
+# >>> import os
+# >>>
+# >>> for i in range(10):
+# ...     print(i)
+# ...
+#
+# into ...
+#
+# import os
+# >>>
+# for i in range(10):
+#     print(i)
+
 bindsym Mod4+v exec --no-startup-id ~/.i3/bin/clipmagic.py
 
 
@@ -217,8 +242,8 @@ bindsym Mod4+v exec --no-startup-id ~/.i3/bin/clipmagic.py
 # https://youtrack.jetbrains.com/issue/IDEA-124160
 
 
-assign [class="jetbrains-pycharm" title="^Commit Changes"] "2:  "
-assign [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] "2:  "
+# assign [class="jetbrains-pycharm" title="^Commit Changes"] "2:  "
+# assign [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] "2:  "
 
 # diff view hack
 # for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace "2:  "; workspace "2:  "
