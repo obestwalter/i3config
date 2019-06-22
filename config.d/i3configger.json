@@ -1,14 +1,14 @@
 {
   "bars": {
     "defaults": {
-      "font": "pango:Fira Code 12, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10",
+      "font": "pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10",
       "mode": "dock",
       "position": "bottom",
       "select": "clock",
       "separator_symbol": " \u2551 ",
       "target": "..",
       "template": "tpl",
-      "tray_padding": "3"
+      "tray_padding": "1"
     },
     "targets": {
       "laptop": {
