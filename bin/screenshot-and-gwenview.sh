@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
-scrot $HOME/scrot.png
-gwenview $HOME/scrot.png
+filename="scrot-$(date +"%y-%m-%d-%T").png"
+scrot "$HOME/$filename"
+gwenview "$HOME/$filename"
