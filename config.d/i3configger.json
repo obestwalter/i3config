@@ -29,13 +29,13 @@
       "HDMI": {
         "mode": "dock",
         "output": "HDMI-1",
-        "position": "bottom"
+        "position": "bottom",
+        "select": "full"
       }
     }
   },
   "main": {
     "i3_refresh_msg": "restart",
-    "status_command": "py3status",
     "log": null,
     "notify": true,
     "target": "../config"

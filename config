@@ -1,6 +1,6 @@
-#######################################################################
-# Built from ~/.i3/config.d by i3configger (Fri Jun  7 21:42:17 2019) #
-#######################################################################
+##############################################################################
+# Built from /home/ob/.i3/config.d by i3configger (Thu Mar 19 13:20:24 2020) #
+##############################################################################
 
 ### basics.conf ###
 floating_modifier Mod4
@@ -124,6 +124,8 @@ bindsym Mod4+Return exec xfce4-terminal --maximize --hide-menubar
 
 # Media and stuff
 
+bindsym Mod4+Control+p exec --no-startup-id playerctl play-pause
+
 # TODO find a decent clipboard handler
 # bindsym Mod1+Control+v
 
@@ -142,6 +144,7 @@ bindsym Mod4+Return exec xfce4-terminal --maximize --hide-menubar
 
 bindsym Mod4+Shift+l exec i3lock -c BF5700
 bindsym Mod4+Shift+s exec systemctl suspend & i3lock -c BF5700
+bindsym Mod4+Shift+g exec scrot
 
 
 ### control-rofi.conf ###
@@ -369,7 +372,7 @@ bar {
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
-        -c /home/ob/.i3/i3bar.clock.conf \
+        -c /home/ob/.i3/i3bar.full.conf \
         -i /home/ob/.i3/py3status \
         -l /home/ob/.i3/py3status.HDMI-1-HDMI.log"
     position bottom
