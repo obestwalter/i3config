@@ -1,5 +1,5 @@
 ##############################################################################
-# Built from /home/ob/.i3/config.d by i3configger (Thu Mar 19 13:20:24 2020) #
+# Built from /home/ob/.i3/config.d by i3configger (Fri Apr  3 10:45:02 2020) #
 ##############################################################################
 
 ### basics.conf ###
@@ -137,13 +137,12 @@ bindsym Mod4+Control+p exec --no-startup-id playerctl play-pause
 
 # TODO make switchable theme: img -> solid -> transparent
 
-# set i3lock -c BF5700 i3lock -f -t -i ~/Dropbox/Pictures/wallpapers/single_screen/generative-orange.png
+# set xtrlock i3lock -f -t -i ~/Dropbox/Pictures/wallpapers/single_screen/generative-orange.png
 
+# set xtrlock i3lock -c BF5700
 
-# set i3lock -c BF5700 pyxtrlock
-
-bindsym Mod4+Shift+l exec i3lock -c BF5700
-bindsym Mod4+Shift+s exec systemctl suspend & i3lock -c BF5700
+bindsym Mod4+Shift+l exec xtrlock
+bindsym Mod4+Shift+s exec systemctl suspend & xtrlock
 bindsym Mod4+Shift+g exec scrot
 
 
@@ -165,7 +164,8 @@ bindsym Control+F12 sticky toggle
 
 
 ### hostname.h2g2.conf ###
-font "pango:Deja Vu Sans Mono Bold 10"
+#font "pango:Deja Vu Sans Mono Bold 10"
+font "pango:Ubuntu Condensed 12"
 
 
 ### mode-i3configger.conf ###
