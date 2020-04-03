@@ -1,5 +1,5 @@
 ##############################################################################
-# Built from /home/ob/.i3/config.d by i3configger (Fri Apr  3 10:45:02 2020) #
+# Built from /home/ob/.i3/config.d by i3configger (Fri Apr  3 14:12:52 2020) #
 ##############################################################################
 
 ### basics.conf ###
@@ -33,6 +33,7 @@ bindsym Mod4+u layout tabbed
 bindsym Mod4+i layout stacking
 bindsym Mod4+o layout toggle split
 bindsym Mod4+p focus parent
+# diaresis are dots on top so win+ü :)
 bindsym Mod4+udiaeresis layout toggle all
 bindsym Mod4+Shift+p focus child
 bindsym Mod4+comma split h
@@ -164,7 +165,6 @@ bindsym Control+F12 sticky toggle
 
 
 ### hostname.h2g2.conf ###
-#font "pango:Deja Vu Sans Mono Bold 10"
 font "pango:Ubuntu Condensed 12"
 
 
@@ -277,7 +277,7 @@ bar {
     tray_padding 1
     tray_output primary
     font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
-    mode dock
+    mode hide
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
