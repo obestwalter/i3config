@@ -1,6 +1,6 @@
-##############################################################################
-# Built from /home/ob/.i3/config.d by i3configger (Fri Apr  3 14:12:52 2020) #
-##############################################################################
+#######################################################################
+# Built from ~/.i3/config.d by i3configger (Fri Apr 10 11:02:34 2020) #
+#######################################################################
 
 ### basics.conf ###
 floating_modifier Mod4
@@ -277,7 +277,7 @@ bar {
     tray_padding 1
     tray_output primary
     font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
-    mode hide
+    mode dock
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
