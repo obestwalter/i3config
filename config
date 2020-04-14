@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Fri Apr 10 11:02:34 2020) #
+# Built from ~/.i3/config.d by i3configger (Tue Apr 14 18:52:30 2020) #
 #######################################################################
 
 ### basics.conf ###
@@ -17,13 +17,14 @@ new_window normal 1px
 force_display_urgency_hint 3000 ms
 hide_edge_borders smart
 
+#  
 
 
 client.background       #000000
 client.focused          #fdf6e3  #268bd2  #fdf6e3  #268bd2  #fdf6e3
 client.unfocused        #eee8d5  #073642  #93a1a1  #268bd2  #fdf6e3
 client.focused_inactive #eee8d5 #002b36 #268bd2 #268bd2 #002b36
-client.urgent           #fdf6e3 #2aa198 #657b83 #268bd2 #2aa198
+client.urgent           #fdf6e3 #cb4b16 #fdf6e3 #268bd2 #2aa198
 client.placeholder      #fdf6e3  #2aa198  #657b83  #268bd2  #2aa198
 
 
@@ -64,7 +65,7 @@ bindcode Shift+107 exec "xfce4-screenshooter --region"
 
 
 ### control-layout.conf ###
-bindsym Mod4+e workspace " 7:   "
+bindsym Mod4+e workspace " 7:   "
 
 bindsym Mod4+s move workspace to output DP-2-2-8
 bindsym Mod4+d move workspace to output DP-1-2
@@ -76,14 +77,14 @@ bindsym Mod4+Shift+Down move down
 bindsym Mod4+Shift+Up move up
 bindsym Mod4+Shift+Right move right
 bindsym Mod4+1 workspace " 1:   "
-bindsym Mod4+2 workspace " 2:   "
-bindsym Mod4+3 workspace " 3:   "
+bindsym Mod4+2 workspace " 2:   "
+bindsym Mod4+3 workspace " 3:   "
 bindsym Mod4+4 workspace " 4:   "
 bindsym Mod4+5 workspace " 5:   "
 bindsym Mod4+6 workspace " 6:   "
-bindsym Mod4+7 workspace " 7:   "
+bindsym Mod4+7 workspace " 7:   "
 bindsym Mod4+8 workspace " 8:   "
-bindsym Mod4+9 workspace " 9:  "
+bindsym Mod4+9 workspace " 9:  "
 bindsym Mod4+0 workspace "10:  "
 
 
@@ -101,14 +102,14 @@ bindsym Mod4+Mod1+Left workspace prev
 bindsym Mod4+Mod1+Right workspace next
 
 bindsym Mod4+Shift+1 move container to workspace number " 1:   "
-bindsym Mod4+Shift+2 move container to workspace number " 2:   "
-bindsym Mod4+Shift+3 move container to workspace number " 3:   "
+bindsym Mod4+Shift+2 move container to workspace number " 2:   "
+bindsym Mod4+Shift+3 move container to workspace number " 3:   "
 bindsym Mod4+Shift+4 move container to workspace number " 4:   "
 bindsym Mod4+Shift+5 move container to workspace number " 5:   "
 bindsym Mod4+Shift+6 move container to workspace number " 6:   "
-bindsym Mod4+Shift+7 move container to workspace number " 7:   "
+bindsym Mod4+Shift+7 move container to workspace number " 7:   "
 bindsym Mod4+Shift+8 move container to workspace number " 8:   "
-bindsym Mod4+Shift+9 move container to workspace number " 9:  "
+bindsym Mod4+Shift+9 move container to workspace number " 9:  "
 bindsym Mod4+Shift+0 move container to workspace number "10:  "
 
 
@@ -240,27 +241,49 @@ bindsym Mod4+v exec --no-startup-id ~/.i3/bin/clipmagic.py
 
 ### window-fixers-pycharm.conf ###
 # TODO turn this into a switchable scheme for single and multi monitor use
-# check https://www.reddit.com/r/i3wm/comments/8gh4c0/working_fix_for_focusing_intellij_popups/
-# http://efod.se/pycharm-idea-i3wm/
-# https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001411659-Lose-Focus-after-Switching-Workspace-in-i3wm
-# https://youtrack.jetbrains.com/issue/IDEA-124160
+
+# hint: use i3-xprop.sh to get the right classifiers for a window
 
 
-# assign [class="jetbrains-pycharm" title="^Commit Changes"] " 2:   "
-# assign [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] " 2:   "
+assign [class="jetbrains-pycharm" title="^Settings"] " 2:   "
+for_window [class="jetbrains-pycharm" title="^Settings"] floating disable
+
+assign [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] " 3:   "
+for_window [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] floating disable
 
 # diff view hack
-# for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace " 2:   "; workspace " 2:   "
-for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable
-
-for_window [class="jetbrains-pycharm" title="^Commit Changes"] floating disable
-for_window [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] floating disable
+# for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace " 2:   "; workspace " 2:   "
+#for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable
 
 
 ### window-fixers-remote-desktops.conf ###
 for_window [title="FreeRDP:.*"] floating disable
 for_window [class="xfreerdp"] floating disable
 for_window [class="xfdesktop"] floating enable
+
+
+### window-icons.conf ###
+# TODO i3configger: implement resolution of vars inside strings?
+# Then it could look like this and would dynamically change on scheme changes
+# set $iconWrapLeft <span foreground='#fdf6e3'>
+
+
+for_window [class="code-oss"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="gwenview"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="jetbrains-pycharm"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="(?i)firefox"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="krusader"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="(.*)terminal(.*)"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="Slack"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="Thunderbird"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [title="Write:.* Thunderbird"] title_format "<span foreground='#fdf6e3'>   </span> %title"
+
+# not really checked / fixed
+
+for_window [class="Signal"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="(.*)Chromium-browser(.*)"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="VirtualBox.*"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="libreoffice.*"] title_format "<span foreground='#fdf6e3'>  </span> %title"
 
 
 ### i3bar.tpl.conf ###
