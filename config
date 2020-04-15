@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Tue Apr 14 18:52:30 2020) #
+# Built from ~/.i3/config.d by i3configger (Wed Apr 15 09:48:29 2020) #
 #######################################################################
 
 ### basics.conf ###
@@ -245,10 +245,10 @@ bindsym Mod4+v exec --no-startup-id ~/.i3/bin/clipmagic.py
 # hint: use i3-xprop.sh to get the right classifiers for a window
 
 
-assign [class="jetbrains-pycharm" title="^Settings"] " 2:   "
-for_window [class="jetbrains-pycharm" title="^Settings"] floating disable
+assign [class="jetbrains-pycharm" title="^Settings|^Shelve Changes|^Keyboard Shortcut"] " 2:   "
+for_window [class="jetbrains-pycharm" title="^Settings|^Shelve Changes|^Keyboard Shortcut"] floating disable
 
-assign [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] " 3:   "
+# assign [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] " 3:   "
 for_window [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] floating disable
 
 # diff view hack
