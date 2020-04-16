@@ -1,8 +1,8 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Wed Apr 15 09:48:29 2020) #
+# Built from ~/.i3/config.d by i3configger (Thu Apr 16 08:23:40 2020) #
 #######################################################################
 
-### basics.conf ###
+### 0-basics.conf ###
 floating_modifier Mod4
 
 focus_follows_mouse no
@@ -17,15 +17,40 @@ new_window normal 1px
 force_display_urgency_hint 3000 ms
 hide_edge_borders smart
 
-#  
-
-
 client.background       #000000
 client.focused          #fdf6e3  #268bd2  #fdf6e3  #268bd2  #fdf6e3
 client.unfocused        #eee8d5  #073642  #93a1a1  #268bd2  #fdf6e3
 client.focused_inactive #eee8d5 #002b36 #268bd2 #268bd2 #002b36
 client.urgent           #fdf6e3 #cb4b16 #fdf6e3 #268bd2 #2aa198
 client.placeholder      #fdf6e3  #2aa198  #657b83  #268bd2  #2aa198
+
+
+### 1-workspaces-and-windows.conf ###
+# https://fontawesome.com/cheatsheet/free/solid
+#     復 
+
+# TODO i3configger: implement resolution of vars inside strings?
+# Then it could look like this and would dynamically change on scheme changes
+# set $iconWrapLeft <span foreground='#fdf6e3'>
+
+
+for_window [class="code-oss"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="gwenview"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="jetbrains-pycharm"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="(?i)firefox"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="krusader"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="(.*)terminal(.*)"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="Slack"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="Thunderbird"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [title="Write:.* Thunderbird"] title_format "<span foreground='#fdf6e3'>   </span> %title"
+for_window [title="Volume Control"] title_format "<span foreground='#fdf6e3'>   </span> %title"
+
+# not really checked / fixed
+
+for_window [class="Signal"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="(.*)Chromium-browser(.*)"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="VirtualBox.*"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+for_window [class="libreoffice.*"] title_format "<span foreground='#fdf6e3'>  </span> %title"
 
 
 ### control-containers.conf ###
@@ -54,10 +79,12 @@ bindsym Mod4+F5 exec --no-startup-id pactl set-sink-mute 0 toggle && killall -SI
 bindsym Mod4+F9 exec --no-startup-id xbacklight e -ctrl intel_backlight -dec 5
 bindsym Mod4+F10 exec --no-startup-id xbacklight e -ctrl intel_backlight -inc 5
 
-bindsym XF86AudioPlay exec quodlibet --play
-bindsym XF86AudioPause exec quodlibet --pause
-bindsym XF86AudioNext exec quodlibet --next
-bindsym XF86AudioPrev exec quodlibet --previous
+# TODO set the rest that might be useful
+# http://wiki.linuxquestions.org/wiki/XF86_keyboard_symbols
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 # Print key | Druck/S-Abfr
 bindcode 107 exec "xfce4-screenshooter --fullscreen"
@@ -65,7 +92,7 @@ bindcode Shift+107 exec "xfce4-screenshooter --region"
 
 
 ### control-layout.conf ###
-bindsym Mod4+e workspace " 7:   "
+bindsym Mod4+e workspace " 7:   "  # video meetings
 
 bindsym Mod4+s move workspace to output DP-2-2-8
 bindsym Mod4+d move workspace to output DP-1-2
@@ -76,16 +103,16 @@ bindsym Mod4+Shift+Left move left
 bindsym Mod4+Shift+Down move down
 bindsym Mod4+Shift+Up move up
 bindsym Mod4+Shift+Right move right
-bindsym Mod4+1 workspace " 1:   "
-bindsym Mod4+2 workspace " 2:   "
-bindsym Mod4+3 workspace " 3:   "
-bindsym Mod4+4 workspace " 4:   "
-bindsym Mod4+5 workspace " 5:   "
-bindsym Mod4+6 workspace " 6:   "
-bindsym Mod4+7 workspace " 7:   "
-bindsym Mod4+8 workspace " 8:   "
-bindsym Mod4+9 workspace " 9:  "
-bindsym Mod4+0 workspace "10:  "
+bindsym Mod4+1 workspace " 1:   "  # terminals
+bindsym Mod4+2 workspace " 2:   "  # hacking
+bindsym Mod4+3 workspace " 3:   "  # hacking / secondary
+bindsym Mod4+4 workspace " 4:   "  # browser
+bindsym Mod4+5 workspace " 5:   "  # file manager
+bindsym Mod4+6 workspace " 6:   "  # communication programs
+bindsym Mod4+7 workspace " 7:   "  # video meetings
+bindsym Mod4+8 workspace " 8:   "  # remote connections
+bindsym Mod4+9 workspace " 9:  "   # admin / monitoring / logs
+bindsym Mod4+0 workspace "10:  "  # browser
 
 
 ### control-navigation.conf ###
@@ -101,16 +128,16 @@ bindsym Mod4+Right focus right
 bindsym Mod4+Mod1+Left workspace prev
 bindsym Mod4+Mod1+Right workspace next
 
-bindsym Mod4+Shift+1 move container to workspace number " 1:   "
-bindsym Mod4+Shift+2 move container to workspace number " 2:   "
-bindsym Mod4+Shift+3 move container to workspace number " 3:   "
-bindsym Mod4+Shift+4 move container to workspace number " 4:   "
-bindsym Mod4+Shift+5 move container to workspace number " 5:   "
-bindsym Mod4+Shift+6 move container to workspace number " 6:   "
-bindsym Mod4+Shift+7 move container to workspace number " 7:   "
-bindsym Mod4+Shift+8 move container to workspace number " 8:   "
-bindsym Mod4+Shift+9 move container to workspace number " 9:  "
-bindsym Mod4+Shift+0 move container to workspace number "10:  "
+bindsym Mod4+Shift+1 move container to workspace number " 1:   "  # terminals
+bindsym Mod4+Shift+2 move container to workspace number " 2:   "  # hacking
+bindsym Mod4+Shift+3 move container to workspace number " 3:   "  # hacking / secondary
+bindsym Mod4+Shift+4 move container to workspace number " 4:   "  # browser
+bindsym Mod4+Shift+5 move container to workspace number " 5:   "  # file manager
+bindsym Mod4+Shift+6 move container to workspace number " 6:   "  # communication programs
+bindsym Mod4+Shift+7 move container to workspace number " 7:   "  # video meetings
+bindsym Mod4+Shift+8 move container to workspace number " 8:   "  # remote connections
+bindsym Mod4+Shift+9 move container to workspace number " 9:  "   # admin / monitoring / logs
+bindsym Mod4+Shift+0 move container to workspace number "10:  "  # browser
 
 
 ### control-others.conf ###
@@ -245,14 +272,13 @@ bindsym Mod4+v exec --no-startup-id ~/.i3/bin/clipmagic.py
 # hint: use i3-xprop.sh to get the right classifiers for a window
 
 
-assign [class="jetbrains-pycharm" title="^Settings|^Shelve Changes|^Keyboard Shortcut"] " 2:   "
-for_window [class="jetbrains-pycharm" title="^Settings|^Shelve Changes|^Keyboard Shortcut"] floating disable
+assign [class="jetbrains-pycharm" title="^Settings|^Shelve Changes|^Keyboard Shortcut|^Conflicts|^Merge Revisions"] " 2:   "  # hacking
+for_window [class="jetbrains-pycharm" title="(^Settings|^Shelve Changes|^Keyboard Shortcut|^Conflicts|^Merge Revisions|Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] floating disable
 
-# assign [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] " 3:   "
-for_window [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] floating disable
+# assign [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] " 3:   "  # hacking / secondary
 
 # diff view hack
-# for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace " 2:   "; workspace " 2:   "
+# for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace " 2:   "  # hacking; workspace " 2:   "  # hacking
 #for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable
 
 
@@ -260,30 +286,6 @@ for_window [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|
 for_window [title="FreeRDP:.*"] floating disable
 for_window [class="xfreerdp"] floating disable
 for_window [class="xfdesktop"] floating enable
-
-
-### window-icons.conf ###
-# TODO i3configger: implement resolution of vars inside strings?
-# Then it could look like this and would dynamically change on scheme changes
-# set $iconWrapLeft <span foreground='#fdf6e3'>
-
-
-for_window [class="code-oss"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="gwenview"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="jetbrains-pycharm"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="(?i)firefox"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="krusader"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="(.*)terminal(.*)"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="Slack"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="Thunderbird"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [title="Write:.* Thunderbird"] title_format "<span foreground='#fdf6e3'>   </span> %title"
-
-# not really checked / fixed
-
-for_window [class="Signal"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="(.*)Chromium-browser(.*)"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="VirtualBox.*"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="libreoffice.*"] title_format "<span foreground='#fdf6e3'>  </span> %title"
 
 
 ### i3bar.tpl.conf ###
