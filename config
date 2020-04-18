@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Sat Apr 18 09:44:32 2020) #
+# Built from ~/.i3/config.d by i3configger (Sat Apr 18 10:25:46 2020) #
 #######################################################################
 
 ### 0-basics.conf ###
@@ -244,15 +244,21 @@ mode "i3configger" {
 ### mode-resize.conf ###
 bindsym Mod4+r mode "resize / move"
 mode "resize / move" {
+    # px are used for floating windows and ppt for tiling
     bindsym Left resize shrink width 100 px or 100 ppt
-    bindsym Right resize grow width 100 px or 100 ppt
-    bindsym Up resize shrink height 100 px or 100 ppt
     bindsym Down resize grow height 100 px or 100 ppt
+    bindsym Up resize shrink height 100 px or 100 ppt
+    bindsym Right resize grow width 100 px or 100 ppt
 
     bindsym Shift+Left resize shrink width 10 px or 10 ppt
+    bindsym Shift+Down resize grow height 10 px or 10 ppt
+    bindsym Shift+Up resize shrink height 10 px or 10 ppt
     bindsym Shift+Right resize grow width 10 px or 10 ppt
-    bindsym Shift+Up resize grow height 10 px or 10 ppt
-    bindsym Shift+Down resize shrink height 10 px or 10 ppt
+
+    bindsym h resize shrink width 1 px or 1 ppt
+    bindsym j resize grow height 1 px or 1 ppt
+    bindsym k resize shrink height 1 px or 1 ppt
+    bindsym l resize grow width 1 px or 1 ppt
 
     bindsym Control+Left move left 100 px
     bindsym Control+Right move right 100 px
@@ -263,6 +269,11 @@ mode "resize / move" {
     bindsym Control+Shift+Right move right 10 px
     bindsym Control+Shift+Up move up 10 px
     bindsym Control+Shift+Down move down 10 px
+
+    bindsym Control+h move left 1 px or 1 ppt
+    bindsym Control+j move 1 px or 1 ppt
+    bindsym Control+k move 1 px or 1 ppt
+    bindsym Control+l move 1 px or 1 ppt
 
     # bindsym Return mode "default" could be something else ...
     bindsym Escape mode "default"
