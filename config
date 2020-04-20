@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Sat Apr 18 10:25:46 2020) #
+# Built from ~/.i3/config.d by i3configger (Mon Apr 20 14:49:29 2020) #
 #######################################################################
 
 ### 0-basics.conf ###
@@ -124,18 +124,6 @@ bindcode 107 exec "xfce4-screenshooter --fullscreen"
 bindcode Shift+107 exec "xfce4-screenshooter --region"
 
 
-### control-layout.conf ###
-bindsym Mod4+s move workspace to output DP-2-2-8
-bindsym Mod4+d move workspace to output DP-1-2
-bindsym Mod4+x move workspace to output eDP-1
-bindsym Mod4+h move workspace to output HDMI-1
-
-bindsym Mod4+Shift+Left move left
-bindsym Mod4+Shift+Down move down
-bindsym Mod4+Shift+Up move up
-bindsym Mod4+Shift+Right move right
-
-
 ### control-navigation.conf ###
 bindsym Mod1+Tab workspace back_and_forth
 bindsym Mod4+Tab exec "rofi -show window"
@@ -215,6 +203,20 @@ bindsym Control+F12 sticky toggle
 
 ### hostname.h2g2.conf ###
 font "pango:Ubuntu Condensed 12"
+
+
+### layout.0-home.conf ###
+# TODO there must be a way to handle this more intelligently
+# if there is no native way, just set variables for the differing outputs
+bindsym Mod4+s move workspace to output DP-1-1
+bindsym Mod4+d move workspace to output DP-1-2-8
+bindsym Mod4+x move workspace to output eDP-1
+bindsym Mod4+h move workspace to output HDMI-1
+
+bindsym Mod4+Shift+Left move left
+bindsym Mod4+Shift+Down move down
+bindsym Mod4+Shift+Up move up
+bindsym Mod4+Shift+Right move right
 
 
 ### mode-i3configger.conf ###
@@ -330,14 +332,14 @@ for_window [class="xfdesktop"] floating enable
 
 ### i3bar.tpl.conf ###
 bar {
-    id laptop
+    id laptop-internal-eDP-1
     output eDP-1
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
         -c /home/ob/.i3/i3bar.full.conf \
         -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.eDP-1-laptop.log"
+        -l /home/ob/.i3/py3status.eDP-1-laptop-internal-eDP-1.log"
     position bottom
     tray_padding 1
     tray_output primary
@@ -364,14 +366,14 @@ bar {
 }
 ### i3bar.tpl.conf ###
 bar {
-    id left-external
+    id avira-left-DP-2-2-8
     output DP-2-2-8
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
         -c /home/ob/.i3/i3bar.full.conf \
         -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.DP-2-2-8-left-external.log"
+        -l /home/ob/.i3/py3status.DP-2-2-8-avira-left-DP-2-2-8.log"
     position bottom
     tray_padding 1
     tray_output primary
@@ -398,19 +400,87 @@ bar {
 }
 ### i3bar.tpl.conf ###
 bar {
-    id right-external
+    id avira-right-DP-1-2
     output DP-1-2
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
         -c /home/ob/.i3/i3bar.full.conf \
         -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.DP-1-2-right-external.log"
+        -l /home/ob/.i3/py3status.DP-1-2-avira-right-DP-1-2.log"
     position bottom
     tray_padding 1
     tray_output primary
     font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
     mode dock
+    modifier Mod4
+    bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
+    bindsym button4 nop
+    bindsym button5 nop
+    separator_symbol  ║ 
+    colors {
+        background #002b36
+        statusline #dc322f
+        separator  #002b36
+        focused_background #eee8d5
+        focused_statusline #268bd2
+        focused_separator  #93a1a1
+        focused_workspace  #268bd2 #268bd2 #fdf6e3
+        active_workspace   #268bd2 #073642 #268bd2
+        inactive_workspace #073642 #073642 #93a1a1
+        urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
+        binding_mode       #fdf6e3 #cb4b16 #fdf6e3
+    }
+}
+### i3bar.tpl.conf ###
+bar {
+    id home-left-DP-1-1
+    output DP-1-1
+    status_command "py3status \
+        --dbus-notify \
+        --timeout 1 \
+        -c /home/ob/.i3/i3bar.full.conf \
+        -i /home/ob/.i3/py3status \
+        -l /home/ob/.i3/py3status.DP-1-1-home-left-DP-1-1.log"
+    position bottom
+    tray_padding 1
+    tray_output primary
+    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
+    mode dock
+    modifier Mod4
+    bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
+    bindsym button4 nop
+    bindsym button5 nop
+    separator_symbol  ║ 
+    colors {
+        background #002b36
+        statusline #dc322f
+        separator  #002b36
+        focused_background #eee8d5
+        focused_statusline #268bd2
+        focused_separator  #93a1a1
+        focused_workspace  #268bd2 #268bd2 #fdf6e3
+        active_workspace   #268bd2 #073642 #268bd2
+        inactive_workspace #073642 #073642 #93a1a1
+        urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
+        binding_mode       #fdf6e3 #cb4b16 #fdf6e3
+    }
+}
+### i3bar.tpl.conf ###
+bar {
+    id home-right-DP-1-2-8
+    output DP-1-2-8
+    status_command "py3status \
+        --dbus-notify \
+        --timeout 1 \
+        -c /home/ob/.i3/i3bar.full.conf \
+        -i /home/ob/.i3/py3status \
+        -l /home/ob/.i3/py3status.DP-1-2-8-home-right-DP-1-2-8.log"
+    position bottom
+    tray_padding 1
+    tray_output primary
+    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
+    mode hide
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
@@ -440,6 +510,40 @@ bar {
         -c /home/ob/.i3/i3bar.full.conf \
         -i /home/ob/.i3/py3status \
         -l /home/ob/.i3/py3status.HDMI-1-HDMI.log"
+    position bottom
+    tray_padding 1
+    tray_output primary
+    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
+    mode dock
+    modifier Mod4
+    bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
+    bindsym button4 nop
+    bindsym button5 nop
+    separator_symbol  ║ 
+    colors {
+        background #002b36
+        statusline #dc322f
+        separator  #002b36
+        focused_background #eee8d5
+        focused_statusline #268bd2
+        focused_separator  #93a1a1
+        focused_workspace  #268bd2 #268bd2 #fdf6e3
+        active_workspace   #268bd2 #073642 #268bd2
+        inactive_workspace #073642 #073642 #93a1a1
+        urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
+        binding_mode       #fdf6e3 #cb4b16 #fdf6e3
+    }
+}
+### i3bar.tpl.conf ###
+bar {
+    id laptop
+    output HDMI-1
+    status_command "py3status \
+        --dbus-notify \
+        --timeout 1 \
+        -c /home/ob/.i3/i3bar.clock.conf \
+        -i /home/ob/.i3/py3status \
+        -l /home/ob/.i3/py3status.HDMI-1-laptop.log"
     position bottom
     tray_padding 1
     tray_output primary
