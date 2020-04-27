@@ -11,27 +11,28 @@
       "tray_padding": "1"
     },
     "targets": {
-      "laptop-internal-eDP-1": {
+      "laptop-internal": {
         "output": "eDP-1",
         "position": "bottom",
         "select": "full"
       },
-      "avira-left-DP-2-2-8": {
+      "avira-left": {
         "output": "DP-2-2-8",
         "position": "bottom",
         "select": "full"
       },
-      "avira-right-DP-1-2": {
+      "avira-right": {
         "output": "DP-1-2",
         "position": "bottom",
         "select": "full"
       },
-      "home-left-DP-1-1": {
+      "home-left": {
+        "mode": "hide",
         "output": "DP-1-1",
         "position": "bottom",
         "select": "full"
       },
-      "home-right-DP-1-2-8": {
+      "home-right": {
         "mode": "hide",
         "output": "DP-1-2-8",
         "position": "bottom",

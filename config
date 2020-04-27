@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Mon Apr 20 14:49:29 2020) #
+# Built from ~/.i3/config.d by i3configger (Mon Apr 27 20:16:39 2020) #
 #######################################################################
 
 ### 0-basics.conf ###
@@ -169,7 +169,11 @@ bindsym Mod4+Control+p exec --no-startup-id playerctl play-pause
 
 # music stuff not in use atm
 # bindsym Mod4+Control+p exec --no-startup-id mpc toggle
+
+# context menu with Win+y (more convenient then FN+RIGHT-CTRL)
+
 # bindsym --release Mod4+y exec sleep 0.1 && xdotool key Menu
+bindsym --release Mod4+y exec xdotool key Menu
 
 # Locking and suspending
 
@@ -208,6 +212,10 @@ font "pango:Ubuntu Condensed 12"
 ### layout.0-home.conf ###
 # TODO there must be a way to handle this more intelligently
 # if there is no native way, just set variables for the differing outputs
+# to make this work properly there also needs a different jsons for schemes
+# this way I can say something like
+#    ~/.virtualenvs/i3configger/bin/i3configger shadow bar:screen:left:mode dock
+# ... and it applies to the correct screen depending on where I am
 bindsym Mod4+s move workspace to output DP-1-1
 bindsym Mod4+d move workspace to output DP-1-2-8
 bindsym Mod4+x move workspace to output eDP-1
@@ -224,8 +232,9 @@ bindsym Mod4+w mode "i3configger"
 mode "i3configger" {
     bindsym Left exec --no-startup-id "~/.virtualenvs/i3configger/bin/i3configger select-previous colors --i3-refresh-msg restart"
     bindsym Right exec --no-startup-id  "~/.virtualenvs/i3configger/bin/i3configger select-next colors --i3-refresh-msg restart"
-    bindsym Up exec --no-startup-id "~/.virtualenvs/i3configger/bin/i3configger shadow bars:targets:laptop:mode dock"
-    bindsym Down exec --no-startup-id "~/.virtualenvs/i3configger/bin/i3configger shadow bars:targets:laptop:mode hide"
+    # TODO - see layout.home.conf
+    bindsym Up exec --no-startup-id "~/.virtualenvs/i3configger/bin/i3configger shadow bars:targets:laptop-internal:mode dock"
+    bindsym Down exec --no-startup-id "~/.virtualenvs/i3configger/bin/i3configger shadow bars:targets:laptop-internal:mode hide"
 
     # TODO
     # fonts bigger/smaller
@@ -323,6 +332,30 @@ for_window [class="jetbrains-pycharm" title="(^Settings|^Shelve Changes|^Keyboar
 # for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace " 2:   "; workspace " 2:   "
 #for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable
 
+# the most annoying things is the search everywhere and find dialogues that seem to be unable to remember a sane
+# position/size especially when switching between different monitor setups - here is an xprop of a search everywhere
+
+# _NET_WM_WINDOW_TYPE(ATOM) = _NET_WM_WINDOW_TYPE_DIALOG
+# _MOTIF_DRAG_RECEIVER_INFO(_MOTIF_DRAG_RECEIVER_INFO) = 0x6c, 0x0, 0x5, 0x0, 0x2, 0x4, 0x60, 0x2, 0x0, 0x0, 0x0, 0x0, 0x10, 0x0, 0x0, 0x0
+# XdndAware(ATOM) = BITMAP
+# _NET_WM_STATE(ATOM) = _NET_WM_STATE_SKIP_TASKBAR
+# WM_HINTS(WM_HINTS):
+# 		Client accepts input or input focus: False
+# 		window id # of group leader: 0x260004d
+# WM_TRANSIENT_FOR(WINDOW): window id # 0x260004d
+# _NET_WM_PID(CARDINAL) = 12488
+# WM_CLIENT_MACHINE(STRING) = "h2g2"
+# WM_PROTOCOLS(ATOM): protocols
+# _MOTIF_WM_HINTS(_MOTIF_WM_HINTS) = 0x3, 0x0, 0x0, 0x0, 0x0
+# WM_NORMAL_HINTS(WM_SIZE_HINTS):
+# 		program specified location: 774, 232
+# 		program specified size: 930 by 516
+# 		window gravity: NorthWest
+# WM_CLASS(STRING) = "jetbrains-pycharm", "jetbrains-pycharm"
+# WM_CLIENT_LEADER(WINDOW): window id # 0x2600008
+# _NET_WM_NAME(UTF8_STRING) = "win6"
+# WM_NAME(STRING) = "win6"
+
 
 ### window-fixers-remote-desktops.conf ###
 for_window [title="FreeRDP:.*"] floating disable
@@ -332,19 +365,19 @@ for_window [class="xfdesktop"] floating enable
 
 ### i3bar.tpl.conf ###
 bar {
-    id laptop-internal-eDP-1
+    id laptop-internal
     output eDP-1
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
         -c /home/ob/.i3/i3bar.full.conf \
         -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.eDP-1-laptop-internal-eDP-1.log"
+        -l /home/ob/.i3/py3status.eDP-1-laptop-internal.log"
     position bottom
     tray_padding 1
     tray_output primary
     font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
-    mode dock
+    mode hide
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
@@ -366,14 +399,14 @@ bar {
 }
 ### i3bar.tpl.conf ###
 bar {
-    id avira-left-DP-2-2-8
+    id avira-left
     output DP-2-2-8
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
         -c /home/ob/.i3/i3bar.full.conf \
         -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.DP-2-2-8-avira-left-DP-2-2-8.log"
+        -l /home/ob/.i3/py3status.DP-2-2-8-avira-left.log"
     position bottom
     tray_padding 1
     tray_output primary
@@ -400,14 +433,14 @@ bar {
 }
 ### i3bar.tpl.conf ###
 bar {
-    id avira-right-DP-1-2
+    id avira-right
     output DP-1-2
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
         -c /home/ob/.i3/i3bar.full.conf \
         -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.DP-1-2-avira-right-DP-1-2.log"
+        -l /home/ob/.i3/py3status.DP-1-2-avira-right.log"
     position bottom
     tray_padding 1
     tray_output primary
@@ -434,19 +467,19 @@ bar {
 }
 ### i3bar.tpl.conf ###
 bar {
-    id home-left-DP-1-1
+    id home-left
     output DP-1-1
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
         -c /home/ob/.i3/i3bar.full.conf \
         -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.DP-1-1-home-left-DP-1-1.log"
+        -l /home/ob/.i3/py3status.DP-1-1-home-left.log"
     position bottom
     tray_padding 1
     tray_output primary
     font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
-    mode dock
+    mode hide
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
@@ -468,14 +501,14 @@ bar {
 }
 ### i3bar.tpl.conf ###
 bar {
-    id home-right-DP-1-2-8
+    id home-right
     output DP-1-2-8
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
         -c /home/ob/.i3/i3bar.full.conf \
         -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.DP-1-2-8-home-right-DP-1-2-8.log"
+        -l /home/ob/.i3/py3status.DP-1-2-8-home-right.log"
     position bottom
     tray_padding 1
     tray_output primary
@@ -510,40 +543,6 @@ bar {
         -c /home/ob/.i3/i3bar.full.conf \
         -i /home/ob/.i3/py3status \
         -l /home/ob/.i3/py3status.HDMI-1-HDMI.log"
-    position bottom
-    tray_padding 1
-    tray_output primary
-    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
-    mode dock
-    modifier Mod4
-    bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
-    bindsym button4 nop
-    bindsym button5 nop
-    separator_symbol  ║ 
-    colors {
-        background #002b36
-        statusline #dc322f
-        separator  #002b36
-        focused_background #eee8d5
-        focused_statusline #268bd2
-        focused_separator  #93a1a1
-        focused_workspace  #268bd2 #268bd2 #fdf6e3
-        active_workspace   #268bd2 #073642 #268bd2
-        inactive_workspace #073642 #073642 #93a1a1
-        urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
-        binding_mode       #fdf6e3 #cb4b16 #fdf6e3
-    }
-}
-### i3bar.tpl.conf ###
-bar {
-    id laptop
-    output HDMI-1
-    status_command "py3status \
-        --dbus-notify \
-        --timeout 1 \
-        -c /home/ob/.i3/i3bar.clock.conf \
-        -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.HDMI-1-laptop.log"
     position bottom
     tray_padding 1
     tray_output primary

@@ -1,0 +1,134 @@
+{
+    "border": "normal",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 556,
+       "width": 884,
+       "x": 0,
+       "y": 0
+    },
+    "name": "CSSH term 1",
+    "percent": 0.2,
+    "swallows": [
+       {
+       "class": "^XTerm$",
+       "instance": "^xterm$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 556,
+       "width": 884,
+       "x": 0,
+       "y": 0
+    },
+    "name": "CSSH: term 2",
+    "percent": 0.2,
+    "swallows": [
+       {
+       "class": "^XTerm$",
+       "instance": "^xterm$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 556,
+       "width": 884,
+       "x": 0,
+       "y": 0
+    },
+    "name": "CSSH term 3",
+    "percent": 0.2,
+    "swallows": [
+       {
+       "class": "^XTerm$",
+       "instance": "^xterm$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 556,
+       "width": 884,
+       "x": 0,
+       "y": 0
+    },
+    "name": "CSSH term 4",
+    "percent": 0.285185185185185,
+    "swallows": [
+       {
+       "class": "^XTerm$",
+       "instance": "^xterm$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "tabbed",
+    "percent": 0.114814814814815,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "normal",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 53,
+               "width": 183,
+               "x": 0,
+               "y": 0
+            },
+            "name": "CSSH [4]",
+            "percent": 0.5,
+            "swallows": [
+               {
+               "class": "^Cssh$",
+               "instance": "^cssh$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "normal",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 650,
+               "width": 1042,
+               "x": 0,
+               "y": 0
+            },
+            "name": "[ZSH] pts/4 ob@h2g2: < ~ > cssh ai-{1-4}.build.avira.org",
+            "percent": 0.5,
+            "swallows": [
+               {
+               "class": "^Xfce4\\-terminal$",
+               "instance": "^xfce4\\-terminal$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
