@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Fri May  1 16:14:31 2020) #
+# Built from ~/.i3/config.d by i3configger (Fri May  1 18:52:12 2020) #
 #######################################################################
 
 ### 0-basics.conf ###
@@ -230,8 +230,9 @@ bindsym Mod4+Shift+Right move right
 ### mode-central-control.conf ###
 bindsym Mod4+c mode "CENTRAL-CONTROL-PROGRAM"
 mode "CENTRAL-CONTROL-PROGRAM" {
-    bindsym t exec --no-startup-id "~/.i3/bin/toggle-touchpad.sh"
-    bindsym u exec --no-startup-id "~/.i3/bin/toggle-unclutter.sh"
+    bindsym s exec --no-startup-id "~/.i3/bin/toggle-screenkey.sh && xdotool key Escape"
+    bindsym t exec --no-startup-id "~/.i3/bin/toggle-touchpad.sh && xdotool key Escape"
+    bindsym u exec --no-startup-id "~/.i3/bin/toggle-unclutter.sh && xdotool key Escape"
 
     bindsym Escape mode "default"
 }
