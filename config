@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Mon Apr 27 20:16:39 2020) #
+# Built from ~/.i3/config.d by i3configger (Fri May  1 16:14:31 2020) #
 #######################################################################
 
 ### 0-basics.conf ###
@@ -227,6 +227,16 @@ bindsym Mod4+Shift+Up move up
 bindsym Mod4+Shift+Right move right
 
 
+### mode-central-control.conf ###
+bindsym Mod4+c mode "CENTRAL-CONTROL-PROGRAM"
+mode "CENTRAL-CONTROL-PROGRAM" {
+    bindsym t exec --no-startup-id "~/.i3/bin/toggle-touchpad.sh"
+    bindsym u exec --no-startup-id "~/.i3/bin/toggle-unclutter.sh"
+
+    bindsym Escape mode "default"
+}
+
+
 ### mode-i3configger.conf ###
 bindsym Mod4+w mode "i3configger"
 mode "i3configger" {
@@ -377,7 +387,7 @@ bar {
     tray_padding 1
     tray_output primary
     font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
-    mode hide
+    mode dock
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
