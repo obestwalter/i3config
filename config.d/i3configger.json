@@ -1,7 +1,7 @@
 {
   "bars": {
     "defaults": {
-      "font": "pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10",
+      "font": "pango:Anonymous Pro Bold 13, Font Awesome 5 Free 13, Font Awesome 5 Free Solid 13, Font Awesome 5 Brands 13",
       "mode": "dock",
       "position": "bottom",
       "select": "clock",
@@ -27,13 +27,13 @@
         "select": "full"
       },
       "home-left": {
-        "mode": "hide",
+        "mode": "dock",
         "output": "DP-1-1",
         "position": "bottom",
         "select": "full"
       },
       "home-right": {
-        "mode": "hide",
+        "mode": "dock",
         "output": "DP-1-2-8",
         "position": "bottom",
         "select": "full"

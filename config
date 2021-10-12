@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Fri May  1 18:52:12 2020) #
+# Built from ~/.i3/config.d by i3configger (Sat Mar 13 14:50:43 2021) #
 #######################################################################
 
 ### 0-basics.conf ###
@@ -18,8 +18,8 @@ force_display_urgency_hint 3000 ms
 hide_edge_borders smart
 
 client.background       #000000
-client.focused          #fdf6e3  #268bd2  #fdf6e3  #268bd2  #fdf6e3
-client.unfocused        #eee8d5  #073642  #93a1a1  #268bd2  #fdf6e3
+client.focused          #268bd2  #268bd2  #fdf6e3  #268bd2  #fdf6e3
+client.unfocused        #073642  #073642  #93a1a1  #268bd2  #fdf6e3
 client.focused_inactive #eee8d5 #002b36 #268bd2 #268bd2 #002b36
 client.urgent           #fdf6e3 #cb4b16 #fdf6e3 #268bd2 #2aa198
 client.placeholder      #fdf6e3  #2aa198  #657b83  #268bd2  #2aa198
@@ -87,17 +87,20 @@ for_window [class="libreoffice.*"] title_format "<span foreground='#fdf6e3'> 
 
 
 ### control-containers.conf ###
-bindsym Mod4+asciicircum focus mode_toggle
+# 49: asciicircum / backtick
+bindcode Mod4+49 focus mode_toggle
+bindcode Mod4+Shift+49 floating toggle
 bindsym Mod4+u layout tabbed
 bindsym Mod4+i layout stacking
 bindsym Mod4+o layout toggle split
 bindsym Mod4+p focus parent
-# diaresis are dots on top so win+ü :)
-bindsym Mod4+udiaeresis layout toggle all
+# 34: ü / [
+bindcode Mod4+34 layout toggle all
 bindsym Mod4+Shift+p focus child
-bindsym Mod4+comma split h
-bindsym Mod4+period split v
-bindsym Mod4+Shift+asciicircum floating toggle
+# 59: comma
+bindcode Mod4+59 split h
+# 60: dot
+bindcode Mod4+60 split v
 
 
 ### control-fn-keys.conf ###
@@ -148,6 +151,13 @@ bindsym Mod4+Shift+8 move container to workspace number " 8:   "
 bindsym Mod4+Shift+9 move container to workspace number " 9:  "
 bindsym Mod4+Shift+0 move container to workspace number "10:  "
 
+# TODO try this https://github.com/seamus-45/roficlip
+bindsym Mod1+space exec "\
+    rofi -combi-modi window,drun,run,ssh \
+    -show combi -modi combi,run,files:~/.i3/bin/rofi-file-browser.sh"
+
+bindsym Mod1+Shift+space exec xfce4-appfinder
+
 
 ### control-others.conf ###
 # i3wm
@@ -176,37 +186,31 @@ bindsym Mod4+Control+p exec --no-startup-id playerctl play-pause
 bindsym --release Mod4+y exec xdotool key Menu
 
 # Locking and suspending
-
 # TODO make switchable theme: img -> solid -> transparent
+# i3lock -c BF5700
+# i3lock -f -t -i ~/Dropbox/Pictures/wallpapers/single_screen/generative-orange.png
+# xtrlock
+# TODO make this kind of stuff work
+# set /home/ob/.i3/bin/lockdown.sh ~/.i3/bin/lockdown.sh
 
-# set xtrlock i3lock -f -t -i ~/Dropbox/Pictures/wallpapers/single_screen/generative-orange.png
-
-# set xtrlock i3lock -c BF5700
-
-bindsym Mod4+Shift+l exec xtrlock
-bindsym Mod4+Shift+s exec systemctl suspend & xtrlock
+bindsym Mod4+Shift+l exec /home/ob/.i3/bin/lockdown.sh
+bindsym Mod4+Shift+s exec systemctl suspend & /home/ob/.i3/bin/lockdown.sh
 bindsym Mod4+Shift+g exec scrot
 
 
-### control-rofi.conf ###
-bindsym Mod1+space exec "\
-    rofi -combi-modi window,drun,run,ssh \
-    -show combi -modi combi,run,files:~/.i3/bin/rofi-file-browser.sh"
-
-# TODO try this https://github.com/seamus-45/roficlip
-
-
 ### control-windows.conf ###
-# numbersign == #
 bindsym F11 fullscreen
-bindsym Mod4+Shift+numbersign kill
+# left of enter on US ANSI keyboard
+bindcode Mod4+Shift+48 kill
+# left of enter on DE ISO keyboard
+bindcode Mod4+Shift+51 kill
 bindsym Shift+F12 move scratchpad
 bindsym F12 scratchpad show
 bindsym Control+F12 sticky toggle
 
 
 ### hostname.h2g2.conf ###
-font "pango:Ubuntu Condensed 12"
+font "pango:Anonymous Pro Bold 14"
 
 
 ### layout.0-home.conf ###
@@ -387,12 +391,13 @@ bar {
     position bottom
     tray_padding 1
     tray_output primary
-    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
+    font pango:Anonymous Pro Bold 13, Font Awesome 5 Free 13, Font Awesome 5 Free Solid 13, Font Awesome 5 Brands 13
     mode dock
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
     bindsym button5 nop
+    workspace_min_width 90
     separator_symbol  ║ 
     colors {
         background #002b36
@@ -400,7 +405,7 @@ bar {
         separator  #002b36
         focused_background #eee8d5
         focused_statusline #268bd2
-        focused_separator  #93a1a1
+        focused_separator  #6c71c4
         focused_workspace  #268bd2 #268bd2 #fdf6e3
         active_workspace   #268bd2 #073642 #268bd2
         inactive_workspace #073642 #073642 #93a1a1
@@ -421,12 +426,13 @@ bar {
     position bottom
     tray_padding 1
     tray_output primary
-    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
+    font pango:Anonymous Pro Bold 13, Font Awesome 5 Free 13, Font Awesome 5 Free Solid 13, Font Awesome 5 Brands 13
     mode dock
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
     bindsym button5 nop
+    workspace_min_width 90
     separator_symbol  ║ 
     colors {
         background #002b36
@@ -434,7 +440,7 @@ bar {
         separator  #002b36
         focused_background #eee8d5
         focused_statusline #268bd2
-        focused_separator  #93a1a1
+        focused_separator  #6c71c4
         focused_workspace  #268bd2 #268bd2 #fdf6e3
         active_workspace   #268bd2 #073642 #268bd2
         inactive_workspace #073642 #073642 #93a1a1
@@ -455,12 +461,13 @@ bar {
     position bottom
     tray_padding 1
     tray_output primary
-    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
+    font pango:Anonymous Pro Bold 13, Font Awesome 5 Free 13, Font Awesome 5 Free Solid 13, Font Awesome 5 Brands 13
     mode dock
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
     bindsym button5 nop
+    workspace_min_width 90
     separator_symbol  ║ 
     colors {
         background #002b36
@@ -468,7 +475,7 @@ bar {
         separator  #002b36
         focused_background #eee8d5
         focused_statusline #268bd2
-        focused_separator  #93a1a1
+        focused_separator  #6c71c4
         focused_workspace  #268bd2 #268bd2 #fdf6e3
         active_workspace   #268bd2 #073642 #268bd2
         inactive_workspace #073642 #073642 #93a1a1
@@ -489,12 +496,13 @@ bar {
     position bottom
     tray_padding 1
     tray_output primary
-    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
-    mode hide
+    font pango:Anonymous Pro Bold 13, Font Awesome 5 Free 13, Font Awesome 5 Free Solid 13, Font Awesome 5 Brands 13
+    mode dock
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
     bindsym button5 nop
+    workspace_min_width 90
     separator_symbol  ║ 
     colors {
         background #002b36
@@ -502,7 +510,7 @@ bar {
         separator  #002b36
         focused_background #eee8d5
         focused_statusline #268bd2
-        focused_separator  #93a1a1
+        focused_separator  #6c71c4
         focused_workspace  #268bd2 #268bd2 #fdf6e3
         active_workspace   #268bd2 #073642 #268bd2
         inactive_workspace #073642 #073642 #93a1a1
@@ -523,12 +531,13 @@ bar {
     position bottom
     tray_padding 1
     tray_output primary
-    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
-    mode hide
+    font pango:Anonymous Pro Bold 13, Font Awesome 5 Free 13, Font Awesome 5 Free Solid 13, Font Awesome 5 Brands 13
+    mode dock
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
     bindsym button5 nop
+    workspace_min_width 90
     separator_symbol  ║ 
     colors {
         background #002b36
@@ -536,7 +545,7 @@ bar {
         separator  #002b36
         focused_background #eee8d5
         focused_statusline #268bd2
-        focused_separator  #93a1a1
+        focused_separator  #6c71c4
         focused_workspace  #268bd2 #268bd2 #fdf6e3
         active_workspace   #268bd2 #073642 #268bd2
         inactive_workspace #073642 #073642 #93a1a1
@@ -557,12 +566,13 @@ bar {
     position bottom
     tray_padding 1
     tray_output primary
-    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
+    font pango:Anonymous Pro Bold 13, Font Awesome 5 Free 13, Font Awesome 5 Free Solid 13, Font Awesome 5 Brands 13
     mode dock
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
     bindsym button5 nop
+    workspace_min_width 90
     separator_symbol  ║ 
     colors {
         background #002b36
@@ -570,7 +580,7 @@ bar {
         separator  #002b36
         focused_background #eee8d5
         focused_statusline #268bd2
-        focused_separator  #93a1a1
+        focused_separator  #6c71c4
         focused_workspace  #268bd2 #268bd2 #fdf6e3
         active_workspace   #268bd2 #073642 #268bd2
         inactive_workspace #073642 #073642 #93a1a1
@@ -578,3 +588,16 @@ bar {
         binding_mode       #fdf6e3 #cb4b16 #fdf6e3
     }
 }
+
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
+for_window [class="plasmashell"] floating enable;
+for_window [class="Plasma"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [title="win7"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Kmix"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+for_window [class="(?i)*nextcloud*"] floating disable
+for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px
+no_focus [class="plasmashell" window_type="notification"] 
