@@ -1,8 +1,8 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Thu May 15 19:42:17 2025) #
+# Built from ~/.i3/config.d by i3configger (Tue May 20 16:02:15 2025) #
 #######################################################################
 
-### 0-basics.conf ###
+### 0-variables.conf ###
 floating_modifier Mod4
 
 focus_follows_mouse no
@@ -25,9 +25,10 @@ client.urgent           #fdf6e3 #cb4b16 #fdf6e3 #268bd2 #2aa198
 client.placeholder      #fdf6e3  #2aa198  #657b83  #268bd2  #2aa198
 
 
-### 1-workspaces-and-windows.conf ###
+### 2-workspaces-and-windows.conf ###
 # https://fontawesome.com/cheatsheet/free/solid
-#     復  
+# https://fontawesome.com/v5/search
+#       
 
 # 8 -> remote connections
 # 9 -> admin / monitoring / logs
@@ -65,6 +66,11 @@ for_window [class="(.*)Chrome(.*)"] title_format "  "
 #for_window [class="libreoffice.*"] title_format "  "
 
 
+### 3-startup.conf ###
+exec_always --no-startup-id picom --experimental-backends --config ~/.i3/picom.conf
+exec_always --no-startup-id dunst -markup &
+
+
 ### control-containers.conf ###
 bindsym Mod4+asciicircum focus mode_toggle
 bindsym Mod4+u layout tabbed
@@ -73,10 +79,22 @@ bindsym Mod4+o layout toggle split
 bindsym Mod4+p focus parent
 # diaresis are dots on top so win+ü :)
 bindsym Mod4+udiaeresis layout toggle all
-bindsym Mod4+Shift+p focus child
+bindsym Mod4+Shift+c focus child
 bindsym Mod4+comma split h
 bindsym Mod4+period split v
 bindsym Mod4+Shift+asciicircum floating toggle
+
+# https://i3wm.org/docs/userguide.html#move_to_outputs
+# FIXME: next just cycles through all monitors
+bindsym Mod4+Shift+n move workspace to output next
+bindsym Mod4+Shift+s move workspace to output primary
+bindsym Mod4+x move workspace to output nonprimary
+bindsym Mod4+h move workspace to output HDMI-1
+
+bindsym Mod4+Shift+Left move left
+bindsym Mod4+Shift+Down move down
+bindsym Mod4+Shift+Up move up
+bindsym Mod4+Shift+Right move right
 
 
 ### control-fn-keys.conf ###
@@ -105,7 +123,7 @@ bindcode Shift+107 exec "xfce4-screenshooter --region"
 
 ### control-navigation.conf ###
 bindsym Mod1+Tab workspace back_and_forth
-bindsym Mod4+Tab exec "rofi -show window"
+bindsym Mod4+Tab exec --no-startup-id "rofi -show window"
 bindsym Mod4+Shift+Tab exec "rofi -modi 'Workspace:~/.i3/bin/i3wslist.sh,Move to Workspace:~/.i3/bin/i3wsmove.sh' -show Workspace"
 
 bindsym Mod4+Left focus left
@@ -129,12 +147,6 @@ bindsym Mod4+Shift+0 move container to workspace number "10:  "
 
 
 ### control-others.conf ###
-# i3wm
-
-bindsym Mod4+Shift+e exec "i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
-bindsym Mod4+Shift+c restart
-bindsym Mod4+Shift+r reload
-
 # Terminal
 
 bindsym Mod4+Return exec xfce4-terminal --maximize --hide-menubar
@@ -153,18 +165,6 @@ bindsym Mod4+Control+p exec --no-startup-id playerctl play-pause
 
 # bindsym --release Mod4+y exec sleep 0.1 && xdotool key Menu
 bindsym --release Mod4+y exec xdotool key Menu
-
-# Locking and suspending
-
-# TODO make switchable theme: img -> solid -> transparent
-
-# set xtrlock i3lock -f -t -i ~/Dropbox/Pictures/wallpapers/single_screen/generative-orange.png
-
-# set xtrlock i3lock -c BF5700
-
-bindsym Mod4+Shift+l exec xtrlock
-bindsym Mod4+Shift+s exec systemctl suspend & xtrlock
-bindsym Mod4+Shift+g exec scrot
 
 
 ### control-rofi.conf ###
@@ -188,29 +188,21 @@ bindsym Control+F12 sticky toggle
 font "pango:Ubuntu Condensed 12"
 
 
-### layout.0-home.conf ###
-# TODO there must be a way to handle this more intelligently
-# if there is no native way, just set variables for the differing outputs
-# to make this work properly there also needs a different jsons for schemes
-# this way I can say something like
-#    ~/.virtualenvs/i3configger/bin/i3configger shadow bar:screen:left:mode dock
-# ... and it applies to the correct screen depending on where I am
-bindsym Mod4+x move workspace to output eDP-1-1
-bindsym Mod4+s move workspace to output DP-1-2
-bindsym Mod4+h move workspace to output HDMI-1
-
-bindsym Mod4+Shift+Left move left
-bindsym Mod4+Shift+Down move down
-bindsym Mod4+Shift+Up move up
-bindsym Mod4+Shift+Right move right
-
-
 ### mode-central-control.conf ###
-bindsym Mod4+c mode "CENTRAL-CONTROL-PROGRAM"
-mode "CENTRAL-CONTROL-PROGRAM" {
+# set i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png i3lock -c BF5700
+#set i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png xtrlock
+
+bindsym Mod4+c mode "CENTRAL-CONTROL-PROGRAM   =>   r: reload  c: restart  x: exit  l: lock  s: suspend  g: scrot"
+mode "CENTRAL-CONTROL-PROGRAM   =>   r: reload  c: restart  x: exit  l: lock  s: suspend  g: scrot" {
     bindsym s exec --no-startup-id "~/.i3/bin/toggle-screenkey.sh && xdotool key Escape"
     bindsym t exec --no-startup-id "~/.i3/bin/toggle-touchpad.sh && xdotool key Escape"
     bindsym u exec --no-startup-id "~/.i3/bin/toggle-unclutter.sh && xdotool key Escape"
+    bindsym r exec "i3-msg reload"
+    bindsym c exec "i3-msg restart"
+    bindsym x exec "i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
+    bindsym l exec "i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png & xdotool key Escape"
+    bindsym s exec "systemctl suspend & i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png"
+    bindsym g exec "scrot && xdotool key Escape"
 
     bindsym Escape mode "default"
 }
@@ -219,11 +211,11 @@ mode "CENTRAL-CONTROL-PROGRAM" {
 ### mode-i3configger.conf ###
 bindsym Mod4+w mode "i3configger"
 mode "i3configger" {
-    bindsym Left exec --no-startup-id "~/.virtualenvs/i3configger/bin/i3configger select-previous colors --i3-refresh-msg restart"
-    bindsym Right exec --no-startup-id  "~/.virtualenvs/i3configger/bin/i3configger select-next colors --i3-refresh-msg restart"
+    bindsym Left exec --no-startup-id "/home/oliver.bestwalter/_sys/bin/i3configger 'select-previous colors' --i3-refresh-msg restart"
+    bindsym Right exec --no-startup-id  "/home/oliver.bestwalter/_sys/bin/i3configger 'select-next colors' --i3-refresh-msg restart"
     # TODO - see layout.home.conf
-    bindsym Up exec --no-startup-id "~/.virtualenvs/i3configger/bin/i3configger shadow bars:targets:laptop-internal:mode dock"
-    bindsym Down exec --no-startup-id "~/.virtualenvs/i3configger/bin/i3configger shadow bars:targets:laptop-internal:mode hide"
+    bindsym Up exec --no-startup-id "/home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode dock'"
+    bindsym Down exec --no-startup-id "/home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode hide'"
 
     # TODO
     # fonts bigger/smaller
@@ -236,7 +228,7 @@ mode "i3configger" {
     # bindsym Shift+Down
     # bindsym Shift+Up
 
-    bindsym Return exec ~/.__pycmds__/i3configger/bin/i3configger
+    bindsym Return exec /home/oliver.bestwalter/_sys/bin/i3configger
     bindsym Escape mode "default"
 }
 
@@ -353,13 +345,13 @@ bar {
 ### i3bar.tpl.conf ###
 bar {
     id widescreen
-    output DP-1-2
+    output DP-1-1
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
         -c /home/oliver.bestwalter/.i3/i3bar.full.conf \
         -i /home/oliver.bestwalter/.i3/py3status \
-        -l /home/oliver.bestwalter/.i3/py3status.DP-1-2-widescreen.log"
+        -l /home/oliver.bestwalter/.i3/py3status.DP-1-1-widescreen.log"
     position bottom
     tray_padding 1
     tray_output primary

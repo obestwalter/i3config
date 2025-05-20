@@ -19,7 +19,7 @@
       },
       "widescreen": {
         "mode": "dock",
-        "output": "DP-1-2",
+        "output": "DP-1-1",
         "position": "bottom",
         "select": "full"
       },
