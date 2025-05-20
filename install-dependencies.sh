@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo apt install \
+sudo apt install --yes \
   arandr \
   bat \
   dtrx \
@@ -8,7 +8,7 @@ sudo apt install \
   i3 \
   nitrogen \
   picom \
-  playerctl
+  playerctl \
   py3status \
   rofi \
   screenkey \
