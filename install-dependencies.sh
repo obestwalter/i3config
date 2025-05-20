@@ -7,6 +7,7 @@ sudo apt install \
   fonts-font-awesome \
   i3 \
   nitrogen \
+  picom \
   playerctl
   py3status \
   rofi \
