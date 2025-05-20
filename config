@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Fri May  1 18:52:12 2020) #
+# Built from ~/.i3/config.d by i3configger (Thu May 15 19:42:17 2025) #
 #######################################################################
 
 ### 0-basics.conf ###
@@ -27,63 +27,42 @@ client.placeholder      #fdf6e3  #2aa198  #657b83  #268bd2  #2aa198
 
 ### 1-workspaces-and-windows.conf ###
 # https://fontawesome.com/cheatsheet/free/solid
-#     復 
+#     復  
 
-# 1 -> terminals
-# 2 -> hacking
-# 3 -> hacking / secondary
-# 4 -> browser
-# 5 -> file manager
-# 6 -> communication programs
-# 7 -> video meetings
 # 8 -> remote connections
 # 9 -> admin / monitoring / logs
 # 10 -> browser / secondary
 
 #  navigation shortcuts
-bindsym Mod4+1 workspace " 1:   "
-
-bindsym Mod4+2 workspace " 2:   "
-
-bindsym Mod4+3 workspace " 3:   "
-
-bindsym Mod4+4 workspace " 4:   "
-
+bindsym Mod4+1 workspace " 1:   "
+bindsym Mod4+e workspace " 2: |  "
+bindsym Mod4+2 workspace " 2: |  "
+bindsym Mod4+3 workspace " 3:   "
+bindsym Mod4+4 workspace " 4: |  "
 bindsym Mod4+5 workspace " 5:   "
-bindsym Mod4+e workspace " 5:   "
-
-bindsym Mod4+6 workspace " 6:   "
-
-bindsym Mod4+7 workspace " 7:   "
-
+bindsym Mod4+6 workspace " 6:   "
+bindsym Mod4+7 workspace " 7:   "
 bindsym Mod4+8 workspace " 8:   "
+bindsym Mod4+9 workspace " 9:  "
+bindsym Mod4+0 workspace "10:  "
 
-bindsym Mod4+9 workspace " 9:  "
-
-bindsym Mod4+0 workspace "10:  "
-
-# TODO i3configger: implement resolution of vars inside strings?
-# Then it could look like this and would dynamically change on scheme changes
-# set $iconWrapLeft <span foreground='#fdf6e3'>
-
-
-for_window [class="code-oss"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="gwenview"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="jetbrains-pycharm"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="(?i)firefox"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="krusader"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="(.*)terminal(.*)"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="Slack"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="Thunderbird"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [title="Write:.* Thunderbird"] title_format "<span foreground='#fdf6e3'>   </span> %title"
-for_window [title="Volume Control"] title_format "<span foreground='#fdf6e3'>   </span> %title"
+for_window [class="(.*)code(.*)"] title_format "   %title"
+#for_window [class="gwenview"] title_format "   %title"
+for_window [class="jetbrains-pycharm"] title_format "   %title"
+for_window [class="(?i)firefox"] title_format "   %title"
+for_window [class="krusader"] title_format "   %title"
+for_window [class="(.*)terminal(.*)"] title_format "   %title"
+for_window [class="Slack"] title_format "   %title"
+for_window [class="Thunderbird"] title_format "   %title"
+for_window [title="Write:.* Thunderbird"] title_format "   %title"
+for_window [title="Volume Control"] title_format "   %title"
+for_window [class="(.*)Chrome(.*)"] title_format "  "
 
 # not really checked / fixed
 
-for_window [class="Signal"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="(.*)Chromium-browser(.*)"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="VirtualBox.*"] title_format "<span foreground='#fdf6e3'>  </span> %title"
-for_window [class="libreoffice.*"] title_format "<span foreground='#fdf6e3'>  </span> %title"
+#for_window [class="Signal"] title_format "  "
+#for_window [class="VirtualBox.*"] title_format "  "
+#for_window [class="libreoffice.*"] title_format "  "
 
 
 ### control-containers.conf ###
@@ -137,16 +116,16 @@ bindsym Mod4+Right focus right
 bindsym Mod4+Mod1+Left workspace prev
 bindsym Mod4+Mod1+Right workspace next
 
-bindsym Mod4+Shift+1 move container to workspace number " 1:   "
-bindsym Mod4+Shift+2 move container to workspace number " 2:   "
-bindsym Mod4+Shift+3 move container to workspace number " 3:   "
-bindsym Mod4+Shift+4 move container to workspace number " 4:   "
+bindsym Mod4+Shift+1 move container to workspace number " 1:   "
+bindsym Mod4+Shift+2 move container to workspace number " 2: |  "
+bindsym Mod4+Shift+3 move container to workspace number " 3:   "
+bindsym Mod4+Shift+4 move container to workspace number " 4: |  "
 bindsym Mod4+Shift+5 move container to workspace number " 5:   "
-bindsym Mod4+Shift+6 move container to workspace number " 6:   "
-bindsym Mod4+Shift+7 move container to workspace number " 7:   "
+bindsym Mod4+Shift+6 move container to workspace number " 6:   "
+bindsym Mod4+Shift+7 move container to workspace number " 7:   "
 bindsym Mod4+Shift+8 move container to workspace number " 8:   "
-bindsym Mod4+Shift+9 move container to workspace number " 9:  "
-bindsym Mod4+Shift+0 move container to workspace number "10:  "
+bindsym Mod4+Shift+9 move container to workspace number " 9:  "
+bindsym Mod4+Shift+0 move container to workspace number "10:  "
 
 
 ### control-others.conf ###
@@ -205,7 +184,7 @@ bindsym F12 scratchpad show
 bindsym Control+F12 sticky toggle
 
 
-### hostname.h2g2.conf ###
+### hostname.LINX-000050.conf ###
 font "pango:Ubuntu Condensed 12"
 
 
@@ -216,9 +195,8 @@ font "pango:Ubuntu Condensed 12"
 # this way I can say something like
 #    ~/.virtualenvs/i3configger/bin/i3configger shadow bar:screen:left:mode dock
 # ... and it applies to the correct screen depending on where I am
-bindsym Mod4+s move workspace to output DP-1-1
-bindsym Mod4+d move workspace to output DP-1-2-8
-bindsym Mod4+x move workspace to output eDP-1
+bindsym Mod4+x move workspace to output eDP-1-1
+bindsym Mod4+s move workspace to output DP-1-2
 bindsym Mod4+h move workspace to output HDMI-1
 
 bindsym Mod4+Shift+Left move left
@@ -328,62 +306,26 @@ mode "resize / move" {
 bindsym Mod4+v exec --no-startup-id ~/.i3/bin/clipmagic.py
 
 
-### window-fixers-pycharm.conf ###
-# TODO turn this into a switchable scheme for single and multi monitor use
-
-# hint: use i3-xprop.sh to get the right classifiers for a window
-
-
-assign [class="jetbrains-pycharm" title="^Settings|^Shelve Changes|^Keyboard Shortcut|^Conflicts|^Merge Revisions"] " 2:   "
-for_window [class="jetbrains-pycharm" title="(^Settings|^Shelve Changes|^Keyboard Shortcut|^Conflicts|^Merge Revisions|Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] floating disable
-
-# assign [class="jetbrains-pycharm" title="(Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages|^Database Console|^Grep Console|^Unversioned Files|^Push Commits)"] " 3:   "
-
-# diff view hack
-# for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace " 2:   "; workspace " 2:   "
-#for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable
-
-# the most annoying things is the search everywhere and find dialogues that seem to be unable to remember a sane
-# position/size especially when switching between different monitor setups - here is an xprop of a search everywhere
-
-# _NET_WM_WINDOW_TYPE(ATOM) = _NET_WM_WINDOW_TYPE_DIALOG
-# _MOTIF_DRAG_RECEIVER_INFO(_MOTIF_DRAG_RECEIVER_INFO) = 0x6c, 0x0, 0x5, 0x0, 0x2, 0x4, 0x60, 0x2, 0x0, 0x0, 0x0, 0x0, 0x10, 0x0, 0x0, 0x0
-# XdndAware(ATOM) = BITMAP
-# _NET_WM_STATE(ATOM) = _NET_WM_STATE_SKIP_TASKBAR
-# WM_HINTS(WM_HINTS):
-# 		Client accepts input or input focus: False
-# 		window id # of group leader: 0x260004d
-# WM_TRANSIENT_FOR(WINDOW): window id # 0x260004d
-# _NET_WM_PID(CARDINAL) = 12488
-# WM_CLIENT_MACHINE(STRING) = "h2g2"
-# WM_PROTOCOLS(ATOM): protocols
-# _MOTIF_WM_HINTS(_MOTIF_WM_HINTS) = 0x3, 0x0, 0x0, 0x0, 0x0
-# WM_NORMAL_HINTS(WM_SIZE_HINTS):
-# 		program specified location: 774, 232
-# 		program specified size: 930 by 516
-# 		window gravity: NorthWest
-# WM_CLASS(STRING) = "jetbrains-pycharm", "jetbrains-pycharm"
-# WM_CLIENT_LEADER(WINDOW): window id # 0x2600008
-# _NET_WM_NAME(UTF8_STRING) = "win6"
-# WM_NAME(STRING) = "win6"
-
-
-### window-fixers-remote-desktops.conf ###
+### window-fixers.conf ###
 for_window [title="FreeRDP:.*"] floating disable
 for_window [class="xfreerdp"] floating disable
 for_window [class="xfdesktop"] floating enable
+
+for_window [class="(.*join\?action\=join.*|.*zoom.*)"] floating enable
+for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom - Licensed Account"] floating disable
+for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom Meeting"] floating disable
 
 
 ### i3bar.tpl.conf ###
 bar {
     id laptop-internal
-    output eDP-1
+    output eDP-1-1
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
-        -c /home/ob/.i3/i3bar.full.conf \
-        -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.eDP-1-laptop-internal.log"
+        -c /home/oliver.bestwalter/.i3/i3bar.full.conf \
+        -i /home/oliver.bestwalter/.i3/py3status \
+        -l /home/oliver.bestwalter/.i3/py3status.eDP-1-1-laptop-internal.log"
     position bottom
     tray_padding 1
     tray_output primary
@@ -410,121 +352,19 @@ bar {
 }
 ### i3bar.tpl.conf ###
 bar {
-    id avira-left
-    output DP-2-2-8
-    status_command "py3status \
-        --dbus-notify \
-        --timeout 1 \
-        -c /home/ob/.i3/i3bar.full.conf \
-        -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.DP-2-2-8-avira-left.log"
-    position bottom
-    tray_padding 1
-    tray_output primary
-    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
-    mode dock
-    modifier Mod4
-    bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
-    bindsym button4 nop
-    bindsym button5 nop
-    separator_symbol  ║ 
-    colors {
-        background #002b36
-        statusline #dc322f
-        separator  #002b36
-        focused_background #eee8d5
-        focused_statusline #268bd2
-        focused_separator  #93a1a1
-        focused_workspace  #268bd2 #268bd2 #fdf6e3
-        active_workspace   #268bd2 #073642 #268bd2
-        inactive_workspace #073642 #073642 #93a1a1
-        urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
-        binding_mode       #fdf6e3 #cb4b16 #fdf6e3
-    }
-}
-### i3bar.tpl.conf ###
-bar {
-    id avira-right
+    id widescreen
     output DP-1-2
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
-        -c /home/ob/.i3/i3bar.full.conf \
-        -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.DP-1-2-avira-right.log"
+        -c /home/oliver.bestwalter/.i3/i3bar.full.conf \
+        -i /home/oliver.bestwalter/.i3/py3status \
+        -l /home/oliver.bestwalter/.i3/py3status.DP-1-2-widescreen.log"
     position bottom
     tray_padding 1
     tray_output primary
     font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
     mode dock
-    modifier Mod4
-    bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
-    bindsym button4 nop
-    bindsym button5 nop
-    separator_symbol  ║ 
-    colors {
-        background #002b36
-        statusline #dc322f
-        separator  #002b36
-        focused_background #eee8d5
-        focused_statusline #268bd2
-        focused_separator  #93a1a1
-        focused_workspace  #268bd2 #268bd2 #fdf6e3
-        active_workspace   #268bd2 #073642 #268bd2
-        inactive_workspace #073642 #073642 #93a1a1
-        urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
-        binding_mode       #fdf6e3 #cb4b16 #fdf6e3
-    }
-}
-### i3bar.tpl.conf ###
-bar {
-    id home-left
-    output DP-1-1
-    status_command "py3status \
-        --dbus-notify \
-        --timeout 1 \
-        -c /home/ob/.i3/i3bar.full.conf \
-        -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.DP-1-1-home-left.log"
-    position bottom
-    tray_padding 1
-    tray_output primary
-    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
-    mode hide
-    modifier Mod4
-    bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
-    bindsym button4 nop
-    bindsym button5 nop
-    separator_symbol  ║ 
-    colors {
-        background #002b36
-        statusline #dc322f
-        separator  #002b36
-        focused_background #eee8d5
-        focused_statusline #268bd2
-        focused_separator  #93a1a1
-        focused_workspace  #268bd2 #268bd2 #fdf6e3
-        active_workspace   #268bd2 #073642 #268bd2
-        inactive_workspace #073642 #073642 #93a1a1
-        urgent_workspace   #fdf6e3 #cb4b16 #fdf6e3
-        binding_mode       #fdf6e3 #cb4b16 #fdf6e3
-    }
-}
-### i3bar.tpl.conf ###
-bar {
-    id home-right
-    output DP-1-2-8
-    status_command "py3status \
-        --dbus-notify \
-        --timeout 1 \
-        -c /home/ob/.i3/i3bar.full.conf \
-        -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.DP-1-2-8-home-right.log"
-    position bottom
-    tray_padding 1
-    tray_output primary
-    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
-    mode hide
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
     bindsym button4 nop
@@ -551,9 +391,9 @@ bar {
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
-        -c /home/ob/.i3/i3bar.full.conf \
-        -i /home/ob/.i3/py3status \
-        -l /home/ob/.i3/py3status.HDMI-1-HDMI.log"
+        -c /home/oliver.bestwalter/.i3/i3bar.full.conf \
+        -i /home/oliver.bestwalter/.i3/py3status \
+        -l /home/oliver.bestwalter/.i3/py3status.HDMI-1-HDMI.log"
     position bottom
     tray_padding 1
     tray_output primary

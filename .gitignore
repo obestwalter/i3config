@@ -6,3 +6,7 @@ _resources
 
 # i3configger persistent state
 config.d/.messages.json
+
+config.bak
+*conf.bak
+py3status.*.log

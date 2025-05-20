@@ -2,7 +2,7 @@
   "bars": {
     "defaults": {
       "font": "pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10",
-      "mode": "dock",
+      "mode": "hide",
       "position": "bottom",
       "select": "clock",
       "separator_symbol": " \u2551 ",
@@ -12,29 +12,14 @@
     },
     "targets": {
       "laptop-internal": {
-        "output": "eDP-1",
+        "mode": "dock",
+        "output": "eDP-1-1",
         "position": "bottom",
         "select": "full"
       },
-      "avira-left": {
-        "output": "DP-2-2-8",
-        "position": "bottom",
-        "select": "full"
-      },
-      "avira-right": {
+      "widescreen": {
+        "mode": "dock",
         "output": "DP-1-2",
-        "position": "bottom",
-        "select": "full"
-      },
-      "home-left": {
-        "mode": "hide",
-        "output": "DP-1-1",
-        "position": "bottom",
-        "select": "full"
-      },
-      "home-right": {
-        "mode": "hide",
-        "output": "DP-1-2-8",
         "position": "bottom",
         "select": "full"
       },
