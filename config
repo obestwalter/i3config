@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Tue May 20 16:02:15 2025) #
+# Built from ~/.i3/config.d by i3configger (Tue May 20 17:12:16 2025) #
 #######################################################################
 
 ### 0-variables.conf ###
@@ -67,8 +67,10 @@ for_window [class="(.*)Chrome(.*)"] title_format "  "
 
 
 ### 3-startup.conf ###
-exec_always --no-startup-id picom --experimental-backends --config ~/.i3/picom.conf
+#exec_always --no-startup-id picom --experimental-backends --config ~/.i3/picom.conf
+exec_always --no-startup-id picom --config ~/.i3/picom.conf
 exec_always --no-startup-id dunst -markup &
+exec_always --no-startup-id i3configger --watch --i3-refresh-msg restart
 
 
 ### control-containers.conf ###
@@ -194,15 +196,15 @@ font "pango:Ubuntu Condensed 12"
 
 bindsym Mod4+c mode "CENTRAL-CONTROL-PROGRAM   =>   r: reload  c: restart  x: exit  l: lock  s: suspend  g: scrot"
 mode "CENTRAL-CONTROL-PROGRAM   =>   r: reload  c: restart  x: exit  l: lock  s: suspend  g: scrot" {
-    bindsym s exec --no-startup-id "~/.i3/bin/toggle-screenkey.sh && xdotool key Escape"
+    bindsym c exec "i3-msg restart"
+    bindsym g exec "scrot && xdotool key Escape"
+    bindsym k exec --no-startup-id "~/.i3/bin/toggle-screenkey.sh && xdotool key Escape"
+    bindsym l exec "i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png & xdotool key Escape"
+    bindsym r exec "i3-msg reload"
+    bindsym s exec "systemctl suspend & i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png"
     bindsym t exec --no-startup-id "~/.i3/bin/toggle-touchpad.sh && xdotool key Escape"
     bindsym u exec --no-startup-id "~/.i3/bin/toggle-unclutter.sh && xdotool key Escape"
-    bindsym r exec "i3-msg reload"
-    bindsym c exec "i3-msg restart"
     bindsym x exec "i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
-    bindsym l exec "i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png & xdotool key Escape"
-    bindsym s exec "systemctl suspend & i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png"
-    bindsym g exec "scrot && xdotool key Escape"
 
     bindsym Escape mode "default"
 }

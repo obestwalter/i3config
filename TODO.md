@@ -1,6 +1,6 @@
 # TODO
 
-* debug non-working control-mode shortcuts
+* check out branch-new-laptop-eperiments
 * autostart (what do I need? Gather from all over the place)
 * notifications
 * get picom or another composer to work
