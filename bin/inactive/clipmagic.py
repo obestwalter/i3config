@@ -3,6 +3,25 @@ import subprocess
 
 import clipboard
 
+# FIXME does definitely no work yet ...
+# not at all with ipython ...
+#
+# and only semi with normal REPL
+#
+# turns ...
+#
+# >>> import os
+# >>>
+# >>> for i in range(10):
+# ...     print(i)
+# ...
+#
+# into ...
+#
+# import os
+# >>>
+# for i in range(10):
+#     print(i)
 
 def replace_clipboard():
     text = clipboard.paste()

@@ -17,4 +17,5 @@ sudo apt install --yes \
   xdotool \
   xfce4-terminal \
   xfce4-screenshooter \
-  xkeycaps
+  xkeycaps \
+  xtrlock

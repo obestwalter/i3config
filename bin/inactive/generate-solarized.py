@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 base03  = '002b36'
 base02  = '073642'
 base01  = '586e75'
