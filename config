@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Wed May 21 17:44:17 2025) #
+# Built from ~/.i3/config.d by i3configger (Wed May 21 17:49:39 2025) #
 #######################################################################
 
 ### 0-basics.conf ###
@@ -67,7 +67,7 @@ for_window [class="Google-chrome" instance="google-chrome"] title_format "   
 for_window [class="(?i)firefox"] title_format "   %title"
 for_window [class="gwenview"] title_format "   %title"
 for_window [class="krusader"] title_format "   %title"
-for_window [class="jetbrains-pycharm"] title_format "   %title"
+for_window [class="jetbrains-pycharm"] title_format "   %title"
 for_window [class="Slack"] title_format "   %title"
 for_window [class="Thunderbird"] title_format "   %title"
 for_window [title="Write:.* Thunderbird"] title_format "   %title"
