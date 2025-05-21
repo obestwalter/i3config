@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Tue May 20 17:12:16 2025) #
+# Built from ~/.i3/config.d by i3configger (Wed May 21 10:55:43 2025) #
 #######################################################################
 
 ### 0-variables.conf ###
@@ -67,10 +67,12 @@ for_window [class="(.*)Chrome(.*)"] title_format "  "
 
 
 ### 3-startup.conf ###
-#exec_always --no-startup-id picom --experimental-backends --config ~/.i3/picom.conf
-exec_always --no-startup-id picom --config ~/.i3/picom.conf
-exec_always --no-startup-id dunst -markup &
-exec_always --no-startup-id i3configger --watch --i3-refresh-msg restart
+# does not to play well with my intel card, leaves artifacts when moving through a text file and other weird shit
+# exec_always --no-startup-id picom --experimental-backends --config ~/.i3/configs-other/picom.conf
+# exec_always --no-startup-id "picom --config ~/.i3/configs-other/picom.conf"
+exec_always --no-startup-id "dunst -config ~/.i3/configs-other/dunstrc -markup full"
+exec_always --no-startup-id "unclutter"
+exec_always --no-startup-id "i3configger --watch --i3-refresh-msg restart"
 
 
 ### control-containers.conf ###
@@ -103,24 +105,25 @@ bindsym Mod4+Shift+Right move right
 # TODO use bindcode for real fn keys
 
 # bindsym Mod4+F4 exec ~/.i3/bin/toggle-touchpad.sh
-bindsym Mod4+F4 exec --no-startup-id firefox
-bindsym Mod4+F6 exec --no-startup-id pactl set-sink-volume 0 -1% && killall -SIGUSR1 py3status
-bindsym Mod4+F7 exec --no-startup-id pactl set-sink-volume 0 +1% && killall -SIGUSR1 py3status
-bindsym Mod4+F5 exec --no-startup-id pactl set-sink-mute 0 toggle && killall -SIGUSR1 py3status
 
-bindsym Mod4+F9 exec --no-startup-id xbacklight e -ctrl intel_backlight -dec 5
-bindsym Mod4+F10 exec --no-startup-id xbacklight e -ctrl intel_backlight -inc 5
+# fn+F12
+
+bindsym Mod4+F4 exec --no-startup-id xbacklight e -ctrl intel_backlight -dec 5
+bindsym Mod4+F5 exec --no-startup-id xbacklight e -ctrl intel_backlight -inc 5
 
 # TODO set the rest that might be useful
 # http://wiki.linuxquestions.org/wiki/XF86_keyboard_symbols
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +2% && killall -SIGUSR1 py3status"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -2% && killall -SIGUSR1 py3status"
+bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute 0 toggle && killall -SIGUSR1 py3status"
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Print key | Druck/S-Abfr
-bindcode 107 exec "xfce4-screenshooter --fullscreen"
-bindcode Shift+107 exec "xfce4-screenshooter --region"
+bindsym Mod4+F10 exec "xfce4-screenshooter --region"
+bindsym Mod4+Shift+F10 exec "xfce4-screenshooter --fullscreen"
 
 
 ### control-navigation.conf ###
@@ -181,8 +184,11 @@ bindsym Mod1+space exec "\
 # numbersign == #
 bindsym F11 fullscreen
 bindsym Mod4+Shift+numbersign kill
+# move anything to the scratchpad area
 bindsym Shift+F12 move scratchpad
+# show whatever you have moved to the scratchpad area
 bindsym F12 scratchpad show
+# show on all workspaces
 bindsym Control+F12 sticky toggle
 
 
@@ -194,8 +200,8 @@ font "pango:Ubuntu Condensed 12"
 # set i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png i3lock -c BF5700
 #set i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png xtrlock
 
-bindsym Mod4+c mode "CENTRAL-CONTROL-PROGRAM   =>   r: reload  c: restart  x: exit  l: lock  s: suspend  g: scrot"
-mode "CENTRAL-CONTROL-PROGRAM   =>   r: reload  c: restart  x: exit  l: lock  s: suspend  g: scrot" {
+bindsym Mod4+c mode "CENTRAL-CONTROL-PROGRAM   =>   c: restart  g: scrot  k: screenkey  l: lock  r: reload  s: suspend  t: touchpad  u: unclutter  x: ccexit"
+mode "CENTRAL-CONTROL-PROGRAM   =>   c: restart  g: scrot  k: screenkey  l: lock  r: reload  s: suspend  t: touchpad  u: unclutter  x: ccexit" {
     bindsym c exec "i3-msg restart"
     bindsym g exec "scrot && xdotool key Escape"
     bindsym k exec --no-startup-id "~/.i3/bin/toggle-screenkey.sh && xdotool key Escape"
@@ -211,8 +217,10 @@ mode "CENTRAL-CONTROL-PROGRAM   =>   r: reload  c: restart  x: exit  l: lock  s:
 
 
 ### mode-i3configger.conf ###
-bindsym Mod4+w mode "i3configger"
-mode "i3configger" {
+bindsym Mod4+w mode "i3configger  =>  Return: run  Left/Right: prev/next colors  Up/Down: laptop bar dock/hide"
+mode "i3configger  =>  Return: run  Left/Right: prev/next colors  Up/Down: laptop bar dock/hide" {
+    bindsym Return exec /home/oliver.bestwalter/_sys/bin/i3configger
+
     bindsym Left exec --no-startup-id "/home/oliver.bestwalter/_sys/bin/i3configger 'select-previous colors' --i3-refresh-msg restart"
     bindsym Right exec --no-startup-id  "/home/oliver.bestwalter/_sys/bin/i3configger 'select-next colors' --i3-refresh-msg restart"
     # TODO - see layout.home.conf
@@ -230,7 +238,6 @@ mode "i3configger" {
     # bindsym Shift+Down
     # bindsym Shift+Up
 
-    bindsym Return exec /home/oliver.bestwalter/_sys/bin/i3configger
     bindsym Escape mode "default"
 }
 
@@ -308,6 +315,25 @@ for_window [class="xfdesktop"] floating enable
 for_window [class="(.*join\?action\=join.*|.*zoom.*)"] floating enable
 for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom - Licensed Account"] floating disable
 for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom Meeting"] floating disable
+
+
+### window-fixers-pycharm.conf ###
+# TODO turn this into a switchable scheme for single and multi monitor use
+# hint: use i3-xprop.sh to get the right classifiers for a window
+
+# do not show the i3 window title bar
+for_window [class="jetbrains-pycharm"] border pixel 1
+
+#set $pc1 ^Settings|^Shelve Changes|^Keyboard Shortcut|^Conflicts|^Merge Revisions
+#set $pc2 Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
+#set $pc3 ^Database Console|^Grep Console|^Unversioned Files|^Push Commits
+#assign [class="jetbrains-pycharm" title="$pc1"] " 1:   "
+#for_window [class="jetbrains-pycharm" title="($pc1|$pc2|$pc3)"] floating disable
+# assign [class="jetbrains-pycharm" title="($pc2|$pc3)"] " 2: |  "
+
+# diff view hack
+# for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace " 2: |  "; workspace " 2: |  "
+#for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable
 
 
 ### i3bar.tpl.conf ###

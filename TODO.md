@@ -1,9 +1,9 @@
 # TODO
 
-* check out branch-new-laptop-eperiments
+* check todos in the config files
+* check out branch-new-laptop-experiments
 * autostart (what do I need? Gather from all over the place)
-* notifications
-* get picom or another composer to work
+* terminal: show running command in title https://stackoverflow.com/q/71459823
 * make little helper scripts to show shortcuts, but they need to be made mode-aware
   * something like this, but cleverer: grep "^bindsym \$win" config.d/* | sort | awk '{$1=""; print $0}'
   * maybe little python script is better
