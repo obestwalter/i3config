@@ -1,27 +1,13 @@
-# My KDE with [i3wm](https://i3wm.org/) setup
+# My [i3 window manager](https://i3wm.org/) config
 
-This is my setup using KDE together with i3wm instead of kwin as window manager.
+**Disclaimer I: I keep this public, because enough people have asked me over the years how I configured my system. It's not meant to be copied as-is. It works for me. Take what you like and leave the rest.**
 
-I am still on 5.24, so [this](https://maxnatt.gitlab.io/posts/kde-plasma-with-i3wm/#kde-524-and-older) works for me:
+**Disclaimer II: To make things more complicated, I also use a self baked python tool that adds dynamic behaviours and builds the i3 config from a set of partials with added functionality. See [i3configger](https://github.com/obestwalter/i3configger). But you simply still can look at the generated [config](config) as the end result.**
 
-`sudo nano /usr/share/xsessions/kde-with-i3.desktop`
+## Resources
 
-    [Desktop Entry]
-    Name=kde-i3
-    Comment=KDE with i3
-    Exec=/usr/local/sbin/kde-i3
-    TryExec=/usr/local/sbin/kde-i3
-    Type=Application
-    X-LightDM-DesktopName=kde-i3
-    DesktopNames=kde-i3
-    Keywords=tiling;wm;windowmanager;window;manager;kde;
-
-`sudo nano /usr/local/sbin/kde-i3`
-
-    #!/bin/sh
-    export KDEWM=/usr/bin/i3
-    exec /usr/bin/startplasma-x11
-
-`sudo chmod a+x /usr/local/sbin/kde-i3`
-
-To make things more complicated, I also use a self baked python tool that builds the i3 config from a set of partials with added functionality. See [i3configger](https://github.com/obestwalter/i3configger).
+* [i3wm](https://i3wm.org/)
+* [arch i3 wiki](https://wiki.archlinux.org/title/I3)
+* [gentoo i3 wiki](https://wiki.gentoo.org/wiki/I3)
+* [py3status](https://pypi.org/project/py3status/)
+* [i3ipc](https://pypi.org/project/i3ipc/)

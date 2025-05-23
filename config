@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Wed May 21 17:49:39 2025) #
+# Built from ~/.i3/config.d by i3configger (Thu May 22 13:30:42 2025) #
 #######################################################################
 
 ### 0-basics.conf ###
@@ -171,15 +171,8 @@ bindsym Mod4+Shift+0 move container to workspace number "10:  "
 
 bindsym Mod4+Return exec xfce4-terminal --maximize --hide-menubar
 
-# Media and stuff
-
-bindsym Mod4+Control+p exec --no-startup-id playerctl play-pause
-
 # TODO find a decent clipboard handler
 # bindsym Mod1+Control+v
-
-# music stuff not in use atm
-# bindsym Mod4+Control+p exec --no-startup-id mpc toggle
 
 # context menu with Win+y (more convenient then FN+RIGHT-CTRL)
 
@@ -297,9 +290,11 @@ mode "resize / move" {
 ### window-fixers.conf ###
 # Zoom
 
-for_window [class="(.*join\?action\=join.*|.*zoom.*)"] floating enable
-for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom - Licensed Account"] floating disable
-for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom Meeting"] floating disable
+#for_window [class="(.*join\?action\=join.*|.*zoom.*)"] floating enable
+#for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom - Licensed Account"] floating disable
+#for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom Meeting"] floating disable
+for_window [class="zoom" instance="zoom"] floating disable
+#for_window [class="zoom" instance="zoom" title="Meeting"] floating disable
 
 # PyCharm
 
