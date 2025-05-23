@@ -1,10 +1,22 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Thu May 22 13:30:42 2025) #
+# Built from ~/.i3/config.d by i3configger (Fri May 23 08:25:17 2025) #
 #######################################################################
 
-### 0-basics.conf ###
+### 0-basic-setup.conf ###
+# Basic variables
+
 # Main modifiers
 floating_modifier Mod4
+
+# Workspaces
+
+# https://fontawesome.com/cheatsheet/free/solid
+# https://fontawesome.com/v5/search
+#       
+
+# 8 -> remote connections
+# 9 -> admin / monitoring / logs
+# 10 -> browser / secondary
 
 # Settings
 focus_follows_mouse no
@@ -17,8 +29,6 @@ new_float normal 3px
 new_window normal 1px
 force_display_urgency_hint 10000 ms
 hide_edge_borders smart
-
-# Basic variables
 
 # Design
 
@@ -40,27 +50,17 @@ client.placeholder      #fdf6e3  #2aa198  #657b83  #268bd2  #2aa198
 ### Other colors
 
 
-### 2-workspaces-and-windows.conf ###
-# https://fontawesome.com/cheatsheet/free/solid
-# https://fontawesome.com/v5/search
-#       
+### 1-startup.conf ###
+# does not to play well with my intel card, leaves artifacts when moving through a text file and other weird shit
+# exec_always --no-startup-id picom --experimental-backends --config ~/.i3/configs-other/picom.conf
+# exec_always --no-startup-id "picom --config ~/.i3/configs-other/picom.conf"
+exec_always --no-startup-id "dunst -config ~/.i3/configs-other/dunstrc -markup full"
+exec_always --no-startup-id "unclutter"
+exec_always --no-startup-id "i3configger --watch --i3-refresh-msg restart"
 
-# 8 -> remote connections
-# 9 -> admin / monitoring / logs
-# 10 -> browser / secondary
 
-#  navigation shortcuts
-bindsym Mod4+1 workspace " 1:   "
-bindsym Mod4+e workspace " 2: |  "
-bindsym Mod4+2 workspace " 2: |  "
-bindsym Mod4+3 workspace " 3:   "
-bindsym Mod4+4 workspace " 4: |  "
-bindsym Mod4+5 workspace " 5:   "
-bindsym Mod4+6 workspace " 6:   "
-bindsym Mod4+7 workspace " 7:   "
-bindsym Mod4+8 workspace " 8:   "
-bindsym Mod4+9 workspace " 9:  "
-bindsym Mod4+0 workspace "10:  "
+### 3-window-settings.conf ###
+# Icons
 
 for_window [class="Code" instance="code"] title_format "   %title"
 for_window [class="Google-chrome" instance="google-chrome"] title_format "   %title"
@@ -74,23 +74,76 @@ for_window [title="Write:.* Thunderbird"] title_format "   %title"
 for_window [class="(.*)terminal(.*)"] title_format "   %title"
 for_window [title="Volume Control"] title_format "   %title"
 for_window [class="teams-for-linux" instance="teams-for-linux"] title_format "   %title"
-
-
 #for_window [class="Signal"] title_format "  "
 #for_window [class="VirtualBox.*"] title_format "  "
 #for_window [class="libreoffice.*"] title_format "  "
 
+# Zoom
 
-### 3-startup.conf ###
-# does not to play well with my intel card, leaves artifacts when moving through a text file and other weird shit
-# exec_always --no-startup-id picom --experimental-backends --config ~/.i3/configs-other/picom.conf
-# exec_always --no-startup-id "picom --config ~/.i3/configs-other/picom.conf"
-exec_always --no-startup-id "dunst -config ~/.i3/configs-other/dunstrc -markup full"
-exec_always --no-startup-id "unclutter"
-exec_always --no-startup-id "i3configger --watch --i3-refresh-msg restart"
+#for_window [class="(.*join\?action\=join.*|.*zoom.*)"] floating enable
+#for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom - Licensed Account"] floating disable
+#for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom Meeting"] floating disable
+for_window [class="zoom" instance="zoom"] floating disable
+#for_window [class="zoom" instance="zoom" title="Meeting"] floating disable
+
+# PyCharm
+
+# TODO turn this into a switchable scheme for single and multi monitor use
+# hint: use i3-xprop.sh to get the right classifiers for a window
+
+# do not show the i3 window title bar, when only one project window is open
+for_window [class="jetbrains-pycharm"] border pixel 1
+
+#set $pc1 ^Settings|^Shelve Changes|^Keyboard Shortcut|^Conflicts|^Merge Revisions
+#set $pc2 Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
+#set $pc3 ^Database Console|^Grep Console|^Unversioned Files|^Push Commits
+#assign [class="jetbrains-pycharm" title="$pc1"] " 1:   "
+#for_window [class="jetbrains-pycharm" title="($pc1|$pc2|$pc3)"] floating disable
+# assign [class="jetbrains-pycharm" title="($pc2|$pc3)"] " 2: |  "
+
+# diff view hack
+# for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace " 2: |  "; workspace " 2: |  "
+#for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable
+
+# Misc
+
+for_window [title="FreeRDP:.*"] floating disable
+for_window [class="xfreerdp"] floating disable
+for_window [class="xfdesktop"] floating enable
 
 
-### control-containers.conf ###
+### control-main-key-bindings.conf ###
+#Navigate
+
+bindsym Mod1+Tab workspace back_and_forth
+
+bindsym Mod4+Left focus left
+bindsym Mod4+Down focus down
+bindsym Mod4+Up focus up
+bindsym Mod4+Right focus right
+
+bindsym Mod4+Mod1+Left workspace prev
+bindsym Mod4+Mod1+Right workspace next
+
+bindsym Mod4+1 workspace " 1:   "
+bindsym Mod4+e workspace " 2: |  "
+bindsym Mod4+2 workspace " 2: |  "
+bindsym Mod4+3 workspace " 3:   "
+bindsym Mod4+4 workspace " 4: |  "
+bindsym Mod4+5 workspace " 5:   "
+bindsym Mod4+6 workspace " 6:   "
+bindsym Mod4+7 workspace " 7:   "
+bindsym Mod4+8 workspace " 8:   "
+bindsym Mod4+9 workspace " 9:  "
+bindsym Mod4+0 workspace "10:  "
+
+# Manipulate
+
+bindsym F11 fullscreen
+bindsym Mod4+Shift+numbersign kill
+# show on all workspaces
+bindsym Control+F12 sticky toggle
+
 bindsym Mod4+asciicircum focus mode_toggle
 bindsym Mod4+u layout tabbed
 bindsym Mod4+i layout stacking
@@ -115,13 +168,39 @@ bindsym Mod4+Shift+Down move down
 bindsym Mod4+Shift+Up move up
 bindsym Mod4+Shift+Right move right
 
+bindsym Mod4+Shift+1 move container to workspace number " 1:   "
+bindsym Mod4+Shift+2 move container to workspace number " 2: |  "
+bindsym Mod4+Shift+3 move container to workspace number " 3:   "
+bindsym Mod4+Shift+4 move container to workspace number " 4: |  "
+bindsym Mod4+Shift+5 move container to workspace number " 5:   "
+bindsym Mod4+Shift+6 move container to workspace number " 6:   "
+bindsym Mod4+Shift+7 move container to workspace number " 7:   "
+bindsym Mod4+Shift+8 move container to workspace number " 8:   "
+bindsym Mod4+Shift+9 move container to workspace number " 9:  "
+bindsym Mod4+Shift+0 move container to workspace number "10:  "
 
-### control-fn-keys.conf ###
-# TODO use bindcode for real fn keys
+# Terminal / Scratchpad (cheap Yakuake emulation)
+
+# HINT numbersign == #
+# move anything to the scratchpad area
+bindsym Shift+F12 move scratchpad
+# show whatever you have moved to the scratchpad area
+bindsym F12 scratchpad show
+
+bindsym Mod4+Return scratchpad show
+bindsym Mod4+Shift+Return exec xfce4-terminal --maximize --hide-menubar
+
+# Rofi
+
+# HINT you can use rofi as pop-up help: rofi -e "my message"
+# TODO try this https://github.com/seamus-45/roficlip
+bindsym Mod1+space exec "rofi -combi-modi window,drun,run -show combi -modi combi,run,files:~/.i3/bin/rofi-file-browser.sh"
+bindsym Mod4+Tab exec --no-startup-id "rofi -show window"
+bindsym Mod4+Shift+Tab exec "rofi -modi 'Workspace:~/.i3/bin/rofi-i3-ws-list.sh,Move to Workspace:~/.i3/bin/rofi-i3-ws-move.sh' -show Workspace"
+
+# FN Keys / Special Controls
 
 # bindsym Mod4+F4 exec ~/.i3/bin/toggle-touchpad.sh
-
-# fn+F12
 
 bindsym Mod4+F4 exec --no-startup-id xbacklight e -ctrl intel_backlight -dec 5
 bindsym Mod4+F5 exec --no-startup-id xbacklight e -ctrl intel_backlight -inc 5
@@ -140,36 +219,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym Mod4+F10 exec "xfce4-screenshooter --region"
 bindsym Mod4+Shift+F10 exec "xfce4-screenshooter --fullscreen"
 
-
-### control-navigation.conf ###
-bindsym Mod1+Tab workspace back_and_forth
-bindsym Mod4+Tab exec --no-startup-id "rofi -show window"
-bindsym Mod4+Shift+Tab exec "rofi -modi 'Workspace:~/.i3/bin/rofi-i3-ws-list.sh,Move to Workspace:~/.i3/bin/rofi-i3-ws-move.sh' -show Workspace"
-
-bindsym Mod4+Left focus left
-bindsym Mod4+Down focus down
-bindsym Mod4+Up focus up
-bindsym Mod4+Right focus right
-
-bindsym Mod4+Mod1+Left workspace prev
-bindsym Mod4+Mod1+Right workspace next
-
-bindsym Mod4+Shift+1 move container to workspace number " 1:   "
-bindsym Mod4+Shift+2 move container to workspace number " 2: |  "
-bindsym Mod4+Shift+3 move container to workspace number " 3:   "
-bindsym Mod4+Shift+4 move container to workspace number " 4: |  "
-bindsym Mod4+Shift+5 move container to workspace number " 5:   "
-bindsym Mod4+Shift+6 move container to workspace number " 6:   "
-bindsym Mod4+Shift+7 move container to workspace number " 7:   "
-bindsym Mod4+Shift+8 move container to workspace number " 8:   "
-bindsym Mod4+Shift+9 move container to workspace number " 9:  "
-bindsym Mod4+Shift+0 move container to workspace number "10:  "
-
-
-### control-others.conf ###
-# Terminal
-
-bindsym Mod4+Return exec xfce4-terminal --maximize --hide-menubar
+# Misc
 
 # TODO find a decent clipboard handler
 # bindsym Mod1+Control+v
@@ -178,26 +228,6 @@ bindsym Mod4+Return exec xfce4-terminal --maximize --hide-menubar
 
 # bindsym --release Mod4+y exec sleep 0.1 && xdotool key Menu
 bindsym --release Mod4+y exec xdotool key Menu
-
-
-### control-rofi.conf ###
-bindsym Mod1+space exec "\
-    rofi -combi-modi window,drun,run,ssh \
-    -show combi -modi combi,run,files:~/.i3/bin/rofi-file-browser.sh"
-
-# TODO try this https://github.com/seamus-45/roficlip
-
-
-### control-windows.conf ###
-# numbersign == #
-bindsym F11 fullscreen
-bindsym Mod4+Shift+numbersign kill
-# move anything to the scratchpad area
-bindsym Shift+F12 move scratchpad
-# show whatever you have moved to the scratchpad area
-bindsym F12 scratchpad show
-# show on all workspaces
-bindsym Control+F12 sticky toggle
 
 
 ### mode-central-control.conf ###
@@ -285,41 +315,6 @@ mode "resize / move" {
     # bindsym Return mode "default" could be something else ...
     bindsym Escape mode "default"
 }
-
-
-### window-fixers.conf ###
-# Zoom
-
-#for_window [class="(.*join\?action\=join.*|.*zoom.*)"] floating enable
-#for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom - Licensed Account"] floating disable
-#for_window [class="(.*join\?action\=join.*|.*zoom.*)" title="Zoom Meeting"] floating disable
-for_window [class="zoom" instance="zoom"] floating disable
-#for_window [class="zoom" instance="zoom" title="Meeting"] floating disable
-
-# PyCharm
-
-# TODO turn this into a switchable scheme for single and multi monitor use
-# hint: use i3-xprop.sh to get the right classifiers for a window
-
-# do not show the i3 window title bar, when only one project window is open
-for_window [class="jetbrains-pycharm"] border pixel 1
-
-#set $pc1 ^Settings|^Shelve Changes|^Keyboard Shortcut|^Conflicts|^Merge Revisions
-#set $pc2 Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
-#set $pc3 ^Database Console|^Grep Console|^Unversioned Files|^Push Commits
-#assign [class="jetbrains-pycharm" title="$pc1"] " 1:   "
-#for_window [class="jetbrains-pycharm" title="($pc1|$pc2|$pc3)"] floating disable
-# assign [class="jetbrains-pycharm" title="($pc2|$pc3)"] " 2: |  "
-
-# diff view hack
-# for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable; move to workspace " 2: |  "; workspace " 2: |  "
-#for_window [class="jetbrains-pycharm" instance="sun-awt-X11-XDialogPeer" title=".*\(/home/.*"] floating disable
-
-# Misc
-
-for_window [title="FreeRDP:.*"] floating disable
-for_window [class="xfreerdp"] floating disable
-for_window [class="xfdesktop"] floating enable
 
 
 ### i3bar.tpl.conf ###
