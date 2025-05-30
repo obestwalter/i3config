@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Fri May 23 08:25:17 2025) #
+# Built from ~/.i3/config.d by i3configger (Fri May 30 17:30:03 2025) #
 #######################################################################
 
 ### 0-basic-setup.conf ###
@@ -56,7 +56,9 @@ client.placeholder      #fdf6e3  #2aa198  #657b83  #268bd2  #2aa198
 # exec_always --no-startup-id "picom --config ~/.i3/configs-other/picom.conf"
 exec_always --no-startup-id "dunst -config ~/.i3/configs-other/dunstrc -markup full"
 exec_always --no-startup-id "unclutter"
-exec_always --no-startup-id "i3configger --watch --i3-refresh-msg restart"
+exec_always --no-startup-id "~/.i3/bin/touchpad-settings.sh"
+
+# exec_always --no-startup-id "i3configger --watch --i3-refresh-msg restart"
 
 
 ### 3-window-settings.conf ###
@@ -92,7 +94,7 @@ for_window [class="zoom" instance="zoom"] floating disable
 # hint: use i3-xprop.sh to get the right classifiers for a window
 
 # do not show the i3 window title bar, when only one project window is open
-for_window [class="jetbrains-pycharm"] border pixel 1
+for_window [class="jetbrains-pycharm"] border pixel 2
 
 #set $pc1 ^Settings|^Shelve Changes|^Keyboard Shortcut|^Conflicts|^Merge Revisions
 #set $pc2 Debug|Inspection|^Find$|^Changes$|^Run$|Version Control|Messages
@@ -115,13 +117,13 @@ for_window [class="xfdesktop"] floating enable
 ### control-main-key-bindings.conf ###
 #Navigate
 
-bindsym Mod1+Tab workspace back_and_forth
+# use xev to figure out the names / keycodes of the keys
 
+bindsym Mod1+Tab workspace back_and_forth
 bindsym Mod4+Left focus left
 bindsym Mod4+Down focus down
 bindsym Mod4+Up focus up
 bindsym Mod4+Right focus right
-
 bindsym Mod4+Mod1+Left workspace prev
 bindsym Mod4+Mod1+Right workspace next
 
@@ -139,8 +141,8 @@ bindsym Mod4+0 workspace "10:  "
 
 # Manipulate
 
-bindsym F11 fullscreen
 bindsym Mod4+Shift+numbersign kill
+bindsym F11 fullscreen
 # show on all workspaces
 bindsym Control+F12 sticky toggle
 
@@ -149,19 +151,20 @@ bindsym Mod4+u layout tabbed
 bindsym Mod4+i layout stacking
 bindsym Mod4+o layout toggle split
 bindsym Mod4+p focus parent
-# diaresis are dots on top so win+ü :)
+# win+ü - toggle between all layout types
 bindsym Mod4+udiaeresis layout toggle all
 bindsym Mod4+Shift+c focus child
 bindsym Mod4+comma split h
 bindsym Mod4+period split v
+# asciicircum == ° (roof sign + shift)
 bindsym Mod4+Shift+asciicircum floating toggle
 
 # https://i3wm.org/docs/userguide.html#move_to_outputs
 # FIXME: next just cycles through all monitors
-bindsym Mod4+Shift+n move workspace to output next
-bindsym Mod4+Shift+s move workspace to output primary
-bindsym Mod4+x move workspace to output nonprimary
-bindsym Mod4+h move workspace to output HDMI-1
+bindsym Mod4+x move workspace to output next
+#bindsym Mod4+h move workspace to output HDMI-1
+#bindsym Mod4+n move workspace to output nonprimary
+#bindsym Mod4+p move workspace to output primary
 
 bindsym Mod4+Shift+Left move left
 bindsym Mod4+Shift+Down move down
@@ -195,7 +198,7 @@ bindsym Mod4+Shift+Return exec xfce4-terminal --maximize --hide-menubar
 # HINT you can use rofi as pop-up help: rofi -e "my message"
 # TODO try this https://github.com/seamus-45/roficlip
 bindsym Mod1+space exec "rofi -combi-modi window,drun,run -show combi -modi combi,run,files:~/.i3/bin/rofi-file-browser.sh"
-bindsym Mod4+Tab exec --no-startup-id "rofi -show window"
+bindsym Mod4+a exec --no-startup-id "rofi -show window"
 bindsym Mod4+Shift+Tab exec "rofi -modi 'Workspace:~/.i3/bin/rofi-i3-ws-list.sh,Move to Workspace:~/.i3/bin/rofi-i3-ws-move.sh' -show Workspace"
 
 # FN Keys / Special Controls
@@ -209,9 +212,11 @@ bindsym Mod4+F5 exec --no-startup-id xbacklight e -ctrl intel_backlight -inc 5
 # http://wiki.linuxquestions.org/wiki/XF86_keyboard_symbols
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl play-pause
-bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +2% && killall -SIGUSR1 py3status"
-bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -2% && killall -SIGUSR1 py3status"
-bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute 0 toggle && killall -SIGUSR1 py3status"
+# This seems to change rancomly ... TODO make more robust
+# see pacmd list-sinks and https://gist.github.com/mikeboiko/6e2c80ab3de7c35ba8bf0579622c2552
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 1 +2% && killall -SIGUSR1 py3status"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 1 -2% && killall -SIGUSR1 py3status"
+bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute 1 toggle && killall -SIGUSR1 py3status"
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
@@ -231,23 +236,20 @@ bindsym --release Mod4+y exec xdotool key Menu
 
 
 ### mode-central-control.conf ###
+# set i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png ~/.i3/bin/lockdown.sh
 # Transparent lock
-#set ~/.i3/bin/lockdown.sh xtrlock
-# set ~/.i3/bin/lockdown.sh i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png
-# set ~/.i3/bin/lockdown.sh i3lock -c BF5700
+#set i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png xtrlock
+# set i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png i3lock -c BF5700
 
 
 bindsym Mod4+c mode "CENTRAL-CONTROL-PROGRAM   =>   c: restart  g: scrot  k: screenkey  l: lock  r: reload  s: suspend  t: touchpad  u: unclutter  x: ccexit"
 mode "CENTRAL-CONTROL-PROGRAM   =>   c: restart  g: scrot  k: screenkey  l: lock  r: reload  s: suspend  t: touchpad  u: unclutter  x: ccexit" {
-    bindsym c exec "i3-msg restart"
     bindsym g exec "scrot && xdotool key Escape"
     bindsym k exec --no-startup-id "~/.i3/bin/toggle-screenkey.sh && xdotool key Escape"
-    bindsym l exec "~/.i3/bin/lockdown.sh & xdotool key Escape"
-    bindsym r exec "i3-msg reload"
-    bindsym s exec "systemctl suspend & ~/.i3/bin/lockdown.sh"
+    bindsym l exec "i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png & xdotool key Escape"
+    bindsym s exec "systemctl suspend & i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png"
     bindsym t exec --no-startup-id "~/.i3/bin/toggle-touchpad.sh && xdotool key Escape"
     bindsym u exec --no-startup-id "~/.i3/bin/toggle-unclutter.sh && xdotool key Escape"
-    bindsym x exec "i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
 
     bindsym Escape mode "default"
 }
@@ -262,6 +264,10 @@ mode "i3configger  =>  Return: run  Left/Right: prev/next colors  Up/Down: lapto
     bindsym Right exec --no-startup-id  "/home/oliver.bestwalter/_sys/bin/i3configger 'select-next colors' --i3-refresh-msg restart"
     bindsym Up exec --no-startup-id "/home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode dock'"
     bindsym Down exec --no-startup-id "/home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode hide'"
+
+    bindsym c exec "i3-msg restart"
+    bindsym r exec "i3-msg reload"
+    bindsym x exec "i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
 
     # TODO
     # fonts bigger/smaller

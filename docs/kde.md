@@ -21,3 +21,9 @@ I am still on 5.24, so [this](https://maxnatt.gitlab.io/posts/kde-plasma-with-i3
     exec /usr/bin/startplasma-x11
 
 `sudo chmod a+x /usr/local/sbin/kde-i3`
+
+# Misc
+
+# Disable KDE global shortcuts
+
+    gdbus call --session --dest=org.kde.kglobalaccel --object-path=/kglobalaccel --method=org.kde.KGlobalAccel.blockGlobalShortcuts 'true'

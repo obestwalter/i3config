@@ -8,6 +8,9 @@
   * something like this, but cleverer: grep "^bindsym \$win" config.d/* | sort | awk '{$1=""; print $0}'
   * maybe little python script is better
 * set cursor theme: https://wiki.archlinux.org/title/Cursor_themes
+* improve rofi with bangs! https://github.com/gotbletu/shownotes/blob/master/rofi-bangs.md
+* graphical exit menu: https://gist.github.com/jcyamo/5675359
+* https://github.com/jamesofarrell/i3-swallow
 
 ## background stuff
 
