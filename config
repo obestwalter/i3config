@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Fri May 30 17:30:03 2025) #
+# Built from ~/.i3/config.d by i3configger (Thu Jun 26 07:48:47 2025) #
 #######################################################################
 
 ### 0-basic-setup.conf ###
@@ -212,7 +212,7 @@ bindsym Mod4+F5 exec --no-startup-id xbacklight e -ctrl intel_backlight -inc 5
 # http://wiki.linuxquestions.org/wiki/XF86_keyboard_symbols
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl play-pause
-# This seems to change rancomly ... TODO make more robust
+# This seems to change randomly ... TODO make more robust
 # see pacmd list-sinks and https://gist.github.com/mikeboiko/6e2c80ab3de7c35ba8bf0579622c2552
 bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 1 +2% && killall -SIGUSR1 py3status"
 bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 1 -2% && killall -SIGUSR1 py3status"
@@ -244,30 +244,29 @@ bindsym --release Mod4+y exec xdotool key Menu
 
 bindsym Mod4+c mode "CENTRAL-CONTROL-PROGRAM   =>   c: restart  g: scrot  k: screenkey  l: lock  r: reload  s: suspend  t: touchpad  u: unclutter  x: ccexit"
 mode "CENTRAL-CONTROL-PROGRAM   =>   c: restart  g: scrot  k: screenkey  l: lock  r: reload  s: suspend  t: touchpad  u: unclutter  x: ccexit" {
-    bindsym g exec "scrot && xdotool key Escape"
+    bindsym g exec --no-startup-id "scrot && xdotool key Escape"
     bindsym k exec --no-startup-id "~/.i3/bin/toggle-screenkey.sh && xdotool key Escape"
-    bindsym l exec "i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png & xdotool key Escape"
-    bindsym s exec "systemctl suspend & i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png"
+    bindsym l exec --no-startup-id "i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png & xdotool key Escape"
+    bindsym s exec --no-startup-id "systemctl suspend & i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png"
     bindsym t exec --no-startup-id "~/.i3/bin/toggle-touchpad.sh && xdotool key Escape"
     bindsym u exec --no-startup-id "~/.i3/bin/toggle-unclutter.sh && xdotool key Escape"
-
     bindsym Escape mode "default"
 }
 
 
 ### mode-i3configger.conf ###
-bindsym Mod4+w mode "i3configger  =>  Return: run  Left/Right: prev/next colors  Up/Down: laptop bar dock/hide"
-mode "i3configger  =>  Return: run  Left/Right: prev/next colors  Up/Down: laptop bar dock/hide" {
+bindsym Mod4+w mode "i3configger  =>  Return: run  Left/Right: prev/next colors  Up/Down: laptop bar dock/hide  c: i3 restart  r: i3 reload  x: i3 exit"
+mode "i3configger  =>  Return: run  Left/Right: prev/next colors  Up/Down: laptop bar dock/hide  c: i3 restart  r: i3 reload  x: i3 exit" {
     bindsym Return exec /home/oliver.bestwalter/_sys/bin/i3configger
 
-    bindsym Left exec --no-startup-id "/home/oliver.bestwalter/_sys/bin/i3configger 'select-previous colors' --i3-refresh-msg restart"
-    bindsym Right exec --no-startup-id  "/home/oliver.bestwalter/_sys/bin/i3configger 'select-next colors' --i3-refresh-msg restart"
+    bindsym Left exec --no-startup-id "~/.i3/bin/i3configger-wrapper.sh 'select-previous colors' --i3-refresh-msg restart"
+    bindsym Right exec --no-startup-id  "~/.i3/bin/i3configger-wrapper.sh 'select-next colors' --i3-refresh-msg restart"
     bindsym Up exec --no-startup-id "/home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode dock'"
     bindsym Down exec --no-startup-id "/home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode hide'"
 
-    bindsym c exec "i3-msg restart"
-    bindsym r exec "i3-msg reload"
-    bindsym x exec "i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
+    bindsym c exec --no-startup-id "i3-msg restarts && notify-send -a 'CENTRAL-CONTROL-PROGRAM' 'i3 restarted'"
+    bindsym r exec --no-startup-id "i3-msg reload && notify-send -a 'CENTRAL-CONTROL-PROGRAM' 'i3 reloaded'"
+    bindsym x exec --no-startup-id "i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
 
     # TODO
     # fonts bigger/smaller
