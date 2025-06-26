@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Thu Jun 26 07:48:47 2025) #
+# Built from ~/.i3/config.d by i3configger (Thu Jun 26 07:56:56 2025) #
 #######################################################################
 
 ### 0-basic-setup.conf ###
@@ -247,7 +247,7 @@ mode "CENTRAL-CONTROL-PROGRAM   =>   c: restart  g: scrot  k: screenkey  l: lock
     bindsym g exec --no-startup-id "scrot && xdotool key Escape"
     bindsym k exec --no-startup-id "~/.i3/bin/toggle-screenkey.sh && xdotool key Escape"
     bindsym l exec --no-startup-id "i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png & xdotool key Escape"
-    bindsym s exec --no-startup-id "systemctl suspend & i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png"
+    bindsym s exec --no-startup-id "xdotool key Escape & systemctl suspend & i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png"
     bindsym t exec --no-startup-id "~/.i3/bin/toggle-touchpad.sh && xdotool key Escape"
     bindsym u exec --no-startup-id "~/.i3/bin/toggle-unclutter.sh && xdotool key Escape"
     bindsym Escape mode "default"
@@ -259,14 +259,14 @@ bindsym Mod4+w mode "i3configger  =>  Return: run  Left/Right: prev/next colors 
 mode "i3configger  =>  Return: run  Left/Right: prev/next colors  Up/Down: laptop bar dock/hide  c: i3 restart  r: i3 reload  x: i3 exit" {
     bindsym Return exec /home/oliver.bestwalter/_sys/bin/i3configger
 
-    bindsym Left exec --no-startup-id "~/.i3/bin/i3configger-wrapper.sh 'select-previous colors' --i3-refresh-msg restart"
-    bindsym Right exec --no-startup-id  "~/.i3/bin/i3configger-wrapper.sh 'select-next colors' --i3-refresh-msg restart"
-    bindsym Up exec --no-startup-id "/home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode dock'"
-    bindsym Down exec --no-startup-id "/home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode hide'"
+    bindsym Left exec --no-startup-id "xdotool key Escape & ~/.i3/bin/i3configger-wrapper.sh 'select-previous colors' --i3-refresh-msg restart"
+    bindsym Right exec --no-startup-id  "xdotool key Escape &  & ~/.i3/bin/i3configger-wrapper.sh 'select-next colors' --i3-refresh-msg restart"
+    bindsym Up exec --no-startup-id "xdotool key Escape &  & /home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode dock'"
+    bindsym Down exec --no-startup-id "xdotool key Escape &  & /home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode hide'"
 
-    bindsym c exec --no-startup-id "i3-msg restarts && notify-send -a 'CENTRAL-CONTROL-PROGRAM' 'i3 restarted'"
-    bindsym r exec --no-startup-id "i3-msg reload && notify-send -a 'CENTRAL-CONTROL-PROGRAM' 'i3 reloaded'"
-    bindsym x exec --no-startup-id "i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
+    bindsym c exec --no-startup-id "xdotool key Escape & i3-msg restarts && notify-send -a 'CENTRAL-CONTROL-PROGRAM' 'i3 restarted'"
+    bindsym r exec --no-startup-id "xdotool key Escape & i3-msg reload && notify-send -a 'CENTRAL-CONTROL-PROGRAM' 'i3 reloaded'"
+    bindsym x exec --no-startup-id "xdotool key Escape & i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
 
     # TODO
     # fonts bigger/smaller
