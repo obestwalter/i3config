@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Thu Jun 26 07:56:56 2025) #
+# Built from ~/.i3/config.d by i3configger (Thu Nov 20 10:26:13 2025) #
 #######################################################################
 
 ### 0-basic-setup.conf ###
@@ -32,8 +32,7 @@ hide_edge_borders smart
 
 # Design
 
-font pango:Jetbrains Mono 14, FontAwesome 14
-# font "pango:Ubuntu Condensed 12"
+font "pango:DejaVu Sans Mono 14 , FontAwesome 14"
 
 client.background       #000000
 client.focused          #fdf6e3  #268bd2  #fdf6e3  #268bd2  #fdf6e3
@@ -57,7 +56,9 @@ client.placeholder      #fdf6e3  #2aa198  #657b83  #268bd2  #2aa198
 exec_always --no-startup-id "dunst -config ~/.i3/configs-other/dunstrc -markup full"
 exec_always --no-startup-id "unclutter"
 exec_always --no-startup-id "~/.i3/bin/touchpad-settings.sh"
-
+# exec_always --no-startup-id feh --bg-scale "path/for/primary/monitor" "path/for/secondary/monitor"
+exec_always --no-startup-id nitrogen --restore
+# currently I just run it manually as it is very stable
 # exec_always --no-startup-id "i3configger --watch --i3-refresh-msg restart"
 
 
@@ -150,12 +151,15 @@ bindsym Mod4+asciicircum focus mode_toggle
 bindsym Mod4+u layout tabbed
 bindsym Mod4+i layout stacking
 bindsym Mod4+o layout toggle split
-bindsym Mod4+p focus parent
 # win+ü - toggle between all layout types
 bindsym Mod4+udiaeresis layout toggle all
-bindsym Mod4+Shift+c focus child
-bindsym Mod4+comma split h
-bindsym Mod4+period split v
+
+# Apparently I never use these ...
+# bindsym Mod4+p focus parent
+# bindsym Mod4+Shift+c focus child
+# bindsym Mod4+comma split h
+# bindsym Mod4+period split v
+
 # asciicircum == ° (roof sign + shift)
 bindsym Mod4+Shift+asciicircum floating toggle
 
@@ -234,6 +238,8 @@ bindsym Mod4+Shift+F10 exec "xfce4-screenshooter --fullscreen"
 # bindsym --release Mod4+y exec sleep 0.1 && xdotool key Menu
 bindsym --release Mod4+y exec xdotool key Menu
 
+bindsym Mod4+period bar mode toggle
+
 
 ### mode-central-control.conf ###
 # set i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png ~/.i3/bin/lockdown.sh
@@ -241,15 +247,14 @@ bindsym --release Mod4+y exec xdotool key Menu
 #set i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png xtrlock
 # set i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png i3lock -c BF5700
 
-
-bindsym Mod4+c mode "CENTRAL-CONTROL-PROGRAM   =>   c: restart  g: scrot  k: screenkey  l: lock  r: reload  s: suspend  t: touchpad  u: unclutter  x: ccexit"
-mode "CENTRAL-CONTROL-PROGRAM   =>   c: restart  g: scrot  k: screenkey  l: lock  r: reload  s: suspend  t: touchpad  u: unclutter  x: ccexit" {
-    bindsym g exec --no-startup-id "scrot && xdotool key Escape"
-    bindsym k exec --no-startup-id "~/.i3/bin/toggle-screenkey.sh && xdotool key Escape"
-    bindsym l exec --no-startup-id "i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png & xdotool key Escape"
-    bindsym s exec --no-startup-id "xdotool key Escape & systemctl suspend & i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png"
-    bindsym t exec --no-startup-id "~/.i3/bin/toggle-touchpad.sh && xdotool key Escape"
-    bindsym u exec --no-startup-id "~/.i3/bin/toggle-unclutter.sh && xdotool key Escape"
+bindsym Mod4+c mode "CENTRAL-CONTROL-PROGRAM   =>   c: restart  g: scrot  k: screenkey  l: lock  r: reload  s: suspend  t: touchpad  u: unclutter"
+mode "CENTRAL-CONTROL-PROGRAM   =>   c: restart  g: scrot  k: screenkey  l: lock  r: reload  s: suspend  t: touchpad  u: unclutter" {
+    bindsym g exec --no-startup-id "xdotool key Escape && scrot"
+    bindsym k exec --no-startup-id "xdotool key Escape && ~/.i3/bin/toggle-screenkey.sh"
+    bindsym l exec --no-startup-id "xdotool key Escape && i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png"
+    bindsym s exec --no-startup-id "xdotool key Escape && systemctl suspend & i3lock -f -t -i ~/Pictures/wallpapers/single_screen/generative-orange.png"
+    bindsym t exec --no-startup-id "xdotool key Escape && ~/.i3/bin/toggle-touchpad.sh"
+    bindsym u exec --no-startup-id "xdotool key Escape && ~/.i3/bin/toggle-unclutter.sh"
     bindsym Escape mode "default"
 }
 
@@ -260,9 +265,9 @@ mode "i3configger  =>  Return: run  Left/Right: prev/next colors  Up/Down: lapto
     bindsym Return exec /home/oliver.bestwalter/_sys/bin/i3configger
 
     bindsym Left exec --no-startup-id "xdotool key Escape & ~/.i3/bin/i3configger-wrapper.sh 'select-previous colors' --i3-refresh-msg restart"
-    bindsym Right exec --no-startup-id  "xdotool key Escape &  & ~/.i3/bin/i3configger-wrapper.sh 'select-next colors' --i3-refresh-msg restart"
-    bindsym Up exec --no-startup-id "xdotool key Escape &  & /home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode dock'"
-    bindsym Down exec --no-startup-id "xdotool key Escape &  & /home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode hide'"
+    bindsym Right exec --no-startup-id  "xdotool key Escape & ~/.i3/bin/i3configger-wrapper.sh 'select-next colors' --i3-refresh-msg restart"
+    bindsym Up exec --no-startup-id "xdotool key Escape & /home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode dock'"
+    bindsym Down exec --no-startup-id "xdotool key Escape & /home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:laptop-internal:mode hide'"
 
     bindsym c exec --no-startup-id "xdotool key Escape & i3-msg restarts && notify-send -a 'CENTRAL-CONTROL-PROGRAM' 'i3 restarted'"
     bindsym r exec --no-startup-id "xdotool key Escape & i3-msg reload && notify-send -a 'CENTRAL-CONTROL-PROGRAM' 'i3 reloaded'"
@@ -322,20 +327,19 @@ mode "resize / move" {
 }
 
 
-### i3bar.tpl.conf ###
+### i3bar.simple.conf ###
 bar {
-    id laptop-internal
-    output eDP-1-1
+    id all-monitors
     status_command "py3status \
         --dbus-notify \
         --timeout 1 \
         -c /home/oliver.bestwalter/.i3/i3bar.full.conf \
         -i /home/oliver.bestwalter/.i3/py3status \
-        -l /home/oliver.bestwalter/.i3/py3status.eDP-1-1-laptop-internal.log"
-    position bottom
+        -l /home/oliver.bestwalter/.i3/py3status.$output-all-monitors.log"
+    position top
     tray_padding 1
     tray_output primary
-    font pango:Fira Code 14, Font Awesome 5 Free 10, Font Awesome 5 Free Solid 10, Font Awesome 5 Brands 10
+    font pango:DejaVu Sans Mono 15, FontAwesome 15
     mode dock
     modifier Mod4
     bindsym --release button3 exec --no-startup-id ~/.i3/bin/screenshot-and-gwenview.sh
