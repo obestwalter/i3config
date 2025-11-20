@@ -1,5 +1,8 @@
 # TODO
 
+* start using nerdfonts (see `fc-list`)
+  hint: /usr/share/fonts/Shure Tech Mono Nerd Font Complete Mono.ttf: ShureTechMono Nerd Font Mono:style=Regular
+    only what is between colons => font pango:ShureTechMono Nerd Font Mono 12
 * check todos in the config files
 * check out branch-new-laptop-experiments
 * autostart (what do I need? Gather from all over the place)
