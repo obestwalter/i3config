@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Sat Nov 22 13:41:21 2025) #
+# Built from ~/.i3/config.d by i3configger (Sat Nov 22 13:54:34 2025) #
 #######################################################################
 
 ### 0-basic-setup.conf ###
@@ -266,6 +266,9 @@ mode "i3configger  =>  Return: run  Left/Right: prev/next colors  Up/Down: lapto
 
     bindsym Left exec --no-startup-id "xdotool key Escape & ~/.i3/bin/i3configger-wrapper.sh 'select-previous colors' --i3-refresh-msg restart"
     bindsym Right exec --no-startup-id  "xdotool key Escape & ~/.i3/bin/i3configger-wrapper.sh 'select-next colors' --i3-refresh-msg restart"
+    bindsym Up exec --no-startup-id "xdotool key Escape & /home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:all-monitors:position top'"
+    bindsym Down exec --no-startup-id "xdotool key Escape & /home/oliver.bestwalter/_sys/bin/i3configger 'shadow bars:targets:all-monitors:position bottom'"
+
     bindsym c exec --no-startup-id "xdotool key Escape & i3-msg restarts && notify-send -a 'CENTRAL-CONTROL-PROGRAM' 'i3 restarted'"
     bindsym r exec --no-startup-id "xdotool key Escape & i3-msg reload && notify-send -a 'CENTRAL-CONTROL-PROGRAM' 'i3 reloaded'"
     bindsym x exec --no-startup-id "xdotool key Escape & i3-nagbar -t warning -m 'Exit i3wm?' -b 'Yes' 'i3-msg exit'"
@@ -333,7 +336,7 @@ bar {
         -c /home/oliver.bestwalter/.i3/i3bar.full.conf \
         -i /home/oliver.bestwalter/.i3/py3status \
         -l /tmp/py3status.i3bar.log"
-    position top
+    position bottom
     tray_padding 1
     tray_output primary
     font pango:DejaVu Sans Mono 15, FontAwesome 15
