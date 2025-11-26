@@ -1,5 +1,5 @@
 #######################################################################
-# Built from ~/.i3/config.d by i3configger (Sat Nov 22 13:54:34 2025) #
+# Built from ~/.i3/config.d by i3configger (Wed Nov 26 16:16:09 2025) #
 #######################################################################
 
 ### 0-basic-setup.conf ###
@@ -53,6 +53,7 @@ client.placeholder      #fdf6e3  #2aa198  #657b83  #268bd2  #2aa198
 # does not to play well with my intel card, leaves artifacts when moving through a text file and other weird shit
 # exec_always --no-startup-id picom --experimental-backends --config ~/.i3/configs-other/picom.conf
 # exec_always --no-startup-id "picom --config ~/.i3/configs-other/picom.conf"
+exec_always --no-startup-id "xset -dpms"
 exec_always --no-startup-id "dunst -config ~/.i3/configs-other/dunstrc -markup full"
 exec_always --no-startup-id "unclutter"
 exec_always --no-startup-id "~/.i3/bin/touchpad-settings.sh"
