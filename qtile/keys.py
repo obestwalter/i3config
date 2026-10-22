@@ -27,7 +27,9 @@ from settings import (
     SHIFT,
     TERMINAL_MAXIMIZED,
     WALLPAPER_LOCK,
+    adjust_font_size,
     cycle_theme,
+    reset_font_size,
     set_bar_position,
 )
 
@@ -113,6 +115,36 @@ def switch_bar_position_and_reload(qtile, position: str) -> None:
     set_bar_position(position)
     qtile.reload_config()
     subprocess.Popen(["notify-send", "-a", "CENTRAL-CONTROL-PROGRAM", f"Bar moved to {position}"])
+
+
+@lazy.function
+def scale_font_size_and_reload(qtile, delta: int) -> None:
+    """Adjust font sizes by `delta` pt, reload Qtile config, and send notification."""
+    font_size, bar_font_size = adjust_font_size(delta)
+    qtile.reload_config()
+    subprocess.Popen(
+        [
+            "notify-send",
+            "-a",
+            "CENTRAL-CONTROL-PROGRAM",
+            f"Font size: {font_size}pt (bar: {bar_font_size}pt)",
+        ]
+    )
+
+
+@lazy.function
+def reset_font_size_and_reload(qtile) -> None:
+    """Reset font sizes to defaults (14pt / 15pt), reload Qtile config, and notify."""
+    font_size, bar_font_size = reset_font_size()
+    qtile.reload_config()
+    subprocess.Popen(
+        [
+            "notify-send",
+            "-a",
+            "CENTRAL-CONTROL-PROGRAM",
+            f"Font size reset: {font_size}pt (bar: {bar_font_size}pt)",
+        ]
+    )
 
 
 @lazy.function
@@ -342,6 +374,37 @@ def build_keys() -> List[Key | KeyChord]:
                     switch_bar_position_and_reload("bottom"),
                     desc="Move bar to bottom",
                 ),
+                # Dynamic font scaling (implements the TODO in mode-i3configger.conf)
+                Key(
+                    [SHIFT],
+                    "Up",
+                    scale_font_size_and_reload(1),
+                    desc="Increase font size (+1pt)",
+                ),
+                Key(
+                    [SHIFT],
+                    "Down",
+                    scale_font_size_and_reload(-1),
+                    desc="Decrease font size (-1pt)",
+                ),
+                Key(
+                    [SHIFT],
+                    "Right",
+                    scale_font_size_and_reload(2),
+                    desc="Increase font size (+2pt)",
+                ),
+                Key(
+                    [SHIFT],
+                    "Left",
+                    scale_font_size_and_reload(-2),
+                    desc="Decrease font size (-2pt)",
+                ),
+                Key(
+                    [],
+                    "0",
+                    reset_font_size_and_reload(),
+                    desc="Reset font size to default (14pt/15pt)",
+                ),
                 Key(
                     [],
                     "c",
@@ -363,7 +426,7 @@ def build_keys() -> List[Key | KeyChord]:
                 Key([], "x", lazy.shutdown(), desc="Exit Qtile"),
             ],
             mode=False,
-            name="qtile-config  =>  Return: reload  Left/Right: prev/next colors  Up/Down: bar top/bottom  c: restart  r: reload  x: exit",
+            name="qtile-config  =>  Return: reload  Left/Right: colors  Up/Down: bar pos  Shift+Up/Down: font +/-  0: font reset  c: restart  r: reload  x: exit",
         ),
 
         # ===================================================================

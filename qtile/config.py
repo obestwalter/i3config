@@ -20,7 +20,7 @@ from bar import build_screens
 from groups import build_groups
 from keys import build_keys, build_mouse
 from layouts import build_floating_layout, build_layouts
-from settings import BAR_FONT_SIZE, FONT_FAMILY, get_active_theme
+from settings import FONT_FAMILY, get_active_theme, get_bar_font_size
 
 # ---------------------------------------------------------------------------
 # Keybindings, Mouse, Groups, Layouts, and Screens
@@ -36,7 +36,7 @@ screens = build_screens()
 _theme = get_active_theme()
 widget_defaults = {
     "font": FONT_FAMILY,
-    "fontsize": BAR_FONT_SIZE,
+    "fontsize": get_bar_font_size(),
     "padding": 4,
     "background": _theme["background"],
     "foreground": _theme["status_color"],

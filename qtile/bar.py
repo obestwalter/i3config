@@ -20,11 +20,11 @@ from libqtile.config import Screen
 
 from groups import WORKSPACE_DEFS, format_window_title
 from settings import (
-    BAR_FONT_SIZE,
     BAR_SEPARATOR,
     BIN_DIR,
     FONT_FAMILY,
     get_active_theme,
+    get_bar_font_size,
     get_bar_position,
 )
 
@@ -247,14 +247,16 @@ def _format_tasklist_title(text: str) -> str:
     return text
 
 
-def _sep(theme: Dict[str, str], screenshot_cb: Dict[str, Any]) -> widget.TextBox:
+def _sep(
+    theme: Dict[str, str], screenshot_cb: Dict[str, Any], fontsize: int
+) -> widget.TextBox:
     """Create the ` ║ ` separator matching i3bar's `separator_symbol`."""
     return widget.TextBox(
         text=BAR_SEPARATOR,
         foreground=theme["focused_separator"],
         background=theme["background"],
         padding=0,
-        fontsize=BAR_FONT_SIZE,
+        fontsize=fontsize,
         mouse_callbacks=screenshot_cb,
     )
 
@@ -262,6 +264,7 @@ def _sep(theme: Dict[str, str], screenshot_cb: Dict[str, Any]) -> widget.TextBox
 def build_widgets(primary: bool = True) -> List[Any]:
     """Build the widget list for the primary or secondary screen."""
     theme = get_active_theme()
+    bar_font_size = get_bar_font_size()
     visible_groups = [name for _, name in WORKSPACE_DEFS]
 
     # Right-clicking anywhere on the bar (unless overridden by a specific widget)
@@ -278,7 +281,7 @@ def build_widgets(primary: bool = True) -> List[Any]:
         # Workspaces (GroupBox)
         widget.GroupBox(
             font=FONT_FAMILY,
-            fontsize=BAR_FONT_SIZE,
+            fontsize=bar_font_size,
             visible_groups=visible_groups,
             margin_y=3,
             margin_x=0,
@@ -305,16 +308,16 @@ def build_widgets(primary: bool = True) -> List[Any]:
         # Active KeyChord / Mode indicator (`binding_mode` in i3bar)
         widget.Chord(
             font=FONT_FAMILY,
-            fontsize=BAR_FONT_SIZE,
+            fontsize=bar_font_size,
             background=theme["bmbg"],
             foreground=theme["bmtxt"],
             padding=8,
         ),
-        _sep(theme, bar_right_click),
+        _sep(theme, bar_right_click, bar_font_size),
         # Window tabs for the current workspace (emulates i3's tabbed title bars with icons)
         widget.TaskList(
             font=FONT_FAMILY,
-            fontsize=BAR_FONT_SIZE - 1,
+            fontsize=max(8, bar_font_size - 1),
             background=theme["background"],
             foreground=theme["cftxt"],
             border=theme["cfbg"],
@@ -336,11 +339,12 @@ def build_widgets(primary: bool = True) -> List[Any]:
             rounded=False,
             mouse_callbacks=bar_right_click,
         ),
-        _sep(theme, bar_right_click),
+        _sep(theme, bar_right_click, bar_font_size),
         # 1. sysdata (CPU, Temp, RAM)
         widget.GenPollText(
             func=_poll_sysdata,
             update_interval=2,
+            fontsize=bar_font_size,
             foreground=theme["status_good"],
             background=theme["background"],
             mouse_callbacks={
@@ -348,11 +352,12 @@ def build_widgets(primary: bool = True) -> List[Any]:
                 "Button3": lambda: qtile.cmd_spawn("xfce4-terminal -T HTOP -e 'htop'"),
             },
         ),
-        _sep(theme, bar_right_click),
+        _sep(theme, bar_right_click, bar_font_size),
         # 2. wifi
         widget.GenPollText(
             func=_poll_wifi,
             update_interval=5,
+            fontsize=bar_font_size,
             foreground=theme["status_good"],
             background=theme["background"],
             mouse_callbacks={
@@ -360,28 +365,31 @@ def build_widgets(primary: bool = True) -> List[Any]:
                 "Button3": lambda: qtile.cmd_spawn(screenshot_script),
             },
         ),
-        _sep(theme, bar_right_click),
+        _sep(theme, bar_right_click, bar_font_size),
         # 3. uname ({node}  {release})
         widget.TextBox(
             text=uname_text,
+            fontsize=bar_font_size,
             foreground=theme["status_color"],
             background=theme["background"],
             mouse_callbacks=bar_right_click,
         ),
-        _sep(theme, bar_right_click),
+        _sep(theme, bar_right_click, bar_font_size),
         # 4. diskdata
         widget.GenPollText(
             func=_poll_diskdata,
             update_interval=30,
+            fontsize=bar_font_size,
             foreground=theme["status_color"],
             background=theme["background"],
             mouse_callbacks=bar_right_click,
         ),
-        _sep(theme, bar_right_click),
+        _sep(theme, bar_right_click, bar_font_size),
         # 5. online_status
         widget.GenPollText(
             func=_poll_online_status,
             update_interval=5,
+            fontsize=bar_font_size,
             foreground=theme["status_good"],
             background=theme["background"],
             mouse_callbacks={
@@ -389,11 +397,12 @@ def build_widgets(primary: bool = True) -> List[Any]:
                 "Button3": lambda: qtile.cmd_spawn("xfce4-terminal -e 'nmtui-edit'"),
             },
         ),
-        _sep(theme, bar_right_click),
+        _sep(theme, bar_right_click, bar_font_size),
         # 6. volume_status
         widget.GenPollText(
             func=_poll_volume,
             update_interval=1,
+            fontsize=bar_font_size,
             foreground=theme["status_color"],
             background=theme["background"],
             mouse_callbacks={
@@ -410,19 +419,21 @@ def build_widgets(primary: bool = True) -> List[Any]:
                 ),
             },
         ),
-        _sep(theme, bar_right_click),
+        _sep(theme, bar_right_click, bar_font_size),
         # 7. battery_level
         widget.GenPollText(
             func=_poll_battery,
             update_interval=5,
+            fontsize=bar_font_size,
             foreground=theme["status_good"],
             background=theme["background"],
             mouse_callbacks=bar_right_click,
         ),
-        _sep(theme, bar_right_click),
+        _sep(theme, bar_right_click, bar_font_size),
         # 8. tztime local
         widget.Clock(
             format=" %a %d.%m  %H:%M",
+            fontsize=bar_font_size,
             foreground=theme["status_color"],
             background=theme["background"],
             mouse_callbacks={
@@ -438,7 +449,7 @@ def build_widgets(primary: bool = True) -> List[Any]:
     if primary:
         widgets.extend(
             [
-                _sep(theme, bar_right_click),
+                _sep(theme, bar_right_click, bar_font_size),
                 widget.Systray(
                     background=theme["background"],
                     padding=1,
@@ -453,15 +464,18 @@ def build_screens() -> List[Screen]:
     """Build Screen configurations for all connected monitors (`id all-monitors`)."""
     theme = get_active_theme()
     position = get_bar_position()  # 'bottom' or 'top'
+    bar_font_size = get_bar_font_size()
+    # Scale bar height proportionally with the bar font size so glyphs never clip
+    bar_height = max(24, int(round(bar_font_size * 1.85)))
 
     primary_bar = bar.Bar(
         build_widgets(primary=True),
-        size=28,
+        size=bar_height,
         background=theme["background"],
     )
     secondary_bar = bar.Bar(
         build_widgets(primary=False),
-        size=28,
+        size=bar_height,
         background=theme["background"],
     )
 

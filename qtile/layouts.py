@@ -14,12 +14,13 @@ from typing import Any, Dict, List
 from libqtile import layout
 from libqtile.config import Match
 
-from settings import FONT_FAMILY, FONT_SIZE, get_active_theme
+from settings import FONT_FAMILY, get_active_theme, get_font_size
 
 
 def build_layouts() -> List[Any]:
-    """Build Qtile layouts styled with the active Solarized theme."""
+    """Build Qtile layouts styled with the active Solarized theme and font size."""
     theme: Dict[str, str] = get_active_theme()
+    font_size: int = get_font_size()
 
     # Common border settings matching `new_window normal 1px` & `hide_edge_borders smart`
     border_theme = {
@@ -57,7 +58,7 @@ def build_layouts() -> List[Any]:
         layout.TreeTab(
             name="treetab",
             font=FONT_FAMILY,
-            fontsize=FONT_SIZE - 2,
+            fontsize=max(8, font_size - 2),
             bg_color=theme["background"],
             active_bg=theme["wfbg"],
             active_fg=theme["wftxt"],
@@ -67,7 +68,7 @@ def build_layouts() -> List[Any]:
             urgent_fg=theme["wutxt"],
             panel_width=220,
             sections=["Windows"],
-            section_fontsize=FONT_SIZE - 2,
+            section_fontsize=max(8, font_size - 2),
             section_fg=theme["watxt"],
         ),
     ]
