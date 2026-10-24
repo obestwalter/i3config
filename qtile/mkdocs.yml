@@ -1,0 +1,11 @@
+site_name: qtile environment
+pages:
+- Home: docs/index.md
+- Architecture & lessons learned: docs/qtile.md
+- Migration from i3: docs/migration.md
+- Window properties: docs/windows.md
+- Keyboard: docs/keyboard.md
+- Findings and risks: docs/findings-and-risks.md
+
+theme: material
+docs_dir: docs

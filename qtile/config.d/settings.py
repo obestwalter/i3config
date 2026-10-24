@@ -18,11 +18,15 @@ from colors import DARK_THEME, THEME_MAP, THEMES, ColorTheme, ThemeName
 
 BarPosition = Literal["top", "bottom"]
 
-# Paths (resolved relative to this repository or ~/.i3 fallback)
-REPO_ROOT: Final[Path] = Path(__file__).resolve().parent.parent
-I3_HOME: Final[Path] = REPO_ROOT if (REPO_ROOT / "bin").is_dir() else Path.home() / ".i3"
-BIN_DIR: Final[Path] = I3_HOME / "bin"
-CONFIGS_OTHER_DIR: Final[Path] = I3_HOME / "configs-other"
+# Paths (resolved relative to the qtile folder, ~/.config/qtile fallback).
+# Layout mirrors the i3 setup: qtile/{config.py,config.d/,bin/,configs-other/,docs/}
+QTILE_HOME: Final[Path] = (
+    Path(__file__).resolve().parent.parent
+    if (Path(__file__).resolve().parent.parent / "bin").is_dir()
+    else Path.home() / ".config" / "qtile"
+)
+BIN_DIR: Final[Path] = QTILE_HOME / "bin"
+CONFIGS_OTHER_DIR: Final[Path] = QTILE_HOME / "configs-other"
 WALLPAPER_LOCK: Final[Path] = (
     Path.home() / "Pictures" / "wallpapers" / "single_screen" / "generative-orange.png"
 )

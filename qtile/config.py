@@ -13,12 +13,13 @@ import sys
 from pathlib import Path
 from typing import Any
 
-# Ensure sibling modules in `qtile/` are importable even if `config.py` is symlinked
-_CONFIG_DIR = str(Path(__file__).resolve().parent)
+# The partials live in `config.d/` (like the i3 config.d). The directory name contains a dot,
+# so it cannot be a package: it is put on sys.path instead (works even if `config.py` is symlinked)
+_CONFIG_DIR = str(Path(__file__).resolve().parent / "config.d")
 if _CONFIG_DIR not in sys.path:
     sys.path.insert(0, _CONFIG_DIR)
 
-# Reload sibling submodules in topological dependency order when Qtile executes
+# Reload the config.d submodules in topological dependency order when Qtile executes
 # `reload_config()`, ensuring submodule edits and `@hook.subscribe` decorators
 # are always refreshed while preserving live window tracking state (`groups.TRACKER`).
 _SUBMODULES_IN_ORDER = (
