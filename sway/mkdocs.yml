@@ -1,0 +1,10 @@
+site_name: sway environment
+pages:
+- Home: docs/index.md
+- Migration from i3: docs/migration.md
+- Window properties: docs/windows.md
+- Keyboard: docs/keyboard.md
+- Findings and risks: docs/findings-and-risks.md
+
+theme: material
+docs_dir: docs

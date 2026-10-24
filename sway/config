@@ -1,0 +1,18 @@
+# Sway main config -> install as ~/.config/sway (or symlink this folder there)
+# Replaces the i3configger generated ~/.i3/config: sway includes the partials itself.
+# Order matters: variables have to be defined before they are used.
+
+include config.d/palette.conf          # solarized base colours
+include config.d/colors.conf           # symlink to colors.0-dark.conf / colors.1-light.conf (bin/sway-colors.sh)
+include config.d/0-basic-setup.conf
+include config.d/1-startup.conf
+include config.d/2-input-output.conf
+include config.d/3-window-settings.conf
+include config.d/control-main-key-bindings.conf
+include config.d/mode-central-control.conf
+include config.d/mode-sway.conf
+include config.d/mode-resize.conf
+include config.d/bar.conf
+
+# distribution defaults (e.g. systemd/dbus environment import)
+include /etc/sway/config.d/*
