@@ -4,48 +4,35 @@ Converted from:
 - config.d/1-startup.conf
 """
 
-import subprocess
+from __future__ import annotations
+
 from libqtile import hook
 
-from settings import BIN_DIR, CONFIGS_OTHER_DIR
-
-
-def _run_background(cmd: list[str] | str, shell: bool = False) -> None:
-    """Spawn a background process safely without blocking Qtile."""
-    try:
-        subprocess.Popen(
-            cmd,
-            shell=shell,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
-    except Exception:
-        pass
+from settings import BIN_DIR, CONFIGS_OTHER_DIR, run_detached
 
 
 @hook.subscribe.startup
 def autostart_always() -> None:
     """Equivalent to i3's `exec_always --no-startup-id`."""
     # Disable DPMS power saving
-    _run_background(["xset", "-dpms"])
+    run_detached(["xset", "-dpms"])
 
     # Restart dunst with custom dunstrc
     dunstrc = CONFIGS_OTHER_DIR / "dunstrc"
-    _run_background(
+    run_detached(
         f"pkill dunst; dunst -config {dunstrc} -markup full",
         shell=True,
     )
 
     # Start unclutter if not already running
-    _run_background("pgrep -x unclutter || unclutter", shell=True)
+    run_detached("pgrep -x unclutter || unclutter", shell=True)
 
     # Apply touchpad settings (check both hyphenated and underscored script names)
-    touchpad_hyphen = BIN_DIR / "touchpad-settings.sh"
-    touchpad_underscore = BIN_DIR / "touchpad_settings.sh"
-    if touchpad_hyphen.exists():
-        _run_background([str(touchpad_hyphen)])
-    elif touchpad_underscore.exists():
-        _run_background([str(touchpad_underscore)])
+    for script_name in ("touchpad-settings.sh", "touchpad_settings.sh"):
+        script_path = BIN_DIR / script_name
+        if script_path.is_file():
+            run_detached([script_path])
+            break
 
     # Restore wallpaper via nitrogen
-    _run_background(["nitrogen", "--restore"])
+    run_detached(["nitrogen", "--restore"])

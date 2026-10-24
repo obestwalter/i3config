@@ -1,138 +1,196 @@
-"""Basic variables, paths, and persistent runtime state (theme & bar position).
+"""Basic variables, paths, process helpers, and persistent runtime state.
 
 Converted from:
 - config.d/0-basic-setup.conf
 - config.d/i3configger.json
 """
 
-import json
-from pathlib import Path
-from typing import Any, Dict
+from __future__ import annotations
 
-from colors import DARK_THEME, THEME_MAP, THEMES
+import json
+import subprocess
+from collections.abc import Sequence
+from dataclasses import asdict, dataclass
+from pathlib import Path
+from typing import Final, Literal
+
+from colors import DARK_THEME, THEME_MAP, THEMES, ColorTheme, ThemeName
+
+BarPosition = Literal["top", "bottom"]
 
 # Paths (resolved relative to this repository or ~/.i3 fallback)
-REPO_ROOT = Path(__file__).resolve().parent.parent
-I3_HOME = REPO_ROOT if (REPO_ROOT / "bin").is_dir() else Path.home() / ".i3"
-BIN_DIR = I3_HOME / "bin"
-CONFIGS_OTHER_DIR = I3_HOME / "configs-other"
-WALLPAPER_LOCK = Path.home() / "Pictures/wallpapers/single_screen/generative-orange.png"
+REPO_ROOT: Final[Path] = Path(__file__).resolve().parent.parent
+I3_HOME: Final[Path] = REPO_ROOT if (REPO_ROOT / "bin").is_dir() else Path.home() / ".i3"
+BIN_DIR: Final[Path] = I3_HOME / "bin"
+CONFIGS_OTHER_DIR: Final[Path] = I3_HOME / "configs-other"
+WALLPAPER_LOCK: Final[Path] = (
+    Path.home() / "Pictures" / "wallpapers" / "single_screen" / "generative-orange.png"
+)
 
-# Runtime state file (replaces i3configger state for theme & bar position)
-STATE_FILE = Path.home() / ".config" / "qtile" / "state.json"
+# Runtime state file (replaces i3configger state for theme, bar position & font sizes)
+STATE_FILE: Final[Path] = Path.home() / ".config" / "qtile" / "state.json"
 
 # Modifiers
-MOD = "mod4"
-ALT = "mod1"
-CTRL = "control"
-SHIFT = "shift"
+MOD: Final[str] = "mod4"
+ALT: Final[str] = "mod1"
+CTRL: Final[str] = "control"
+SHIFT: Final[str] = "shift"
 
 # Fonts (defaults from 0-basic-setup.conf & i3bar.simple.conf)
-FONT_FAMILY = "DejaVu Sans Mono"
-DEFAULT_FONT_SIZE = 14
-DEFAULT_BAR_FONT_SIZE = 15
-MIN_FONT_SIZE = 8
-MAX_FONT_SIZE = 32
-BAR_SEPARATOR = " ║ "
+FONT_FAMILY: Final[str] = "DejaVu Sans Mono"
+DEFAULT_FONT_SIZE: Final[int] = 14
+DEFAULT_BAR_FONT_SIZE: Final[int] = 15
+MIN_FONT_SIZE: Final[int] = 8
+MAX_FONT_SIZE: Final[int] = 32
+BAR_SEPARATOR: Final[str] = " ║ "
 
 # Applications
-TERMINAL = "xfce4-terminal"
-TERMINAL_MAXIMIZED = "xfce4-terminal --maximize --hide-menubar"
+TERMINAL: Final[str] = "xfce4-terminal"
+TERMINAL_MAXIMIZED: Final[str] = "xfce4-terminal --maximize --hide-menubar"
 
 
-def load_state() -> Dict[str, Any]:
-    """Load persisted theme, bar position, and font size state."""
-    default_state = {
-        "theme": "dark",
-        "bar_position": "bottom",
-        "font_size": DEFAULT_FONT_SIZE,
-        "bar_font_size": DEFAULT_BAR_FONT_SIZE,
-    }
-    try:
-        if STATE_FILE.is_file():
-            data = json.loads(STATE_FILE.read_text(encoding="utf-8"))
-            if isinstance(data, dict):
-                default_state.update(data)
-    except Exception:
-        pass
-    return default_state
+def _clamp_font(size: int | float) -> int:
+    """Clamp a font size to [MIN_FONT_SIZE, MAX_FONT_SIZE]."""
+    return max(MIN_FONT_SIZE, min(MAX_FONT_SIZE, int(size)))
 
 
-def save_state(state: Dict[str, Any]) -> None:
-    """Persist theme, bar position, and font size state to disk."""
-    try:
-        STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
-        STATE_FILE.write_text(json.dumps(state, indent=2), encoding="utf-8")
-    except Exception:
-        pass
+@dataclass(slots=True)
+class RuntimeState:
+    """Persisted user preferences controlled dynamically via Mod4+w."""
+
+    theme: ThemeName = "dark"
+    bar_position: BarPosition = "bottom"
+    font_size: int = DEFAULT_FONT_SIZE
+    bar_font_size: int = DEFAULT_BAR_FONT_SIZE
+
+    @classmethod
+    def load(cls, path: Path = STATE_FILE) -> RuntimeState:
+        """Load and validate runtime state from disk, falling back to defaults."""
+        if not path.is_file():
+            return cls()
+        try:
+            raw = json.loads(path.read_text(encoding="utf-8"))
+            if not isinstance(raw, dict):
+                return cls()
+            theme = raw.get("theme", "dark")
+            bar_pos = raw.get("bar_position", "bottom")
+            font_size = raw.get("font_size", DEFAULT_FONT_SIZE)
+            bar_font_size = raw.get("bar_font_size", DEFAULT_BAR_FONT_SIZE)
+            return cls(
+                theme=theme if theme in THEME_MAP else "dark",
+                bar_position=bar_pos if bar_pos in ("top", "bottom") else "bottom",
+                font_size=(
+                    _clamp_font(font_size)
+                    if isinstance(font_size, (int, float))
+                    else DEFAULT_FONT_SIZE
+                ),
+                bar_font_size=(
+                    _clamp_font(bar_font_size)
+                    if isinstance(bar_font_size, (int, float))
+                    else DEFAULT_BAR_FONT_SIZE
+                ),
+            )
+        except (OSError, ValueError, TypeError):
+            return cls()
+
+    def save(self, path: Path = STATE_FILE) -> None:
+        """Persist current runtime state to disk."""
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(asdict(self), indent=2), encoding="utf-8")
+        except OSError:
+            pass
+
+    @property
+    def color_theme(self) -> ColorTheme:
+        """Return the active ColorTheme object."""
+        return THEME_MAP.get(self.theme, DARK_THEME)
 
 
-def get_active_theme() -> Dict[str, str]:
-    """Return the active color theme dictionary."""
-    state = load_state()
-    theme_name = state.get("theme", "dark")
-    return THEME_MAP.get(theme_name, DARK_THEME)
+# ---------------------------------------------------------------------------
+# State Accessor & Mutator Helpers
+# ---------------------------------------------------------------------------
+def get_active_theme(path: Path = STATE_FILE) -> ColorTheme:
+    """Return the active ColorTheme dataclass."""
+    return RuntimeState.load(path).color_theme
 
 
-def get_bar_position() -> str:
+def get_bar_position(path: Path = STATE_FILE) -> BarPosition:
     """Return 'top' or 'bottom' for the status bar."""
-    state = load_state()
-    pos = state.get("bar_position", "bottom")
-    return pos if pos in ("top", "bottom") else "bottom"
+    return RuntimeState.load(path).bar_position
 
 
-def get_font_size() -> int:
+def get_font_size(path: Path = STATE_FILE) -> int:
     """Return the active general/layout font size."""
-    state = load_state()
-    size = state.get("font_size", DEFAULT_FONT_SIZE)
-    return int(size) if isinstance(size, (int, float)) else DEFAULT_FONT_SIZE
+    return RuntimeState.load(path).font_size
 
 
-def get_bar_font_size() -> int:
+def get_bar_font_size(path: Path = STATE_FILE) -> int:
     """Return the active status bar font size."""
-    state = load_state()
-    size = state.get("bar_font_size", DEFAULT_BAR_FONT_SIZE)
-    return int(size) if isinstance(size, (int, float)) else DEFAULT_BAR_FONT_SIZE
+    return RuntimeState.load(path).bar_font_size
 
 
-def adjust_font_size(delta: int) -> tuple[int, int]:
-    """Adjust font_size and bar_font_size by `delta` points (clamped) and save state."""
-    state = load_state()
-    font_size = max(MIN_FONT_SIZE, min(MAX_FONT_SIZE, get_font_size() + delta))
-    bar_font_size = max(MIN_FONT_SIZE, min(MAX_FONT_SIZE, get_bar_font_size() + delta))
-    state["font_size"] = font_size
-    state["bar_font_size"] = bar_font_size
-    save_state(state)
-    return font_size, bar_font_size
+def cycle_theme(step: int = 1, *, path: Path = STATE_FILE) -> ThemeName:
+    """Switch to the next/previous color theme and persist state."""
+    state = RuntimeState.load(path)
+    idx = THEMES.index(state.theme) if state.theme in THEMES else 0
+    state.theme = THEMES[(idx + step) % len(THEMES)]
+    state.save(path)
+    return state.theme
 
 
-def reset_font_size() -> tuple[int, int]:
-    """Reset font sizes to their defaults (14 / 15) and save state."""
-    state = load_state()
-    state["font_size"] = DEFAULT_FONT_SIZE
-    state["bar_font_size"] = DEFAULT_BAR_FONT_SIZE
-    save_state(state)
-    return DEFAULT_FONT_SIZE, DEFAULT_BAR_FONT_SIZE
+def set_bar_position(position: BarPosition, *, path: Path = STATE_FILE) -> BarPosition:
+    """Set bar position ('top' or 'bottom') and persist state."""
+    state = RuntimeState.load(path)
+    if position in ("top", "bottom"):
+        state.bar_position = position
+        state.save(path)
+    return state.bar_position
+
+
+def adjust_font_size(delta: int, *, path: Path = STATE_FILE) -> tuple[int, int]:
+    """Adjust font_size and bar_font_size by `delta` points and persist state."""
+    state = RuntimeState.load(path)
+    state.font_size = _clamp_font(state.font_size + delta)
+    state.bar_font_size = _clamp_font(state.bar_font_size + delta)
+    state.save(path)
+    return state.font_size, state.bar_font_size
+
+
+def reset_font_size(*, path: Path = STATE_FILE) -> tuple[int, int]:
+    """Reset font sizes to defaults (14pt / 15pt) and persist state."""
+    state = RuntimeState.load(path)
+    state.font_size = DEFAULT_FONT_SIZE
+    state.bar_font_size = DEFAULT_BAR_FONT_SIZE
+    state.save(path)
+    return state.font_size, state.bar_font_size
 
 
 # Backwards-compatible module-level aliases evaluated at import/reload time
-FONT_SIZE = get_font_size()
-BAR_FONT_SIZE = get_bar_font_size()
+FONT_SIZE: int = get_font_size()
+BAR_FONT_SIZE: int = get_bar_font_size()
 
 
-def cycle_theme(step: int = 1) -> None:
-    """Switch to the next/previous color theme and save state."""
-    state = load_state()
-    current = state.get("theme", "dark")
-    idx = THEMES.index(current) if current in THEMES else 0
-    new_theme = THEMES[(idx + step) % len(THEMES)]
-    state["theme"] = new_theme
-    save_state(state)
+# ---------------------------------------------------------------------------
+# Process & Notification Helpers
+# ---------------------------------------------------------------------------
+def run_detached(cmd: Sequence[str | Path] | str, *, shell: bool = False) -> None:
+    """Spawn a background process safely without blocking the Qtile event loop."""
+    try:
+        args: Sequence[str] | str = (
+            cmd if isinstance(cmd, str) else [str(part) for part in cmd]
+        )
+        subprocess.Popen(
+            args,
+            shell=shell,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            start_new_session=True,
+        )
+    except OSError:
+        pass
 
 
-def set_bar_position(position: str) -> None:
-    """Set bar position ('top' or 'bottom') and save state."""
-    if position in ("top", "bottom"):
-        state = load_state()
-        state["bar_position"] = position
-        save_state(state)
+def notify(message: str, *, app_name: str = "CENTRAL-CONTROL-PROGRAM") -> None:
+    """Send a desktop notification via notify-send."""
+    run_detached(["notify-send", "-a", app_name, message])

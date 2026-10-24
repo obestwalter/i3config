@@ -7,14 +7,15 @@ Converted from:
 - config.d/mode-resize.conf
 """
 
-import subprocess
-from typing import List
+from __future__ import annotations
+
+from typing import Any
+
 from libqtile.config import Click, Drag, Key, KeyChord, Mouse
 from libqtile.lazy import lazy
 
 from groups import (
-    DYNAMIC_SCRATCHPAD_GROUP,
-    WORKSPACE_DEFS,
+    WORKSPACE_SPECS,
     move_to_scratchpad,
     toggle_scratchpad,
     toggle_sticky,
@@ -27,8 +28,10 @@ from settings import (
     SHIFT,
     TERMINAL_MAXIMIZED,
     WALLPAPER_LOCK,
+    BarPosition,
     adjust_font_size,
     cycle_theme,
+    notify,
     reset_font_size,
     set_bar_position,
 )
@@ -38,10 +41,9 @@ from settings import (
 # Helper functions for i3-equivalent navigation & manipulation
 # ---------------------------------------------------------------------------
 @lazy.function
-def focus_direction(qtile, direction: str) -> None:
+def focus_direction(qtile: Any, direction: str) -> None:
     """Focus window in direction; in Max (tabbed) layout, Left/Up & Right/Down cycle tabs."""
-    layout_name = qtile.current_layout.name
-    if layout_name == "max":
+    if qtile.current_layout.name == "max":
         if direction in ("left", "up"):
             qtile.current_group.prev_window()
         else:
@@ -51,9 +53,9 @@ def focus_direction(qtile, direction: str) -> None:
 
 
 @lazy.function
-def step_visible_group(qtile, step: int) -> None:
+def step_visible_group(qtile: Any, step: int) -> None:
     """Switch to previous/next workspace, skipping hidden scratchpad groups."""
-    valid_names = [name for _, name in WORKSPACE_DEFS]
+    valid_names = [spec.name for spec in WORKSPACE_SPECS]
     current_name = qtile.current_group.name
     if current_name not in valid_names:
         qtile.groups_map[valid_names[0]].toscreen(toggle=False)
@@ -63,7 +65,7 @@ def step_visible_group(qtile, step: int) -> None:
 
 
 @lazy.function
-def focus_mode_toggle(qtile) -> None:
+def focus_mode_toggle(qtile: Any) -> None:
     """Toggle focus between floating and tiled windows (`focus mode_toggle` in i3)."""
     group = qtile.current_group
     win = qtile.current_window
@@ -79,7 +81,7 @@ def focus_mode_toggle(qtile) -> None:
 
 
 @lazy.function
-def toggle_split_or_columns(qtile) -> None:
+def toggle_split_or_columns(qtile: Any) -> None:
     """Switch to `columns` layout or toggle split mode (`layout toggle split` in i3)."""
     if qtile.current_layout.name != "columns":
         for idx, lyt in enumerate(qtile.current_group.layouts):
@@ -91,7 +93,7 @@ def toggle_split_or_columns(qtile) -> None:
 
 
 @lazy.function
-def move_workspace_to_next_screen(qtile) -> None:
+def move_workspace_to_next_screen(qtile: Any) -> None:
     """Move the current workspace to the next monitor (`move workspace to output next` in i3)."""
     if len(qtile.screens) < 2:
         return
@@ -102,53 +104,39 @@ def move_workspace_to_next_screen(qtile) -> None:
 
 
 @lazy.function
-def switch_theme_and_reload(qtile, step: int) -> None:
+def switch_theme_and_reload(qtile: Any, step: int) -> None:
     """Cycle dark/light Solarized theme, reload Qtile config, and send notification."""
-    cycle_theme(step)
+    new_theme = cycle_theme(step)
     qtile.reload_config()
-    subprocess.Popen(["notify-send", "-a", "CENTRAL-CONTROL-PROGRAM", "Qtile theme switched"])
+    notify(f"Qtile theme switched: {new_theme}")
 
 
 @lazy.function
-def switch_bar_position_and_reload(qtile, position: str) -> None:
+def switch_bar_position_and_reload(qtile: Any, position: BarPosition) -> None:
     """Move bar to top or bottom, reload Qtile config, and send notification."""
     set_bar_position(position)
     qtile.reload_config()
-    subprocess.Popen(["notify-send", "-a", "CENTRAL-CONTROL-PROGRAM", f"Bar moved to {position}"])
+    notify(f"Bar moved to {position}")
 
 
 @lazy.function
-def scale_font_size_and_reload(qtile, delta: int) -> None:
+def scale_font_size_and_reload(qtile: Any, delta: int) -> None:
     """Adjust font sizes by `delta` pt, reload Qtile config, and send notification."""
     font_size, bar_font_size = adjust_font_size(delta)
     qtile.reload_config()
-    subprocess.Popen(
-        [
-            "notify-send",
-            "-a",
-            "CENTRAL-CONTROL-PROGRAM",
-            f"Font size: {font_size}pt (bar: {bar_font_size}pt)",
-        ]
-    )
+    notify(f"Font size: {font_size}pt (bar: {bar_font_size}pt)")
 
 
 @lazy.function
-def reset_font_size_and_reload(qtile) -> None:
+def reset_font_size_and_reload(qtile: Any) -> None:
     """Reset font sizes to defaults (14pt / 15pt), reload Qtile config, and notify."""
     font_size, bar_font_size = reset_font_size()
     qtile.reload_config()
-    subprocess.Popen(
-        [
-            "notify-send",
-            "-a",
-            "CENTRAL-CONTROL-PROGRAM",
-            f"Font size reset: {font_size}pt (bar: {bar_font_size}pt)",
-        ]
-    )
+    notify(f"Font size reset: {font_size}pt (bar: {bar_font_size}pt)")
 
 
 @lazy.function
-def resize_window(qtile, dw: int, dh: int) -> None:
+def resize_window(qtile: Any, dw: int, dh: int) -> None:
     """Resize floating or tiled window by (dw, dh) pixels (`mode-resize.conf`)."""
     win = qtile.current_window
     if win is None:
@@ -168,7 +156,7 @@ def resize_window(qtile, dw: int, dh: int) -> None:
 
 
 @lazy.function
-def move_window_by(qtile, dx: int, dy: int) -> None:
+def move_window_by(qtile: Any, dx: int, dy: int) -> None:
     """Move floating window by (dx, dy) pixels, or shuffle tiled window (`mode-resize.conf`)."""
     win = qtile.current_window
     if win is None:
@@ -187,9 +175,13 @@ def move_window_by(qtile, dx: int, dy: int) -> None:
             layout.shuffle_down()
 
 
-def build_keys() -> List[Key | KeyChord]:
+def build_keys() -> list[Key | KeyChord]:
     """Build all Qtile keybindings and modes."""
-    keys: List[Key | KeyChord] = [
+    rofi_file_browser = BIN_DIR / "rofi-file-browser.sh"
+    rofi_ws_list = BIN_DIR / "rofi-qtile-ws-list.sh"
+    rofi_ws_move = BIN_DIR / "rofi-qtile-ws-move.sh"
+
+    keys: list[Key | KeyChord] = [
         # ===================================================================
         # Navigate (control-main-key-bindings.conf)
         # ===================================================================
@@ -235,7 +227,12 @@ def build_keys() -> List[Key | KeyChord]:
         Key([SHIFT], "F12", move_to_scratchpad(), desc="Move focused window to scratchpad"),
         Key([], "F12", toggle_scratchpad(), desc="Show/toggle scratchpad"),
         Key([MOD], "Return", toggle_scratchpad(), desc="Show/toggle scratchpad"),
-        Key([MOD, SHIFT], "Return", lazy.spawn(TERMINAL_MAXIMIZED), desc="Launch maximized terminal"),
+        Key(
+            [MOD, SHIFT],
+            "Return",
+            lazy.spawn(TERMINAL_MAXIMIZED),
+            desc="Launch maximized terminal",
+        ),
 
         # ===================================================================
         # Rofi
@@ -245,7 +242,7 @@ def build_keys() -> List[Key | KeyChord]:
             "space",
             lazy.spawn(
                 f"rofi -combi-modi window,drun,run -show combi "
-                f"-modi combi,run,files:{BIN_DIR}/rofi-file-browser.sh"
+                f"-modi combi,run,files:{rofi_file_browser}"
             ),
             desc="Rofi combi launcher & file browser",
         ),
@@ -254,8 +251,8 @@ def build_keys() -> List[Key | KeyChord]:
             [MOD, SHIFT],
             "Tab",
             lazy.spawn(
-                f"rofi -modi 'Workspace:{BIN_DIR}/rofi-qtile-ws-list.sh,"
-                f"Move to Workspace:{BIN_DIR}/rofi-qtile-ws-move.sh' -show Workspace"
+                f"rofi -modi 'Workspace:{rofi_ws_list},"
+                f"Move to Workspace:{rofi_ws_move}' -show Workspace"
             ),
             desc="Rofi workspace switcher / mover",
         ),
@@ -474,28 +471,28 @@ def build_keys() -> List[Key | KeyChord]:
     ]
 
     # Workspace switching (Mod4 + 1..0) and moving container to workspace (Mod4 + Shift + 1..0)
-    for key_name, ws_name in WORKSPACE_DEFS:
+    for spec in WORKSPACE_SPECS:
         keys.append(
             Key(
                 [MOD],
-                key_name,
-                lazy.group[ws_name].toscreen(toggle=False),
-                desc=f"Switch to workspace {ws_name.strip()}",
+                spec.key,
+                lazy.group[spec.name].toscreen(toggle=False),
+                desc=f"Switch to workspace {spec.name.strip()}",
             )
         )
         keys.append(
             Key(
                 [MOD, SHIFT],
-                key_name,
-                lazy.window.togroup(ws_name, switch_group=False),
-                desc=f"Move window to workspace {ws_name.strip()}",
+                spec.key,
+                lazy.window.togroup(spec.name, switch_group=False),
+                desc=f"Move window to workspace {spec.name.strip()}",
             )
         )
 
     return keys
 
 
-def build_mouse() -> List[Mouse]:
+def build_mouse() -> list[Mouse]:
     """Mouse bindings for floating windows (`floating_modifier Mod4`)."""
     return [
         Drag(

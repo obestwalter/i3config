@@ -6,46 +6,66 @@ Converted from:
 - config.d/control-main-key-bindings.conf (Scratchpad & sticky window bindings)
 """
 
+from __future__ import annotations
+
 import re
-from typing import List, Tuple
+from dataclasses import dataclass, field
+from typing import Any, Final
+
 from libqtile import hook
 from libqtile.config import DropDown, Group, Match, ScratchPad
 from libqtile.lazy import lazy
 
 from settings import TERMINAL
 
+
+@dataclass(frozen=True, slots=True)
+class WorkspaceSpec:
+    """Specification for a numbered i3-style workspace group."""
+
+    key: str
+    name: str
+    layout: str = "max"
+
+
 # Workspaces matching i3 $ws1 .. $ws10
-# Tuple format: (key_name, group_name_and_label)
-WORKSPACE_DEFS: List[Tuple[str, str]] = [
-    ("1", " 1:   "),
-    ("2", " 2: |  "),
-    ("3", " 3:   "),
-    ("4", " 4: |  "),
-    ("5", " 5:   "),
-    ("6", " 6:   "),
-    ("7", " 7:   "),
+WORKSPACE_SPECS: Final[tuple[WorkspaceSpec, ...]] = (
+    WorkspaceSpec("1", " 1:   "),
+    WorkspaceSpec("2", " 2: |  "),
+    WorkspaceSpec("3", " 3:   "),
+    WorkspaceSpec("4", " 4: |  "),
+    WorkspaceSpec("5", " 5:   "),
+    WorkspaceSpec("6", " 6:   "),
+    WorkspaceSpec("7", " 7:   "),
     # 8 -> remote connections
-    ("8", " 8:   "),
+    WorkspaceSpec("8", " 8:   "),
     # 9 -> admin / monitoring / logs
-    ("9", " 9:  "),
+    WorkspaceSpec("9", " 9:  "),
     # 10 -> browser / secondary
-    ("0", "10:  "),
+    WorkspaceSpec("0", "10:  "),
+)
+
+# Backwards-compatible tuple list `(key_name, group_name)`
+WORKSPACE_DEFS: Final[list[tuple[str, str]]] = [
+    (spec.key, spec.name) for spec in WORKSPACE_SPECS
 ]
 
 # Hidden group used to emulate i3's arbitrary window `move scratchpad` / `scratchpad show`
-DYNAMIC_SCRATCHPAD_GROUP = "_i3_scratchpad"
+DYNAMIC_SCRATCHPAD_GROUP: Final[str] = "_i3_scratchpad"
 
 
-def build_groups() -> List[Group]:
+def build_groups() -> list[Group]:
     """Create the 10 workspace groups plus Qtile ScratchPad."""
-    groups: List[Group] = [
-        # Default layout is "max" (tabbed equivalent when paired with bar WindowTabs/TaskList)
-        Group(name=ws_name, label=ws_name, layout="max")
-        for _, ws_name in WORKSPACE_DEFS
+    groups: list[Group] = [
+        # Default layout is "max" (tabbed equivalent when paired with bar TaskList)
+        Group(name=spec.name, label=spec.name, layout=spec.layout)
+        for spec in WORKSPACE_SPECS
     ]
 
     # Hidden group for moving arbitrary windows to/from the scratchpad (Shift+F12 / F12)
-    groups.append(Group(name=DYNAMIC_SCRATCHPAD_GROUP, label="", init=True, persist=True))
+    groups.append(
+        Group(name=DYNAMIC_SCRATCHPAD_GROUP, label="", init=True, persist=True)
+    )
 
     # DropDown terminal scratchpad (cheap Yakuake emulation)
     groups.append(
@@ -69,63 +89,98 @@ def build_groups() -> List[Group]:
 
 
 # ---------------------------------------------------------------------------
-# Arbitrary Window Scratchpad (i3 `move scratchpad` / `scratchpad show`)
+# Stateful Window Tracker (Scratchpad & Sticky Windows)
 # ---------------------------------------------------------------------------
-_scratchpad_windows: List[int] = []
+@dataclass(slots=True)
+class WindowStateTracker:
+    """Tracks arbitrary scratchpad windows and sticky windows across workspaces."""
 
+    scratchpad_windows: list[int] = field(default_factory=list)
+    sticky_windows: set[int] = field(default_factory=set)
 
-@lazy.function
-def move_to_scratchpad(qtile) -> None:
-    """Move the focused window to the hidden scratchpad (i3 `move scratchpad`)."""
-    win = qtile.current_window
-    if win is None:
-        return
-    if win.wid not in _scratchpad_windows:
-        _scratchpad_windows.append(win.wid)
-    win.togroup(DYNAMIC_SCRATCHPAD_GROUP)
-
-
-@lazy.function
-def toggle_scratchpad(qtile) -> None:
-    """Show/hide the window in the dynamic scratchpad, or toggle DropDown terminal."""
-    win = qtile.current_window
-    # If the currently focused window came from the dynamic scratchpad, hide it back
-    if win is not None and win.wid in _scratchpad_windows:
+    def move_to_scratchpad(self, qtile_instance: Any) -> None:
+        """Move the focused window to the hidden scratchpad (i3 `move scratchpad`)."""
+        win = qtile_instance.current_window
+        if win is None:
+            return
+        if win.wid not in self.scratchpad_windows:
+            self.scratchpad_windows.append(win.wid)
         win.togroup(DYNAMIC_SCRATCHPAD_GROUP)
-        return
 
-    # Otherwise, check if the hidden scratchpad group has any windows
-    scratch_group = qtile.groups_map.get(DYNAMIC_SCRATCHPAD_GROUP)
-    if scratch_group and scratch_group.windows:
-        target = scratch_group.windows[-1]
-        target.togroup(qtile.current_group.name)
-        target.enable_floating()
-        target.bring_to_front()
-        target.focus(warp=False)
-        return
+    def toggle_scratchpad(self, qtile_instance: Any) -> None:
+        """Show/hide a window from the dynamic scratchpad, or toggle DropDown terminal."""
+        win = qtile_instance.current_window
+        if win is not None and win.wid in self.scratchpad_windows:
+            win.togroup(DYNAMIC_SCRATCHPAD_GROUP)
+            return
 
-    # Fallback: toggle the ScratchPad DropDown terminal
-    scratchpad = qtile.groups_map.get("scratchpad")
-    if scratchpad and "term" in scratchpad.dropdowns:
-        scratchpad.dropdowns["term"].toggle()
+        scratch_group = qtile_instance.groups_map.get(DYNAMIC_SCRATCHPAD_GROUP)
+        if scratch_group and scratch_group.windows:
+            target = scratch_group.windows[-1]
+            target.togroup(qtile_instance.current_group.name)
+            target.enable_floating()
+            target.bring_to_front()
+            target.focus(warp=False)
+            return
+
+        scratchpad = qtile_instance.groups_map.get("scratchpad")
+        if scratchpad and "term" in scratchpad.dropdowns:
+            scratchpad.dropdowns["term"].toggle()
+
+    def toggle_sticky(self, qtile_instance: Any) -> None:
+        """Toggle whether the current window follows across all workspaces."""
+        win = qtile_instance.current_window
+        if win is None:
+            return
+        if win.wid in self.sticky_windows:
+            self.sticky_windows.remove(win.wid)
+        else:
+            self.sticky_windows.add(win.wid)
+
+    def sync_sticky_to_current_group(self, qtile_instance: Any) -> None:
+        """Move all tracked sticky windows to the active workspace group."""
+        if qtile_instance is None or not self.sticky_windows:
+            return
+        current_group = qtile_instance.current_group
+        if current_group is None or current_group.name in (
+            "scratchpad",
+            DYNAMIC_SCRATCHPAD_GROUP,
+        ):
+            return
+        for wid in list(self.sticky_windows):
+            win = qtile_instance.windows_map.get(wid)
+            if win is None:
+                self.sticky_windows.discard(wid)
+            elif win.group != current_group:
+                win.togroup(current_group.name)
+
+    def remove_window(self, wid: int) -> None:
+        """Remove a closed window from tracking sets."""
+        self.sticky_windows.discard(wid)
+        if wid in self.scratchpad_windows:
+            self.scratchpad_windows.remove(wid)
 
 
-# ---------------------------------------------------------------------------
-# Sticky Windows (i3 `sticky toggle` on Control+F12)
-# ---------------------------------------------------------------------------
-_sticky_windows: set[int] = set()
+# Preserve the existing tracker instance across `importlib.reload(groups)` calls
+TRACKER: WindowStateTracker = globals().get("TRACKER") or WindowStateTracker()
 
 
 @lazy.function
-def toggle_sticky(qtile) -> None:
-    """Toggle whether the current window follows across all workspaces."""
-    win = qtile.current_window
-    if win is None:
-        return
-    if win.wid in _sticky_windows:
-        _sticky_windows.remove(win.wid)
-    else:
-        _sticky_windows.add(win.wid)
+def move_to_scratchpad(qtile_instance: Any) -> None:
+    """Lazy command: move focused window to scratchpad."""
+    TRACKER.move_to_scratchpad(qtile_instance)
+
+
+@lazy.function
+def toggle_scratchpad(qtile_instance: Any) -> None:
+    """Lazy command: toggle scratchpad window or dropdown terminal."""
+    TRACKER.toggle_scratchpad(qtile_instance)
+
+
+@lazy.function
+def toggle_sticky(qtile_instance: Any) -> None:
+    """Lazy command: toggle sticky state on focused window."""
+    TRACKER.toggle_sticky(qtile_instance)
 
 
 @hook.subscribe.setgroup
@@ -133,81 +188,78 @@ def _move_sticky_windows() -> None:
     """Move all sticky windows to the newly focused group."""
     from libqtile import qtile
 
-    if qtile is None or not _sticky_windows:
-        return
-    current_group = qtile.current_group
-    if current_group is None or current_group.name in ("scratchpad", DYNAMIC_SCRATCHPAD_GROUP):
-        return
-    for wid in list(_sticky_windows):
-        win = qtile.windows_map.get(wid)
-        if win is None:
-            _sticky_windows.discard(wid)
-        elif win.group != current_group:
-            win.togroup(current_group.name)
+    TRACKER.sync_sticky_to_current_group(qtile)
 
 
 @hook.subscribe.client_killed
-def _cleanup_window_tracking(window) -> None:
+def _cleanup_window_tracking(window: Any) -> None:
     """Remove closed windows from sticky and scratchpad tracking."""
-    _sticky_windows.discard(window.wid)
-    if window.wid in _scratchpad_windows:
-        _scratchpad_windows.remove(window.wid)
+    TRACKER.remove_window(window.wid)
 
 
 # ---------------------------------------------------------------------------
 # Window Title Icon Formatting & Floating Rules (3-window-settings.conf)
 # ---------------------------------------------------------------------------
-# Rules matching i3 `for_window [...] title_format " <icon>  %title"`
-ICON_CLASS_RULES: List[Tuple[re.Pattern, str]] = [
-    (re.compile(r"^Code$"), ""),
-    (re.compile(r"^Google-chrome$"), ""),
-    (re.compile(r"(?i)firefox"), ""),
-    (re.compile(r"^gwenview$"), ""),
-    (re.compile(r"^krusader$"), ""),
-    (re.compile(r"^jetbrains-pycharm$"), ""),
-    (re.compile(r"^Slack$"), ""),
-    (re.compile(r"^Thunderbird$"), ""),
-    (re.compile(r".*terminal.*"), ""),
-    (re.compile(r"^teams-for-linux$"), ""),
-]
+@dataclass(frozen=True, slots=True)
+class TitleIconRule:
+    """Maps a regex pattern to a FontAwesome window title icon."""
 
-ICON_TITLE_RULES: List[Tuple[re.Pattern, str]] = [
-    (re.compile(r"^Write:.* Thunderbird"), ""),
-    (re.compile(r"^Volume Control$"), ""),
-]
+    pattern: re.Pattern[str]
+    icon: str
+
+    def apply(self, title: str) -> str:
+        prefix = f" {self.icon}  "
+        return title if title.startswith(prefix) else f"{prefix}{title}"
+
+
+ICON_CLASS_RULES: Final[tuple[TitleIconRule, ...]] = (
+    TitleIconRule(re.compile(r"^Code$"), ""),
+    TitleIconRule(re.compile(r"^Google-chrome$"), ""),
+    TitleIconRule(re.compile(r"(?i)firefox"), ""),
+    TitleIconRule(re.compile(r"^gwenview$"), ""),
+    TitleIconRule(re.compile(r"^krusader$"), ""),
+    TitleIconRule(re.compile(r"^jetbrains-pycharm$"), ""),
+    TitleIconRule(re.compile(r"^Slack$"), ""),
+    TitleIconRule(re.compile(r"^Thunderbird$"), ""),
+    TitleIconRule(re.compile(r".*terminal.*"), ""),
+    TitleIconRule(re.compile(r"^teams-for-linux$"), ""),
+)
+
+ICON_TITLE_RULES: Final[tuple[TitleIconRule, ...]] = (
+    TitleIconRule(re.compile(r"^Write:.* Thunderbird"), ""),
+    TitleIconRule(re.compile(r"^Volume Control$"), ""),
+)
 
 # Rules where i3 specifies `floating disable`
-FORCE_TILE_MATCHES: List[Match] = [
+FORCE_TILE_MATCHES: Final[tuple[Match, ...]] = (
     Match(wm_class="zoom", wm_instance_class="zoom"),
     Match(wm_class="xfreerdp"),
     Match(title=re.compile(r"^FreeRDP:.*")),
-]
+)
 
 
-def format_window_title(window, text: str) -> str:
+def format_window_title(window: Any, text: str) -> str:
     """Format window title with FontAwesome application icons from 3-window-settings.conf."""
     if window is None:
         return text
 
     # Check title-specific rules first (e.g. "Write:.* Thunderbird" overrides class "Thunderbird")
-    for pattern, icon in ICON_TITLE_RULES:
-        if pattern.search(text):
-            prefix = f" {icon}  "
-            return text if text.startswith(prefix) else f"{prefix}{text}"
+    for rule in ICON_TITLE_RULES:
+        if rule.pattern.search(text):
+            return rule.apply(text)
 
     # Check WM_CLASS rules
     wm_classes = window.get_wm_class() or []
     for wm_cls in wm_classes:
-        for pattern, icon in ICON_CLASS_RULES:
-            if pattern.search(wm_cls):
-                prefix = f" {icon}  "
-                return text if text.startswith(prefix) else f"{prefix}{text}"
+        for rule in ICON_CLASS_RULES:
+            if rule.pattern.search(wm_cls):
+                return rule.apply(text)
 
     return text
 
 
 @hook.subscribe.client_new
-def _apply_window_rules(window) -> None:
+def _apply_window_rules(window: Any) -> None:
     """Apply `floating disable` rules from 3-window-settings.conf."""
     for match in FORCE_TILE_MATCHES:
         if match.compare(window):
